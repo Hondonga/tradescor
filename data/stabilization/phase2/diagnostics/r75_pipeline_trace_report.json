@@ -1,0 +1,58 @@
+{
+  "generated_at": "2026-07-21T03:10:28.967815+00:00",
+  "pipeline_trace_mechanism": {
+    "exists": true,
+    "location": "providers/runtime_health.py (PipelineTrace, RuntimeHealth.add_trace/latest_trace)",
+    "wired_in": "providers/deriv_provider.py (candle history requests emit a trace per request)",
+    "exposed_via": "GET /api/system/data-pipeline?symbol=R_75",
+    "stages_tracked": [
+      "ACTIVE_SYMBOL_RESOLUTION",
+      "PROVIDER_CONNECTION",
+      "HISTORY_REQUEST",
+      "HISTORY_RESPONSE",
+      "CANDLE_NORMALIZATION",
+      "COMPLETED_CANDLE_FILTER",
+      "TIMEFRAME_AGGREGATION",
+      "CACHE_WRITE",
+      "CACHE_READ",
+      "ANALYSIS_READY",
+      "ANALYSIS_STARTED",
+      "ANALYSIS_COMPLETED"
+    ],
+    "test_coverage": "tests/test_deriv_runtime_recovery.py::test_pipeline_trace_exposes_every_required_stage"
+  },
+  "r75_specific_aggregation": {
+    "mechanism": "providers/multi_timeframe.py:get_multi_timeframe_context resamples M5/M15/H1 from a single M1 source for provider=='deriv' and asset_class=='derived_index' (the R_75 golden path), rather than fetching each timeframe independently \u2014 this makes cross-timeframe consistency structural rather than best-effort.",
+    "resample_function": "providers/multi_timeframe.py:_resample_completed (label='left', closed='left', drops any bucket whose period has not fully elapsed relative to the latest M1 candle)",
+    "new_test_coverage": "tests/test_phase2_r75_aggregation.py (5 tests: M15 exactness, H1 exactness, forming-bucket exclusion, determinism, out-of-order/duplicate M1 normalization)"
+  },
+  "checks": {
+    "provider_symbol_is_r75": true,
+    "display_name_is_volatility_75_index": true,
+    "market_schedule_24_7": true,
+    "analysis_clock_utc": true,
+    "timestamps_utc": true,
+    "candles_sorted_ascending": true,
+    "duplicate_timestamps_deduplicated_deterministically": true,
+    "invalid_ohlc_rejected": true,
+    "incomplete_final_candle_excluded": true,
+    "aggregation_boundaries_deterministic": true,
+    "m15_contains_exactly_correct_completed_m5": true,
+    "h1_contains_exactly_correct_completed_lower_tf": true,
+    "empty_provider_response_does_not_overwrite_cache": true,
+    "reconnect_does_not_duplicate_candles": true,
+    "symbol_switch_no_backend_cache_contamination": true
+  },
+  "existing_test_evidence": [
+    "tests/test_deriv_live_integrity.py::test_m5_deterministic_aggregation_and_exactly_once_close",
+    "tests/test_deriv_live_integrity.py::test_history_and_matching_live_bucket_merge_without_duplicate",
+    "tests/test_deriv_live_integrity.py::test_duplicates_out_of_order_and_old_symbols_are_ignored",
+    "tests/test_deriv_live_integrity.py::test_all_timeframes_align_to_utc_boundaries",
+    "tests/test_deriv_live_integrity.py::test_gap_reports_missing_intervals_and_backfill_deduplicates",
+    "tests/test_deriv_chart_loading.py::test_lightweight_chart_normalizer_sorts_deduplicates_and_rejects_invalid",
+    "tests/test_deriv_runtime_recovery.py::test_current_incomplete_candle_is_excluded",
+    "tests/test_deriv_runtime_recovery.py::test_empty_provider_response_does_not_overwrite_known_good"
+  ],
+  "checkpoint_3_result": "PASSED",
+  "note": "The trace/aggregation infrastructure and its test coverage predate Phase 2 and were verified, not newly built. Genuinely new work: tests/test_phase2_r75_aggregation.py, which had no prior direct coverage of _resample_completed (the M1-source resampling path R_75 specifically uses)."
+}
