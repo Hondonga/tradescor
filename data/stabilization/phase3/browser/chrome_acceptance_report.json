@@ -1,0 +1,662 @@
+{
+  "generated_at": "2026-07-21T12:50:41.637Z",
+  "section": "27 - CHROME ACCEPTANCE",
+  "method": "Playwright/Chromium against a static Storybook build of market-chart.stories.tsx (real MarketChart, real overlay pipeline) for the 14 required R_75 M5 states across 5 resolutions, plus a live Drawing-Inspector-open interaction, plus a live-app cross-market structural smoke check.",
+  "resolutions_tested": [
+    "1920x1080",
+    "1536x864",
+    "1440x900",
+    "1280x800",
+    "1024x768"
+  ],
+  "results": [
+    {
+      "state": "01_market_context",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--market-context-only&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/01_market_context_1920x1080.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "02_developing_buy",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--developing-buy-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/02_developing_buy_1920x1080.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "03_developing_sell",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--developing-sell-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/03_developing_sell_1920x1080.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "04_plan_validation",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--plan-validation&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/04_plan_validation_1920x1080.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "05_trade_ready_buy",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--trade-ready-buy&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/05_trade_ready_buy_1920x1080.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "06_trade_ready_sell",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--trade-ready-sell&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/06_trade_ready_sell_1920x1080.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "07_expired",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--expired-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/07_expired_1920x1080.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "08_invalidated",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--invalidated-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/08_invalidated_1920x1080.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "09_replay",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--replay-mode&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/09_replay_1920x1080.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "10_historical",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--waiting-for-confirmation&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/10_historical_1920x1080.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "11_previous_setup",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--previous-setup-enabled&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/11_previous_setup_1920x1080.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "12_advanced_smc",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--advanced-smc-enabled&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/12_advanced_smc_1920x1080.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "13_research_mode",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--research-only-scenario&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/13_research_mode_1920x1080.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "01_market_context",
+      "resolution": "1536x864",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--market-context-only&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/01_market_context_1536x864.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "02_developing_buy",
+      "resolution": "1536x864",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--developing-buy-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/02_developing_buy_1536x864.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "03_developing_sell",
+      "resolution": "1536x864",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--developing-sell-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/03_developing_sell_1536x864.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "04_plan_validation",
+      "resolution": "1536x864",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--plan-validation&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/04_plan_validation_1536x864.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "05_trade_ready_buy",
+      "resolution": "1536x864",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--trade-ready-buy&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/05_trade_ready_buy_1536x864.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "06_trade_ready_sell",
+      "resolution": "1536x864",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--trade-ready-sell&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/06_trade_ready_sell_1536x864.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "07_expired",
+      "resolution": "1536x864",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--expired-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/07_expired_1536x864.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "08_invalidated",
+      "resolution": "1536x864",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--invalidated-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/08_invalidated_1536x864.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "09_replay",
+      "resolution": "1536x864",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--replay-mode&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/09_replay_1536x864.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "10_historical",
+      "resolution": "1536x864",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--waiting-for-confirmation&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/10_historical_1536x864.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "11_previous_setup",
+      "resolution": "1536x864",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--previous-setup-enabled&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/11_previous_setup_1536x864.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "12_advanced_smc",
+      "resolution": "1536x864",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--advanced-smc-enabled&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/12_advanced_smc_1536x864.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "13_research_mode",
+      "resolution": "1536x864",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--research-only-scenario&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/13_research_mode_1536x864.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "01_market_context",
+      "resolution": "1440x900",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--market-context-only&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/01_market_context_1440x900.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": [
+        "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+        "Failed to load resource: net::ERR_INTERNET_DISCONNECTED"
+      ]
+    },
+    {
+      "state": "02_developing_buy",
+      "resolution": "1440x900",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--developing-buy-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/02_developing_buy_1440x900.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": [
+        "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+        "Failed to load resource: net::ERR_INTERNET_DISCONNECTED"
+      ]
+    },
+    {
+      "state": "03_developing_sell",
+      "resolution": "1440x900",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--developing-sell-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/03_developing_sell_1440x900.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": [
+        "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+        "Failed to load resource: net::ERR_INTERNET_DISCONNECTED"
+      ]
+    },
+    {
+      "state": "04_plan_validation",
+      "resolution": "1440x900",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--plan-validation&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/04_plan_validation_1440x900.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": [
+        "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+        "Failed to load resource: net::ERR_INTERNET_DISCONNECTED"
+      ]
+    },
+    {
+      "state": "05_trade_ready_buy",
+      "resolution": "1440x900",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--trade-ready-buy&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/05_trade_ready_buy_1440x900.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": [
+        "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+        "Failed to load resource: net::ERR_INTERNET_DISCONNECTED"
+      ]
+    },
+    {
+      "state": "06_trade_ready_sell",
+      "resolution": "1440x900",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--trade-ready-sell&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/06_trade_ready_sell_1440x900.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "07_expired",
+      "resolution": "1440x900",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--expired-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/07_expired_1440x900.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "08_invalidated",
+      "resolution": "1440x900",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--invalidated-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/08_invalidated_1440x900.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "09_replay",
+      "resolution": "1440x900",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--replay-mode&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/09_replay_1440x900.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "10_historical",
+      "resolution": "1440x900",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--waiting-for-confirmation&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/10_historical_1440x900.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "11_previous_setup",
+      "resolution": "1440x900",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--previous-setup-enabled&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/11_previous_setup_1440x900.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "12_advanced_smc",
+      "resolution": "1440x900",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--advanced-smc-enabled&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/12_advanced_smc_1440x900.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "13_research_mode",
+      "resolution": "1440x900",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--research-only-scenario&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/13_research_mode_1440x900.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "01_market_context",
+      "resolution": "1280x800",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--market-context-only&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/01_market_context_1280x800.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "02_developing_buy",
+      "resolution": "1280x800",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--developing-buy-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/02_developing_buy_1280x800.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "03_developing_sell",
+      "resolution": "1280x800",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--developing-sell-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/03_developing_sell_1280x800.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "04_plan_validation",
+      "resolution": "1280x800",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--plan-validation&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/04_plan_validation_1280x800.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "05_trade_ready_buy",
+      "resolution": "1280x800",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--trade-ready-buy&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/05_trade_ready_buy_1280x800.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "06_trade_ready_sell",
+      "resolution": "1280x800",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--trade-ready-sell&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/06_trade_ready_sell_1280x800.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "07_expired",
+      "resolution": "1280x800",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--expired-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/07_expired_1280x800.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "08_invalidated",
+      "resolution": "1280x800",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--invalidated-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/08_invalidated_1280x800.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "09_replay",
+      "resolution": "1280x800",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--replay-mode&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/09_replay_1280x800.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "10_historical",
+      "resolution": "1280x800",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--waiting-for-confirmation&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/10_historical_1280x800.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "11_previous_setup",
+      "resolution": "1280x800",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--previous-setup-enabled&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/11_previous_setup_1280x800.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "12_advanced_smc",
+      "resolution": "1280x800",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--advanced-smc-enabled&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/12_advanced_smc_1280x800.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "13_research_mode",
+      "resolution": "1280x800",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--research-only-scenario&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/13_research_mode_1280x800.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "01_market_context",
+      "resolution": "1024x768",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--market-context-only&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/01_market_context_1024x768.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "02_developing_buy",
+      "resolution": "1024x768",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--developing-buy-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/02_developing_buy_1024x768.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "03_developing_sell",
+      "resolution": "1024x768",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--developing-sell-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/03_developing_sell_1024x768.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "04_plan_validation",
+      "resolution": "1024x768",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--plan-validation&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/04_plan_validation_1024x768.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "05_trade_ready_buy",
+      "resolution": "1024x768",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--trade-ready-buy&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/05_trade_ready_buy_1024x768.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "06_trade_ready_sell",
+      "resolution": "1024x768",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--trade-ready-sell&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/06_trade_ready_sell_1024x768.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "07_expired",
+      "resolution": "1024x768",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--expired-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/07_expired_1024x768.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "08_invalidated",
+      "resolution": "1024x768",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--invalidated-setup&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/08_invalidated_1024x768.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "09_replay",
+      "resolution": "1024x768",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--replay-mode&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/09_replay_1024x768.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "10_historical",
+      "resolution": "1024x768",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--waiting-for-confirmation&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/10_historical_1024x768.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "11_previous_setup",
+      "resolution": "1024x768",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--previous-setup-enabled&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/11_previous_setup_1024x768.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "12_advanced_smc",
+      "resolution": "1024x768",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--advanced-smc-enabled&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/12_advanced_smc_1024x768.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "13_research_mode",
+      "resolution": "1024x768",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--research-only-scenario&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/13_research_mode_1024x768.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "14_drawing_inspector_open",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:6013/iframe.html?id=chart-scenarios--trade-ready-buy&viewMode=story",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/14_drawing_inspector_open_1920x1080.png",
+      "ok": true,
+      "inspector_opened": true,
+      "new_console_errors": []
+    },
+    {
+      "state": "cross_market_jump10_research_only",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:5000/workspace?symbol=JD10&timeframe=M5",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/cross_market_jump10_research_only.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "cross_market_gbpusd_forex",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:5000/workspace?symbol=GBP/USD&timeframe=M5",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/cross_market_gbpusd_forex.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "cross_market_step_market",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:5000/workspace?symbol=stpRNG&timeframe=M5",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/cross_market_step_market.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    },
+    {
+      "state": "cross_market_boom_crash_market",
+      "resolution": "1920x1080",
+      "url": "http://127.0.0.1:5000/workspace?symbol=BOOM50&timeframe=M5",
+      "file": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase3/browser/cross_market_boom_crash_market.png",
+      "ok": true,
+      "horizontal_overflow": false,
+      "new_console_errors": []
+    }
+  ],
+  "all_captures_ok": true,
+  "any_console_errors": true,
+  "any_horizontal_overflow": false
+}
