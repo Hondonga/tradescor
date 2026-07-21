@@ -3,6 +3,7 @@ import {
   ColorType,
   createChart,
   LineStyle,
+  type AutoscaleInfo,
   type IChartApi,
   type ISeriesApi,
   type UTCTimestamp,
@@ -14,6 +15,7 @@ import { selectVisibleOverlays } from "@/lib/overlays";
 import { applyDensity, hiddenEvidenceCount } from "@/lib/overlay-density";
 import { styleForOverlay, type LineStyleToken } from "@/lib/overlay-style-registry";
 import { computeZoneRect, type ZoneRect } from "@/lib/overlay-layout";
+import { actionablePriceRange } from "@/lib/chart/priceScaleRange";
 import { ChartToolbar } from "./chart-toolbar";
 import { ChartZoneLayer } from "./chart-zone-layer";
 import { ChartPriceTags } from "./chart-price-tags";
@@ -211,6 +213,20 @@ export function MarketChart() {
     const chart = chartRef.current;
     const series = seriesRef.current;
     if (!chart || !series) return;
+    series.applyOptions({
+      autoscaleInfoProvider: (original: () => AutoscaleInfo | null) => {
+        const base = original();
+        const range = actionablePriceRange(visibleOverlays);
+        if (!range) return base;
+        const priceRange = base?.priceRange
+          ? {
+              minValue: Math.min(base.priceRange.minValue, range.minValue),
+              maxValue: Math.max(base.priceRange.maxValue, range.maxValue),
+            }
+          : range;
+        return { priceRange, margins: base?.margins };
+      },
+    });
     series.priceScale().applyOptions({ autoScale: true });
 
     const zoneOverlays = visibleOverlays.filter((o) => o.low != null && o.high != null);
