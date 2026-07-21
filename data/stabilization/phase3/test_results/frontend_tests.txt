@@ -1,0 +1,36 @@
+
+ RUN  v3.2.7 /Users/user/Documents/Codex/ tradescor/ict_flask_scanner/frontend
+
+ ✓ src/components/chart/chart-setup-summary.test.tsx (4 tests) 145ms
+ ✓ src/components/chart/chart-zone-layer.test.tsx (4 tests) 176ms
+ ✓ src/components/chart/chart-toolbar.test.tsx (9 tests) 663ms
+   ✓ ChartToolbar > shows a density mode selector and calls onDensityModeChange when a mode is chosen (§4/§24: keyboard-accessible, no mouse required)  319ms
+ ✓ src/components/chart/chart-price-tags.test.tsx (6 tests) 454ms
+ ✓ src/components/chart/drawing-inspector.test.tsx (9 tests) 451ms
+ ✓ src/components/terminal/opportunity-queue.test.tsx (9 tests) 391ms
+stderr | src/components/terminal/decision-rail.test.tsx > DecisionRail section order (Phase 3 §11) > omits WHAT IS MISSING once TRADE_READY, and shows the trade plan instead
+Each child in a list should have a unique "key" prop.
+
+Check the render method of `dl`. It was passed a child from TradeReadyPlan. See https://react.dev/link/warning-keys for more information.
+
+ ✓ src/components/terminal/decision-rail.test.tsx (9 tests) 851ms
+   ✓ DecisionRail section order (Phase 3 §11) > renders MARKET STATE, ACTIVE SETUP, WHAT IS MISSING, NEXT ACTION and DETAILS in the required order for a developing setup  335ms
+ ✓ src/components/chart/overlay-tooltip.test.tsx (4 tests) 187ms
+ ✓ src/lib/chart/setupFocus.test.ts (12 tests) 33ms
+ ✓ src/components/chart/chart-event-markers.test.tsx (4 tests) 203ms
+ ✓ src/lib/overlays.test.ts (14 tests) 143ms
+ ✓ src/lib/chart/priceScaleRange.test.ts (5 tests) 6ms
+ ✓ src/store/terminal-store.test.ts (12 tests) 64ms
+ ✓ src/lib/overlay-collision.test.ts (5 tests) 9ms
+ ✓ src/lib/chart/overlayPriority.test.ts (10 tests) 23ms
+ ✓ src/lib/overlay-density.test.ts (7 tests) 12ms
+ ✓ src/lib/overlay-style-registry.test.ts (11 tests) 11ms
+ ✓ src/lib/overlay-layout.test.ts (6 tests) 8ms
+ ✓ src/lib/overlay-labels.test.ts (12 tests) 31ms
+
+ Test Files  19 passed (19)
+      Tests  152 passed (152)
+   Start at  08:42:27
+   Duration  10.56s (transform 904ms, setup 8.09s, collect 4.00s, tests 3.86s, environment 27.39s, prepare 7.24s)
+
+exit_code=0

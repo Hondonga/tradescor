@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-07-21T12:43:43.879718+00:00",
+  "sections": "25 (backend regression) and 26 (frontend test/build gate)",
+  "python_full": {
+    "command": "python3 -m pytest tests/ -q",
+    "result": "818 passed, 13 subtests passed",
+    "exit_code": 0,
+    "baseline_comparison": "Exactly matches the Phase 2 baseline (818 passed, 13 subtests) -- zero regressions.",
+    "file": "data/stabilization/phase3/test_results/python_full.txt"
+  },
+  "python_focused_subsystems": {
+    "command": "python3 -m pytest tests/ -k \"phase2 or reachability or paper or replay or quarantine or target_hierarchy or structural_target\" -q",
+    "result": "109 passed, 709 deselected",
+    "exit_code": 0,
+    "covers": [
+      "BUY reachability",
+      "SELL reachability",
+      "paper tests",
+      "replay parity",
+      "strategy quarantine",
+      "target hierarchy"
+    ]
+  },
+  "frontend_tests": {
+    "command": "npx vitest run",
+    "result": "152 tests passed (19 test files)",
+    "exit_code": 0,
+    "baseline_comparison": "67 at Phase 3 start -> 152 now (+85 new tests across this phase, zero removed or weakened)",
+    "file": "data/stabilization/phase3/test_results/frontend_tests.txt"
+  },
+  "typescript_build": {
+    "command": "npx tsc -b",
+    "result": "clean, 0 errors",
+    "exit_code": 0,
+    "file": "data/stabilization/phase3/test_results/typescript_build.txt"
+  },
+  "frontend_build": {
+    "command": "npx vite build",
+    "result": "production build succeeded",
+    "exit_code": 0,
+    "file": "data/stabilization/phase3/test_results/frontend_build.txt"
+  },
+  "linting": "Not configured in this project (no \"lint\" script in package.json) -- correctly skipped per the milestone's own conditional wording (\"linting if configured\").",
+  "frozen_ml_integrity": {
+    "dataset_all_unchanged": true,
+    "model_all_unchanged": true,
+    "model_status": "REJECTED_POOR_CALIBRATION",
+    "live_activation_available": false,
+    "no_new_training_runs": true,
+    "file": "data/stabilization/phase3/diagnostics/ml_integrity_recheck.json"
+  },
+  "backend_test_fixes": [
+    "tests/test_priority_context_forex_restoration.py::test_navigation_contains_no_automatic_full_analysis_trigger -- updated to check the combined source of workspace-page.tsx + the new opportunity-queue.tsx after the \u00a719 extraction; same invariant, same protection.",
+    "tests/test_jump_post_event_research_presentation.py::test_jump_research_rail_contains_non_predictive_confirmation_copy -- updated after the \u00a711 rail reorder consolidated the 'Plan blocker' row into WHAT IS MISSING; also fixed a real gap this surfaced (plan_blocker was not being read as a fallback) in decision-rail.tsx itself."
+  ],
+  "regressions_detected": false,
+  "no_existing_tests_removed_or_weakened": true,
+  "checkpoint_25_26_result": "PASSED"
+}
