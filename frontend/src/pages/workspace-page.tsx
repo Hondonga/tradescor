@@ -1,10 +1,11 @@
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
-import { Bell, Star, Search, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { useState } from "react";
 import { useTerminalStore } from "@/store/terminal-store";
 import { useAnalysis } from "@/hooks/use-analysis";
 import { MarketChart } from "@/components/chart/market-chart";
 import { DecisionRail } from "@/components/terminal/decision-rail";
+import { OpportunityQueue } from "@/components/terminal/opportunity-queue";
 import { Button } from "@/components/ui/button";
 import { cancelLatestSetupSearch, startLatestSetupSearch } from "@/lib/api";
 import { useHistorySearchPolling } from "@/hooks/use-history-search-polling";
@@ -38,46 +39,13 @@ export function WorkspacePage() {
           collapsedSize={0}
           order={1}
         >
-          <aside className="queue-panel">
-            <header>
-              <b>Opportunity queue</b>
-              <Bell size={13} />
-            </header>
-            {watch.length ? (
-              watch.map((row) => (
-                <button
-                  key={row.symbol.provider_symbol}
-                  onClick={() => store.selectMarket(row)}
-                >
-                  <Star size={11} />
-                  <span>
-                    <b>{row.symbol.display_name}</b>
-                    <small>
-                      {row.decision?.decision.status || "Not analyzed"}
-                    </small>
-                  </span>
-                </button>
-              ))
-            ) : store.dataReadiness === "error" ? (
-              <div className="queue-empty">
-                <b>OPPORTUNITY QUEUE PAUSED</b>
-                <br />
-                Live analysis is unavailable because completed candle data could
-                not be loaded.
-              </div>
-            ) : (
-              <div className="queue-empty">
-                Star symbols in Markets to build the queue.
-              </div>
-            )}
-            <Button
-              className="m-3"
-              onClick={() => analysis.mutate()}
-              disabled={analysis.isPending}
-            >
-              Analyze now
-            </Button>
-          </aside>
+          <OpportunityQueue
+            rows={watch}
+            onSelect={(row) => store.selectMarket(row)}
+            dataReadiness={store.dataReadiness}
+            onAnalyzeNow={() => analysis.mutate()}
+            analyzePending={analysis.isPending}
+          />
         </Panel>
         <PanelResizeHandle className="resize-handle" />
         <Panel defaultSize={58} minSize={40} order={2}>
