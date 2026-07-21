@@ -20,7 +20,15 @@ export function applySetupFocus(
 ): Overlay[] {
   if (!decision) return overlays;
   const tradeReady = Boolean(decision.decision?.trade_ready);
-  const hasActiveSetup = Boolean(decision.active_setup);
+  // Phase 3 §18 -- research-only evidence is hidden in CLEAN mode by
+  // default (visible only in RESEARCH mode, which never calls into Setup
+  // Focus at all). A research-only decision is deliberately treated as if
+  // it had no active setup here, even though decision.active_setup is
+  // technically populated -- research-only can never be TRADE_READY
+  // (Phase 2 quarantine), so this only ever affects the "developing setup"
+  // branch below.
+  const researchOnly = Boolean(decision.setup?.research_only);
+  const hasActiveSetup = Boolean(decision.active_setup) && !researchOnly;
   const currentPrice = overlays.find((o) => o.type === "current_price")?.price ?? null;
 
   if (tradeReady) {

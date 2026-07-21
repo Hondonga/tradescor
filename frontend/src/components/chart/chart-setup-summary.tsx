@@ -22,6 +22,12 @@ export function ChartSetupSummary({ decision, visible }: ChartSetupSummaryProps)
   const direction = String(activeSetup.direction || decision.decision.direction || "").toLowerCase();
   if (direction !== "buy" && direction !== "sell") return null;
 
+  // Phase 3 §18 — a research-only candidate must never be presented as an
+  // ACTIVE SETUP; it is always visually muted and explicitly labeled a
+  // research scenario instead, matching the same quarantine rules already
+  // enforced for actionable overlays (Phase 2).
+  const researchOnly = Boolean(activeSetup.research_only ?? decision.setup.research_only);
+
   const setupType = titleCase(String(activeSetup.setup_type || decision.setup.setup_type || ""));
   const stage = titleCase(
     String(activeSetup.lifecycle || activeSetup.state || activeSetup.stage || decision.decision.stage || ""),
@@ -33,10 +39,10 @@ export function ChartSetupSummary({ decision, visible }: ChartSetupSummaryProps)
       <p
         className={
           "text-[10px] font-semibold tracking-[.06em] " +
-          (direction === "sell" ? "text-red-300" : "text-emerald-300")
+          (researchOnly ? "text-research" : direction === "sell" ? "text-red-300" : "text-emerald-300")
         }
       >
-        {direction.toUpperCase()} SETUP
+        {researchOnly ? "RESEARCH SCENARIO" : `${direction.toUpperCase()} SETUP`}
       </p>
       {setupType && <p className="text-[9px] text-zinc-500">{setupType}</p>}
       <div className="mt-2 space-y-1.5">

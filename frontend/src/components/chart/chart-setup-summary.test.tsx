@@ -69,4 +69,18 @@ describe("ChartSetupSummary", () => {
     const { container } = render(<ChartSetupSummary decision={decision()} visible={false} />);
     expect(container).toBeEmptyDOMElement();
   });
+
+  it("never labels a research-only candidate as an ACTIVE/BUY/SELL SETUP (Phase 3 §18)", () => {
+    render(
+      <ChartSetupSummary
+        decision={decision({
+          setup: { setup_type: "structure_pullback", stage: "PLAN_VALIDATION", status: "PLAN VALIDATION", context_summary: "", next_required_condition: "", trade_ready: false, targets: [], quality_score: null, quality_grade: null, research_only: true },
+          active_setup: { setup_id: "vsp-1", lifecycle: "PLAN_VALIDATION", direction: "sell", setup_type: "structure_pullback", research_only: true },
+        })}
+        visible
+      />,
+    );
+    expect(screen.getByText("RESEARCH SCENARIO")).toBeInTheDocument();
+    expect(screen.queryByText("SELL SETUP")).not.toBeInTheDocument();
+  });
 });

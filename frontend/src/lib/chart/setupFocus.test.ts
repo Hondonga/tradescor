@@ -130,6 +130,24 @@ describe("applySetupFocus", () => {
       expect(result).not.toContain("entry");
     });
 
+    it("hides research-only setup evidence in CLEAN mode by default (Phase 3 §18), treating it like no active setup", () => {
+      const researchDecision = decision({
+        active_setup: { setup_id: "setup-1", lifecycle: "WAITING_FOR_DISPLACEMENT" },
+        setup: { setup_id: "setup-1", trade_ready: false, targets: [], quality_score: null, quality_grade: null, next_required_condition: "", context_summary: "", research_only: true } as any,
+        decision: { status: "RESEARCH SCENARIO", direction: "sell", stage: "WAITING_FOR_DISPLACEMENT", headline: "", summary: "", next_action: "", trade_ready: false },
+      });
+      const overlays = [
+        overlay({ overlay_id: "cp", type: "current_price", price: 51500 }),
+        overlay({ overlay_id: "zone", category: "developing", type: "m15_pullback_area", low: 51300, high: 51600 }),
+        overlay({ overlay_id: "confirm", category: "developing", type: "confirmation", price: 51420 }),
+        overlay({ overlay_id: "ctx", category: "context", price: 51900 }),
+      ];
+      const result = applySetupFocus(overlays, researchDecision).map((o) => o.overlay_id);
+      expect(result).not.toContain("zone");
+      expect(result).not.toContain("confirm");
+      expect(result).toEqual(expect.arrayContaining(["cp", "ctx"]));
+    });
+
     it("narrows external structure context to the nearest reference above and below current price", () => {
       const overlays = [
         overlay({ overlay_id: "cp", type: "current_price", price: 51500 }),
