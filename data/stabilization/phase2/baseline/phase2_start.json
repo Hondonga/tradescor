@@ -1,0 +1,24 @@
+{
+  "started_at": "2026-07-21T02:56:31.605453+00:00",
+  "baseline_commit": "437e876097af3806a9df2f4437a211ad367d71c3",
+  "working_branch": "tradescor-phase2-volatility75-stabilization",
+  "working_tree_status": [],
+  "python_baseline_passed": 759,
+  "frontend_baseline_passed": 65,
+  "ml_dataset_checksum": "737b02ea7c98fa68131920cc0fb6f5b438a8504dc2898aea14c1ce4c0b178b23",
+  "ml_model_run": "ml-run-610209ec3d9146ae",
+  "golden_path": {
+    "provider": "deriv",
+    "symbol": "R_75",
+    "timeframe": "M5",
+    "strategy": "volatility_structure_pullback"
+  },
+  "phase1_artifacts_verified": {
+    "safety_branch_head": "437e876097af3806a9df2f4437a211ad367d71c3",
+    "safety_tag_head": "437e876097af3806a9df2f4437a211ad367d71c3",
+    "backup_db_count": 4,
+    "screenshot_count": 20,
+    "report_count": 4,
+    "ml_checksum_matches": true
+  }
+}
