@@ -331,6 +331,95 @@ const advancedSmcEnabled = buildDecision({
   ],
 });
 
+// --- Phase 3 §23 additional required fixtures ---------------------------
+
+const waitingForEntry = buildDecision({
+  direction: "sell",
+  stage: "WAITING_FOR_ENTRY",
+  status: "WAITING FOR M5 RETRACEMENT",
+  setupId: "vsp-waiting-entry",
+  overlays: [
+    currentPriceOverlay(),
+    ...structureOverlays(),
+    overlay({ type: "m15_pullback_area", setup_id: "vsp-waiting-entry", category: "developing", low: 51350, high: 51650, priority: 90, display_group: "setup", label: "M15 Pullback Area" }),
+    overlay({ type: "confirmation", setup_id: "vsp-waiting-entry", category: "developing", price: 51420, priority: 50, display_group: "setup", label: "Confirmation Level" }),
+  ],
+});
+
+const tooLateSetup = buildDecision({
+  direction: null,
+  stage: "NO_DIRECTIONAL_CONTEXT",
+  status: "TOO LATE",
+  setupId: null,
+  overlays: [currentPriceOverlay(), ...structureOverlays()],
+  previousSetup: { setup_id: "vsp-too-late-1", terminal_status: "TOO_LATE", terminal_reason: "Price moved too far beyond the confirmed entry to chase." },
+});
+
+const researchOnlyScenario: NormalizedDecision = {
+  ...buildDecision({
+    direction: "sell",
+    stage: "PLAN_VALIDATION",
+    status: "RESEARCH SCENARIO",
+    setupId: "jump-research-1",
+    overlays: [
+      currentPriceOverlay(),
+      ...structureOverlays(),
+      ...developingOverlays("jump-research-1", "sell"),
+    ],
+  }),
+  setup: {
+    setup_id: "jump-research-1",
+    setup_type: "jump_post_event_continuation",
+    direction: "sell",
+    stage: "PLAN_VALIDATION",
+    status: "RESEARCH SCENARIO",
+    context_summary: "Research-only Jump post-event continuation candidate.",
+    next_required_condition: "Research only -- not eligible for Auto or paper signals.",
+    trade_ready: false,
+    targets: [],
+    quality_score: null,
+    quality_grade: null,
+    research_only: true,
+  },
+  active_setup: {
+    setup_id: "jump-research-1",
+    lifecycle: "PLAN_VALIDATION",
+    setup_type: "jump_post_event_continuation",
+    direction: "sell",
+    research_only: true,
+  },
+};
+
+const stateContradiction: NormalizedDecision = {
+  ...buildDecision({
+    direction: null,
+    stage: "NO_DIRECTIONAL_CONTEXT",
+    status: "STATE CONTRADICTION",
+    setupId: null,
+    overlays: [currentPriceOverlay()],
+  }),
+  decision: {
+    status: "STATE CONTRADICTION",
+    direction: null,
+    stage: "STATE_CONTRADICTION",
+    headline: "STATE CONTRADICTION",
+    summary: "Conflicting lifecycle or ownership fields were blocked.",
+    next_action: "Do not act. Wait for a new coherent decision.",
+    trade_ready: false,
+  },
+};
+
+const staleDataState: NormalizedDecision = {
+  ...buildDecision({
+    direction: "sell",
+    stage: "WAITING_FOR_DISPLACEMENT",
+    status: "SELL SETUP DEVELOPING",
+    setupId: "vsp-stale",
+    overlays: [currentPriceOverlay(), ...structureOverlays(), ...developingOverlays("vsp-stale", "sell")],
+  }),
+  readiness: { state: "stale", last_successful_update: "2026-07-18T01:40:00Z" } as any,
+};
+
 function renderScenario(
   decision: NormalizedDecision,
   overlayVisibility: Partial<Record<OverlayCategory, boolean>> = {},
@@ -368,6 +457,44 @@ function renderScenario(
   );
 }
 
+/** Live/replay/connection-state variant of renderScenario, for fixtures
+ * that aren't representable purely as "frozen at decision time" historical
+ * inspection (replay mode, provider reconnecting, empty/no-data state). */
+function renderLive(
+  decision: NormalizedDecision | undefined,
+  storeOverrides: Partial<Parameters<typeof useTerminalStore.setState>[0]> = {},
+) {
+  useTerminalStore.setState({
+    symbol: SYMBOL,
+    timeframe: "M5",
+    marketSource: "deriv",
+    marketType: "derived",
+    workspaceMode: "live",
+    historicalCandles: [],
+    decision,
+    overlayOwner: decision ? OWNER : undefined,
+    connection: "connected",
+    dataReadiness: decision ? "ready" : "idle",
+    densityMode: "clean",
+    overlayVisibility: {
+      trade_plan: true,
+      market_structure: true,
+      context_levels: true,
+      advanced_smc: false,
+      previous_setup: false,
+    },
+    ...storeOverrides,
+  } as any);
+  const client = new QueryClient();
+  return (
+    <QueryClientProvider client={client}>
+      <div style={{ width: 1440, height: 720 }} className="border border-white/10">
+        <MarketChart />
+      </div>
+    </QueryClientProvider>
+  );
+}
+
 const meta: Meta = {
   title: "Chart/Scenarios",
   parameters: {
@@ -392,6 +519,21 @@ export const PreviousSetupEnabled: Story = {
 };
 export const AdvancedSmcEnabled: Story = {
   render: () => renderScenario(advancedSmcEnabled, { advanced_smc: true }, "research"),
+};
+export const WaitingForEntry: Story = { render: () => renderScenario(waitingForEntry) };
+export const TooLate: Story = { render: () => renderScenario(tooLateSetup) };
+export const StateContradiction: Story = { render: () => renderScenario(stateContradiction) };
+export const ResearchOnlyScenario: Story = {
+  render: () => renderScenario(researchOnlyScenario, { advanced_smc: true }, "standard"),
+};
+export const PreviousSetupHidden: Story = { render: () => renderScenario(expiredSetup) };
+export const StaleDataState: Story = { render: () => renderScenario(staleDataState) };
+export const ReplayMode: Story = {
+  render: () => renderLive(tradeReadySell, { workspaceMode: "replay", historicalCandles: candles() }),
+};
+export const EmptyNoDataState: Story = { render: () => renderLive(undefined) };
+export const ProviderReconnecting: Story = {
+  render: () => renderLive(undefined, { connection: "reconnecting" }),
 };
 
 // --- responsive spot-checks (Phase 3 §16 widths) — one illustrative scenario ---
