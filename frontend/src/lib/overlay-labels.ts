@@ -3,7 +3,11 @@
 // mode-aware current-price label — "Current" / "Decision-time Current" /
 // "Replay Current" / "Previous setup price"); this module only decides how
 // much of that label to show and how to shorten it for a compact right-edge
-// tag. It never invents or overrides wording the backend didn't send.
+// tag. It never invents or overrides wording the backend didn't send, with
+// one narrow exception: the current-price tag's short form (Phase 3 §17 —
+// "CURRENT" / "DECISION TIME" / "REPLAY PRICE") is derived directly from the
+// overlay's own backend-sent `overlay_mode` enum, not guessed by the
+// frontend, so it can never disagree with what the backend normalized.
 import type { Overlay } from "@/types";
 import { overlayRole } from "./overlays";
 
@@ -49,11 +53,27 @@ const TAG_TEXT: Record<string, string> = {
   final_invalidation: "INVALID",
   invalidation: "INVALID",
   setup_invalidation: "INVALID",
-  current_price: "",
+};
+
+// Phase 3 §17 — the current-price tag's text must reflect Workspace mode
+// (LIVE/HISTORICAL_INSPECTION/REPLAY), keyed off the overlay's own
+// overlay_mode metadata rather than any frontend-side mode tracking, so it
+// can never drift from what the backend actually normalized this decision
+// as. PREVIOUS_SETUP intentionally falls through to "" here — per §17,
+// previous-setup pricing must never replace/relabel the current-price tag;
+// it renders through its own separate historical overlay rows instead.
+const CURRENT_PRICE_TAG_TEXT: Record<string, string> = {
+  LIVE: "CURRENT",
+  HISTORICAL_INSPECTION: "DECISION TIME",
+  REPLAY: "REPLAY PRICE",
 };
 
 /** Short (<=6 char) right-edge tag text, distinct from the full chart label. */
 export function tagText(overlay: Overlay): string {
+  if (overlay.type === "current_price") {
+    const mode = String(overlay.metadata.overlay_mode || "");
+    return CURRENT_PRICE_TAG_TEXT[mode] || "";
+  }
   const role = String(overlay.metadata.plan_role || overlay.type || "").toLowerCase();
   if (role in TAG_TEXT) return TAG_TEXT[role];
   const words = chartLabel(overlay).split(/\s+/).filter(Boolean);

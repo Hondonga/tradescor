@@ -76,4 +76,22 @@ describe("tagText", () => {
   it("falls back to a short form of the chart label for everything else", () => {
     expect(tagText(overlay({ label: "H1 Bearish Context", type: "h1_context" }))).toBe("H1 BEARISH");
   });
+
+  it("labels the current-price tag CURRENT in live mode (Phase 3 §17)", () => {
+    expect(tagText(overlay({ type: "current_price", metadata: { overlay_mode: "LIVE" } }))).toBe("CURRENT");
+  });
+
+  it("labels the current-price tag DECISION TIME in historical inspection, never 'Decision-time Current'", () => {
+    const text = tagText(overlay({ type: "current_price", metadata: { overlay_mode: "HISTORICAL_INSPECTION" } }));
+    expect(text).toBe("DECISION TIME");
+    expect(text).not.toContain("Decision-time Current");
+  });
+
+  it("labels the current-price tag REPLAY PRICE in replay mode", () => {
+    expect(tagText(overlay({ type: "current_price", metadata: { overlay_mode: "REPLAY" } }))).toBe("REPLAY PRICE");
+  });
+
+  it("does not replace the current-price tag when Previous Setup is the mode", () => {
+    expect(tagText(overlay({ type: "current_price", metadata: { overlay_mode: "PREVIOUS_SETUP" } }))).toBe("");
+  });
 });
