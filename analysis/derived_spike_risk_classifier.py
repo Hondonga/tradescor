@@ -1,0 +1,4 @@
+"""Informational alignment risk for Boom/Crash paper analysis."""
+def classify_spike_risk(family,direction,config=None):
+    family=str(family).upper();aligned=(family=="BOOM" and direction=="buy") or (family=="CRASH" and direction=="sell");alignment="aligned" if aligned else "opposed";cfg=config or {};minimum=float(cfg.get("aligned_minimum_rr",1.5) if aligned else cfg.get("opposed_minimum_rr",2));validity=int(cfg.get("aligned_setup_validity_candles",12) if aligned else cfg.get("opposed_setup_validity_candles",8))
+    return {"alignment":alignment,"gap_risk":"moderate" if aligned else "extreme","slippage_risk":"high" if aligned else "extreme","required_confirmation_strength":"standard completed structure break" if aligned else "strong completed structure shift and retest","minimum_required_rr":minimum,"risk_multiplier":1.0 if aligned else .5,"setup_validity_candles":validity,"warnings":[] if aligned else ["Candidate opposes the expected family spike direction."]}

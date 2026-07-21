@@ -1,0 +1,1 @@
+def derived_outcome_event(*,snapshot_id,outcome,mfe=None,mae=None,realized_r=None,reason=None):return {"snapshot_id":snapshot_id,"outcome":outcome,"mfe":mfe,"mae":mae,"realized_r":realized_r,"reason":reason}

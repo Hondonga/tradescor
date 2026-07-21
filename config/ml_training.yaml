@@ -1,0 +1,19 @@
+dataset_id: ml-r75-f4c52d93c7a8dc3e95f1
+dataset_checksum: 737b02ea7c98fa68131920cc0fb6f5b438a8504dc2898aea14c1ce4c0b178b23
+schema_version: smc-ml-features-v1
+random_seed: 75
+primary_target: TP1_BEFORE_STOP
+thresholds: [0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80]
+minimum_validation_trades: 30
+minimum_validation_retention: 0.20
+minimum_test_trades: 25
+minimum_pr_auc: 0.30
+maximum_brier_score: 0.25
+maximum_ece: 0.15
+maximum_drawdown_worsening_r: 2.0
+calibration_methods: [none, sigmoid, isotonic]
+gradient_boosting:
+  max_iter: 160
+  learning_rate: 0.05
+  max_leaf_nodes: 15
+  l2_regularization: 1.0

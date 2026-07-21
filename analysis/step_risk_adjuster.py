@@ -1,0 +1,2 @@
+def step_risk_adjustments(config=None):
+    cfg=config or {};execution=cfg.get("execution",{});return {"confidence_ceiling":float(cfg.get("confidence_ceiling",.65)),"minimum_tp1_rr":float(execution.get("minimum_tp1_rr",1.4)),"maximum_chase_atr":float(execution.get("maximum_chase_atr",.22)),"stop_buffer_multiplier":1.0,"setup_lifetime_candles":int(execution.get("setup_expiration_m5_candles",8)),"research_warning":"Step Index strategy remains under research validation."}

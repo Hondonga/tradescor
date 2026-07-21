@@ -1,0 +1,12 @@
+{
+  "minimum_profile_samples": 30,
+  "good_profile_samples": 100,
+  "atr_period": 14,
+  "profile_window": 200,
+  "spike_atr_multiple": 2.5,
+  "spike_median_range_multiple": 3.0,
+  "compression_ratio": 0.72,
+  "expansion_ratio": 1.45,
+  "trend_efficiency": 0.32,
+  "range_efficiency": 0.20
+}

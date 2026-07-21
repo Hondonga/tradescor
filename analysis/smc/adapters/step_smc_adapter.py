@@ -1,0 +1,3 @@
+from analysis.smc.adapters._shared import evaluate_shared
+def evaluate_step_smc(*,symbol,family,candles_by_timeframe,tick_size=.01,requested_strategy="auto",**_):
+    result=evaluate_shared(symbol=symbol,family=family,frames=candles_by_timeframe,tick_size=tick_size,requested_strategy=requested_strategy,adapter_id="step_smc_adapter",model_name="Step SMC",fvg_supported=False,ob_supported=False,structural_array_supported=True,research_only=False);structure=result["structure"];result["selected_sub_method"]="breakout_and_retest" if structure.get("last_bos") else "range_boundary_reaction" if structure.get("external_structure")=="range" else "structure_pullback" if structure.get("external_structure") in {"bullish","bearish"} else "none";return result

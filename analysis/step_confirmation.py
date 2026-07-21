@@ -1,0 +1,3 @@
+from analysis.derived_execution_confirmation import confirm_m5_execution,lock_confirmed_entry
+def confirm_step_execution(candles,direction,m15_zone,execution_zone,setup_id,zone_reached_at):return confirm_m5_execution(candles,direction,m15_zone,execution_zone,setup_id,zone_reached_at)
+def lock_step_entry(confirmation,setup_id,price,existing=None):return lock_confirmed_entry(confirmation,setup_id,existing,price)

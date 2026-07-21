@@ -1,0 +1,264 @@
+{
+  "frozen_at": "2026-07-20T17:57:01.345262+00:00",
+  "status": "DEVELOPMENT_RESULT_CONSUMED",
+  "promotion": "BLOCKED",
+  "fingerprint": {
+    "strategy_id": "jdbr",
+    "window": "2026-06-24..2026-07-02",
+    "symbols": [
+      "JD10",
+      "JD100",
+      "JD50",
+      "JD75"
+    ],
+    "parameter_hash": "6c956dde3901634d"
+  },
+  "spec": {
+    "experiment_id": "jdbr_feasibility_selftest_2026-07",
+    "strategy_id": "jdbr",
+    "strategy_version": "v1-spec",
+    "engine_version": "jump_dex_post_event-research",
+    "symbols": [
+      "JD10",
+      "JD50",
+      "JD75",
+      "JD100"
+    ],
+    "start_time": "2026-06-24",
+    "end_time": "2026-07-02",
+    "hypothesis": "x",
+    "primary_metric": "expectancy_R",
+    "grouping_unit": "event_id",
+    "control_methods": [
+      "paired_opposite_direction",
+      "random_direction",
+      "geometry_only"
+    ],
+    "cost_model": {
+      "type": "per_trade_R",
+      "cost_R": 0.0002
+    },
+    "parameters_frozen_before_run": true,
+    "parameters": {
+      "risk_atr": 1.0,
+      "rr": 1.5,
+      "outcome_window": 120
+    },
+    "min_resolved_trades": 200,
+    "min_independent_periods": 8,
+    "max_single_symbol_profit_share": 0.6,
+    "max_single_period_profit_share": 0.6,
+    "created_at": "2026-07-20T17:56:57.287435+00:00"
+  },
+  "report": {
+    "experiment_id": "jdbr_feasibility_selftest_2026-07",
+    "strategy_id": "jdbr",
+    "strategy_version": "v1-spec",
+    "engine_version": "jump_dex_post_event-research",
+    "parameter_hash": "6c956dde3901634d",
+    "symbols": [
+      "JD10",
+      "JD50",
+      "JD75",
+      "JD100"
+    ],
+    "outcome": "REJECTED_INSUFFICIENT_SAMPLE",
+    "reasons": [
+      "n=76 (<200) or periods=8 (<8)."
+    ],
+    "comparison": {
+      "grouping_unit": "event_id",
+      "arms": {
+        "same_direction": {
+          "n": 76,
+          "mean_R": 0.1511,
+          "median_R": -1.0002,
+          "total_R": 11.485,
+          "win_rate_%": 46.1,
+          "profit_factor": 1.28,
+          "max_drawdown": -1.0,
+          "ci_grouped": {
+            "mean": 0.1511157894736843,
+            "median": -1.0002,
+            "lo": -0.11204210526315783,
+            "hi": 0.44716842105263166,
+            "n": 76,
+            "n_groups": 76,
+            "excludes_zero": false
+          }
+        },
+        "paired_opposite_direction": {
+          "n": 76,
+          "mean_R": 0.0195,
+          "median_R": -1.0002,
+          "total_R": 1.485,
+          "win_rate_%": 40.8,
+          "profit_factor": 1.033,
+          "max_drawdown": -1.0,
+          "ci_grouped": {
+            "mean": 0.019536842105263203,
+            "median": -1.0002,
+            "lo": -0.2765157894736841,
+            "hi": 0.28269473684210533,
+            "n": 76,
+            "n_groups": 76,
+            "excludes_zero": false
+          }
+        },
+        "random_direction": {
+          "n": 76,
+          "mean_R": -0.0134,
+          "median_R": -1.0002,
+          "total_R": -1.015,
+          "win_rate_%": 39.5,
+          "profit_factor": 0.978,
+          "max_drawdown": -1.0,
+          "ci_grouped": {
+            "mean": -0.013357894736842072,
+            "median": -1.0002,
+            "lo": -0.2765157894736841,
+            "hi": 0.2498000000000001,
+            "n": 76,
+            "n_groups": 76,
+            "excludes_zero": false
+          }
+        },
+        "geometry_only": {
+          "n": 76,
+          "mean_R": 0.0853,
+          "median_R": 0.2498,
+          "total_R": 6.485,
+          "win_rate_%": 86.8,
+          "profit_factor": 1.648,
+          "max_drawdown": -1.001,
+          "ci_grouped": {
+            "mean": 0.08532631578947374,
+            "median": 0.24980000000000002,
+            "lo": -0.013357894736842083,
+            "hi": 0.16756315789473689,
+            "n": 76,
+            "n_groups": 76,
+            "excludes_zero": false
+          }
+        }
+      },
+      "same_minus_opposite": {
+        "mean": 0.13157894736842105,
+        "median": 0.0,
+        "lo": -0.39473684210526316,
+        "hi": 0.6578947368421053,
+        "n": 76,
+        "n_groups": 76,
+        "excludes_zero": false
+      },
+      "same_minus_random": {
+        "mean": 0.16447368421052633,
+        "median": 0.0,
+        "lo": -0.19736842105263158,
+        "hi": 0.5592105263157895,
+        "n": 76,
+        "n_groups": 76,
+        "excludes_zero": false
+      },
+      "same_minus_geometry_only": {
+        "mean": 0.06578947368421052,
+        "median": 0.0,
+        "lo": -0.19736842105263158,
+        "hi": 0.32894736842105265,
+        "n": 76,
+        "n_groups": 76,
+        "excludes_zero": false
+      }
+    },
+    "stability": {
+      "symbol_consistency": {
+        "pooled_sign": 1,
+        "symbols_agreeing_%": 75.0,
+        "per_symbol_mean_R": {
+          "JD10": -0.0478,
+          "JD100": 0.3887,
+          "JD50": 0.184,
+          "JD75": 0.1109
+        }
+      },
+      "symbol_concentration": {
+        "top_group": "JD100",
+        "top_group_profit_share": 0.56,
+        "positive_total_R": 12.489
+      },
+      "period_concentration": {
+        "top_group": "2026-06-24",
+        "top_group_profit_share": 0.353,
+        "positive_total_R": 16.987
+      },
+      "per_symbol": {
+        "JD10": {
+          "n": 21,
+          "mean_R": -0.0478,
+          "total_R": -1.004
+        },
+        "JD100": {
+          "n": 18,
+          "mean_R": 0.3887,
+          "total_R": 6.996
+        },
+        "JD50": {
+          "n": 19,
+          "mean_R": 0.184,
+          "total_R": 3.496
+        },
+        "JD75": {
+          "n": 18,
+          "mean_R": 0.1109,
+          "total_R": 1.996
+        }
+      },
+      "per_period": {
+        "2026-06-24": {
+          "n": 9,
+          "mean_R": 0.6665,
+          "total_R": 5.998
+        },
+        "2026-06-25": {
+          "n": 9,
+          "mean_R": 0.1109,
+          "total_R": 0.998
+        },
+        "2026-06-26": {
+          "n": 7,
+          "mean_R": 0.0712,
+          "total_R": 0.499
+        },
+        "2026-06-27": {
+          "n": 7,
+          "mean_R": 0.0712,
+          "total_R": 0.499
+        },
+        "2026-06-28": {
+          "n": 13,
+          "mean_R": 0.346,
+          "total_R": 4.497
+        },
+        "2026-06-29": {
+          "n": 9,
+          "mean_R": 0.3887,
+          "total_R": 3.498
+        },
+        "2026-06-30": {
+          "n": 9,
+          "mean_R": 0.1109,
+          "total_R": 0.998
+        },
+        "2026-07-01": {
+          "n": 13,
+          "mean_R": -0.4233,
+          "total_R": -5.503
+        }
+      }
+    },
+    "n_independent_periods": 8,
+    "promotion": "BLOCKED"
+  },
+  "data_previously_consumed": true,
+  "warning": "This (strategy, window, parameters) was already consumed. Re-reporting it as independent evidence is invalid."
+}

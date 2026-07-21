@@ -1,0 +1,12 @@
+[41340:481580:0719/092523.715446:ERROR:ui/display/mac/cv_display_link_mac.mm:194] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[41340:481580:0719/092523.717484:ERROR:ui/display/mac/cv_display_link_mac.mm:194] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[41340:481580:0719/092523.718841:ERROR:ui/display/mac/cv_display_link_mac.mm:194] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[41340:481580:0719/092523.719740:ERROR:ui/display/mac/cv_display_link_mac.mm:194] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[41340:481580:0719/092524.443543:ERROR:ui/display/mac/cv_display_link_mac.mm:194] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[41340:481580:0719/092524.667006:ERROR:ui/display/mac/cv_display_link_mac.mm:194] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[41333:481532:0719/092524.747408:ERROR:base/process/process_mac.cc:53] task_policy_set TASK_CATEGORY_POLICY: (ipc/send) invalid destination port (0x10000003)
+[41333:481532:0719/092524.748558:ERROR:base/process/process_mac.cc:98] task_policy_set TASK_SUPPRESSION_POLICY: (ipc/send) invalid destination port (0x10000003)
+[41340:481580:0719/092524.907758:ERROR:ui/display/mac/cv_display_link_mac.mm:194] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[41340:481580:0719/092524.918870:ERROR:ui/display/mac/cv_display_link_mac.mm:194] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[41340:481580:0719/092524.919422:ERROR:ui/display/mac/cv_display_link_mac.mm:194] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+28714 bytes written to file /Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/browser_acceptance/react-terminal/markets-1440.png

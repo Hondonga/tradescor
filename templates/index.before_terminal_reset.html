@@ -1,0 +1,1221 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TradeScor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=terminal-reset-1">
+</head>
+<body class="view-scanner">
+    <aside class="app-sidebar" aria-label="TradeScor navigation">
+        <div class="sidebar-brand">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <div>
+                <strong>TradeScor</strong>
+                <small>Decision desk</small>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Workspace">
+            <button type="button" data-app-view="home" data-label="Home" role="tab" aria-selected="false"><span aria-hidden="true">⌂</span>Home</button>
+            <button type="button" data-app-view="scanner" class="active" data-label="Scanner" role="tab" aria-selected="true"><span aria-hidden="true">◎</span>Scanner</button>
+            <button type="button" data-app-view="chart" data-label="Chart" role="tab" aria-selected="false"><span aria-hidden="true">▦</span>Chart</button>
+            <button type="button" data-app-view="lab" data-label="Lab" role="tab" aria-selected="false"><span aria-hidden="true">◇</span>Lab</button>
+            <button type="button" data-app-view="settings" data-label="Settings" role="tab" aria-selected="false"><span aria-hidden="true">⚙</span>Settings</button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button type="button" class="sidebar-collapse" aria-label="Collapse sidebar" title="Collapse sidebar">‹</button>
+        </div>
+    </aside>
+
+    <main class="dashboard-shell">
+        <header class="top-bar terminal-top-bar">
+            <div class="brand-block page-title-block">
+                <div class="brand-copy">
+                    <span>TradeScor</span>
+                    <h1 id="current-page-title">Scanner</h1>
+                </div>
+            </div>
+
+            <nav class="terminal-controls" aria-label="Chart controls">
+                <label>
+                    <span>Symbol</span>
+                <select id="symbol">
+                    <optgroup label="Forex">
+                        <option value="EUR/USD" selected>EUR/USD</option>
+                        <option value="GBP/USD">GBP/USD</option>
+                        <option value="USD/JPY">USD/JPY</option>
+                        <option value="AUD/USD">AUD/USD</option>
+                        <option value="USD/CAD">USD/CAD</option>
+                        <option value="GBP/JPY">GBP/JPY</option>
+                    </optgroup>
+                    <optgroup label="Crypto">
+                        <option value="BTC/USD">BTC/USD</option>
+                        <option value="ETH/USD">ETH/USD</option>
+                    </optgroup>
+                    <optgroup label="Indices">
+                        <option value="NASDAQ 100">NASDAQ 100</option>
+                        <option value="Dow Jones 30">Dow Jones 30</option>
+                        <option value="S&P 500">S&amp;P 500</option>
+                        <option value="Russell 2000">Russell 2000</option>
+                    </optgroup>
+                </select>
+                </label>
+
+                <label>
+                    <span>Timeframe</span>
+                <select id="timeframe">
+                    <option value="M1">M1</option>
+                    <option value="M5" selected>M5</option>
+                    <option value="M15">M15</option>
+                    <option value="M30">M30</option>
+                    <option value="H1">H1</option>
+                    <option value="H2">H2</option>
+                    <option value="H4">H4</option>
+                    <option value="D1">D1</option>
+                </select>
+                </label>
+
+                <label class="strategy-control">
+                    <span>Strategy</span>
+                <select id="strategy">
+                    <option value="auto" selected>Auto</option>
+                    <option value="ict_2022">ICT Precision</option>
+                    <option value="supply_demand">Supply &amp; Demand</option>
+                    <option value="breakout_retest">Breakout &amp; Retest</option>
+                    <option value="universal_structure">Structure Context</option>
+                </select>
+                </label>
+
+                <button id="load-chart" type="button">Analyze</button>
+            </nav>
+
+            <div class="terminal-status">
+                <span class="status-badge session"><small>Session</small><strong id="header-session-name">--</strong></span>
+                <span class="status-badge"><small>Market</small><strong id="header-session-status">--</strong></span>
+                <span class="terminal-clock"><small>New York Time</small><strong id="clock">--:--:--</strong></span>
+                <button id="settings-toggle" class="icon-button" type="button" aria-label="Open settings" title="Settings">&#9881;</button>
+            </div>
+
+            <span id="top-symbol" class="visually-hidden">--</span>
+            <span id="top-timeframe" class="visually-hidden">--</span>
+            <span id="top-strategy" class="visually-hidden">--</span>
+            <span id="last-loaded" class="visually-hidden">Last updated: none</span>
+        </header>
+
+        <section id="home-view" class="home-dashboard" aria-labelledby="home-title">
+            <header class="home-welcome">
+                <span>Market clarity, without the noise</span>
+                <h2 id="home-title">Welcome to TradeScor</h2>
+                <p>Analyze a market in seconds. Get a clear decision, risk plan, and next action.</p>
+            </header>
+
+            <div class="home-grid">
+                <article class="home-card quick-analyze-card">
+                    <div class="home-card-heading">
+                        <span>Start here</span>
+                        <h3>Quick Analyze</h3>
+                    </div>
+                    <div class="home-analyze-grid">
+                        <label>
+                            <span>Symbol</span>
+                            <select id="home-symbol">
+                                <optgroup label="Forex">
+                                    <option value="EUR/USD" selected>EUR/USD</option>
+                                    <option value="GBP/USD">GBP/USD</option>
+                                    <option value="USD/JPY">USD/JPY</option>
+                                    <option value="AUD/USD">AUD/USD</option>
+                                    <option value="USD/CAD">USD/CAD</option>
+                                    <option value="GBP/JPY">GBP/JPY</option>
+                                </optgroup>
+                                <optgroup label="Crypto">
+                                    <option value="BTC/USD">BTC/USD</option>
+                                    <option value="ETH/USD">ETH/USD</option>
+                                </optgroup>
+                                <optgroup label="Indices">
+                                    <option value="NASDAQ 100">NASDAQ 100</option>
+                                    <option value="Dow Jones 30">Dow Jones 30</option>
+                                    <option value="S&amp;P 500">S&amp;P 500</option>
+                                    <option value="Russell 2000">Russell 2000</option>
+                                </optgroup>
+                            </select>
+                        </label>
+                        <label>
+                            <span>Timeframe</span>
+                            <select id="home-timeframe">
+                                <option value="M1">M1</option>
+                                <option value="M5" selected>M5</option>
+                                <option value="M15">M15</option>
+                                <option value="M30">M30</option>
+                                <option value="H1">H1</option>
+                                <option value="H2">H2</option>
+                                <option value="H4">H4</option>
+                                <option value="D1">D1</option>
+                            </select>
+                        </label>
+                        <div class="home-auto-mode" aria-label="Strategy mode">
+                            <span>Mode</span>
+                            <strong>Auto</strong>
+                            <small>TradeScor will choose the best analysis model for this market condition.</small>
+                        </div>
+                    </div>
+                    <button id="home-analyze" class="home-primary-action" type="button">Analyze Market</button>
+                    <small>No chart or market data is fetched until you press Analyze Market.</small>
+                </article>
+
+                <article class="home-card latest-decision-card">
+                    <div class="home-card-heading">
+                        <span>Latest analysis</span>
+                        <h3>Latest Result</h3>
+                    </div>
+                    <div id="home-decision-empty" class="home-empty-decision">
+                        <strong>No analysis yet</strong>
+                        <p>Run an analysis to see your latest result.</p>
+                    </div>
+                    <div id="home-decision-result" class="home-decision-result" hidden>
+                        <span id="home-decision-market">EUR/USD · M5</span>
+                        <strong id="home-decision-status">NO CLEAN ENTRY</strong>
+                        <p id="home-decision-direction">Looking for: No clear direction yet</p>
+                        <div class="home-decision-meta">
+                            <span>Score <b id="home-decision-score">0/100</b></span>
+                        </div>
+                        <div class="home-next-action">
+                            <span>Next Action</span>
+                            <p id="home-decision-next">Analyze a market to get a clear next step.</p>
+                        </div>
+                        <button type="button" data-open-view="chart">Open Chart</button>
+                    </div>
+                </article>
+
+                <article class="home-card session-overview-card">
+                    <div class="home-card-heading">
+                        <span>America/New_York</span>
+                        <h3>Market Session</h3>
+                    </div>
+                    <dl class="home-session-list">
+                        <div><dt>Market</dt><dd id="home-market-open">--</dd></div>
+                        <div><dt>New York Time</dt><dd id="home-ny-time">--</dd></div>
+                        <div><dt>Session</dt><dd id="home-session-name">--</dd></div>
+                        <div><dt>Kill Zone</dt><dd id="home-kill-zone">--</dd></div>
+                        <div><dt>Next</dt><dd id="home-next-session">--</dd></div>
+                    </dl>
+                </article>
+
+                <article class="home-card home-launch-card">
+                    <span class="home-card-number">01</span>
+                    <div><h3>Scanner</h3><p>Review the complete decision and risk plan.</p></div>
+                    <button type="button" data-open-view="scanner">Open Scanner</button>
+                </article>
+
+                <article class="home-card home-launch-card">
+                    <span class="home-card-number">02</span>
+                    <div><h3>Open Chart</h3><p>Inspect the loaded candles and projected plan.</p></div>
+                    <button type="button" data-open-view="chart">Open Chart View</button>
+                </article>
+
+                <article class="home-card home-launch-card">
+                    <span class="home-card-number">03</span>
+                    <div><h3>Strategy Lab</h3><p>Research strategies and compare historical runs.</p></div>
+                    <button type="button" data-open-view="lab">Open Lab</button>
+                </article>
+
+                <article class="home-card home-launch-card">
+                    <span class="home-card-number">04</span>
+                    <div><h3>Settings</h3><p>Choose default modes, overlays, and data preferences.</p></div>
+                    <button type="button" data-open-view="settings">Open Settings</button>
+                </article>
+            </div>
+        </section>
+
+        <section id="scanner-view" class="scanner-view" aria-live="polite">
+            <div id="scanner-placeholder" class="scanner-placeholder">
+                <i class="scanner-placeholder-line" aria-hidden="true"></i>
+                <span id="scanner-placeholder-market">EUR/USD · M5</span>
+                <strong>Market brief ready</strong>
+                <p>No market data loaded</p>
+            </div>
+
+            <div id="scanner-result" class="scanner-result" hidden>
+                <header class="scanner-result-header">
+                    <span id="scanner-market">EUR/USD · M5</span>
+                    <strong id="scanner-action">NO CLEAN ENTRY</strong>
+                    <p id="scanner-state" class="scanner-state">No confirmed entry is available.</p>
+
+                    <section class="scanner-next-primary">
+                        <span>Next Action</span>
+                        <strong id="scanner-next-action">Analyze the market to see the next action.</strong>
+                    </section>
+
+                    <div class="scanner-score-row">
+                        <div>
+                            <span>Looking For</span>
+                            <strong id="scanner-direction">No clear direction yet</strong>
+                        </div>
+                        <div>
+                            <span>Trade Score</span>
+                            <strong><b id="scanner-score">0</b>/100</strong>
+                            <small id="scanner-score-label">No clean entry</small>
+                            <span class="scanner-score-meter" aria-hidden="true"><i id="scanner-score-fill"></i></span>
+                        </div>
+                        <div>
+                            <span>Confidence</span>
+                            <strong id="scanner-confidence">Low</strong>
+                        </div>
+                    </div>
+                </header>
+
+                <section id="scanner-entry-timing-card" class="entry-timing-card" data-status="unavailable">
+                    <div>
+                        <span>Entry Timing</span>
+                        <strong id="scanner-entry-timing-status">PENDING</strong>
+                    </div>
+                    <p id="scanner-entry-timing-message">Entry timing will appear when a valid plan exists.</p>
+                    <small id="scanner-entry-timing-metrics">Current-price risk and reward unavailable.</small>
+                </section>
+
+                <div class="scanner-plan-heading">
+                    <span id="scanner-plan-title">Projected Plan if Confirmed</span>
+                </div>
+
+                <dl class="scanner-levels scanner-trade-plan">
+                    <div>
+                        <dt>Entry Trigger</dt>
+                        <dd id="scanner-trigger">Not available</dd>
+                    </div>
+                    <div>
+                        <dt>Stop Loss</dt>
+                        <dd id="scanner-stop">Not available</dd>
+                        <small id="scanner-risk">Risk unavailable</small>
+                    </div>
+                    <div>
+                        <dt>Take Profit 1</dt>
+                        <dd id="scanner-tp1">No valid TP yet</dd>
+                        <small><span id="scanner-tp1-distance">Expected TP unavailable</span><b id="scanner-rr1">R:R unavailable</b></small>
+                    </div>
+                    <div>
+                        <dt>Take Profit 2</dt>
+                        <dd id="scanner-tp2">No valid TP yet</dd>
+                        <small><span id="scanner-tp2-distance">Expected TP unavailable</span><b id="scanner-rr2">R:R unavailable</b></small>
+                    </div>
+                </dl>
+                <p id="scanner-plan-warning" class="scanner-plan-warning" hidden></p>
+
+                <div class="scanner-guidance scanner-why">
+                    <section>
+                        <h2>Why</h2>
+                        <ul id="scanner-reasons">
+                            <li>Analysis is still loading.</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <section class="workspace-grid trader-workspace">
+            <section class="chart-card">
+                <div class="chart-header">
+                    <div class="chart-identity">
+                        <strong id="chart-title">EUR/USD · M5</strong>
+                        <div class="chart-decision-summary">
+                            <b id="chart-decision-status">NO CLEAN ENTRY</b>
+                            <span id="chart-direction">Looking for: No clear direction yet</span>
+                        </div>
+                        <span id="status-text">Press Analyze to load candles.</span>
+                    </div>
+                    <div class="chart-market-stats" aria-label="Current candle statistics">
+                        <span>Price <strong id="chart-current-price">--</strong></span>
+                        <span>Change <strong id="chart-price-change">--</strong></span>
+                        <span>High <strong id="chart-high">--</strong></span>
+                        <span>Low <strong id="chart-low">--</strong></span>
+                        <span>Spread <strong id="chart-spread">--</strong></span>
+                    </div>
+                    <div class="chart-header-actions">
+                        <span id="analysis-mode-badge" class="mode-badge live">LIVE ANALYSIS</span>
+                        <span id="refresh-text">Auto-refresh off</span>
+                    </div>
+                </div>
+                <div id="context-timeframe-switcher" class="timeframe-switcher" hidden></div>
+                <div class="chart-overlay-controls" aria-label="Chart overlays">
+                    <label aria-label="Trade Plan Zones"><input id="toggle-trade-plan" type="checkbox" checked><span>Zones</span></label>
+                    <label><input id="toggle-context-zones" type="checkbox" checked><span>FVG</span></label>
+                    <label><input id="toggle-advanced-labels" type="checkbox"><span>Labels</span></label>
+                </div>
+                <div id="chart-entry-timing" class="chart-entry-timing" data-status="unavailable">
+                    <span>Entry Timing</span>
+                    <strong id="chart-entry-timing-status">PENDING</strong>
+                    <p id="chart-entry-timing-message">Analyze a valid trade plan to evaluate entry distance.</p>
+                </div>
+
+                <div class="chart-stage">
+                    <div id="chart"></div>
+                    <div id="chart-overlay-layer" class="chart-overlay-layer" aria-hidden="true"></div>
+                    <div id="chart-empty-state" class="empty-state">
+                        Press Analyze to load the chart.
+                    </div>
+                </div>
+            </section>
+
+            <aside class="assistant-panel" aria-label="Market Analysis Assistant">
+                <div class="assistant-heading">
+                    <div>
+                        <span id="answer-market">Click Load Chart</span>
+                        <h2>TradeScor Decision</h2>
+                    </div>
+                    <div>
+                        <span id="setup-status-label">NO CLEAN ENTRY</span>
+                    </div>
+                </div>
+
+                <section class="assistant-card decision-overview-card">
+                    <div class="decision-overview-grid">
+                        <div>
+                            <span>Status</span>
+                            <strong id="decision-status">NO CLEAN ENTRY</strong>
+                        </div>
+                        <div>
+                            <span>Direction</span>
+                            <strong id="decision-direction">No clear direction yet</strong>
+                        </div>
+                        <div>
+                            <span>Score</span>
+                            <strong id="decision-score">0/100</strong>
+                        </div>
+                        <div>
+                            <span>Confidence</span>
+                            <strong id="decision-confidence">Low</strong>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="assistant-card decision-entry-timing-card">
+                    <span>Entry Timing</span>
+                    <strong id="decision-entry-timing-status">Pending</strong>
+                    <p id="decision-entry-timing-message">Analyze a market to evaluate entry timing.</p>
+                </section>
+
+                <section id="decision-lifecycle-card" class="assistant-card decision-lifecycle-card" data-lifecycle="pending">
+                    <span>Trade Lifecycle</span>
+                    <strong id="decision-lifecycle-status">No Active Position</strong>
+                    <p id="decision-lifecycle-message">A confirmed trade plan has not activated yet.</p>
+                </section>
+
+                <section class="assistant-card market-filters-card">
+                    <span>Market Filters</span>
+                    <dl class="decision-plan-list market-filter-list">
+                        <div><dt>News Risk</dt><dd id="decision-news-risk">Unavailable</dd></div>
+                        <div><dt>News Source</dt><dd id="decision-news-source">--</dd></div>
+                        <div><dt>News Detail</dt><dd id="decision-news-message">Marketaux news unavailable.</dd></div>
+                        <div><dt>DXY</dt><dd id="decision-dxy-status">Off</dd></div>
+                        <div><dt>DXY Detail</dt><dd id="decision-dxy-message">DXY confirmation is turned off.</dd></div>
+                        <div><dt>Session</dt><dd id="decision-session-status">--</dd></div>
+                    </dl>
+                </section>
+
+                <section class="assistant-card" data-answer-card="trend">
+                    <div class="assistant-bias-grid">
+                        <div>
+                            <span>Higher-Timeframe Bias</span>
+                            <strong id="answer-htf-bias">Unclear</strong>
+                        </div>
+                        <div>
+                            <span id="execution-trend-label">Execution Trend</span>
+                            <strong id="setup-bias">Unclear</strong>
+                        </div>
+                    </div>
+                    <p id="assistant-trend-explanation">Higher-timeframe direction has not been analyzed.</p>
+                </section>
+
+                <section class="assistant-card" data-answer-card="location">
+                    <span>Price Location</span>
+                    <strong id="answer-price-location">No clear level</strong>
+                    <p id="assistant-location-explanation">Load a chart to locate price within current structure.</p>
+                </section>
+
+                <section class="assistant-card" data-answer-card="intent">
+                    <span>Market Intent</span>
+                    <strong id="answer-market-intent">Ranging / undecided</strong>
+                    <p id="assistant-intent-explanation">TradeScor is waiting for readable market behavior.</p>
+                </section>
+
+                <section class="assistant-card trade-status-card" data-answer-card="status">
+                    <span>Trade Status</span>
+                    <strong id="setup-state">NO CLEAN ENTRY</strong>
+                    <p id="assistant-status-explanation"><span id="setup-readiness">Not Ready</span>. No confirmed entry is available.</p>
+                </section>
+
+                <section class="assistant-card why-card">
+                    <span>Why?</span>
+                    <ul id="why-list" class="why-list compact-why">
+                        <li class="waiting"><span>○</span><p>Click Load Chart to let TradeScor read the market.</p></li>
+                    </ul>
+                </section>
+
+                <section class="assistant-card next-action-card">
+                    <span>Next Action</span>
+                    <strong id="next-confirmation">Click Load Chart.</strong>
+                    <p id="assistant-next-outcome">Watch for confirmation, then reassess. Remain flat if it fails.</p>
+                </section>
+
+                <section class="assistant-card decision-plan-card">
+                    <span>Trade Plan</span>
+                    <dl class="decision-plan-list">
+                        <div><dt>Entry Trigger</dt><dd id="decision-entry">No clean trade plan yet.</dd></div>
+                        <div><dt>Stop Loss</dt><dd id="decision-stop">--</dd></div>
+                        <div><dt>TP1</dt><dd id="decision-tp1">No valid TP yet</dd></div>
+                        <div><dt>TP2</dt><dd id="decision-tp2">No valid TP yet</dd></div>
+                        <div><dt>Risk</dt><dd id="decision-risk">Unavailable</dd></div>
+                        <div><dt>R:R</dt><dd id="decision-rr">Unavailable</dd></div>
+                    </dl>
+                </section>
+            </aside>
+        </section>
+
+        <section class="supporting-analysis dashboard-cards" aria-label="Dashboard summary">
+            <article class="support-card dashboard-card recent-analysis-card">
+                <div class="support-heading">
+                    <span>Recent Analyses</span>
+                    <strong>Local history</strong>
+                </div>
+                <ul id="home-recent-markets" class="home-recent-list dashboard-recent-list">
+                    <li><span>No analyzed markets yet.</span><small>Results stay on this device.</small></li>
+                </ul>
+            </article>
+
+            <article class="support-card dashboard-card session-dashboard-card">
+                <div class="support-heading">
+                    <span>Market Session</span>
+                    <strong>America/New_York</strong>
+                </div>
+                <dl class="dashboard-mini-list">
+                    <div><dt>Time</dt><dd id="dashboard-ny-time">--</dd></div>
+                    <div><dt>Session</dt><dd id="dashboard-session-name">--</dd></div>
+                    <div><dt>Kill Zone</dt><dd id="dashboard-kill-zone">--</dd></div>
+                    <div><dt>Market</dt><dd id="dashboard-market-open">--</dd></div>
+                    <div><dt>Next</dt><dd id="dashboard-next-session">--</dd></div>
+                </dl>
+            </article>
+
+            <article class="support-card dashboard-card news-dashboard-card">
+                <div class="support-heading">
+                    <span>News Risk</span>
+                    <strong id="dashboard-news-status">Not configured</strong>
+                </div>
+                <p id="dashboard-news-detail">No high-impact news configured.</p>
+            </article>
+
+            <article class="support-card dashboard-card lab-summary-dashboard-card">
+                <div class="support-heading">
+                    <span>Strategy Lab Summary</span>
+                    <strong id="dashboard-lab-status">Research</strong>
+                </div>
+                <p id="dashboard-lab-summary">Run Strategy Lab when you want historical context. It never runs automatically.</p>
+                <button type="button" data-open-view="lab">Open Lab</button>
+            </article>
+        </section>
+
+        <section class="legacy-support-data" aria-hidden="true">
+            <p id="answer-now">Click Load Chart to read the market.</p>
+            <small id="story-instruction">Be patient. Let the market confirm.</small>
+            <ol id="market-story-timeline" class="market-story-timeline">
+                <li>Load a chart to begin the market story.</li>
+            </ol>
+            <strong id="answer-topdown">Not loaded</strong>
+            <p id="answer-topdown-summary">Enable MTF Context and click Load Chart.</p>
+            <div id="htf-context-table" class="htf-context-table">
+                <div class="htf-table-head"><span>Timeframe</span><span>Bias</span><span>Structure</span><span>Summary</span></div>
+                <p>Higher-timeframe context will appear after analysis.</p>
+            </div>
+        </section>
+
+        <section class="key-levels-strip" aria-label="Current key levels">
+            <div><span>Important Zone</span><strong id="answer-zone">Not loaded</strong></div>
+            <div><span>Trigger Level</span><strong id="answer-confirmation">--</strong></div>
+            <div><span>Invalidation</span><strong id="answer-invalidation">--</strong></div>
+            <div><span>Next Target</span><strong id="key-next-target">Not selected</strong></div>
+            <div><span>Execution Trend</span><strong id="key-bias">Unclear</strong></div>
+            <div><span>Market Clarity</span><strong id="market-clarity">--</strong></div>
+            <div><span>Risk / Reward</span><strong id="key-risk-reward">Unavailable</strong></div>
+            <div><span>Status</span><strong id="trade-readiness">Not Ready</strong></div>
+        </section>
+
+        <details class="more-details">
+            <summary>Advanced Details</summary>
+
+            <div class="details-grid">
+                <details id="data-settings" class="detail-drawer-section">
+                    <summary>Data &amp; Refresh Settings</summary>
+                    <div class="drawer-panel settings-grid">
+                        <label class="field">
+                            <span>Bars</span>
+                            <input id="bars" type="number" value="300" min="50" step="50">
+                        </label>
+
+                        <label class="field">
+                            <span>Data Mode</span>
+                            <select id="data-mode">
+                                <option value="single" selected>Single Timeframe</option>
+                                <option value="balanced">Balanced Context</option>
+                                <option value="full">Full Context</option>
+                            </select>
+                            <small>Balanced Context improves analysis but uses more API credits.</small>
+                        </label>
+
+                        <label class="toggle-card">
+                            <span>Auto Refresh</span>
+                            <input id="auto-refresh" type="checkbox">
+                            <strong id="auto-refresh-state">Off</strong>
+                        </label>
+
+                        <label class="field">
+                            <span>Refresh Interval</span>
+                            <select id="refresh-interval" disabled>
+                                <option value="60" selected>60s</option>
+                                <option value="120">120s</option>
+                                <option value="300">5m</option>
+                            </select>
+                        </label>
+                    </div>
+                </details>
+
+                <details class="detail-drawer-section">
+                    <summary>Trade Plan &amp; Strategy Details</summary>
+                    <div class="drawer-panel debug-stack">
+                        <div id="setup-direction" class="setup-status">NO CLEAN ENTRY</div>
+
+                        <section class="quality-grid" aria-label="Setup and trade quality">
+                            <article>
+                                <span>Setup Quality</span>
+                                <strong id="setup-quality">--</strong>
+                                <small>Technical pattern strength</small>
+                            </article>
+                            <article>
+                                <span>Trade Quality</span>
+                                <strong id="trade-quality">--</strong>
+                                <small>Objective and reward quality</small>
+                            </article>
+                        </section>
+
+                        <section class="answer-block trade-level-answer">
+                            <div class="panel-heading compact-heading">
+                                <h2>Trade Plan</h2>
+                                <span id="detail-state">NO CLEAN ENTRY</span>
+                            </div>
+                            <p id="level-note" class="muted-copy level-note">Trade levels are unavailable until confirmation appears.</p>
+                            <div class="objective-summary">
+                                <article>
+                                    <span>Primary Objective</span>
+                                    <strong id="objective-primary">Not selected</strong>
+                                    <small id="objective-primary-reason">A meaningful target is required before a trade can be approved.</small>
+                                </article>
+                                <article id="objective-secondary-card">
+                                    <span>Secondary Objective</span>
+                                    <strong id="objective-secondary">Not selected</strong>
+                                    <small id="objective-secondary-reason">No secondary objective selected.</small>
+                                </article>
+                            </div>
+                            <dl id="level-list" class="detail-list levels-locked">
+                                <div><dt>Entry Zone</dt><dd id="level-entry">--</dd></div>
+                                <div><dt>Stop Loss</dt><dd id="level-stop">--</dd></div>
+                                <div><dt>Primary Target</dt><dd id="level-tp1">--</dd></div>
+                                <div><dt>Secondary Target</dt><dd id="level-tp2">--</dd></div>
+                                <div><dt>Primary R:R</dt><dd id="level-rr1">--</dd></div>
+                                <div><dt>Secondary R:R</dt><dd id="level-rr2">--</dd></div>
+                            </dl>
+                        </section>
+
+                        <section class="answer-block">
+                            <span>Strategy Action</span>
+                            <strong id="suggested-action">Analyze the market.</strong>
+                        </section>
+                    </div>
+                </details>
+
+                <details id="ict-details-panel" class="detail-drawer-section" hidden>
+                    <summary>ICT 2022 Details</summary>
+                    <div class="drawer-panel ict-details-grid">
+                        <div>
+                            <div class="panel-heading compact-heading">
+                                <h2>ICT Checklist</h2>
+                                <span id="ict-state-label">Waiting</span>
+                            </div>
+                            <ul id="ict-checklist" class="check-list ict-checklist">
+                                <li data-ict-check="htf_bias"><span>HTF Bias</span><strong>Waiting</strong></li>
+                                <li data-ict-check="kill_zone"><span>Kill Zone</span><strong>Waiting</strong></li>
+                                <li data-ict-check="liquidity_pool"><span>Liquidity Pool</span><strong>Waiting</strong></li>
+                                <li data-ict-check="liquidity_swept"><span>Liquidity Sweep</span><strong>Waiting</strong></li>
+                                <li data-ict-check="choch"><span>CHoCH</span><strong>Waiting</strong></li>
+                                <li data-ict-check="fvg"><span>FVG</span><strong>Waiting</strong></li>
+                                <li data-ict-check="ob_valid"><span>Order Block Quality</span><strong>Waiting</strong></li>
+                                <li data-ict-check="ote"><span>OTE Alignment</span><strong>Waiting</strong></li>
+                                <li data-ict-check="dxy"><span>DXY</span><strong>Unknown</strong></li>
+                                <li data-ict-check="news"><span>News Filter</span><strong>Unknown</strong></li>
+                                <li data-ict-check="risk_reward"><span>Risk / Reward</span><strong>Waiting</strong></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <div class="panel-heading compact-heading">
+                                <h2>Current ICT Sequence</h2>
+                                <span>Selected strategy only</span>
+                            </div>
+                            <dl class="detail-list compact-list ict-detail-list">
+                                <div><dt>Kill Zone</dt><dd id="ict-kill-zone">--</dd></div>
+                                <div><dt>Liquidity Sweep</dt><dd id="ict-liquidity-sweep">--</dd></div>
+                                <div><dt>CHoCH</dt><dd id="ict-choch">--</dd></div>
+                                <div><dt>FVG</dt><dd id="ict-fvg">--</dd></div>
+                                <div><dt>IFVG</dt><dd id="ict-ifvg">--</dd></div>
+                                <div><dt>OTE</dt><dd id="ict-ote">--</dd></div>
+                                <div><dt>Order Block</dt><dd id="ict-order-block">--</dd></div>
+                                <div><dt>AMD Phase</dt><dd id="ict-amd-phase">--</dd></div>
+                                <div><dt>DXY</dt><dd id="ict-dxy">--</dd></div>
+                                <div><dt>News Filter</dt><dd id="ict-news">--</dd></div>
+                            </dl>
+                        </div>
+                    </div>
+                </details>
+
+                <details id="supply-demand-details-panel" class="detail-drawer-section" hidden>
+                    <summary>Supply &amp; Demand Details</summary>
+                    <div class="drawer-panel">
+                        <dl class="detail-list compact-list">
+                            <div><dt>Active Zone</dt><dd id="sd-active-zone">--</dd></div>
+                            <div><dt>Zone Quality</dt><dd id="sd-zone-quality">--</dd></div>
+                            <div><dt>Impulse</dt><dd id="sd-impulse">--</dd></div>
+                            <div><dt>Mitigation</dt><dd id="sd-mitigation">--</dd></div>
+                            <div><dt>Reaction</dt><dd id="sd-reaction">--</dd></div>
+                            <div><dt>Trigger</dt><dd id="sd-trigger">--</dd></div>
+                            <div><dt>Strategy State</dt><dd id="sd-state">--</dd></div>
+                        </dl>
+                    </div>
+                </details>
+
+                <details id="breakout-details-panel" class="detail-drawer-section" hidden>
+                    <summary>Breakout &amp; Retest Details</summary>
+                    <div class="drawer-panel">
+                        <dl class="detail-list compact-list">
+                            <div><dt>Active Range</dt><dd id="breakout-range">--</dd></div>
+                            <div><dt>Breakout</dt><dd id="breakout-direction">--</dd></div>
+                            <div><dt>Broken Level</dt><dd id="breakout-level">--</dd></div>
+                            <div><dt>Retest</dt><dd id="breakout-retest">--</dd></div>
+                            <div><dt>Rejection</dt><dd id="breakout-rejection">--</dd></div>
+                            <div><dt>Measured Move</dt><dd id="breakout-measured-move">--</dd></div>
+                            <div><dt>Strategy State</dt><dd id="breakout-state">--</dd></div>
+                        </dl>
+                    </div>
+                </details>
+
+                <details class="detail-drawer-section">
+                    <summary>Macro Context</summary>
+                    <section class="macro-dashboard drawer-panel" aria-label="Macro Dashboard">
+                        <div class="macro-heading">
+                            <div>
+                                <h2>Macro Dashboard</h2>
+                                <span id="macro-summary">Click Load Chart to build institutional market context.</span>
+                            </div>
+                            <strong id="macro-alignment">Neutral</strong>
+                        </div>
+
+                        <div id="macro-news-warning" class="macro-warning" hidden>
+                            High-impact news restriction active.
+                        </div>
+
+                        <div class="macro-grid">
+                            <article class="macro-card">
+                                <span>ICT Trading Session</span>
+                                <strong id="macro-session-name">--</strong>
+                                <p id="macro-session-detail">Session status will appear after analysis.</p>
+                            </article>
+
+                            <article class="macro-card macro-wide">
+                                <span>Top-Down Bias</span>
+                                <div id="macro-topdown-list" class="macro-timeframe-list">
+                                    Load chart to analyze Weekly, Daily, H4, H1, M15, and M5.
+                                </div>
+                            </article>
+
+                            <article class="macro-card">
+                                <span>DXY Correlation</span>
+                                <strong id="macro-dxy-trend">--</strong>
+                                <p id="macro-dxy-status">Disabled until a USD-related symbol is analyzed.</p>
+                            </article>
+
+                            <article class="macro-card">
+                                <span>Economic News</span>
+                                <strong id="macro-news-status">--</strong>
+                                <p id="macro-news-detail">Local high-impact calendar status will appear here.</p>
+                            </article>
+
+                            <article class="macro-card">
+                                <span>Market Phase</span>
+                                <strong id="macro-phase-name">--</strong>
+                                <p id="macro-phase-detail">Power of Three phase detection will appear here.</p>
+                            </article>
+                        </div>
+                    </section>
+                </details>
+
+                <details class="detail-drawer-section">
+                    <summary>Top-Down Analysis</summary>
+                    <div class="drawer-panel">
+                        <div class="panel-heading compact-heading">
+                            <h2>Top-Down Analysis</h2>
+                            <span id="topdown-alignment">Waiting</span>
+                        </div>
+                        <div id="topdown-list" class="mini-list">
+                            Click Load Chart to build multi-timeframe context.
+                        </div>
+                    </div>
+                </details>
+
+                <details class="detail-drawer-section">
+                    <summary>Session Details</summary>
+                    <section class="session-terminal drawer-panel" aria-label="ICT session intelligence">
+                        <div class="session-progress-card">
+                            <div class="session-progress-heading">
+                                <strong id="header-progress-label">Current Session</strong>
+                                <span id="header-progress-percent">0%</span>
+                            </div>
+                            <div class="session-progress-track" aria-hidden="true">
+                                <span id="header-progress-fill"></span>
+                            </div>
+                            <div class="session-progress-meta">
+                                <span>Start <strong id="header-session-start">--</strong></span>
+                                <span>Now <strong id="header-session-now">--</strong></span>
+                                <span>End <strong id="header-session-end">--</strong></span>
+                            </div>
+                        </div>
+
+                        <div class="session-summary-grid">
+                            <div><span>Time Remaining</span><strong id="header-session-remaining">--</strong></div>
+                            <div><span>Next Session</span><strong id="header-next-session">--</strong></div>
+                            <div><span>Entry Allowed</span><strong id="header-entry-allowed">--</strong></div>
+                        </div>
+
+                        <div id="header-session-timeline" class="session-timeline-strip">
+                            <span>○ Asian Session</span>
+                            <span>○ London Kill Zone</span>
+                            <span>○ New York Kill Zone</span>
+                            <span>○ London Close</span>
+                        </div>
+                    </section>
+
+                    <dl class="detail-list compact-list drawer-panel">
+                        <div><dt>Current Session</dt><dd id="session-current">--</dd></div>
+                        <div><dt>Status</dt><dd id="session-status">--</dd></div>
+                        <div><dt>Phase</dt><dd id="session-phase">--</dd></div>
+                        <div><dt>Next Kill Zone</dt><dd id="session-next">--</dd></div>
+                        <div><dt>Time Remaining</dt><dd id="session-remaining">--</dd></div>
+                        <div><dt>Entry Allowed</dt><dd id="session-allowed">--</dd></div>
+                        <div><dt>Expected Behaviour</dt><dd id="session-behavior">--</dd></div>
+                    </dl>
+                    <span id="session-entry" class="visually-hidden">Waiting</span>
+                </details>
+
+                <details class="detail-drawer-section">
+                    <summary>Strategy Journey</summary>
+                    <div class="drawer-panel">
+                        <div class="panel-heading compact-heading">
+                            <h2>Strategy Journey</h2>
+                            <span id="story-phase">Waiting</span>
+                        </div>
+                        <ul id="setup-checklist" class="progress-list">
+                            <li data-step="watching"><span>○</span><strong>Watching</strong></li>
+                            <li data-step="liquidity_sweep"><span>○</span><strong>Liquidity Sweep</strong></li>
+                            <li data-step="waiting_mss"><span>○</span><strong>MSS Check</strong></li>
+                            <li data-step="waiting_ifvg"><span>○</span><strong>IFVG Check</strong></li>
+                            <li data-step="entry_ready"><span>○</span><strong>Trade Ready</strong></li>
+                        </ul>
+                        <p id="setup-summary" class="narrative-copy">Click Load Chart to generate the current market story.</p>
+                        <strong class="visually-hidden"><span id="setup-score">0</span>/100</strong>
+                    </div>
+                </details>
+
+                <details class="detail-drawer-section">
+                    <summary>Replay Lab</summary>
+                    <div class="replay-bar drawer-panel" aria-label="Replay controls">
+                        <span>Replay Lab</span>
+                        <button id="replay-play" type="button" disabled>Play</button>
+                        <button id="replay-pause" type="button" disabled>Pause</button>
+                        <button id="replay-back" type="button" disabled>Step Back</button>
+                        <button id="replay-step" type="button" disabled>Step Forward</button>
+                        <button id="replay-reset" type="button" disabled>Reset</button>
+                        <label>
+                            Speed
+                            <select id="replay-speed" disabled>
+                                <option value="1">1x</option>
+                                <option value="2" selected>2x</option>
+                                <option value="5">5x</option>
+                                <option value="10">10x</option>
+                            </select>
+                        </label>
+                        <strong id="replay-status">Load a chart to replay candles.</strong>
+                    </div>
+                </details>
+
+                <details class="detail-drawer-section">
+                    <summary>Answer QA</summary>
+                    <div class="drawer-panel answer-qa-panel">
+                        <div class="panel-heading compact-heading">
+                            <h2>Market Answer QA</h2>
+                            <span id="answer-qa-validation">Waiting</span>
+                        </div>
+
+                        <section class="qa-section">
+                            <div class="panel-heading compact-heading">
+                                <h3>Current Answers</h3>
+                                <span id="answer-qa-snapshot-count">0 replay snapshots</span>
+                            </div>
+                            <pre id="answer-qa-current">Load a chart to inspect trader_answers.</pre>
+                        </section>
+
+                        <section class="qa-section">
+                            <h3>Source Strategy Result</h3>
+                            <pre id="answer-qa-source">No strategy result loaded.</pre>
+                        </section>
+
+                        <section class="qa-section">
+                            <h3>Answer Conditions</h3>
+                            <div id="answer-qa-conditions" class="info-list">No answer conditions loaded.</div>
+                        </section>
+
+                        <section class="qa-section">
+                            <h3>Missing Data Warnings</h3>
+                            <div id="answer-qa-warnings" class="qa-message-list">No warnings.</div>
+                        </section>
+
+                        <section class="qa-section">
+                            <h3>Clarity Explanation</h3>
+                            <p id="answer-qa-clarity">Load a chart to explain market clarity.</p>
+                        </section>
+
+                        <section class="qa-section">
+                            <h3>Replay Answer Changes</h3>
+                            <p id="answer-qa-change-reason" class="qa-change-reason">Step through Replay Mode to explain answer changes.</p>
+                            <div id="answer-qa-replay-log" class="qa-replay-log">No replay answer changes recorded.</div>
+                        </section>
+                    </div>
+                </details>
+
+                <details class="detail-drawer-section">
+                    <summary>Analysis Timeline</summary>
+                    <div class="drawer-panel">
+                        <div class="panel-heading compact-heading">
+                            <h2>Analysis Timeline</h2>
+                            <span id="explanation-status">Waiting</span>
+                        </div>
+                        <div id="setup-explanation" class="info-list">
+                            The app only analyzes the selected chart after you click Load Chart.
+                        </div>
+                        <div id="timeline-list" class="timeline-list">
+                            Timeline resets whenever a new chart is loaded.
+                        </div>
+                    </div>
+                </details>
+
+                <details class="detail-drawer-section">
+                    <summary>Developer Debug Data</summary>
+                    <div class="drawer-panel debug-stack">
+                        <div class="panel-heading compact-heading">
+                            <h2>Market Context</h2>
+                            <span id="context-count">Waiting</span>
+                        </div>
+                        <div id="market-context-list" class="info-list">
+                            Click Load Chart to fetch candles and build context.
+                        </div>
+                        <div id="liquidity-map-list" class="info-list split-list">
+                            Liquidity map will appear after analysis.
+                        </div>
+
+                        <div class="panel-heading compact-heading">
+                            <h2>Recent Structure</h2>
+                            <span id="structure-count">Waiting</span>
+                        </div>
+                        <div id="structure-list" class="info-list">
+                            Click Load Chart to show the current structure state.
+                        </div>
+
+                        <ul id="technical-checklist" class="check-list">
+                            <li data-check="htf_fvg"><span>HTF FVG</span><strong>Waiting</strong></li>
+                            <li data-check="liquidity_sweep"><span>Liquidity Sweep</span><strong>Waiting</strong></li>
+                            <li data-check="mss"><span>MSS</span><strong>Waiting</strong></li>
+                            <li data-check="ifvg"><span>IFVG Entry</span><strong>Waiting</strong></li>
+                            <li data-check="premium_discount"><span>Premium / Discount</span><strong>Waiting</strong></li>
+                            <li data-check="displacement"><span>Displacement</span><strong>Waiting</strong></li>
+                            <li data-check="session"><span>Session Filter</span><strong>Waiting</strong></li>
+                            <li data-check="risk_reward"><span>Risk / Reward</span><strong>Waiting</strong></li>
+                        </ul>
+
+                        <details class="debug-box">
+                            <summary>View latest analysis JSON</summary>
+                            <pre id="raw-analysis">No analysis loaded.</pre>
+                        </details>
+                    </div>
+                </details>
+            </div>
+        </details>
+
+        <section id="settings-view" class="settings-view" aria-labelledby="settings-title">
+            <header class="settings-heading">
+                <span>Preferences</span>
+                <h2 id="settings-title">Settings</h2>
+                <p>Choose sensible defaults. Settings are saved only in this browser.</p>
+            </header>
+
+            <div class="settings-card-grid">
+                <section class="settings-card">
+                    <div class="home-card-heading"><span>Workspace</span><h3>General</h3></div>
+                    <label><span>Default symbol</span><select id="settings-default-symbol">
+                        <option value="EUR/USD">EUR/USD</option><option value="GBP/USD">GBP/USD</option>
+                        <option value="USD/JPY">USD/JPY</option><option value="AUD/USD">AUD/USD</option>
+                        <option value="USD/CAD">USD/CAD</option><option value="GBP/JPY">GBP/JPY</option>
+                        <option value="BTC/USD">BTC/USD</option><option value="ETH/USD">ETH/USD</option>
+                        <option value="NASDAQ 100">NASDAQ 100</option><option value="Dow Jones 30">Dow Jones 30</option>
+                        <option value="S&amp;P 500">S&amp;P 500</option><option value="Russell 2000">Russell 2000</option>
+                    </select></label>
+                    <label><span>Default timeframe</span><select id="settings-default-timeframe">
+                        <option value="M1">M1</option><option value="M5">M5</option><option value="M15">M15</option>
+                        <option value="M30">M30</option><option value="H1">H1</option><option value="H2">H2</option>
+                        <option value="H4">H4</option><option value="D1">D1</option>
+                    </select></label>
+                    <label><span>Default strategy mode</span><select id="settings-strategy-mode">
+                        <option value="auto">Auto</option>
+                        <option value="manual">Manual</option>
+                    </select></label>
+                    <label id="settings-manual-strategy-field"><span>Manual strategy</span><select id="settings-default-strategy">
+                        <option value="ict_2022">ICT Precision</option>
+                        <option value="supply_demand">Supply &amp; Demand</option>
+                        <option value="breakout_retest">Breakout &amp; Retest</option>
+                        <option value="universal_structure">Structure Context</option>
+                    </select></label>
+                </section>
+
+                <section class="settings-card">
+                    <div class="home-card-heading"><span>Visuals</span><h3>Chart</h3></div>
+                    <label class="settings-switch"><span>Show trade plan zones</span><input id="settings-trade-plan" type="checkbox" checked></label>
+                    <label class="settings-switch"><span>Show FVG / IFVG zones</span><input id="settings-context-zones" type="checkbox" checked></label>
+                    <label class="settings-switch"><span>Show advanced labels</span><input id="settings-advanced-labels" type="checkbox"></label>
+                </section>
+
+                <section class="settings-card">
+                    <div class="home-card-heading"><span>Trading clock</span><h3>Sessions</h3></div>
+                    <div class="settings-static-row"><span>Session timezone</span><strong>America/New_York</strong></div>
+                    <div class="settings-static-row"><span>New York time</span><strong id="settings-ny-time">--</strong></div>
+                    <label class="settings-switch"><span>Show session status</span><input id="settings-show-session" type="checkbox" checked></label>
+                    <p>Session calculations automatically switch between EST and EDT.</p>
+                </section>
+
+                <section class="settings-card">
+                    <div class="home-card-heading"><span>Credits and context</span><h3>Data</h3></div>
+                    <div class="settings-static-row"><span>Provider</span><strong>Twelve Data</strong></div>
+                    <label class="settings-switch"><span>Auto-refresh</span><input id="settings-auto-refresh" type="checkbox"></label>
+                    <label><span>Refresh interval</span><select id="settings-refresh-interval">
+                        <option value="60">60 seconds</option><option value="120">2 minutes</option><option value="300">5 minutes</option>
+                    </select></label>
+                    <label><span>Context mode</span><select id="settings-data-mode">
+                        <option value="single">Single Timeframe</option>
+                        <option value="balanced">Balanced Context</option>
+                        <option value="full">Full Context</option>
+                    </select></label>
+                    <label class="settings-switch"><span>Marketaux provider</span><input id="settings-marketaux-enabled" type="checkbox" checked></label>
+                    <label class="settings-switch"><span>News risk filter</span><input id="settings-news-risk" type="checkbox" checked></label>
+                    <label class="settings-switch"><span>DXY confirmation</span><input id="settings-dxy-confirmation" type="checkbox"></label>
+                    <small id="settings-marketaux-status">Marketaux API token is read from the backend .env file.</small>
+                    <small>Add a Marketaux API token to enable live market news risk.</small>
+                    <small>Charts never preload. Auto-refresh remains off unless you enable it.</small>
+                </section>
+            </div>
+            <p id="settings-save-status" class="settings-save-status" aria-live="polite">Preferences save automatically.</p>
+        </section>
+
+        <!-- ================================================================
+             STRATEGY LAB
+             ================================================================ -->
+        <details id="strategy-lab-panel" class="strategy-lab-panel">
+            <summary class="strategy-lab-summary">
+                <span class="lab-icon" aria-hidden="true">⚗</span>
+                <span><strong>Strategy Lab</strong><small>Backtest strategies and compare performance.</small></span>
+                <span id="lab-best-badge" class="lab-best-badge" hidden></span>
+            </summary>
+
+            <div class="strategy-lab-body">
+
+                <!-- Inputs -->
+                <section class="lab-inputs">
+                    <div class="lab-inputs-grid">
+                        <label class="field">
+                            <span>Symbol</span>
+                            <select id="lab-symbol">
+                                <optgroup label="Forex">
+                                    <option value="EUR/USD" selected>EUR/USD</option>
+                                    <option value="GBP/USD">GBP/USD</option>
+                                    <option value="USD/JPY">USD/JPY</option>
+                                    <option value="AUD/USD">AUD/USD</option>
+                                    <option value="USD/CAD">USD/CAD</option>
+                                    <option value="GBP/JPY">GBP/JPY</option>
+                                </optgroup>
+                                <optgroup label="Crypto">
+                                    <option value="BTC/USD">BTC/USD</option>
+                                    <option value="ETH/USD">ETH/USD</option>
+                                </optgroup>
+                                <optgroup label="Indices">
+                                    <option value="NASDAQ 100">NASDAQ 100</option>
+                                    <option value="S&amp;P 500">S&amp;P 500</option>
+                                </optgroup>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Timeframe</span>
+                            <select id="lab-timeframe">
+                                <option value="M5">M5</option>
+                                <option value="M15" selected>M15</option>
+                                <option value="M30">M30</option>
+                                <option value="H1">H1</option>
+                                <option value="H4">H4</option>
+                                <option value="D1">D1</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Bars</span>
+                            <input id="lab-bars" type="number" value="500" min="100" max="2000" step="100">
+                            <small>Fast: max 500. Accurate: max 300.</small>
+                        </label>
+
+                        <label class="field">
+                            <span>Starting Balance</span>
+                            <input id="lab-balance" type="number" value="10000" min="1000" step="1000">
+                        </label>
+
+                        <label class="field">
+                            <span>Risk per Trade (%)</span>
+                            <input id="lab-risk" type="number" value="1" min="0.1" max="5" step="0.1">
+                        </label>
+
+                        <label class="field">
+                            <span>Backtest Mode</span>
+                            <select id="lab-mode">
+                                <option value="fast" selected>Fast</option>
+                                <option value="accurate">Accurate</option>
+                            </select>
+                            <small id="lab-mode-hint">Accurate Mode checks every candle and is capped at 300 bars to prevent timeout. Fast Mode checks every 15 candles.</small>
+                        </label>
+                    </div>
+
+                    <div class="lab-strategy-picker">
+                        <span>Strategies to Test</span>
+                        <div class="lab-strategy-checkboxes">
+                            <label><input type="checkbox" name="lab-strategy" value="universal_structure" checked> Universal Structure</label>
+                            <label><input type="checkbox" name="lab-strategy" value="supply_demand" checked> Supply &amp; Demand</label>
+                            <label><input type="checkbox" name="lab-strategy" value="breakout_retest" checked> Breakout &amp; Retest</label>
+                            <label><input type="checkbox" name="lab-strategy" value="ict_2022"> ICT 2022 (session-dependent)</label>
+                        </div>
+                    </div>
+
+                    <div class="lab-actions">
+                        <button id="lab-run-btn" type="button" class="lab-run-btn">Run Backtest</button>
+                        <span id="lab-status" class="lab-status">Select strategies and click Run Backtest.</span>
+                    </div>
+                </section>
+
+                <!-- Warnings -->
+                <div id="lab-warnings" class="lab-warnings" hidden></div>
+
+                <!-- Current run state. Kept outside results so failures cannot expose stale reports. -->
+                <div id="lab-result-state" class="lab-result-state" hidden></div>
+
+                <!-- Results (hidden until run) -->
+                <section id="lab-results" class="lab-results" hidden>
+
+                    <!-- Immutable identity of the report currently displayed below. -->
+                    <div id="lab-result-identity" class="lab-result-identity" hidden></div>
+
+                    <!-- Best strategy summary -->
+                    <div id="lab-summary-card" class="lab-summary-card">
+                        <span class="lab-summary-label">Performance Summary</span>
+                        <strong id="lab-best-name">—</strong>
+                        <p id="lab-summary-text">Run a backtest to see results.</p>
+                    </div>
+
+                    <!-- Trust summary (mode metadata) -->
+                    <div id="lab-trust-summary" class="lab-trust-summary" hidden></div>
+
+                    <!-- Strategy run status -->
+                    <div class="lab-run-status-section">
+                        <h3>Strategy Run Status</h3>
+                        <div id="lab-run-status" class="lab-run-status-grid"></div>
+                    </div>
+
+                    <!-- Comparison table -->
+                    <div class="lab-table-wrapper">
+                        <h3>Strategy Comparison</h3>
+                        <table class="lab-table" id="lab-comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Strategy</th>
+                                    <th>Trades</th>
+                                    <th>Win Rate</th>
+                                    <th>Profit Factor</th>
+                                    <th>Expectancy</th>
+                                    <th>Max Drawdown</th>
+                                    <th>Avg RR</th>
+                                    <th>Sample Quality</th>
+                                    <th>Reason</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lab-table-body">
+                                <tr><td colspan="8" class="lab-table-empty">No results yet.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Equity curves -->
+                    <div class="lab-equity-section">
+                        <div class="lab-equity-header">
+                            <h3>Equity Curves</h3>
+                            <div id="lab-equity-legend" class="lab-equity-legend"></div>
+                        </div>
+                        <div id="lab-equity-warning" class="lab-equity-warning" hidden></div>
+                        <div id="lab-equity-chart" class="lab-equity-chart"></div>
+                    </div>
+
+                    <!-- Trade log -->
+                    <div class="lab-trade-log-section">
+                        <div class="lab-trade-log-header">
+                            <h3>Trade Log</h3>
+                            <select id="lab-log-filter" class="lab-log-filter">
+                                <option value="all">All strategies</option>
+                            </select>
+                        </div>
+                        <p id="lab-trade-log-count" class="lab-trade-log-count" hidden></p>
+                        <div class="lab-trade-log-wrapper">
+                            <table class="lab-table lab-trade-log-table">
+                                <thead>
+                                    <tr>
+                                        <th>Strategy</th>
+                                        <th>Dir</th>
+                                        <th>Entry Time</th>
+                                        <th>Entry</th>
+                                        <th>SL</th>
+                                        <th>TP1</th>
+                                        <th>Exit</th>
+                                        <th>Result</th>
+                                        <th>RR</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="lab-trade-log-body">
+                                    <tr><td colspan="9" class="lab-table-empty">No trades yet.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </details>
+    </main>
+
+    <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="{{ url_for('static', filename='app.js') }}?v=trade-score-2"></script>
+</body>
+</html>

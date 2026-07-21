@@ -1,0 +1,2 @@
+from analysis.derived_boundary_rejection import detect_boundary_rejection
+def evaluate_step_boundary_reaction(candles,locked_range,side,atr):return detect_boundary_rejection(candles,locked_range,side,atr=atr)

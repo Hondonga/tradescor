@@ -1,0 +1,3 @@
+def compare_derived_candidates(candidates,registry,minimum_developing=.45):
+    pool=[row for row in candidates if not row.get("blocking_reasons") and row.get("quality_score",0)>=minimum_developing];pool.sort(key=lambda row:(not row.get("trade_ready"),-row.get("quality_score",0),registry[row["strategy_id"]]["priority"]));selected=pool[0] if pool else None;runner=pool[1] if len(pool)>1 else None
+    return {"selected_candidate":selected,"runner_up":runner,"buy_candidates":[row for row in candidates if row.get("direction")=="buy"],"sell_candidates":[row for row in candidates if row.get("direction")=="sell"]}

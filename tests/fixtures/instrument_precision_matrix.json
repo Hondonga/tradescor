@@ -1,0 +1,9 @@
+[
+  {"symbol":"EUR/USD","provider":"twelve_data","market_type":"forex","metadata":{},"price_decimals":5,"tick_size":0.00001},
+  {"symbol":"USD/JPY","provider":"twelve_data","market_type":"forex","metadata":{},"price_decimals":3,"tick_size":0.001},
+  {"symbol":"R_75","provider":"deriv","market_type":"derived","metadata":{"pip_size":0.0001},"price_decimals":4,"tick_size":0.0001},
+  {"symbol":"JD75","provider":"deriv","market_type":"derived","metadata":{"pip_size":0.01},"price_decimals":2,"tick_size":0.01},
+  {"symbol":"stpRNG","provider":"deriv","market_type":"derived","metadata":{"pip_size":0.1},"price_decimals":1,"tick_size":0.1},
+  {"symbol":"BOOM500","provider":"deriv","market_type":"derived","metadata":{"pip_size":0.001},"price_decimals":3,"tick_size":0.001},
+  {"symbol":"CRASH500","provider":"deriv","market_type":"derived","metadata":{"pip_size":0.001},"price_decimals":3,"tick_size":0.001}
+]

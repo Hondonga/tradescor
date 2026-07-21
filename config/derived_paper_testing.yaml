@@ -1,0 +1,11 @@
+{
+  "derived_paper_testing": {
+    "enabled": true,
+    "database_path": "data/derived_paper_testing.db",
+    "snapshot": {"record_all_completed_auto_decisions": true, "deduplicate_unchanged_decisions": true},
+    "fill": {"default_entry_policy": "strategy_defined", "default_slippage_points": 0, "expiration_uses_completed_candles": true},
+    "ambiguity": {"policy": "mark_ambiguous"},
+    "management": {"tp1_close_fraction": 0.50, "tp2_close_fraction": 0.50, "move_stop_after_tp1": "none", "continue_filled_trade_after_router_replacement": true},
+    "evidence": {"early_samples": 30, "moderate_samples": 100, "stronger_samples": 250, "require_out_of_sample_for_router_ranking": true}
+  }
+}

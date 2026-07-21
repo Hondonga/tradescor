@@ -1,0 +1,34 @@
+[
+  {
+    "experiment_id": "jdbr_feasibility_selftest_2026-07",
+    "fingerprint": {
+      "strategy_id": "jdbr",
+      "window": "2026-06-24..2026-07-02",
+      "symbols": [
+        "JD10",
+        "JD100",
+        "JD50",
+        "JD75"
+      ],
+      "parameter_hash": "6c956dde3901634d"
+    },
+    "outcome": "REJECTED_INSUFFICIENT_SAMPLE",
+    "frozen_at": "2026-07-20T17:56:34.953908+00:00"
+  },
+  {
+    "experiment_id": "jdbr_feasibility_selftest_2026-07",
+    "fingerprint": {
+      "strategy_id": "jdbr",
+      "window": "2026-06-24..2026-07-02",
+      "symbols": [
+        "JD10",
+        "JD100",
+        "JD50",
+        "JD75"
+      ],
+      "parameter_hash": "6c956dde3901634d"
+    },
+    "outcome": "REJECTED_INSUFFICIENT_SAMPLE",
+    "frozen_at": "2026-07-20T17:57:01.345262+00:00"
+  }
+]

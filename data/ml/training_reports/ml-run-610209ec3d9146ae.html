@@ -1,0 +1,1073 @@
+<!doctype html><meta charset='utf-8'><title>TradeScor ML Training Report</title><style>body{background:#080b10;color:#dbe5f3;font:14px system-ui;padding:32px}pre{background:#101722;padding:20px;border-radius:8px;white-space:pre-wrap}</style><h1>TradeScor Offline ML Training Report</h1><p>Research only. No live activation endpoint exists.</p><pre>{
+  &quot;dataset&quot;: {
+    &quot;application_version&quot;: &quot;tradescor-smc-ml-foundation-v1&quot;,
+    &quot;buy_setups&quot;: 975,
+    &quot;candle_checksum&quot;: &quot;b57b907d51b856de88428312f91f3dcbd4c36bc6114788068f1ea14ee5e2908b&quot;,
+    &quot;checksum&quot;: &quot;737b02ea7c98fa68131920cc0fb6f5b438a8504dc2898aea14c1ce4c0b178b23&quot;,
+    &quot;config_hash&quot;: &quot;b01471f25a7f63e300a2c7f92e68fa5f141cc4880b1d8353935faff5f8fa4b98&quot;,
+    &quot;coverage&quot;: {
+      &quot;actual_end&quot;: &quot;2026-07-20T05:44:00+00:00&quot;,
+      &quot;actual_start&quot;: &quot;2026-04-21T05:45:00+00:00&quot;,
+      &quot;duplicate_intervals&quot;: 0,
+      &quot;missing_m1_count&quot;: 0,
+      &quot;missing_m1_intervals&quot;: [],
+      &quot;requested_end&quot;: &quot;2026-07-20T05:45:00+00:00&quot;,
+      &quot;requested_start&quot;: &quot;2026-04-21T05:45:00+00:00&quot;,
+      &quot;total_m1_candles&quot;: 129600
+    },
+    &quot;dataset_id&quot;: &quot;ml-r75-f4c52d93c7a8dc3e95f1&quot;,
+    &quot;engine_version&quot;: &quot;volatility_structure_pullback_engine-v1&quot;,
+    &quot;feature_schema_hash&quot;: &quot;a1fed054f38cf3f064d820df2e0abbdfe40992bbd8e129c680217e2e39cbaac1&quot;,
+    &quot;frozen&quot;: true,
+    &quot;immutable&quot;: true,
+    &quot;leakage_violations&quot;: 0,
+    &quot;period&quot;: {
+      &quot;actual_end&quot;: &quot;2026-07-20T05:44:00+00:00&quot;,
+      &quot;actual_start&quot;: &quot;2026-04-21T05:45:00+00:00&quot;,
+      &quot;days&quot;: 90,
+      &quot;requested_end&quot;: &quot;2026-07-20T05:45:00+00:00&quot;,
+      &quot;requested_start&quot;: &quot;2026-04-21T05:45:00+00:00&quot;,
+      &quot;selection&quot;: &quot;fixed_trailing_calendar_period&quot;
+    },
+    &quot;resolved_rows&quot;: 674,
+    &quot;rows&quot;: 2442,
+    &quot;schema_version&quot;: &quot;smc-ml-features-v1&quot;,
+    &quot;sell_setups&quot;: 751,
+    &quot;setups&quot;: 1726,
+    &quot;source&quot;: &quot;real_deriv_public_m1&quot;,
+    &quot;source_dataset_id&quot;: &quot;dataset-d59388b117ef24de8742535d&quot;,
+    &quot;splits&quot;: {
+      &quot;test&quot;: {
+        &quot;end&quot;: &quot;2026-07-20T04:00:00+00:00&quot;,
+        &quot;purged_sequence_overlap&quot;: true,
+        &quot;rows&quot;: 475,
+        &quot;shuffled&quot;: false,
+        &quot;start&quot;: &quot;2026-07-03T05:15:00+00:00&quot;,
+        &quot;untouched&quot;: true
+      },
+      &quot;train&quot;: {
+        &quot;end&quot;: &quot;2026-06-14T22:10:00+00:00&quot;,
+        &quot;purged_sequence_overlap&quot;: true,
+        &quot;rows&quot;: 1466,
+        &quot;shuffled&quot;: false,
+        &quot;start&quot;: &quot;2026-04-22T15:00:00+00:00&quot;,
+        &quot;untouched&quot;: false
+      },
+      &quot;validation&quot;: {
+        &quot;end&quot;: &quot;2026-07-02T22:50:00+00:00&quot;,
+        &quot;purged_sequence_overlap&quot;: true,
+        &quot;rows&quot;: 490,
+        &quot;shuffled&quot;: false,
+        &quot;start&quot;: &quot;2026-06-15T05:00:00+00:00&quot;,
+        &quot;untouched&quot;: false
+      }
+    },
+    &quot;strategy&quot;: &quot;volatility_structure_pullback&quot;,
+    &quot;symbol&quot;: &quot;R_75&quot;,
+    &quot;trade_ready_rows&quot;: 674,
+    &quot;training_allowed&quot;: false,
+    &quot;training_readiness&quot;: {
+      &quot;blocking_requirements&quot;: [],
+      &quot;manual_override_allowed&quot;: false,
+      &quot;ready&quot;: true,
+      &quot;requirements&quot;: [
+        {
+          &quot;current&quot;: 0,
+          &quot;name&quot;: &quot;maximum_leakage_violations&quot;,
+          &quot;passed&quot;: true,
+          &quot;required&quot;: 0
+        },
+        {
+          &quot;current&quot;: 0.0,
+          &quot;name&quot;: &quot;maximum_unresolved_label_ratio&quot;,
+          &quot;passed&quot;: true,
+          &quot;required&quot;: 0.35
+        },
+        {
+          &quot;current&quot;: 329,
+          &quot;name&quot;: &quot;minimum_buy_resolved&quot;,
+          &quot;passed&quot;: true,
+          &quot;required&quot;: 35
+        },
+        {
+          &quot;current&quot;: 6,
+          &quot;name&quot;: &quot;minimum_independent_market_periods&quot;,
+          &quot;passed&quot;: true,
+          &quot;required&quot;: 6
+        },
+        {
+          &quot;current&quot;: 456,
+          &quot;name&quot;: &quot;minimum_negative_outcomes&quot;,
+          &quot;passed&quot;: true,
+          &quot;required&quot;: 25
+        },
+        {
+          &quot;current&quot;: 218,
+          &quot;name&quot;: &quot;minimum_positive_outcomes&quot;,
+          &quot;passed&quot;: true,
+          &quot;required&quot;: 25
+        },
+        {
+          &quot;current&quot;: 674,
+          &quot;name&quot;: &quot;minimum_resolved_entries&quot;,
+          &quot;passed&quot;: true,
+          &quot;required&quot;: 100
+        },
+        {
+          &quot;current&quot;: 345,
+          &quot;name&quot;: &quot;minimum_sell_resolved&quot;,
+          &quot;passed&quot;: true,
+          &quot;required&quot;: 35
+        },
+        {
+          &quot;current&quot;: 674,
+          &quot;name&quot;: &quot;minimum_trade_ready_plans&quot;,
+          &quot;passed&quot;: true,
+          &quot;required&quot;: 100
+        },
+        {
+          &quot;current&quot;: 1726,
+          &quot;name&quot;: &quot;minimum_unique_setup_candidates&quot;,
+          &quot;passed&quot;: true,
+          &quot;required&quot;: 500
+        }
+      ]
+    }
+  },
+  &quot;target&quot;: &quot;TP1_BEFORE_STOP&quot;,
+  &quot;exclusions&quot;: {
+    &quot;not_trade_ready&quot;: 1758,
+    &quot;purged_split_boundary&quot;: 11
+  },
+  &quot;models&quot;: [
+    {
+      &quot;name&quot;: &quot;dummy_majority&quot;,
+      &quot;calibration&quot;: &quot;none&quot;,
+      &quot;validation_metrics&quot;: {
+        &quot;pr_auc&quot;: 0.3333333333333333,
+        &quot;roc_auc&quot;: 0.5,
+        &quot;balanced_accuracy&quot;: 0.5,
+        &quot;precision&quot;: 0.0,
+        &quot;recall&quot;: 0.0,
+        &quot;f1&quot;: 0.0,
+        &quot;specificity&quot;: 1.0,
+        &quot;mcc&quot;: 0.0,
+        &quot;confusion_matrix&quot;: [
+          [
+            96,
+            0
+          ],
+          [
+            48,
+            0
+          ]
+        ],
+        &quot;log_loss&quot;: 12.014551129705717,
+        &quot;brier_score&quot;: 0.3333333333333333,
+        &quot;ece&quot;: 0.3333333333333333
+      },
+      &quot;selected_threshold&quot;: 0.5
+    },
+    {
+      &quot;name&quot;: &quot;dummy_prior&quot;,
+      &quot;calibration&quot;: &quot;none&quot;,
+      &quot;validation_metrics&quot;: {
+        &quot;pr_auc&quot;: 0.3333333333333333,
+        &quot;roc_auc&quot;: 0.5,
+        &quot;balanced_accuracy&quot;: 0.5,
+        &quot;precision&quot;: 0.0,
+        &quot;recall&quot;: 0.0,
+        &quot;f1&quot;: 0.0,
+        &quot;specificity&quot;: 1.0,
+        &quot;mcc&quot;: 0.0,
+        &quot;confusion_matrix&quot;: [
+          [
+            96,
+            0
+          ],
+          [
+            48,
+            0
+          ]
+        ],
+        &quot;log_loss&quot;: 0.637379362446309,
+        &quot;brier_score&quot;: 0.22259894247716716,
+        &quot;ece&quot;: 0.01940928270042197
+      },
+      &quot;selected_threshold&quot;: 0.5
+    },
+    {
+      &quot;name&quot;: &quot;logistic_unweighted&quot;,
+      &quot;calibration&quot;: &quot;none&quot;,
+      &quot;validation_metrics&quot;: {
+        &quot;pr_auc&quot;: 0.4377143100588101,
+        &quot;roc_auc&quot;: 0.6026475694444444,
+        &quot;balanced_accuracy&quot;: 0.6041666666666666,
+        &quot;precision&quot;: 0.42105263157894735,
+        &quot;recall&quot;: 0.6666666666666666,
+        &quot;f1&quot;: 0.5161290322580645,
+        &quot;specificity&quot;: 0.5416666666666666,
+        &quot;mcc&quot;: 0.19672236884115843,
+        &quot;confusion_matrix&quot;: [
+          [
+            52,
+            44
+          ],
+          [
+            16,
+            32
+          ]
+        ],
+        &quot;log_loss&quot;: 0.7559026473878897,
+        &quot;brier_score&quot;: 0.27090987919249404,
+        &quot;ece&quot;: 0.2559992170523921
+      },
+      &quot;selected_threshold&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;logistic_unweighted&quot;,
+      &quot;calibration&quot;: &quot;sigmoid&quot;,
+      &quot;validation_metrics&quot;: {
+        &quot;pr_auc&quot;: 0.4377143100588101,
+        &quot;roc_auc&quot;: 0.6026475694444444,
+        &quot;balanced_accuracy&quot;: 0.5052083333333334,
+        &quot;precision&quot;: 0.4,
+        &quot;recall&quot;: 0.041666666666666664,
+        &quot;f1&quot;: 0.07547169811320754,
+        &quot;specificity&quot;: 0.96875,
+        &quot;mcc&quot;: 0.026822089039291005,
+        &quot;confusion_matrix&quot;: [
+          [
+            93,
+            3
+          ],
+          [
+            46,
+            2
+          ]
+        ],
+        &quot;log_loss&quot;: 0.6199549082375886,
+        &quot;brier_score&quot;: 0.2151126364460487,
+        &quot;ece&quot;: 0.02098465972053271
+      },
+      &quot;selected_threshold&quot;: 0.35
+    },
+    {
+      &quot;name&quot;: &quot;logistic_unweighted&quot;,
+      &quot;calibration&quot;: &quot;isotonic&quot;,
+      &quot;validation_metrics&quot;: {
+        &quot;pr_auc&quot;: 0.45474137578145213,
+        &quot;roc_auc&quot;: 0.6583116319444444,
+        &quot;balanced_accuracy&quot;: 0.5208333333333334,
+        &quot;precision&quot;: 1.0,
+        &quot;recall&quot;: 0.041666666666666664,
+        &quot;f1&quot;: 0.08,
+        &quot;specificity&quot;: 1.0,
+        &quot;mcc&quot;: 0.16783627165933782,
+        &quot;confusion_matrix&quot;: [
+          [
+            96,
+            0
+          ],
+          [
+            46,
+            2
+          ]
+        ],
+        &quot;log_loss&quot;: 0.5728836266015424,
+        &quot;brier_score&quot;: 0.20063950257915775,
+        &quot;ece&quot;: 2.0816681711721685e-17
+      },
+      &quot;selected_threshold&quot;: 0.4
+    },
+    {
+      &quot;name&quot;: &quot;logistic_balanced&quot;,
+      &quot;calibration&quot;: &quot;none&quot;,
+      &quot;validation_metrics&quot;: {
+        &quot;pr_auc&quot;: 0.44576757838228315,
+        &quot;roc_auc&quot;: 0.6011284722222222,
+        &quot;balanced_accuracy&quot;: 0.5416666666666666,
+        &quot;precision&quot;: 0.3577981651376147,
+        &quot;recall&quot;: 0.8125,
+        &quot;f1&quot;: 0.4968152866242038,
+        &quot;specificity&quot;: 0.2708333333333333,
+        &quot;mcc&quot;: 0.0915857103095044,
+        &quot;confusion_matrix&quot;: [
+          [
+            26,
+            70
+          ],
+          [
+            9,
+            39
+          ]
+        ],
+        &quot;log_loss&quot;: 0.9498905613182386,
+        &quot;brier_score&quot;: 0.3408552809929749,
+        &quot;ece&quot;: 0.3306180860118954
+      },
+      &quot;selected_threshold&quot;: 0.8
+    },
+    {
+      &quot;name&quot;: &quot;logistic_balanced&quot;,
+      &quot;calibration&quot;: &quot;sigmoid&quot;,
+      &quot;validation_metrics&quot;: {
+        &quot;pr_auc&quot;: 0.44576757838228315,
+        &quot;roc_auc&quot;: 0.6011284722222222,
+        &quot;balanced_accuracy&quot;: 0.5052083333333334,
+        &quot;precision&quot;: 0.4,
+        &quot;recall&quot;: 0.041666666666666664,
+        &quot;f1&quot;: 0.07547169811320754,
+        &quot;specificity&quot;: 0.96875,
+        &quot;mcc&quot;: 0.026822089039291005,
+        &quot;confusion_matrix&quot;: [
+          [
+            93,
+            3
+          ],
+          [
+            46,
+            2
+          ]
+        ],
+        &quot;log_loss&quot;: 0.6201786804908438,
+        &quot;brier_score&quot;: 0.2151296449132635,
+        &quot;ece&quot;: 0.028965706932010497
+      },
+      &quot;selected_threshold&quot;: 0.35
+    },
+    {
+      &quot;name&quot;: &quot;logistic_balanced&quot;,
+      &quot;calibration&quot;: &quot;isotonic&quot;,
+      &quot;validation_metrics&quot;: {
+        &quot;pr_auc&quot;: 0.44605431285163805,
+        &quot;roc_auc&quot;: 0.636501736111111,
+        &quot;balanced_accuracy&quot;: 0.5260416666666666,
+        &quot;precision&quot;: 0.5714285714285714,
+        &quot;recall&quot;: 0.08333333333333333,
+        &quot;f1&quot;: 0.14545454545454545,
+        &quot;specificity&quot;: 0.96875,
+        &quot;mcc&quot;: 0.11416834431938576,
+        &quot;confusion_matrix&quot;: [
+          [
+            93,
+            3
+          ],
+          [
+            44,
+            4
+          ]
+        ],
+        &quot;log_loss&quot;: 0.5892424312495563,
+        &quot;brier_score&quot;: 0.2051308699477658,
+        &quot;ece&quot;: 0.00694444444444446
+      },
+      &quot;selected_threshold&quot;: 0.4
+    },
+    {
+      &quot;name&quot;: &quot;logistic_setup_weighted&quot;,
+      &quot;calibration&quot;: &quot;none&quot;,
+      &quot;validation_metrics&quot;: {
+        &quot;pr_auc&quot;: 0.4377143100588101,
+        &quot;roc_auc&quot;: 0.6026475694444444,
+        &quot;balanced_accuracy&quot;: 0.6041666666666666,
+        &quot;precision&quot;: 0.42105263157894735,
+        &quot;recall&quot;: 0.6666666666666666,
+        &quot;f1&quot;: 0.5161290322580645,
+        &quot;specificity&quot;: 0.5416666666666666,
+        &quot;mcc&quot;: 0.19672236884115843,
+        &quot;confusion_matrix&quot;: [
+          [
+            52,
+            44
+          ],
+          [
+            16,
+            32
+          ]
+        ],
+        &quot;log_loss&quot;: 0.7559026473878897,
+        &quot;brier_score&quot;: 0.27090987919249404,
+        &quot;ece&quot;: 0.2559992170523921
+      },
+      &quot;selected_threshold&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;logistic_setup_weighted&quot;,
+      &quot;calibration&quot;: &quot;sigmoid&quot;,
+      &quot;validation_metrics&quot;: {
+        &quot;pr_auc&quot;: 0.4377143100588101,
+        &quot;roc_auc&quot;: 0.6026475694444444,
+        &quot;balanced_accuracy&quot;: 0.5052083333333334,
+        &quot;precision&quot;: 0.4,
+        &quot;recall&quot;: 0.041666666666666664,
+        &quot;f1&quot;: 0.07547169811320754,
+        &quot;specificity&quot;: 0.96875,
+        &quot;mcc&quot;: 0.026822089039291005,
+        &quot;confusion_matrix&quot;: [
+          [
+            93,
+            3
+          ],
+          [
+            46,
+            2
+          ]
+        ],
+        &quot;log_loss&quot;: 0.6199549082375886,
+        &quot;brier_score&quot;: 0.2151126364460487,
+        &quot;ece&quot;: 0.02098465972053271
+      },
+      &quot;selected_threshold&quot;: 0.35
+    },
+    {
+      &quot;name&quot;: &quot;logistic_setup_weighted&quot;,
+      &quot;calibration&quot;: &quot;isotonic&quot;,
+      &quot;validation_metrics&quot;: {
+        &quot;pr_auc&quot;: 0.45474137578145213,
+        &quot;roc_auc&quot;: 0.6583116319444444,
+        &quot;balanced_accuracy&quot;: 0.5208333333333334,
+        &quot;precision&quot;: 1.0,
+        &quot;recall&quot;: 0.041666666666666664,
+        &quot;f1&quot;: 0.08,
+        &quot;specificity&quot;: 1.0,
+        &quot;mcc&quot;: 0.16783627165933782,
+        &quot;confusion_matrix&quot;: [
+          [
+            96,
+            0
+          ],
+          [
+            46,
+            2
+          ]
+        ],
+        &quot;log_loss&quot;: 0.5728836266015424,
+        &quot;brier_score&quot;: 0.20063950257915775,
+        &quot;ece&quot;: 2.0816681711721685e-17
+      },
+      &quot;selected_threshold&quot;: 0.4
+    },
+    {
+      &quot;name&quot;: &quot;gradient_boosting&quot;,
+      &quot;calibration&quot;: &quot;none&quot;,
+      &quot;validation_metrics&quot;: {
+        &quot;pr_auc&quot;: 0.2815526542997233,
+        &quot;roc_auc&quot;: 0.4053819444444445,
+        &quot;balanced_accuracy&quot;: 0.4635416666666667,
+        &quot;precision&quot;: 0.21052631578947367,
+        &quot;recall&quot;: 0.08333333333333333,
+        &quot;f1&quot;: 0.11940298507462686,
+        &quot;specificity&quot;: 0.84375,
+        &quot;mcc&quot;: -0.10156667501540163,
+        &quot;confusion_matrix&quot;: [
+          [
+            81,
+            15
+          ],
+          [
+            44,
+            4
+          ]
+        ],
+        &quot;log_loss&quot;: 0.7503383108214884,
+        &quot;brier_score&quot;: 0.26883541999551586,
+        &quot;ece&quot;: 0.23477605003909593
+      },
+      &quot;selected_threshold&quot;: 0.5
+    },
+    {
+      &quot;name&quot;: &quot;gradient_boosting&quot;,
+      &quot;calibration&quot;: &quot;sigmoid&quot;,
+      &quot;validation_metrics&quot;: {
+        &quot;pr_auc&quot;: 0.3921660386785535,
+        &quot;roc_auc&quot;: 0.5946180555555556,
+        &quot;balanced_accuracy&quot;: 0.5104166666666666,
+        &quot;precision&quot;: 1.0,
+        &quot;recall&quot;: 0.020833333333333332,
+        &quot;f1&quot;: 0.04081632653061224,
+        &quot;specificity&quot;: 1.0,
+        &quot;mcc&quot;: 0.11826247919781652,
+        &quot;confusion_matrix&quot;: [
+          [
+            96,
+            0
+          ],
+          [
+            47,
+            1
+          ]
+        ],
+        &quot;log_loss&quot;: 0.623261828529245,
+        &quot;brier_score&quot;: 0.2167765116640617,
+        &quot;ece&quot;: 0.09575477465252856
+      },
+      &quot;selected_threshold&quot;: 0.35
+    },
+    {
+      &quot;name&quot;: &quot;gradient_boosting&quot;,
+      &quot;calibration&quot;: &quot;isotonic&quot;,
+      &quot;validation_metrics&quot;: {
+        &quot;pr_auc&quot;: 0.35044444444444445,
+        &quot;roc_auc&quot;: 0.5364583333333333,
+        &quot;balanced_accuracy&quot;: 0.5,
+        &quot;precision&quot;: 0.0,
+        &quot;recall&quot;: 0.0,
+        &quot;f1&quot;: 0.0,
+        &quot;specificity&quot;: 1.0,
+        &quot;mcc&quot;: 0.0,
+        &quot;confusion_matrix&quot;: [
+          [
+            96,
+            0
+          ],
+          [
+            48,
+            0
+          ]
+        ],
+        &quot;log_loss&quot;: 0.6309923742018491,
+        &quot;brier_score&quot;: 0.21992982456140353,
+        &quot;ece&quot;: 1.0003572044799588e-16
+      },
+      &quot;selected_threshold&quot;: 0.35
+    }
+  ],
+  &quot;selection&quot;: {
+    &quot;model&quot;: &quot;logistic_unweighted&quot;,
+    &quot;calibration&quot;: &quot;isotonic&quot;,
+    &quot;threshold&quot;: 0.4,
+    &quot;selected_using&quot;: &quot;validation_only&quot;,
+    &quot;frozen_at&quot;: &quot;2026-07-20T13:43:10.525369+00:00&quot;
+  },
+  &quot;validation&quot;: {
+    &quot;pr_auc&quot;: 0.45474137578145213,
+    &quot;roc_auc&quot;: 0.6583116319444444,
+    &quot;balanced_accuracy&quot;: 0.5208333333333334,
+    &quot;precision&quot;: 1.0,
+    &quot;recall&quot;: 0.041666666666666664,
+    &quot;f1&quot;: 0.08,
+    &quot;specificity&quot;: 1.0,
+    &quot;mcc&quot;: 0.16783627165933782,
+    &quot;confusion_matrix&quot;: [
+      [
+        96,
+        0
+      ],
+      [
+        46,
+        2
+      ]
+    ],
+    &quot;log_loss&quot;: 0.5728836266015424,
+    &quot;brier_score&quot;: 0.20063950257915775,
+    &quot;ece&quot;: 2.0816681711721685e-17
+  },
+  &quot;test&quot;: {
+    &quot;pr_auc&quot;: 0.39935212232964284,
+    &quot;roc_auc&quot;: 0.5937578027465668,
+    &quot;balanced_accuracy&quot;: 0.5406991260923846,
+    &quot;precision&quot;: 0.3617021276595745,
+    &quot;recall&quot;: 0.7555555555555555,
+    &quot;f1&quot;: 0.4892086330935252,
+    &quot;specificity&quot;: 0.3258426966292135,
+    &quot;mcc&quot;: 0.08400834275350325,
+    &quot;confusion_matrix&quot;: [
+      [
+        29,
+        60
+      ],
+      [
+        11,
+        34
+      ]
+    ],
+    &quot;log_loss&quot;: 3.59124577042867,
+    &quot;brier_score&quot;: 0.2935638300596546,
+    &quot;ece&quot;: 0.21675485475871756
+  },
+  &quot;smc_only&quot;: {
+    &quot;trades&quot;: 134,
+    &quot;wins&quot;: 44,
+    &quot;losses&quot;: 90,
+    &quot;average_realized_r&quot;: 0.04152944689909935,
+    &quot;total_realized_r&quot;: 5.564945884479313,
+    &quot;expectancy&quot;: 0.04152944689909935,
+    &quot;profit_factor&quot;: 1.062527481848082,
+    &quot;maximum_drawdown_r&quot;: 22.685516139552263,
+    &quot;buy&quot;: {
+      &quot;trades&quot;: 74,
+      &quot;wins&quot;: 31,
+      &quot;total_realized_r&quot;: 29.847718196615922,
+      &quot;expectancy&quot;: 0.4033475431975125
+    },
+    &quot;sell&quot;: {
+      &quot;trades&quot;: 60,
+      &quot;wins&quot;: 13,
+      &quot;total_realized_r&quot;: -24.28277231213661,
+      &quot;expectancy&quot;: -0.4047128718689435
+    }
+  },
+  &quot;smc_plus_ml&quot;: {
+    &quot;trades&quot;: 94,
+    &quot;wins&quot;: 33,
+    &quot;losses&quot;: 61,
+    &quot;average_realized_r&quot;: 0.15742512142751108,
+    &quot;total_realized_r&quot;: 14.797961414186041,
+    &quot;expectancy&quot;: 0.15742512142751108,
+    &quot;profit_factor&quot;: 1.246632690236434,
+    &quot;maximum_drawdown_r&quot;: 11.703176491780336,
+    &quot;buy&quot;: {
+      &quot;trades&quot;: 59,
+      &quot;wins&quot;: 25,
+      &quot;total_realized_r&quot;: 27.334934369883392,
+      &quot;expectancy&quot;: 0.4633039723709049
+    },
+    &quot;sell&quot;: {
+      &quot;trades&quot;: 35,
+      &quot;wins&quot;: 8,
+      &quot;total_realized_r&quot;: -12.536972955697347,
+      &quot;expectancy&quot;: -0.3581992273056385
+    }
+  },
+  &quot;periods&quot;: {
+    &quot;block-5&quot;: {
+      &quot;smc_only&quot;: {
+        &quot;trades&quot;: 16,
+        &quot;wins&quot;: 3,
+        &quot;losses&quot;: 13,
+        &quot;average_realized_r&quot;: -0.4588242977232915,
+        &quot;total_realized_r&quot;: -7.341188763572664,
+        &quot;expectancy&quot;: -0.4588242977232915,
+        &quot;profit_factor&quot;: 0.43529317203287204,
+        &quot;maximum_drawdown_r&quot;: 9.358029456875098,
+        &quot;buy&quot;: {
+          &quot;trades&quot;: 5,
+          &quot;wins&quot;: 1,
+          &quot;total_realized_r&quot;: -1.9831593066975644,
+          &quot;expectancy&quot;: -0.3966318613395129
+        },
+        &quot;sell&quot;: {
+          &quot;trades&quot;: 11,
+          &quot;wins&quot;: 2,
+          &quot;total_realized_r&quot;: -5.358029456875099,
+          &quot;expectancy&quot;: -0.48709358698864536
+        }
+      },
+      &quot;smc_plus_ml&quot;: {
+        &quot;trades&quot;: 8,
+        &quot;wins&quot;: 0,
+        &quot;losses&quot;: 8,
+        &quot;average_realized_r&quot;: -1.0,
+        &quot;total_realized_r&quot;: -8.0,
+        &quot;expectancy&quot;: -1.0,
+        &quot;profit_factor&quot;: 0.0,
+        &quot;maximum_drawdown_r&quot;: 8.0,
+        &quot;buy&quot;: {
+          &quot;trades&quot;: 4,
+          &quot;wins&quot;: 0,
+          &quot;total_realized_r&quot;: -4.0,
+          &quot;expectancy&quot;: -1.0
+        },
+        &quot;sell&quot;: {
+          &quot;trades&quot;: 4,
+          &quot;wins&quot;: 0,
+          &quot;total_realized_r&quot;: -4.0,
+          &quot;expectancy&quot;: -1.0
+        }
+      }
+    },
+    &quot;block-6&quot;: {
+      &quot;smc_only&quot;: {
+        &quot;trades&quot;: 118,
+        &quot;wins&quot;: 41,
+        &quot;losses&quot;: 77,
+        &quot;average_realized_r&quot;: 0.10937402244111843,
+        &quot;total_realized_r&quot;: 12.906134648051975,
+        &quot;expectancy&quot;: 0.10937402244111843,
+        &quot;profit_factor&quot;: 1.1698175611585786,
+        &quot;maximum_drawdown_r&quot;: 13.703176491780335,
+        &quot;buy&quot;: {
+          &quot;trades&quot;: 69,
+          &quot;wins&quot;: 30,
+          &quot;total_realized_r&quot;: 31.830877503313488,
+          &quot;expectancy&quot;: 0.4613170652654129
+        },
+        &quot;sell&quot;: {
+          &quot;trades&quot;: 49,
+          &quot;wins&quot;: 11,
+          &quot;total_realized_r&quot;: -18.924742855261513,
+          &quot;expectancy&quot;: -0.3862192419441125
+        }
+      },
+      &quot;smc_plus_ml&quot;: {
+        &quot;trades&quot;: 86,
+        &quot;wins&quot;: 33,
+        &quot;losses&quot;: 53,
+        &quot;average_realized_r&quot;: 0.26509257458355856,
+        &quot;total_realized_r&quot;: 22.797961414186037,
+        &quot;expectancy&quot;: 0.26509257458355856,
+        &quot;profit_factor&quot;: 1.438422334888193,
+        &quot;maximum_drawdown_r&quot;: 11.703176491780335,
+        &quot;buy&quot;: {
+          &quot;trades&quot;: 55,
+          &quot;wins&quot;: 25,
+          &quot;total_realized_r&quot;: 31.334934369883392,
+          &quot;expectancy&quot;: 0.5697260794524253
+        },
+        &quot;sell&quot;: {
+          &quot;trades&quot;: 31,
+          &quot;wins&quot;: 8,
+          &quot;total_realized_r&quot;: -8.536972955697347,
+          &quot;expectancy&quot;: -0.2753862243773338
+        }
+      }
+    }
+  },
+  &quot;stability&quot;: &quot;UNSTABLE&quot;,
+  &quot;feature_importance&quot;: [
+    {
+      &quot;feature&quot;: &quot;target_source_internal_swing&quot;,
+      &quot;standardized_coefficient&quot;: -0.9330906708570996,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m15_pullback_depth_pct&quot;,
+      &quot;standardized_coefficient&quot;: -0.8668242928838154,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;target_source_external_swing&quot;,
+      &quot;standardized_coefficient&quot;: 0.8531836757103936,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m15_pullback_depth_atr&quot;,
+      &quot;standardized_coefficient&quot;: 0.7234883870659283,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;target_age&quot;,
+      &quot;standardized_coefficient&quot;: -0.556693610910131,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m15_range_width_atr&quot;,
+      &quot;standardized_coefficient&quot;: -0.5416912072631163,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m5_target_timeframe&quot;,
+      &quot;standardized_coefficient&quot;: -0.5029257542608474,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;h1_atr&quot;,
+      &quot;standardized_coefficient&quot;: 0.47129641330836586,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m15_setup_distance_atr&quot;,
+      &quot;standardized_coefficient&quot;: -0.4441521518915098,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m15_premium_discount&quot;,
+      &quot;standardized_coefficient&quot;: -0.4356238068742714,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;h1_swing_low_distance_atr&quot;,
+      &quot;standardized_coefficient&quot;: -0.41394358240644996,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m15_swing_low_distance_atr&quot;,
+      &quot;standardized_coefficient&quot;: 0.28910260884308553,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;h1_overlap_ratio&quot;,
+      &quot;standardized_coefficient&quot;: 0.26386740156690486,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m5_retracement_depth&quot;,
+      &quot;standardized_coefficient&quot;: -0.2357247306723955,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;returns_20&quot;,
+      &quot;standardized_coefficient&quot;: 0.23252756547869324,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m5_confirmation_age&quot;,
+      &quot;standardized_coefficient&quot;: 0.23100595304867183,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;rolling_volatility&quot;,
+      &quot;standardized_coefficient&quot;: 0.2036182114785376,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m5_entry_distance_atr&quot;,
+      &quot;standardized_coefficient&quot;: 0.1816923954137319,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m5_chase_distance_atr&quot;,
+      &quot;standardized_coefficient&quot;: 0.1816923954137319,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m5_close_location&quot;,
+      &quot;standardized_coefficient&quot;: 0.1779562962678924,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m5_displacement_body_atr&quot;,
+      &quot;standardized_coefficient&quot;: 0.1624367010507788,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;h1_external_structure&quot;,
+      &quot;standardized_coefficient&quot;: 0.16055301133157732,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;h1_active_leg_direction&quot;,
+      &quot;standardized_coefficient&quot;: 0.16055301133157732,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;h1_latest_bos_direction&quot;,
+      &quot;standardized_coefficient&quot;: 0.16055301133157732,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;h1_directional_efficiency&quot;,
+      &quot;standardized_coefficient&quot;: 0.14526530631030868,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m5_tp1_rr&quot;,
+      &quot;standardized_coefficient&quot;: -0.13329777578290616,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;returns_5&quot;,
+      &quot;standardized_coefficient&quot;: 0.132986096852192,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m5_displacement_range_atr&quot;,
+      &quot;standardized_coefficient&quot;: -0.10351897112277215,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;returns_10&quot;,
+      &quot;standardized_coefficient&quot;: -0.07796506645252502,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m15_swing_high_distance_atr&quot;,
+      &quot;standardized_coefficient&quot;: 0.06797523120934379,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m5_directional_close_count&quot;,
+      &quot;standardized_coefficient&quot;: -0.053177719339678665,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m15_displacement_strength&quot;,
+      &quot;standardized_coefficient&quot;: -0.051934473646688635,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;h1_swing_high_distance_atr&quot;,
+      &quot;standardized_coefficient&quot;: 0.05193115481095768,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;h1_active_leg_age&quot;,
+      &quot;standardized_coefficient&quot;: -0.04948959384780783,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;h1_latest_bos_age&quot;,
+      &quot;standardized_coefficient&quot;: -0.04948959384780783,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m5_target_distance_atr&quot;,
+      &quot;standardized_coefficient&quot;: -0.04664108344629797,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;returns_50&quot;,
+      &quot;standardized_coefficient&quot;: 0.03807522566887663,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m5_structure_break_distance_atr&quot;,
+      &quot;standardized_coefficient&quot;: -0.03486447504109931,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m5_stop_distance_atr&quot;,
+      &quot;standardized_coefficient&quot;: 0.022521920499049553,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;h1_active_leg_distance_atr&quot;,
+      &quot;standardized_coefficient&quot;: 0.005790011218386162,
+      &quot;association&quot;: &quot;higher&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;rolling_directional_efficiency&quot;,
+      &quot;standardized_coefficient&quot;: -0.003564250854269438,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m15_condition&quot;,
+      &quot;standardized_coefficient&quot;: 0.0,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m15_location_valid&quot;,
+      &quot;standardized_coefficient&quot;: 0.0,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m5_bos&quot;,
+      &quot;standardized_coefficient&quot;: 0.0,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;m5_mss&quot;,
+      &quot;standardized_coefficient&quot;: 0.0,
+      &quot;association&quot;: &quot;lower&quot;
+    },
+    {
+      &quot;feature&quot;: &quot;target_consumed&quot;,
+      &quot;standardized_coefficient&quot;: 0.0,
+      &quot;association&quot;: &quot;lower&quot;
+    }
+  ],
+  &quot;model_status&quot;: &quot;REJECTED_POOR_CALIBRATION&quot;,
+  &quot;metadata&quot;: {
+    &quot;model_id&quot;: &quot;model-495e93f5c3331938&quot;,
+    &quot;model_type&quot;: &quot;logistic_unweighted&quot;,
+    &quot;training_timestamp&quot;: &quot;2026-07-20T13:43:10.615001+00:00&quot;,
+    &quot;dataset_id&quot;: &quot;ml-r75-f4c52d93c7a8dc3e95f1&quot;,
+    &quot;dataset_checksum&quot;: &quot;737b02ea7c98fa68131920cc0fb6f5b438a8504dc2898aea14c1ce4c0b178b23&quot;,
+    &quot;feature_schema_version&quot;: &quot;smc-ml-features-v1&quot;,
+    &quot;feature_ordering&quot;: [
+      &quot;h1_external_structure&quot;,
+      &quot;h1_active_leg_direction&quot;,
+      &quot;h1_active_leg_distance_atr&quot;,
+      &quot;h1_active_leg_age&quot;,
+      &quot;h1_latest_bos_direction&quot;,
+      &quot;h1_latest_bos_age&quot;,
+      &quot;h1_swing_high_distance_atr&quot;,
+      &quot;h1_swing_low_distance_atr&quot;,
+      &quot;h1_atr&quot;,
+      &quot;h1_directional_efficiency&quot;,
+      &quot;h1_overlap_ratio&quot;,
+      &quot;m15_condition&quot;,
+      &quot;m15_pullback_depth_pct&quot;,
+      &quot;m15_pullback_depth_atr&quot;,
+      &quot;m15_setup_distance_atr&quot;,
+      &quot;m15_premium_discount&quot;,
+      &quot;m15_swing_high_distance_atr&quot;,
+      &quot;m15_swing_low_distance_atr&quot;,
+      &quot;m15_displacement_strength&quot;,
+      &quot;m15_range_width_atr&quot;,
+      &quot;m15_location_valid&quot;,
+      &quot;m5_displacement_body_atr&quot;,
+      &quot;m5_displacement_range_atr&quot;,
+      &quot;m5_close_location&quot;,
+      &quot;m5_directional_close_count&quot;,
+      &quot;m5_bos&quot;,
+      &quot;m5_mss&quot;,
+      &quot;m5_structure_break_distance_atr&quot;,
+      &quot;m5_retracement_depth&quot;,
+      &quot;m5_entry_distance_atr&quot;,
+      &quot;m5_stop_distance_atr&quot;,
+      &quot;m5_target_distance_atr&quot;,
+      &quot;m5_target_timeframe&quot;,
+      &quot;m5_tp1_rr&quot;,
+      &quot;m5_chase_distance_atr&quot;,
+      &quot;m5_confirmation_age&quot;,
+      &quot;target_source&quot;,
+      &quot;target_age&quot;,
+      &quot;target_consumed&quot;,
+      &quot;returns_5&quot;,
+      &quot;returns_10&quot;,
+      &quot;returns_20&quot;,
+      &quot;returns_50&quot;,
+      &quot;rolling_volatility&quot;,
+      &quot;rolling_directional_efficiency&quot;
+    ],
+    &quot;transformed_features&quot;: [
+      &quot;h1_external_structure&quot;,
+      &quot;h1_active_leg_direction&quot;,
+      &quot;h1_active_leg_distance_atr&quot;,
+      &quot;h1_active_leg_age&quot;,
+      &quot;h1_latest_bos_direction&quot;,
+      &quot;h1_latest_bos_age&quot;,
+      &quot;h1_swing_high_distance_atr&quot;,
+      &quot;h1_swing_low_distance_atr&quot;,
+      &quot;h1_atr&quot;,
+      &quot;h1_directional_efficiency&quot;,
+      &quot;h1_overlap_ratio&quot;,
+      &quot;m15_condition&quot;,
+      &quot;m15_pullback_depth_pct&quot;,
+      &quot;m15_pullback_depth_atr&quot;,
+      &quot;m15_setup_distance_atr&quot;,
+      &quot;m15_premium_discount&quot;,
+      &quot;m15_swing_high_distance_atr&quot;,
+      &quot;m15_swing_low_distance_atr&quot;,
+      &quot;m15_displacement_strength&quot;,
+      &quot;m15_range_width_atr&quot;,
+      &quot;m15_location_valid&quot;,
+      &quot;m5_displacement_body_atr&quot;,
+      &quot;m5_displacement_range_atr&quot;,
+      &quot;m5_close_location&quot;,
+      &quot;m5_directional_close_count&quot;,
+      &quot;m5_bos&quot;,
+      &quot;m5_mss&quot;,
+      &quot;m5_structure_break_distance_atr&quot;,
+      &quot;m5_retracement_depth&quot;,
+      &quot;m5_entry_distance_atr&quot;,
+      &quot;m5_stop_distance_atr&quot;,
+      &quot;m5_target_distance_atr&quot;,
+      &quot;m5_target_timeframe&quot;,
+      &quot;m5_tp1_rr&quot;,
+      &quot;m5_chase_distance_atr&quot;,
+      &quot;m5_confirmation_age&quot;,
+      &quot;target_age&quot;,
+      &quot;target_consumed&quot;,
+      &quot;returns_5&quot;,
+      &quot;returns_10&quot;,
+      &quot;returns_20&quot;,
+      &quot;returns_50&quot;,
+      &quot;rolling_volatility&quot;,
+      &quot;rolling_directional_efficiency&quot;,
+      &quot;target_source_external_swing&quot;,
+      &quot;target_source_internal_swing&quot;
+    ],
+    &quot;configuration_hash&quot;: &quot;4138ffb90f790d6fec3b9c0b4134e7f1b681c3727452e69025225920229a6d15&quot;,
+    &quot;code_version&quot;: &quot;tradescor-offline-baseline-v1&quot;,
+    &quot;dependencies&quot;: {
+      &quot;python&quot;: &quot;3.14.4&quot;,
+      &quot;scikit_learn&quot;: &quot;1.8.0&quot;,
+      &quot;numpy&quot;: &quot;2.4.4&quot;
+    },
+    &quot;selected_threshold&quot;: 0.4,
+    &quot;calibration_method&quot;: &quot;isotonic&quot;
+  }
+}</pre>

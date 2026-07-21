@@ -1,0 +1,17 @@
+{
+  "derived_replay": {
+    "enabled": true,
+    "database_path": "data/derived_replay.db",
+    "maximum_concurrent_runs": 1,
+    "maximum_queue_depth": 1,
+    "worker_yield_seconds": 0.01,
+    "maximum_candles_per_batch": 250,
+    "checkpoint_every_candles": 250,
+    "default_base_timeframe": "M1",
+    "fallback_base_timeframe": "M5",
+    "execution": {"confirmation_close_policy": "next_base_candle_open", "ambiguity_policy": "mark_ambiguous", "default_slippage_points": 0},
+    "analysis": {"run_on_each_completed_m5": true, "refresh_higher_timeframes_on_close_only": true},
+    "persistence": {"save_all_decisions": true, "save_data_snapshots": true, "deterministic_ids": true},
+    "validation": {"require_configuration_hash": true, "require_dataset_checksum": true, "require_live_replay_parity_tests": true}
+  }
+}

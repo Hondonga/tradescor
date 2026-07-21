@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-07-20T13:42:37.544221+00:00",
+  "dataset_checksum_verified": true,
+  "dataset_id": "ml-r75-f4c52d93c7a8dc3e95f1",
+  "error": "cannot schedule new futures after interpreter shutdown",
+  "excluded_samples": 1769,
+  "finished_at": "2026-07-20T13:42:37.823271+00:00",
+  "live_activation_available": false,
+  "progress": 15,
+  "run_id": "ml-run-a1a6422badea422c",
+  "split_counts": {
+    "test": 134,
+    "train": 395,
+    "validation": 144
+  },
+  "stage": "failed",
+  "state": "failed"
+}

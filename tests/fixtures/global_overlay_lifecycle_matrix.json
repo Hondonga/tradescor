@@ -1,0 +1,31 @@
+{
+  "forex": [
+    {"fixture":"expired_ict","stage":"EXPIRED","status":"SETUP EXPIRED","active":false,"previous":true,"actionable":false},
+    {"fixture":"developing_ict","stage":"WAITING_FOR_CONFIRMATION","status":"SETUP DEVELOPING","active":true,"previous":false,"actionable":false},
+    {"fixture":"trade_ready_ict","stage":"TRADE_READY","status":"READY TO SELL","direction":"sell","active":true,"previous":false,"actionable":true},
+    {"fixture":"neutral_range","stage":"CONTEXT","status":"MARKET CONTEXT","direction":null,"setup":false,"active":false,"previous":false,"actionable":false}
+  ],
+  "volatility": [
+    {"fixture":"context_only","stage":"CONTEXT","status":"MARKET CONTEXT","direction":null,"setup":false,"active":false,"previous":false,"actionable":false},
+    {"fixture":"developing_pullback","stage":"WAITING_FOR_DISPLACEMENT","status":"SETUP DEVELOPING","active":true,"previous":false,"actionable":false},
+    {"fixture":"trade_ready_pullback","stage":"TRADE_READY","status":"READY TO BUY","active":true,"previous":false,"actionable":true},
+    {"fixture":"invalidated_pullback","stage":"INVALIDATED","status":"INVALIDATED","active":false,"previous":true,"actionable":false}
+  ],
+  "jump": [
+    {"fixture":"event_risk","stage":"WAITING_FOR_DISPLACEMENT","status":"EVENT RISK","active":true,"previous":false,"actionable":false,"event_risk":true},
+    {"fixture":"waiting_fresh_structure","stage":"WAITING_FOR_DISPLACEMENT","status":"SETUP DEVELOPING","active":true,"previous":false,"actionable":false},
+    {"fixture":"developing_post_event","stage":"WAITING_FOR_CONFIRMATION","status":"DEVELOPING","active":true,"previous":false,"actionable":false},
+    {"fixture":"event_cancelled","stage":"EVENT_CANCELLED","status":"EVENT CANCELLED","active":false,"previous":true,"actionable":false}
+  ],
+  "step": [
+    {"fixture":"range_context","stage":"CONTEXT","status":"MARKET CONTEXT","direction":null,"setup":false,"active":false,"previous":false,"actionable":false},
+    {"fixture":"developing_boundary_reaction","stage":"WAITING_FOR_SWEEP","status":"SETUP DEVELOPING","active":true,"previous":false,"actionable":false},
+    {"fixture":"accepted_breakout","stage":"WAITING_FOR_RETRACE","status":"SETUP DEVELOPING","active":true,"previous":false,"actionable":false},
+    {"fixture":"invalidated_stale_range","stage":"STALE_RANGE_INVALIDATED","status":"INVALIDATED STALE RANGE","active":false,"previous":true,"actionable":false}
+  ],
+  "boom_crash": [
+    {"fixture":"cooldown","stage":"CONTEXT","status":"EVENT COOLDOWN","direction":null,"setup":false,"active":false,"previous":false,"actionable":false},
+    {"fixture":"developing_post_spike","stage":"WAITING_FOR_CONFIRMATION","status":"SETUP DEVELOPING","active":true,"previous":false,"actionable":false},
+    {"fixture":"new_spike_cancellation","stage":"POST_SPIKE_CANCELLED","status":"POST SPIKE CANCELLED","active":false,"previous":true,"actionable":false}
+  ]
+}

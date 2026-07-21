@@ -1,0 +1,135 @@
+{
+  "application_version": "tradescor-smc-ml-foundation-v1",
+  "buy_setups": 975,
+  "candle_checksum": "b57b907d51b856de88428312f91f3dcbd4c36bc6114788068f1ea14ee5e2908b",
+  "checksum": "737b02ea7c98fa68131920cc0fb6f5b438a8504dc2898aea14c1ce4c0b178b23",
+  "config_hash": "b01471f25a7f63e300a2c7f92e68fa5f141cc4880b1d8353935faff5f8fa4b98",
+  "coverage": {
+    "actual_end": "2026-07-20T05:44:00+00:00",
+    "actual_start": "2026-04-21T05:45:00+00:00",
+    "duplicate_intervals": 0,
+    "missing_m1_count": 0,
+    "missing_m1_intervals": [],
+    "requested_end": "2026-07-20T05:45:00+00:00",
+    "requested_start": "2026-04-21T05:45:00+00:00",
+    "total_m1_candles": 129600
+  },
+  "dataset_id": "ml-r75-f4c52d93c7a8dc3e95f1",
+  "engine_version": "volatility_structure_pullback_engine-v1",
+  "feature_schema_hash": "a1fed054f38cf3f064d820df2e0abbdfe40992bbd8e129c680217e2e39cbaac1",
+  "frozen": true,
+  "immutable": true,
+  "leakage_violations": 0,
+  "period": {
+    "actual_end": "2026-07-20T05:44:00+00:00",
+    "actual_start": "2026-04-21T05:45:00+00:00",
+    "days": 90,
+    "requested_end": "2026-07-20T05:45:00+00:00",
+    "requested_start": "2026-04-21T05:45:00+00:00",
+    "selection": "fixed_trailing_calendar_period"
+  },
+  "resolved_rows": 674,
+  "rows": 2442,
+  "schema_version": "smc-ml-features-v1",
+  "sell_setups": 751,
+  "setups": 1726,
+  "source": "real_deriv_public_m1",
+  "source_dataset_id": "dataset-d59388b117ef24de8742535d",
+  "splits": {
+    "test": {
+      "end": "2026-07-20T04:00:00+00:00",
+      "purged_sequence_overlap": true,
+      "rows": 475,
+      "shuffled": false,
+      "start": "2026-07-03T05:15:00+00:00",
+      "untouched": true
+    },
+    "train": {
+      "end": "2026-06-14T22:10:00+00:00",
+      "purged_sequence_overlap": true,
+      "rows": 1466,
+      "shuffled": false,
+      "start": "2026-04-22T15:00:00+00:00",
+      "untouched": false
+    },
+    "validation": {
+      "end": "2026-07-02T22:50:00+00:00",
+      "purged_sequence_overlap": true,
+      "rows": 490,
+      "shuffled": false,
+      "start": "2026-06-15T05:00:00+00:00",
+      "untouched": false
+    }
+  },
+  "strategy": "volatility_structure_pullback",
+  "symbol": "R_75",
+  "trade_ready_rows": 674,
+  "training_allowed": false,
+  "training_readiness": {
+    "blocking_requirements": [],
+    "manual_override_allowed": false,
+    "ready": true,
+    "requirements": [
+      {
+        "current": 0,
+        "name": "maximum_leakage_violations",
+        "passed": true,
+        "required": 0
+      },
+      {
+        "current": 0.0,
+        "name": "maximum_unresolved_label_ratio",
+        "passed": true,
+        "required": 0.35
+      },
+      {
+        "current": 329,
+        "name": "minimum_buy_resolved",
+        "passed": true,
+        "required": 35
+      },
+      {
+        "current": 6,
+        "name": "minimum_independent_market_periods",
+        "passed": true,
+        "required": 6
+      },
+      {
+        "current": 456,
+        "name": "minimum_negative_outcomes",
+        "passed": true,
+        "required": 25
+      },
+      {
+        "current": 218,
+        "name": "minimum_positive_outcomes",
+        "passed": true,
+        "required": 25
+      },
+      {
+        "current": 674,
+        "name": "minimum_resolved_entries",
+        "passed": true,
+        "required": 100
+      },
+      {
+        "current": 345,
+        "name": "minimum_sell_resolved",
+        "passed": true,
+        "required": 35
+      },
+      {
+        "current": 674,
+        "name": "minimum_trade_ready_plans",
+        "passed": true,
+        "required": 100
+      },
+      {
+        "current": 1726,
+        "name": "minimum_unique_setup_candidates",
+        "passed": true,
+        "required": 500
+      }
+    ]
+  }
+}

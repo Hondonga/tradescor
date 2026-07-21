@@ -1,0 +1,21 @@
+{
+  "symbol": "GBP/USD",
+  "timeframe": "M15",
+  "provider": "twelve_data",
+  "evidence": {
+    "h1_structure": "Higher Highs / Higher Lows",
+    "referenced_zone": {"low": 1.34635, "high": 1.34641, "timeframe": "M15"},
+    "m5_confirmation": null
+  },
+  "legacy_decision_sequence": [
+    {"scenario_state": "EXPIRED", "direction": "sell", "status": "SELL SETUP FORMING"}
+  ],
+  "expected": {
+    "scenario_state": "EXPIRED",
+    "status": "SETUP EXPIRED",
+    "direction": null,
+    "entry_zone": null,
+    "m5_confirmation": null,
+    "trade_plan": null
+  }
+}

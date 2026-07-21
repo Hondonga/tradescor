@@ -1,0 +1,5 @@
+from strategies.derived.boom_crash_spike_state import evaluate_boom_crash_spike_state
+def test_data_failure_is_not_reported_as_no_setup_or_ready():
+    result=evaluate_boom_crash_spike_state(symbol="BOOM500",family={"family":"BOOM","classification_confidence":.9},spike_detector={"spike_detected":False},volatility={"regime":"NORMAL"},profile={"profile_quality":"good","atr":1},candles_by_timeframe={},current_price=None,data_quality={"analysis_allowed":False,"status":"invalid"});assert result["decision"]["status"]=="DATA UNAVAILABLE" and not result["decision"]["trade_ready"]
+def test_spike_alone_never_creates_ready():
+    result=evaluate_boom_crash_spike_state(symbol="BOOM500",family={"family":"BOOM","classification_confidence":.9},spike_detector={"spike_detected":True,"classification":"expected_family_spike","direction":"up","formed_at":"t","origin_price":100,"extreme_price":110,"family_expected":True},volatility={"regime":"NORMAL"},profile={"profile_quality":"good","atr":1},candles_by_timeframe={},current_price=110,data_quality={"analysis_allowed":True,"status":"good"});assert not result["decision"]["trade_ready"]

@@ -1,0 +1,10 @@
+{
+  "strategy_diagnostics": {
+    "enabled": true,
+    "shadow_candidates": true,
+    "store_gate_failures": true,
+    "show_first_blocking_gate": true,
+    "detect_state_contradictions": true,
+    "detect_stale_setup_objects": true
+  }
+}

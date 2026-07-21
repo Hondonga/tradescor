@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "market": {"provider": "deriv", "asset_class": "derived_index", "schedule": "24_7"},
+  "symbols": {
+    "R_100": {"family": "VOLATILITY", "subfamily": "VOLATILITY_100", "expected_spike_direction": "none", "movement_unit": "points", "supported_timeframes": ["M1", "M5", "M15", "M30", "H1", "H4", "D1"], "risk_classification": "high", "research_status": "enabled", "enabled_strategies": ["Structure Pullback", "Breakout and Retest", "Range Reaction"]},
+    "R_75": {"family": "VOLATILITY", "subfamily": "VOLATILITY_75", "expected_spike_direction": "none", "movement_unit": "points", "research_status": "enabled"}
+  },
+  "family_defaults": {
+    "VOLATILITY": {"expected_spike_direction": "none"},
+    "BOOM": {"expected_spike_direction": "up"},
+    "CRASH": {"expected_spike_direction": "down"},
+    "JUMP": {"expected_spike_direction": "both"},
+    "DEX": {"expected_spike_direction": "both"},
+    "RANGE_BREAK": {"expected_spike_direction": "none"},
+    "STEP": {"expected_spike_direction": "none"},
+    "VOLATILITY_SWITCH": {"expected_spike_direction": "both"},
+    "DRIFT_SWITCH": {"expected_spike_direction": "both"},
+    "HYBRID": {"expected_spike_direction": "both"},
+    "OTHER_DERIVED": {"expected_spike_direction": "none"}
+  }
+}

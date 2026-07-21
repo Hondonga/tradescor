@@ -1,0 +1,237 @@
+{
+  "source": "baseline_before_causal_geometry.json",
+  "fixtures": [
+    {
+      "fixture_id": "volatility_structure_pullback_buy",
+      "strategy_id": "volatility_structure_pullback",
+      "direction": "buy",
+      "failed_lifecycle_stage": null,
+      "blocker_code": "",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "volatility_structure_pullback_sell",
+      "strategy_id": "volatility_structure_pullback",
+      "direction": "sell",
+      "failed_lifecycle_stage": null,
+      "blocker_code": "",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "volatility_liquidity_reversal_buy",
+      "strategy_id": "volatility_liquidity_reversal",
+      "direction": "buy",
+      "failed_lifecycle_stage": "WAITING_FOR_PULLBACK",
+      "blocker_code": "strategy_reachability",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "volatility_liquidity_reversal_sell",
+      "strategy_id": "volatility_liquidity_reversal",
+      "direction": "sell",
+      "failed_lifecycle_stage": "WAITING_FOR_PULLBACK",
+      "blocker_code": "strategy_reachability",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "volatility_range_reaction_buy",
+      "strategy_id": "volatility_range_reaction",
+      "direction": "buy",
+      "failed_lifecycle_stage": "WAITING_FOR_PULLBACK",
+      "blocker_code": "strategy_reachability",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "volatility_range_reaction_sell",
+      "strategy_id": "volatility_range_reaction",
+      "direction": "sell",
+      "failed_lifecycle_stage": "WAITING_FOR_PULLBACK",
+      "blocker_code": "strategy_reachability",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "volatility_breakout_and_retest_buy",
+      "strategy_id": "volatility_breakout_and_retest",
+      "direction": "buy",
+      "failed_lifecycle_stage": "NO_DIRECTIONAL_CONTEXT",
+      "blocker_code": "strategy_reachability",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "volatility_breakout_and_retest_sell",
+      "strategy_id": "volatility_breakout_and_retest",
+      "direction": "sell",
+      "failed_lifecycle_stage": "NO_DIRECTIONAL_CONTEXT",
+      "blocker_code": "strategy_reachability",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "jump_post_event_continuation_buy",
+      "strategy_id": "jump_post_event_continuation",
+      "direction": "buy",
+      "failed_lifecycle_stage": "WAITING_FOR_TARGET",
+      "blocker_code": "NO_STRUCTURAL_TARGET",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "jump_post_event_continuation_sell",
+      "strategy_id": "jump_post_event_continuation",
+      "direction": "sell",
+      "failed_lifecycle_stage": "WAITING_FOR_TARGET",
+      "blocker_code": "NO_STRUCTURAL_TARGET",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "jump_post_event_reversal_buy",
+      "strategy_id": "jump_post_event_reversal",
+      "direction": "buy",
+      "failed_lifecycle_stage": "WAITING_FOR_TARGET",
+      "blocker_code": "NO_STRUCTURAL_TARGET",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "jump_post_event_reversal_sell",
+      "strategy_id": "jump_post_event_reversal",
+      "direction": "sell",
+      "failed_lifecycle_stage": "WAITING_FOR_TARGET",
+      "blocker_code": "NO_STRUCTURAL_TARGET",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "step_range_reaction_buy",
+      "strategy_id": "step_range_reaction",
+      "direction": "buy",
+      "failed_lifecycle_stage": "PLAN_REJECTED",
+      "blocker_code": "NO_STRUCTURAL_TARGET",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "step_range_reaction_sell",
+      "strategy_id": "step_range_reaction",
+      "direction": "sell",
+      "failed_lifecycle_stage": "PLAN_REJECTED",
+      "blocker_code": "NO_STRUCTURAL_TARGET",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "step_structure_pullback_buy",
+      "strategy_id": "step_structure_pullback",
+      "direction": "buy",
+      "failed_lifecycle_stage": "PLAN_REJECTED",
+      "blocker_code": "NO_STRUCTURAL_TARGET",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "step_structure_pullback_sell",
+      "strategy_id": "step_structure_pullback",
+      "direction": "sell",
+      "failed_lifecycle_stage": "PLAN_REJECTED",
+      "blocker_code": "NO_STRUCTURAL_TARGET",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "step_breakout_and_retest_buy",
+      "strategy_id": "step_breakout_and_retest",
+      "direction": "buy",
+      "failed_lifecycle_stage": "PLAN_REJECTED",
+      "blocker_code": "NO_STRUCTURAL_TARGET",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "step_breakout_and_retest_sell",
+      "strategy_id": "step_breakout_and_retest",
+      "direction": "sell",
+      "failed_lifecycle_stage": "PLAN_REJECTED",
+      "blocker_code": "NO_STRUCTURAL_TARGET",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": []
+    },
+    {
+      "fixture_id": "boom_spike_state",
+      "strategy_id": "boom_crash_spike_state",
+      "direction": "buy",
+      "failed_lifecycle_stage": "NO_CONTEXT",
+      "blocker_code": "strategy_reachability",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": [
+        {
+          "code": "OWNER_MISMATCH",
+          "message": "Selected model, decision owner, and overlay owner must match.",
+          "blocking": true
+        }
+      ]
+    },
+    {
+      "fixture_id": "crash_spike_state",
+      "strategy_id": "boom_crash_spike_state",
+      "direction": "sell",
+      "failed_lifecycle_stage": "NO_CONTEXT",
+      "blocker_code": "strategy_reachability",
+      "target_trace": null,
+      "entry_trace": null,
+      "stop_trace": null,
+      "plan_invariant_violations": [
+        {
+          "code": "OWNER_MISMATCH",
+          "message": "Selected model, decision owner, and overlay owner must match.",
+          "blocking": true
+        }
+      ]
+    }
+  ]
+}

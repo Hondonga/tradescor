@@ -1,0 +1,3 @@
+from analysis.derived_pullback_zone_engine import detect_pullback,select_m15_pullback_zone
+def evaluate_step_pullback(candles,direction,atr,current_price,config=None):
+    cfg=config or {};pullback=detect_pullback(candles,direction,atr,{"minimum_pullback_atr":cfg.get("minimum_pullback_atr",.2),"maximum_pullback_atr":cfg.get("maximum_pullback_atr",1.25),"minimum_pullback_percentage":.1,"maximum_pullback_percentage":.8});zone=select_m15_pullback_zone(candles,direction,pullback,atr,current_price,{"minimum_zone_quality":.6,"maximum_zone_touches":2,"maximum_pullback_atr":cfg.get("maximum_pullback_atr",1.25)});return {"pullback":pullback,"zone":zone}

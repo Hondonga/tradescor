@@ -1,0 +1,1 @@
+"""Derived Index research strategies."""

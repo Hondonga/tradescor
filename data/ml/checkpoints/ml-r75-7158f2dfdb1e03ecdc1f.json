@@ -1,0 +1,8 @@
+{
+  "checkpoint_hash": "1d30f9b2424a90653c471d308b737bd729e44d5c05b5051841d142a6021e58e8",
+  "config_hash": "6965888036ba34d7b8bbd5cc1946145c0cfd7ea96e613360d8aea13c4824a582",
+  "dataset_id": "ml-r75-7158f2dfdb1e03ecdc1f",
+  "decision_time": "2026-07-19 22:10:00+00:00",
+  "processed_candles": 201,
+  "snapshot_ids": []
+}

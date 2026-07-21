@@ -1,0 +1,66 @@
+{
+  "browser": "Google Chrome",
+  "base_url": "http://127.0.0.1:5000",
+  "symbol_switch_matrix": [
+    {
+      "symbol_id": "twelve_data:GBP/USD",
+      "display_name": "GBP/USD",
+      "passed": true
+    },
+    {
+      "symbol_id": "twelve_data:EUR/USD",
+      "display_name": "EUR/USD",
+      "passed": true
+    },
+    {
+      "symbol_id": "twelve_data:USD/JPY",
+      "display_name": "USD/JPY",
+      "passed": true
+    },
+    {
+      "symbol_id": "twelve_data:USD/CAD",
+      "display_name": "USD/CAD",
+      "passed": true
+    },
+    {
+      "symbol_id": "deriv:R_75",
+      "display_name": "Volatility 75 Index",
+      "passed": true
+    },
+    {
+      "symbol_id": "deriv:JD75",
+      "display_name": "Jump 75 Index",
+      "passed": true
+    },
+    {
+      "symbol_id": "deriv:stpRNG",
+      "display_name": "Step Index 100",
+      "passed": true
+    },
+    {
+      "symbol_id": "deriv:BOOM500",
+      "display_name": "Boom 500 Index",
+      "passed": true
+    },
+    {
+      "symbol_id": "deriv:CRASH500",
+      "display_name": "Crash 500 Index",
+      "passed": true
+    }
+  ],
+  "workspace": {
+    "symbol_id": "deriv:R_75",
+    "current_price": "50585.1933",
+    "active_setup": "vsp-setup-9a40fc7d2caf672fc941",
+    "lifecycle": "Waiting For Pullback",
+    "drawing_count_default": 1,
+    "drawing_count_advanced": 2,
+    "drawing_labels_default": [
+      "Decision-time Current"
+    ],
+    "previous_setup_hidden_by_default": true,
+    "model_switch_cleared_decision": true
+  },
+  "console_errors": [],
+  "passed": true
+}

@@ -1,0 +1,3 @@
+def classify_derived_evidence(filled_trade_count,out_of_sample_available=False,config=None):
+    cfg=config or {};early=int(cfg.get("early_samples",30));moderate=int(cfg.get("moderate_samples",100));strong=int(cfg.get("stronger_samples",250));n=int(filled_trade_count);label="STRONGER" if n>=strong else "MODERATE" if n>=moderate else "EARLY" if n>=early else "INSUFFICIENT"
+    return {"sample_size":n,"filled_sample_size":n,"filled_trade_count":n,"evidence_label":label,"out_of_sample_available":bool(out_of_sample_available),"eligible_for_router_ranking":bool(out_of_sample_available and label in {"MODERATE","STRONGER"})}

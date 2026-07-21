@@ -1,0 +1,2 @@
+def test_chart_and_panel_read_backend_spike_strategy_contract():
+    engine=open("analysis/derived_engine.py",encoding="utf-8").read();js=open("static/app.js",encoding="utf-8").read();html=open("templates/index.html",encoding="utf-8").read();assert '"trade_chart":build_derived_trade_chart(strategy,current)' in engine and "derived_index?.contract?.strategy_result" in js and "analysis.decision?.trade_chart" in js and 'value="boom_crash_spike_state"' in html

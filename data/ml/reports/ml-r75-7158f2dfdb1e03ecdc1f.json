@@ -1,0 +1,1187 @@
+{
+  "ambiguous_outcome_count": 0,
+  "constant_features": [
+    "target_consumed"
+  ],
+  "direction_balance": {
+    "buy": 3,
+    "sell": 3
+  },
+  "feature_distributions": {
+    "h1_active_leg_age": {
+      "max": 1.0,
+      "median": 0.5,
+      "min": 0.0
+    },
+    "h1_active_leg_direction": {
+      "max": 1.0,
+      "median": 0.0,
+      "min": -1.0
+    },
+    "h1_active_leg_distance_atr": {
+      "max": 0.6525538818291402,
+      "median": 0.34486963015598915,
+      "min": 0.18177157963083707
+    },
+    "h1_atr": {
+      "max": 822.2635428571427,
+      "median": 781.4283178571422,
+      "min": 770.0714285714275
+    },
+    "h1_directional_efficiency": {
+      "max": 0.20856770997464041,
+      "median": 0.16243231621974227,
+      "min": 0.0033307283897118633
+    },
+    "h1_external_structure": {
+      "max": 1.0,
+      "median": 0.0,
+      "min": -1.0
+    },
+    "h1_latest_bos_age": {
+      "max": 1.0,
+      "median": 0.5,
+      "min": 0.0
+    },
+    "h1_latest_bos_direction": {
+      "max": 1.0,
+      "median": 0.0,
+      "min": -1.0
+    },
+    "h1_overlap_ratio": {
+      "max": 0.5872187511370619,
+      "median": 0.5633921511026514,
+      "min": 0.534901462154058
+    },
+    "h1_swing_high_distance_atr": {
+      "max": 2.1665697275228757,
+      "median": 1.4148866251559329,
+      "min": 0.3038175308412926
+    },
+    "h1_swing_low_distance_atr": {
+      "max": 3.6026535942862523,
+      "median": 2.435623112617016,
+      "min": 1.490040158831253
+    },
+    "m15_condition": {
+      "max": 2.0,
+      "median": 1.5,
+      "min": 1.0
+    },
+    "m15_displacement_strength": {
+      "max": 1.856710825151169,
+      "median": 0.8934647448500974,
+      "min": 0.011084507537836952
+    },
+    "m15_location_valid": {
+      "max": 1.0,
+      "median": 0.5,
+      "min": 0.0
+    },
+    "m15_premium_discount": {
+      "max": 0.8446891166171248,
+      "median": 0.2662848762346281,
+      "min": 0.14494968445307457
+    },
+    "m15_pullback_depth_atr": {
+      "max": 2.617211061068161,
+      "median": 0.7019522544674038,
+      "min": 0.07168755579712766
+    },
+    "m15_pullback_depth_pct": {
+      "max": 0.6454946366705868,
+      "median": 0.1692611425992328,
+      "min": 0.010758250303239285
+    },
+    "m15_range_width_atr": {
+      "max": 6.663495808007245,
+      "median": 4.1547643681970055,
+      "min": 3.8409146928454425
+    },
+    "m15_setup_distance_atr": {
+      "max": 2.078882796263815,
+      "median": 0.3515119368461349,
+      "min": 0.0
+    },
+    "m15_swing_high_distance_atr": {
+      "max": 5.189883924922798,
+      "median": 3.075797801978077,
+      "min": 0.5965358539440907
+    },
+    "m15_swing_low_distance_atr": {
+      "max": 3.244378838901352,
+      "median": 1.3445288341572292,
+      "min": 0.20857905033496107
+    },
+    "m5_bos": {
+      "max": 1.0,
+      "median": 0.5,
+      "min": 0.0
+    },
+    "m5_chase_distance_atr": {
+      "max": 0.9634658638902727,
+      "median": 0.6171586374935107,
+      "min": 0.27085141109674876
+    },
+    "m5_close_location": {
+      "max": 0.742814555871139,
+      "median": 0.19914675391031356,
+      "min": 0.00361880977330132
+    },
+    "m5_confirmation_age": {
+      "max": 9.0,
+      "median": 5.0,
+      "min": 4.0
+    },
+    "m5_directional_close_count": {
+      "max": 8.0,
+      "median": 6.5,
+      "min": 3.0
+    },
+    "m5_displacement_body_atr": {
+      "max": 1.5438717734475274,
+      "median": 0.7079876686819637,
+      "min": 0.04064502579793375
+    },
+    "m5_displacement_range_atr": {
+      "max": 1.6616622113289548,
+      "median": 0.9808368868274545,
+      "min": 0.5047300577881019
+    },
+    "m5_entry_distance_atr": {
+      "max": 0.9634658638902727,
+      "median": 0.6171586374935107,
+      "min": 0.27085141109674876
+    },
+    "m5_mss": {
+      "max": 1.0,
+      "median": 0.5,
+      "min": 0.0
+    },
+    "m5_retracement_depth": {
+      "max": 0.1018470453469127,
+      "median": -1.133614553630417,
+      "min": -6.741351515770534
+    },
+    "m5_stop_distance_atr": {
+      "max": 6.682301121922563,
+      "median": 4.849914419317729,
+      "min": 3.017527716712894
+    },
+    "m5_structure_break_distance_atr": {
+      "max": 4.297201601664366,
+      "median": 0.7527048990937993,
+      "min": 0.14759043205744707
+    },
+    "m5_target_distance_atr": {
+      "max": 10.212140643314308,
+      "median": 10.212140643314308,
+      "min": 10.212140643314308
+    },
+    "m5_target_timeframe": {
+      "max": 1.0,
+      "median": 0.0,
+      "min": 0.0
+    },
+    "m5_tp1_rr": {
+      "max": 1.5282371232585483,
+      "median": 1.5282371232585483,
+      "min": 1.5282371232585483
+    },
+    "returns_10": {
+      "max": 0.0035672124671755068,
+      "median": -0.00351776768195311,
+      "min": -0.0161183261034048
+    },
+    "returns_20": {
+      "max": 0.009210774217018436,
+      "median": -0.007829801607008968,
+      "min": -0.01764529166763895
+    },
+    "returns_5": {
+      "max": 0.004378332229157511,
+      "median": -0.0017985450485162868,
+      "min": -0.011728011919419634
+    },
+    "returns_50": {
+      "max": 0.010782718926954482,
+      "median": -0.005707886369526849,
+      "min": -0.028040261695462143
+    },
+    "rolling_directional_efficiency": {
+      "max": 0.4750963615855848,
+      "median": 0.2569053524588808,
+      "min": 0.1618801082876821
+    },
+    "rolling_volatility": {
+      "max": 0.0028151789218302265,
+      "median": 0.0023999342072449897,
+      "min": 0.0019020272270260442
+    },
+    "target_age": {
+      "max": 207.0,
+      "median": 207.0,
+      "min": 207.0
+    },
+    "target_consumed": {
+      "max": 0.0,
+      "median": 0.0,
+      "min": 0.0
+    }
+  },
+  "highly_correlated_features": [
+    {
+      "correlation": 1.0,
+      "left": "h1_external_structure",
+      "right": "h1_active_leg_direction"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_external_structure",
+      "right": "h1_active_leg_age"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_external_structure",
+      "right": "h1_latest_bos_direction"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_external_structure",
+      "right": "h1_latest_bos_age"
+    },
+    {
+      "correlation": 0.998,
+      "left": "h1_external_structure",
+      "right": "h1_overlap_ratio"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_external_structure",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_external_structure",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_external_structure",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9563,
+      "left": "h1_external_structure",
+      "right": "returns_50"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_active_leg_direction",
+      "right": "h1_active_leg_age"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_active_leg_direction",
+      "right": "h1_latest_bos_direction"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_active_leg_direction",
+      "right": "h1_latest_bos_age"
+    },
+    {
+      "correlation": 0.998,
+      "left": "h1_active_leg_direction",
+      "right": "h1_overlap_ratio"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_active_leg_direction",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_active_leg_direction",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_active_leg_direction",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9563,
+      "left": "h1_active_leg_direction",
+      "right": "returns_50"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_active_leg_distance_atr",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_active_leg_distance_atr",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_active_leg_distance_atr",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_active_leg_age",
+      "right": "h1_latest_bos_direction"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_active_leg_age",
+      "right": "h1_latest_bos_age"
+    },
+    {
+      "correlation": 0.998,
+      "left": "h1_active_leg_age",
+      "right": "h1_overlap_ratio"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_active_leg_age",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_active_leg_age",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_active_leg_age",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9563,
+      "left": "h1_active_leg_age",
+      "right": "returns_50"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_latest_bos_direction",
+      "right": "h1_latest_bos_age"
+    },
+    {
+      "correlation": 0.998,
+      "left": "h1_latest_bos_direction",
+      "right": "h1_overlap_ratio"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_latest_bos_direction",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_latest_bos_direction",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_latest_bos_direction",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9563,
+      "left": "h1_latest_bos_direction",
+      "right": "returns_50"
+    },
+    {
+      "correlation": 0.998,
+      "left": "h1_latest_bos_age",
+      "right": "h1_overlap_ratio"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_latest_bos_age",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_latest_bos_age",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_latest_bos_age",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9563,
+      "left": "h1_latest_bos_age",
+      "right": "returns_50"
+    },
+    {
+      "correlation": 0.998,
+      "left": "h1_swing_high_distance_atr",
+      "right": "h1_swing_low_distance_atr"
+    },
+    {
+      "correlation": 0.9956,
+      "left": "h1_swing_high_distance_atr",
+      "right": "m15_swing_high_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_swing_high_distance_atr",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_swing_high_distance_atr",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_swing_high_distance_atr",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9991,
+      "left": "h1_swing_low_distance_atr",
+      "right": "m15_swing_high_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_swing_low_distance_atr",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_swing_low_distance_atr",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_swing_low_distance_atr",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9998,
+      "left": "h1_atr",
+      "right": "h1_directional_efficiency"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_atr",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_atr",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_atr",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_directional_efficiency",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_directional_efficiency",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_directional_efficiency",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9502,
+      "left": "h1_directional_efficiency",
+      "right": "returns_50"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_overlap_ratio",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_overlap_ratio",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "h1_overlap_ratio",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9699,
+      "left": "h1_overlap_ratio",
+      "right": "returns_50"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_condition",
+      "right": "m15_location_valid"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_condition",
+      "right": "m5_bos"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_condition",
+      "right": "m5_mss"
+    },
+    {
+      "correlation": 0.9997,
+      "left": "m15_pullback_depth_pct",
+      "right": "m15_pullback_depth_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_pullback_depth_pct",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_pullback_depth_pct",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_pullback_depth_pct",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_pullback_depth_atr",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_pullback_depth_atr",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_pullback_depth_atr",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9523,
+      "left": "m15_pullback_depth_atr",
+      "right": "m5_confirmation_age"
+    },
+    {
+      "correlation": 0.9994,
+      "left": "m15_setup_distance_atr",
+      "right": "m5_displacement_body_atr"
+    },
+    {
+      "correlation": 0.9995,
+      "left": "m15_setup_distance_atr",
+      "right": "m5_displacement_range_atr"
+    },
+    {
+      "correlation": 0.9916,
+      "left": "m15_setup_distance_atr",
+      "right": "m5_close_location"
+    },
+    {
+      "correlation": 0.9965,
+      "left": "m15_setup_distance_atr",
+      "right": "m5_directional_close_count"
+    },
+    {
+      "correlation": 0.9997,
+      "left": "m15_setup_distance_atr",
+      "right": "m5_structure_break_distance_atr"
+    },
+    {
+      "correlation": 0.9999,
+      "left": "m15_setup_distance_atr",
+      "right": "m5_retracement_depth"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_setup_distance_atr",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_setup_distance_atr",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_setup_distance_atr",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9995,
+      "left": "m15_setup_distance_atr",
+      "right": "m5_confirmation_age"
+    },
+    {
+      "correlation": 0.9867,
+      "left": "m15_setup_distance_atr",
+      "right": "returns_5"
+    },
+    {
+      "correlation": 0.9989,
+      "left": "m15_setup_distance_atr",
+      "right": "rolling_volatility"
+    },
+    {
+      "correlation": 0.9571,
+      "left": "m15_premium_discount",
+      "right": "m15_swing_low_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_premium_discount",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_premium_discount",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_premium_discount",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_swing_high_distance_atr",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_swing_high_distance_atr",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_swing_high_distance_atr",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_swing_low_distance_atr",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_swing_low_distance_atr",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_swing_low_distance_atr",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9856,
+      "left": "m15_swing_low_distance_atr",
+      "right": "returns_20"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_displacement_strength",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_displacement_strength",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_displacement_strength",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_range_width_atr",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_range_width_atr",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_range_width_atr",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_location_valid",
+      "right": "m5_bos"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m15_location_valid",
+      "right": "m5_mss"
+    },
+    {
+      "correlation": 0.9838,
+      "left": "m5_displacement_body_atr",
+      "right": "m5_displacement_range_atr"
+    },
+    {
+      "correlation": 0.9984,
+      "left": "m5_displacement_body_atr",
+      "right": "m5_structure_break_distance_atr"
+    },
+    {
+      "correlation": 0.9997,
+      "left": "m5_displacement_body_atr",
+      "right": "m5_retracement_depth"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_displacement_body_atr",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_displacement_body_atr",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_displacement_body_atr",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_displacement_body_atr",
+      "right": "m5_confirmation_age"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_displacement_range_atr",
+      "right": "m5_structure_break_distance_atr"
+    },
+    {
+      "correlation": 0.9991,
+      "left": "m5_displacement_range_atr",
+      "right": "m5_retracement_depth"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_displacement_range_atr",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_displacement_range_atr",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_displacement_range_atr",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.998,
+      "left": "m5_displacement_range_atr",
+      "right": "m5_confirmation_age"
+    },
+    {
+      "correlation": 0.9883,
+      "left": "m5_close_location",
+      "right": "m5_structure_break_distance_atr"
+    },
+    {
+      "correlation": 0.993,
+      "left": "m5_close_location",
+      "right": "m5_retracement_depth"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_close_location",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_close_location",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_close_location",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9952,
+      "left": "m5_close_location",
+      "right": "m5_confirmation_age"
+    },
+    {
+      "correlation": 0.9943,
+      "left": "m5_directional_close_count",
+      "right": "m5_structure_break_distance_atr"
+    },
+    {
+      "correlation": 0.9974,
+      "left": "m5_directional_close_count",
+      "right": "m5_retracement_depth"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_directional_close_count",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_directional_close_count",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_directional_close_count",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9986,
+      "left": "m5_directional_close_count",
+      "right": "m5_confirmation_age"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_bos",
+      "right": "m5_mss"
+    },
+    {
+      "correlation": 0.9994,
+      "left": "m5_structure_break_distance_atr",
+      "right": "m5_retracement_depth"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_structure_break_distance_atr",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_structure_break_distance_atr",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_structure_break_distance_atr",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9985,
+      "left": "m5_structure_break_distance_atr",
+      "right": "m5_confirmation_age"
+    },
+    {
+      "correlation": 0.9827,
+      "left": "m5_structure_break_distance_atr",
+      "right": "returns_5"
+    },
+    {
+      "correlation": 0.9976,
+      "left": "m5_structure_break_distance_atr",
+      "right": "rolling_volatility"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_retracement_depth",
+      "right": "m5_entry_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_retracement_depth",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_retracement_depth",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 0.9998,
+      "left": "m5_retracement_depth",
+      "right": "m5_confirmation_age"
+    },
+    {
+      "correlation": 0.9885,
+      "left": "m5_retracement_depth",
+      "right": "returns_5"
+    },
+    {
+      "correlation": 0.9994,
+      "left": "m5_retracement_depth",
+      "right": "rolling_volatility"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_entry_distance_atr",
+      "right": "m5_stop_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_entry_distance_atr",
+      "right": "m5_target_timeframe"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_entry_distance_atr",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_entry_distance_atr",
+      "right": "m5_confirmation_age"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_entry_distance_atr",
+      "right": "returns_5"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_entry_distance_atr",
+      "right": "returns_10"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_entry_distance_atr",
+      "right": "returns_20"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_entry_distance_atr",
+      "right": "returns_50"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_entry_distance_atr",
+      "right": "rolling_volatility"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_entry_distance_atr",
+      "right": "rolling_directional_efficiency"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_stop_distance_atr",
+      "right": "m5_target_timeframe"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_stop_distance_atr",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_stop_distance_atr",
+      "right": "m5_confirmation_age"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_stop_distance_atr",
+      "right": "returns_5"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_stop_distance_atr",
+      "right": "returns_10"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_stop_distance_atr",
+      "right": "returns_20"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_stop_distance_atr",
+      "right": "returns_50"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_stop_distance_atr",
+      "right": "rolling_volatility"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_stop_distance_atr",
+      "right": "rolling_directional_efficiency"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_target_timeframe",
+      "right": "m5_chase_distance_atr"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_chase_distance_atr",
+      "right": "m5_confirmation_age"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_chase_distance_atr",
+      "right": "returns_5"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_chase_distance_atr",
+      "right": "returns_10"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_chase_distance_atr",
+      "right": "returns_20"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_chase_distance_atr",
+      "right": "returns_50"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_chase_distance_atr",
+      "right": "rolling_volatility"
+    },
+    {
+      "correlation": 1.0,
+      "left": "m5_chase_distance_atr",
+      "right": "rolling_directional_efficiency"
+    },
+    {
+      "correlation": 0.9913,
+      "left": "m5_confirmation_age",
+      "right": "returns_5"
+    },
+    {
+      "correlation": 0.9999,
+      "left": "m5_confirmation_age",
+      "right": "rolling_volatility"
+    }
+  ],
+  "leakage_violations": 0,
+  "missing_value_percentages": {
+    "h1_active_leg_age": 0.0,
+    "h1_active_leg_direction": 0.0,
+    "h1_active_leg_distance_atr": 0.0,
+    "h1_atr": 0.0,
+    "h1_directional_efficiency": 0.0,
+    "h1_external_structure": 0.0,
+    "h1_latest_bos_age": 0.0,
+    "h1_latest_bos_direction": 0.0,
+    "h1_overlap_ratio": 0.0,
+    "h1_swing_high_distance_atr": 0.0,
+    "h1_swing_low_distance_atr": 0.0,
+    "m15_condition": 0.0,
+    "m15_displacement_strength": 0.0,
+    "m15_location_valid": 0.0,
+    "m15_premium_discount": 0.0,
+    "m15_pullback_depth_atr": 0.0,
+    "m15_pullback_depth_pct": 0.0,
+    "m15_range_width_atr": 0.0,
+    "m15_setup_distance_atr": 50.0,
+    "m15_swing_high_distance_atr": 0.0,
+    "m15_swing_low_distance_atr": 0.0,
+    "m5_bos": 0.0,
+    "m5_chase_distance_atr": 66.667,
+    "m5_close_location": 0.0,
+    "m5_confirmation_age": 50.0,
+    "m5_directional_close_count": 0.0,
+    "m5_displacement_body_atr": 0.0,
+    "m5_displacement_range_atr": 0.0,
+    "m5_entry_distance_atr": 66.667,
+    "m5_mss": 0.0,
+    "m5_retracement_depth": 50.0,
+    "m5_stop_distance_atr": 66.667,
+    "m5_structure_break_distance_atr": 50.0,
+    "m5_target_distance_atr": 83.333,
+    "m5_target_timeframe": 0.0,
+    "m5_tp1_rr": 83.333,
+    "returns_10": 0.0,
+    "returns_20": 0.0,
+    "returns_5": 0.0,
+    "returns_50": 0.0,
+    "rolling_directional_efficiency": 0.0,
+    "rolling_volatility": 0.0,
+    "target_age": 83.333,
+    "target_consumed": 0.0,
+    "target_source": 0.0
+  },
+  "model_accuracy": null,
+  "outcome_balance": {
+    "ENTRY_FILLED_TP1": 1,
+    "UNRESOLVED": 5
+  },
+  "outcomes_by_group": {
+    "direction": {
+      "buy::UNRESOLVED": 3,
+      "sell::ENTRY_FILLED_TP1": 1,
+      "sell::UNRESOLVED": 2
+    },
+    "quality_grade": {
+      "None::ENTRY_FILLED_TP1": 1,
+      "None::UNRESOLVED": 5
+    },
+    "stage": {
+      "PLAN_VALIDATION::UNRESOLVED": 1,
+      "TRADE_READY::ENTRY_FILLED_TP1": 1,
+      "WAITING_FOR_ENTRY::UNRESOLVED": 1,
+      "WAITING_FOR_PULLBACK::UNRESOLVED": 3
+    },
+    "structure_state": {
+      "bearish::ENTRY_FILLED_TP1": 1,
+      "bearish::UNRESOLVED": 2,
+      "bullish::UNRESOLVED": 3
+    },
+    "volatility_regime": {
+      "normal::ENTRY_FILLED_TP1": 1,
+      "normal::UNRESOLVED": 5
+    }
+  },
+  "snapshots_per_setup": {
+    "maximum": 2,
+    "mean": 1.2,
+    "minimum": 1
+  },
+  "splits": {
+    "test": 2,
+    "train": 3,
+    "validation": 1
+  },
+  "stage_balance": {
+    "PLAN_VALIDATION": 1,
+    "TRADE_READY": 1,
+    "WAITING_FOR_ENTRY": 1,
+    "WAITING_FOR_PULLBACK": 3
+  },
+  "total_candles": 1440,
+  "total_snapshots": 6,
+  "unique_setups": 5,
+  "unresolved_label_count": 5,
+  "validation": {
+    "leakage_violations": 0,
+    "maximum_snapshots_per_setup": 2,
+    "rows": 6,
+    "unique_setups": 5,
+    "valid": true,
+    "validation_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "violations": []
+  }
+}

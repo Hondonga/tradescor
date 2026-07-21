@@ -1,0 +1,41 @@
+data/derived_paper_testing.db
+data/derived_paper_testing.db-shm
+data/derived_paper_testing.db-wal
+data/derived_replay.db
+data/derived_replay.db-shm
+data/derived_replay.db-wal
+data/replay_datasets/
+data/strategy_gate_diagnostics.db
+data/strategy_gate_diagnostics.db-shm
+data/strategy_gate_diagnostics.db-wal
+data/smc_acceptance.db
+data/smc_acceptance.db-shm
+data/smc_acceptance.db-wal
+data/smc_matrix/
+
+# --- added for Phase 1 stabilization baseline (2026-07-20) ---
+# Secrets
+.env
+*.env.local
+
+# Python
+__pycache__/
+**/__pycache__/
+*.pyc
+.pytest_cache/
+**/.pytest_cache/
+.venv/
+venv/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/storybook-static/
+frontend/.storybook/dist/
+node_modules/
+
+# OS
+.DS_Store
+
+# Stabilization backups are checksummed copies, not source of truth for git
+data/stabilization/backups/

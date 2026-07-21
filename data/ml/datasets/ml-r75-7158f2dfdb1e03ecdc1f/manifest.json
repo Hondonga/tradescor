@@ -1,0 +1,51 @@
+{
+  "application_version": "tradescor-smc-ml-foundation-v1",
+  "buy_setups": 2,
+  "candle_checksum": "5193cb61a4cf9f8dac248d20ae3d5b34be7214f9db9e5ce6ffe4242ffb9bf154",
+  "checksum": "d4711c8254801fdd67a6878b8f235eacebafa1426648e3ccf829f119ec589568",
+  "config_hash": "6965888036ba34d7b8bbd5cc1946145c0cfd7ea96e613360d8aea13c4824a582",
+  "dataset_id": "ml-r75-7158f2dfdb1e03ecdc1f",
+  "engine_version": "volatility_structure_pullback_engine-v1",
+  "feature_schema_hash": "a1fed054f38cf3f064d820df2e0abbdfe40992bbd8e129c680217e2e39cbaac1",
+  "leakage_violations": 0,
+  "period": {
+    "days": 1,
+    "end": "2026-07-20T05:30:00+00:00",
+    "selection": "fixed_trailing_calendar_period",
+    "start": "2026-07-19T05:30:00+00:00"
+  },
+  "resolved_rows": 1,
+  "rows": 6,
+  "schema_version": "smc-ml-features-v1",
+  "sell_setups": 3,
+  "setups": 5,
+  "source": "real_deriv_public_m1",
+  "source_dataset_id": "dataset-b47162fd357c3faf136c14ee",
+  "splits": {
+    "test": {
+      "end": "2026-07-20T04:00:00+00:00",
+      "rows": 2,
+      "shuffled": false,
+      "start": "2026-07-20T02:15:00+00:00",
+      "untouched": true
+    },
+    "train": {
+      "end": "2026-07-20T00:50:00+00:00",
+      "rows": 3,
+      "shuffled": false,
+      "start": "2026-07-20T00:00:00+00:00",
+      "untouched": false
+    },
+    "validation": {
+      "end": "2026-07-20T02:00:00+00:00",
+      "rows": 1,
+      "shuffled": false,
+      "start": "2026-07-20T02:00:00+00:00",
+      "untouched": false
+    }
+  },
+  "strategy": "volatility_structure_pullback",
+  "symbol": "R_75",
+  "trade_ready_rows": 1,
+  "training_allowed": false
+}

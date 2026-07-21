@@ -1,0 +1,145 @@
+[
+  {
+    "module": "analysis/global_overlay_contract.py",
+    "market_family": "All",
+    "strategy": "All current and future strategies",
+    "existing_overlay_type": "Multiple engine-specific row and trade-chart shapes",
+    "new_normalized_type": "Global overlay contract",
+    "category": "context|developing|actionable|historical",
+    "ownership_source": "decision.ownership decision/overlay owner plus selected strategy",
+    "lifecycle_behavior": "Sole idempotent lifecycle, ownership, readiness, clustering and archival boundary",
+    "precision_behavior": "analysis.instrument_precision registry"
+  },
+  {
+    "module": "analysis/decision_engine.py",
+    "market_family": "Forex, crypto, traditional index",
+    "strategy": "Authoritative top-down router",
+    "existing_overlay_type": "decision overlays and trade_chart compatibility projection",
+    "new_normalized_type": "Backend evidence consumed by market decision normalizer",
+    "category": "context|developing|actionable",
+    "ownership_source": "normalized decision owner",
+    "lifecycle_behavior": "Legacy fields are mirrors; global finalizer owns visible lifecycle",
+    "precision_behavior": "instrument registry at response boundary"
+  },
+  {
+    "module": "analysis/forex_overlay_contract.py",
+    "market_family": "Forex ICT",
+    "strategy": "ict_2022",
+    "existing_overlay_type": "ICT context, setup zone, confirmation and plan rows",
+    "new_normalized_type": "Global context/developing/actionable rows",
+    "category": "mixed, normalized centrally",
+    "ownership_source": "decision.ownership",
+    "lifecycle_behavior": "Terminal setup removed and archived",
+    "precision_behavior": "5 decimals, or 3 for JPY, from registry"
+  },
+  {
+    "module": "analysis/forex_decision_normalizer.py",
+    "market_family": "Forex ICT",
+    "strategy": "ict_2022",
+    "existing_overlay_type": "trade_chart compatibility fields",
+    "new_normalized_type": "Non-visual compatibility mirror",
+    "category": "not rendered directly",
+    "ownership_source": "authoritative strategy result",
+    "lifecycle_behavior": "Global contract blocks stale or terminal plans",
+    "precision_behavior": "instrument registry"
+  },
+  {
+    "module": "analysis/market_decision_normalizer.py",
+    "market_family": "Forex, crypto, traditional index",
+    "strategy": "Assigned market strategy",
+    "existing_overlay_type": "strategy-neutral product rows",
+    "new_normalized_type": "Global overlay list",
+    "category": "context|developing|actionable|historical",
+    "ownership_source": "selected strategy and decision owner",
+    "lifecycle_behavior": "Calls global finalizer before leaving analysis boundary",
+    "precision_behavior": "instrument registry"
+  },
+  {
+    "module": "analysis/smc/smc_normalizer.py",
+    "market_family": "Volatility, Jump, Step, Boom/Crash",
+    "strategy": "Family SMC adapters",
+    "existing_overlay_type": "SMC entities and trade_chart",
+    "new_normalized_type": "Evidence input only",
+    "category": "family-specific context evidence",
+    "ownership_source": "SMC router",
+    "lifecycle_behavior": "No direct frontend rendering",
+    "precision_behavior": "provider tick metadata at product boundary"
+  },
+  {
+    "module": "analysis/smc/smc_product_contract.py",
+    "market_family": "All Deriv SMC families",
+    "strategy": "volatility_smc|jump_smc|step_smc family adapters",
+    "existing_overlay_type": "structural range, objective, entry area, sweep and plan",
+    "new_normalized_type": "Global range/objective/setup/context/actionable rows",
+    "category": "mixed, normalized centrally",
+    "ownership_source": "strategy identity plus family-adapter decision owner",
+    "lifecycle_behavior": "Stable developing IDs; terminal setup archived",
+    "precision_behavior": "Deriv provider pip/tick metadata"
+  },
+  {
+    "module": "analysis/volatility_structure_pullback_engine.py",
+    "market_family": "Deriv Volatility",
+    "strategy": "volatility_structure_pullback",
+    "existing_overlay_type": "H1/M15/M5 context, projected geometry and ready plan",
+    "new_normalized_type": "Global context/developing/actionable rows",
+    "category": "context|developing|actionable",
+    "ownership_source": "volatility_structure_pullback",
+    "lifecycle_behavior": "Projected plan roles downgraded; actionables require TRADE_READY",
+    "precision_behavior": "provider tick supplied to registry"
+  },
+  {
+    "module": "analysis/derived_engine.py",
+    "market_family": "Volatility, Jump, Step, Boom/Crash and other Derived research",
+    "strategy": "Auto and manual family strategies",
+    "existing_overlay_type": "active_trade_plan, key_levels, range/event zones and trade_chart",
+    "new_normalized_type": "Family-adapted global product_contract",
+    "category": "context|developing|actionable|historical",
+    "ownership_source": "resolved strategy and family adapter",
+    "lifecycle_behavior": "Every branch now crosses the same global finalizer",
+    "precision_behavior": "Deriv provider pip/tick metadata"
+  },
+  {
+    "module": "analysis/volatility_latest_setup_search.py",
+    "market_family": "Deriv Volatility",
+    "strategy": "volatility_structure_pullback historical search",
+    "existing_overlay_type": "live-shaped setup inspection",
+    "new_normalized_type": "HISTORICAL_INSPECTION overlay mode",
+    "category": "decision-time context/setup/plan only",
+    "ownership_source": "frozen historical decision",
+    "lifecycle_behavior": "Never merged into LIVE",
+    "precision_behavior": "same instrument registry as live"
+  },
+  {
+    "module": "app.py",
+    "market_family": "All",
+    "strategy": "All API response paths",
+    "existing_overlay_type": "legacy response mirrors",
+    "new_normalized_type": "Final route safety pass over decision.overlays",
+    "category": "all",
+    "ownership_source": "final decision identity",
+    "lifecycle_behavior": "LIVE and REPLAY explicitly isolated before serialization and logging",
+    "precision_behavior": "registry metadata passed from unified market registry/query"
+  },
+  {
+    "module": "frontend/src/components/chart/market-chart.tsx",
+    "market_family": "All",
+    "strategy": "All",
+    "existing_overlay_type": "normalized decision overlays",
+    "new_normalized_type": "Sole active renderer",
+    "category": "toggle-filtered normalized categories",
+    "ownership_source": "strict decision/workspace/setup/mode identity",
+    "lifecycle_behavior": "Historical hidden by default; stale actionables suppressed",
+    "precision_behavior": "decision.precision drives scale and labels"
+  },
+  {
+    "module": "static/app.js",
+    "market_family": "Legacy fallback only",
+    "strategy": "Legacy dashboard",
+    "existing_overlay_type": "direct DOM drawing paths",
+    "new_normalized_type": "Retired from active application routing",
+    "category": "not active",
+    "ownership_source": "not applicable",
+    "lifecycle_behavior": "React dist is served for /, /markets, /workspace and /research",
+    "precision_behavior": "not part of active renderer"
+  }
+]

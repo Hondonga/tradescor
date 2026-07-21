@@ -1,0 +1,22 @@
+{
+  "symbol": "USD/CAD",
+  "timeframe": "M15",
+  "input": {
+    "h1_structure": "Overlapping Transition",
+    "m15_structure": "Higher Highs / Higher Lows",
+    "scenario_state": "NO_ICT_CONTEXT",
+    "m5_confirmation": null,
+    "entry": null,
+    "stop": null,
+    "trade_plan_valid": false
+  },
+  "expected": {
+    "status": "WAITING FOR ICT CONTEXT",
+    "direction": null,
+    "entry": null,
+    "stop": null,
+    "tp1": null,
+    "tp2": null,
+    "actionable_overlays": 0
+  }
+}

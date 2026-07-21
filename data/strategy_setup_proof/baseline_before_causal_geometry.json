@@ -1,0 +1,2919 @@
+{
+  "strategies": [
+    {
+      "strategy_id": "volatility_structure_pullback",
+      "family": "VOLATILITY",
+      "directions_required": [
+        "buy",
+        "sell"
+      ],
+      "directions_reached": [
+        "buy",
+        "sell"
+      ],
+      "fixtures_run": 2,
+      "trade_ready_count": 2,
+      "paper_registered_count": 2,
+      "resolved_count": 2,
+      "failed_stage": null,
+      "reachable": true,
+      "status": "REACHABLE"
+    },
+    {
+      "strategy_id": "volatility_liquidity_reversal",
+      "family": "VOLATILITY",
+      "directions_required": [
+        "buy",
+        "sell"
+      ],
+      "directions_reached": [],
+      "fixtures_run": 2,
+      "trade_ready_count": 0,
+      "paper_registered_count": 0,
+      "resolved_count": 0,
+      "failed_stage": "UNREACHABLE_CODE_PATH",
+      "reachable": false,
+      "status": "NOT_PRODUCTION_SUPPORTED"
+    },
+    {
+      "strategy_id": "volatility_range_reaction",
+      "family": "VOLATILITY",
+      "directions_required": [
+        "buy",
+        "sell"
+      ],
+      "directions_reached": [],
+      "fixtures_run": 2,
+      "trade_ready_count": 0,
+      "paper_registered_count": 0,
+      "resolved_count": 0,
+      "failed_stage": "UNREACHABLE_CODE_PATH",
+      "reachable": false,
+      "status": "NOT_PRODUCTION_SUPPORTED"
+    },
+    {
+      "strategy_id": "volatility_breakout_and_retest",
+      "family": "VOLATILITY",
+      "directions_required": [
+        "buy",
+        "sell"
+      ],
+      "directions_reached": [],
+      "fixtures_run": 2,
+      "trade_ready_count": 0,
+      "paper_registered_count": 0,
+      "resolved_count": 0,
+      "failed_stage": "UNREACHABLE_CODE_PATH",
+      "reachable": false,
+      "status": "NOT_PRODUCTION_SUPPORTED"
+    },
+    {
+      "strategy_id": "jump_post_event_continuation",
+      "family": "JUMP",
+      "directions_required": [
+        "buy",
+        "sell"
+      ],
+      "directions_reached": [],
+      "fixtures_run": 2,
+      "trade_ready_count": 0,
+      "paper_registered_count": 0,
+      "resolved_count": 0,
+      "failed_stage": "TARGET_CREATION_FAILURE",
+      "reachable": false,
+      "status": "NOT_PRODUCTION_SUPPORTED"
+    },
+    {
+      "strategy_id": "jump_post_event_reversal",
+      "family": "JUMP",
+      "directions_required": [
+        "buy",
+        "sell"
+      ],
+      "directions_reached": [],
+      "fixtures_run": 2,
+      "trade_ready_count": 0,
+      "paper_registered_count": 0,
+      "resolved_count": 0,
+      "failed_stage": "TARGET_CREATION_FAILURE",
+      "reachable": false,
+      "status": "NOT_PRODUCTION_SUPPORTED"
+    },
+    {
+      "strategy_id": "step_range_reaction",
+      "family": "STEP",
+      "directions_required": [
+        "buy",
+        "sell"
+      ],
+      "directions_reached": [],
+      "fixtures_run": 2,
+      "trade_ready_count": 0,
+      "paper_registered_count": 0,
+      "resolved_count": 0,
+      "failed_stage": "TARGET_CREATION_FAILURE",
+      "reachable": false,
+      "status": "NOT_PRODUCTION_SUPPORTED"
+    },
+    {
+      "strategy_id": "step_structure_pullback",
+      "family": "STEP",
+      "directions_required": [
+        "buy",
+        "sell"
+      ],
+      "directions_reached": [],
+      "fixtures_run": 2,
+      "trade_ready_count": 0,
+      "paper_registered_count": 0,
+      "resolved_count": 0,
+      "failed_stage": "TARGET_CREATION_FAILURE",
+      "reachable": false,
+      "status": "NOT_PRODUCTION_SUPPORTED"
+    },
+    {
+      "strategy_id": "step_breakout_and_retest",
+      "family": "STEP",
+      "directions_required": [
+        "buy",
+        "sell"
+      ],
+      "directions_reached": [],
+      "fixtures_run": 2,
+      "trade_ready_count": 0,
+      "paper_registered_count": 0,
+      "resolved_count": 0,
+      "failed_stage": "TARGET_CREATION_FAILURE",
+      "reachable": false,
+      "status": "NOT_PRODUCTION_SUPPORTED"
+    },
+    {
+      "strategy_id": "boom_crash_spike_state",
+      "family": "BOOM_CRASH",
+      "directions_required": [
+        "buy",
+        "sell"
+      ],
+      "directions_reached": [],
+      "fixtures_run": 2,
+      "trade_ready_count": 0,
+      "paper_registered_count": 0,
+      "resolved_count": 0,
+      "failed_stage": "DIRECTIONAL_CONTEXT_ABSENT",
+      "reachable": false,
+      "status": "NOT_PRODUCTION_SUPPORTED"
+    }
+  ],
+  "generated_at": "2026-07-20T03:45:56.173008+00:00",
+  "pipeline": "analysis.derived_engine.analyze_derived_index",
+  "fixture_count": 20,
+  "deterministic_reachability_passed": true,
+  "real_history_validation": {
+    "run": false,
+    "reason": null
+  },
+  "fixtures": [
+    {
+      "strategy_id": "volatility_structure_pullback",
+      "direction": "buy",
+      "fixture_id": "volatility_structure_pullback_buy",
+      "transitions": [
+        {
+          "decision_time": "2026-01-31T15:40:00+00:00",
+          "stage": "DATA_LOADING",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "history",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-31T19:00:00+00:00",
+          "stage": "WAITING_FOR_PULLBACK",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "m15_pullback",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-31T23:05:00+00:00",
+          "stage": "TRADE_READY",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL",
+            "M15_PULLBACK",
+            "VALID_LOCATION",
+            "M5_DISPLACEMENT",
+            "M5_STRUCTURE_BREAK",
+            "ENTRY_SELECTED",
+            "STOP_SELECTED",
+            "TARGET_SELECTED",
+            "RR_VALIDATED",
+            "TRADE_READY"
+          ],
+          "first_blocker": "",
+          "entities_available": [
+            "bos",
+            "completed_confirmation",
+            "decision_owner",
+            "direction",
+            "entry",
+            "overlay_owner",
+            "reward_to_risk",
+            "setup_id",
+            "stop",
+            "tp1"
+          ],
+          "entry": 117.0,
+          "stop": 114.46664285714286,
+          "target": 121.5,
+          "rr": 1.776299094933319,
+          "asserted_trade_ready": true,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-31T23:40:00+00:00",
+          "stage": "TRADE_READY",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL",
+            "M15_PULLBACK",
+            "VALID_LOCATION",
+            "M5_DISPLACEMENT",
+            "M5_STRUCTURE_BREAK",
+            "ENTRY_SELECTED",
+            "STOP_SELECTED",
+            "TARGET_SELECTED",
+            "RR_VALIDATED",
+            "TRADE_READY"
+          ],
+          "first_blocker": "",
+          "entities_available": [
+            "bos",
+            "completed_confirmation",
+            "decision_owner",
+            "direction",
+            "entry",
+            "overlay_owner",
+            "reward_to_risk",
+            "setup_id",
+            "stop",
+            "tp1"
+          ],
+          "entry": 117.65,
+          "stop": 115.75757142857142,
+          "target": 121.5,
+          "rr": 2.0344228882010884,
+          "asserted_trade_ready": true,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-02-01T00:00:00+00:00",
+          "stage": "TRADE_READY",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL",
+            "M15_PULLBACK",
+            "VALID_LOCATION",
+            "M5_DISPLACEMENT",
+            "M5_STRUCTURE_BREAK",
+            "ENTRY_SELECTED",
+            "STOP_SELECTED",
+            "TARGET_SELECTED",
+            "RR_VALIDATED",
+            "TRADE_READY"
+          ],
+          "first_blocker": "",
+          "entities_available": [
+            "bos",
+            "completed_confirmation",
+            "decision_owner",
+            "direction",
+            "entry",
+            "overlay_owner",
+            "reward_to_risk",
+            "setup_id",
+            "stop",
+            "tp1"
+          ],
+          "entry": 117.65,
+          "stop": 115.76264285714285,
+          "target": 121.5,
+          "rr": 2.03988949021684,
+          "asserted_trade_ready": true,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": true
+        }
+      ],
+      "trade_ready_reached": true,
+      "paper_registered": true,
+      "outcome_resolved": true,
+      "paper_result": {
+        "paper_registered": true,
+        "outcome_resolved": true,
+        "paper_setup_id": "paper-setup-95090d3befc4e8fbda1e8cec",
+        "outcome": "TP1_HIT",
+        "realized_r": 2.03988949021684,
+        "excursion": {
+          "paper_setup_id": "paper-setup-95090d3befc4e8fbda1e8cec",
+          "mfe_points": 3.9443678571428507,
+          "mfe_r": 2.0898894902168395,
+          "mfe_time": "2026-02-01T00:10:00+00:00",
+          "mae_points": 0.0,
+          "mae_r": 0.0,
+          "mae_time": "2026-02-01T00:10:00+00:00",
+          "maximum_price": 121.59436785714286,
+          "minimum_price": 117.65,
+          "payload_json": "{\"mfe_points\":3.9443678571428507,\"mfe_r\":2.0898894902168395,\"mfe_time\":\"2026-02-01T00:10:00+00:00\",\"mae_points\":0,\"mae_r\":0.0,\"mae_time\":\"2026-02-01T00:10:00+00:00\",\"maximum_price\":121.59436785714286,\"minimum_price\":117.65}"
+        }
+      },
+      "required_stages_missing": [],
+      "future_candle_access": false,
+      "classification": "REACHABLE",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "volatility_structure_pullback",
+      "direction": "sell",
+      "fixture_id": "volatility_structure_pullback_sell",
+      "transitions": [
+        {
+          "decision_time": "2026-01-31T15:40:00+00:00",
+          "stage": "DATA_LOADING",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "history",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-31T19:00:00+00:00",
+          "stage": "WAITING_FOR_PULLBACK",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "m15_pullback",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-31T23:05:00+00:00",
+          "stage": "TRADE_READY",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL",
+            "M15_PULLBACK",
+            "VALID_LOCATION",
+            "M5_DISPLACEMENT",
+            "M5_STRUCTURE_BREAK",
+            "ENTRY_SELECTED",
+            "STOP_SELECTED",
+            "TARGET_SELECTED",
+            "RR_VALIDATED",
+            "TRADE_READY"
+          ],
+          "first_blocker": "",
+          "entities_available": [
+            "bos",
+            "completed_confirmation",
+            "decision_owner",
+            "direction",
+            "entry",
+            "overlay_owner",
+            "reward_to_risk",
+            "setup_id",
+            "stop",
+            "tp1"
+          ],
+          "entry": 103.0,
+          "stop": 105.53335714285714,
+          "target": 98.5,
+          "rr": 1.776299094933319,
+          "asserted_trade_ready": true,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-31T23:40:00+00:00",
+          "stage": "TRADE_READY",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL",
+            "M15_PULLBACK",
+            "VALID_LOCATION",
+            "M5_DISPLACEMENT",
+            "M5_STRUCTURE_BREAK",
+            "ENTRY_SELECTED",
+            "STOP_SELECTED",
+            "TARGET_SELECTED",
+            "RR_VALIDATED",
+            "TRADE_READY"
+          ],
+          "first_blocker": "",
+          "entities_available": [
+            "bos",
+            "completed_confirmation",
+            "decision_owner",
+            "direction",
+            "entry",
+            "overlay_owner",
+            "reward_to_risk",
+            "setup_id",
+            "stop",
+            "tp1"
+          ],
+          "entry": 102.35,
+          "stop": 104.24242857142858,
+          "target": 98.5,
+          "rr": 2.0344228882010884,
+          "asserted_trade_ready": true,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-02-01T00:00:00+00:00",
+          "stage": "TRADE_READY",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL",
+            "M15_PULLBACK",
+            "VALID_LOCATION",
+            "M5_DISPLACEMENT",
+            "M5_STRUCTURE_BREAK",
+            "ENTRY_SELECTED",
+            "STOP_SELECTED",
+            "TARGET_SELECTED",
+            "RR_VALIDATED",
+            "TRADE_READY"
+          ],
+          "first_blocker": "",
+          "entities_available": [
+            "bos",
+            "completed_confirmation",
+            "decision_owner",
+            "direction",
+            "entry",
+            "overlay_owner",
+            "reward_to_risk",
+            "setup_id",
+            "stop",
+            "tp1"
+          ],
+          "entry": 102.35,
+          "stop": 104.23735714285715,
+          "target": 98.5,
+          "rr": 2.03988949021684,
+          "asserted_trade_ready": true,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": true
+        }
+      ],
+      "trade_ready_reached": true,
+      "paper_registered": true,
+      "outcome_resolved": true,
+      "paper_result": {
+        "paper_registered": true,
+        "outcome_resolved": true,
+        "paper_setup_id": "paper-setup-f1afdf42dc962cc478bb1aea",
+        "outcome": "TP1_HIT",
+        "realized_r": 2.03988949021684,
+        "excursion": {
+          "paper_setup_id": "paper-setup-f1afdf42dc962cc478bb1aea",
+          "mfe_points": 3.9443678571428507,
+          "mfe_r": 2.0898894902168395,
+          "mfe_time": "2026-02-01T00:10:00+00:00",
+          "mae_points": 0.0,
+          "mae_r": 0.0,
+          "mae_time": "2026-02-01T00:10:00+00:00",
+          "maximum_price": 102.35,
+          "minimum_price": 98.40563214285714,
+          "payload_json": "{\"mfe_points\":3.9443678571428507,\"mfe_r\":2.0898894902168395,\"mfe_time\":\"2026-02-01T00:10:00+00:00\",\"mae_points\":0,\"mae_r\":0.0,\"mae_time\":\"2026-02-01T00:10:00+00:00\",\"maximum_price\":102.35,\"minimum_price\":98.40563214285714}"
+        }
+      },
+      "required_stages_missing": [],
+      "future_candle_access": false,
+      "classification": "REACHABLE",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "volatility_liquidity_reversal",
+      "direction": "buy",
+      "fixture_id": "volatility_liquidity_reversal_buy",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "DATA_LOADING",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "DATA_LOADING",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "WAITING_FOR_PULLBACK",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "WAITING_FOR_PULLBACK",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "WAITING_FOR_PULLBACK",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "DIRECTIONAL_CONTEXT",
+        "LIQUIDITY_SWEEP",
+        "DISPLACEMENT",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "UNREACHABLE_CODE_PATH",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "volatility_liquidity_reversal",
+      "direction": "sell",
+      "fixture_id": "volatility_liquidity_reversal_sell",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "DATA_LOADING",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "DATA_LOADING",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "WAITING_FOR_PULLBACK",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "WAITING_FOR_PULLBACK",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "WAITING_FOR_PULLBACK",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "DIRECTIONAL_CONTEXT",
+        "LIQUIDITY_SWEEP",
+        "DISPLACEMENT",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "UNREACHABLE_CODE_PATH",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "volatility_range_reaction",
+      "direction": "buy",
+      "fixture_id": "volatility_range_reaction_buy",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "DATA_LOADING",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "DATA_LOADING",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "WAITING_FOR_PULLBACK",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "WAITING_FOR_PULLBACK",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "WAITING_FOR_PULLBACK",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "RANGE_CONFIRMED",
+        "BOUNDARY_SWEEP",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "UNREACHABLE_CODE_PATH",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "volatility_range_reaction",
+      "direction": "sell",
+      "fixture_id": "volatility_range_reaction_sell",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "DATA_LOADING",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "DATA_LOADING",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "WAITING_FOR_PULLBACK",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "WAITING_FOR_PULLBACK",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "WAITING_FOR_PULLBACK",
+          "lifecycle_reached": [
+            "H1_DIRECTIONAL"
+          ],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "direction",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "RANGE_CONFIRMED",
+        "BOUNDARY_SWEEP",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "UNREACHABLE_CODE_PATH",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "volatility_breakout_and_retest",
+      "direction": "buy",
+      "fixture_id": "volatility_breakout_and_retest_buy",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "DATA_LOADING",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "DATA_LOADING",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "NO_DIRECTIONAL_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "NO_DIRECTIONAL_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "NO_DIRECTIONAL_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "RANGE_CONFIRMED",
+        "ACCEPTED_BREAKOUT",
+        "RETEST",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "UNREACHABLE_CODE_PATH",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "volatility_breakout_and_retest",
+      "direction": "sell",
+      "fixture_id": "volatility_breakout_and_retest_sell",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "DATA_LOADING",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "DATA_LOADING",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "NO_DIRECTIONAL_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "NO_DIRECTIONAL_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "NO_DIRECTIONAL_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [
+            "decision_owner",
+            "overlay_owner"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "volatility_structure_pullback",
+          "strategy_identity_matches": false
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "RANGE_CONFIRMED",
+        "ACCEPTED_BREAKOUT",
+        "RETEST",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "UNREACHABLE_CODE_PATH",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "jump_post_event_continuation",
+      "direction": "buy",
+      "fixture_id": "jump_post_event_continuation_buy",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id",
+            "sweep"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id",
+            "sweep"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id",
+            "sweep"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "EVENT_COMPLETED",
+        "QUARANTINE",
+        "FRESH_STRUCTURE",
+        "DISPLACEMENT",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "TARGET_CREATION_FAILURE",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "jump_post_event_continuation",
+      "direction": "sell",
+      "fixture_id": "jump_post_event_continuation_sell",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "EVENT_COMPLETED",
+        "QUARANTINE",
+        "FRESH_STRUCTURE",
+        "DISPLACEMENT",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "TARGET_CREATION_FAILURE",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "jump_post_event_reversal",
+      "direction": "buy",
+      "fixture_id": "jump_post_event_reversal_buy",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id",
+            "sweep"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id",
+            "sweep"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "jump_inter_event_range_reaction",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id",
+            "sweep"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "EVENT_COMPLETED",
+        "QUARANTINE",
+        "POST_EVENT_REJECTION",
+        "DISPLACEMENT",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "TARGET_CREATION_FAILURE",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "jump_post_event_reversal",
+      "direction": "sell",
+      "fixture_id": "jump_post_event_reversal_sell",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "jump_inter_event_range_reaction",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id",
+            "sweep"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "liquidity_reversal",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "fvg",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "structure_pullback",
+          "strategy_identity_matches": false
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "EVENT_COMPLETED",
+        "QUARANTINE",
+        "POST_EVENT_REJECTION",
+        "DISPLACEMENT",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "TARGET_CREATION_FAILURE",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "step_range_reaction",
+      "direction": "buy",
+      "fixture_id": "step_range_reaction_buy",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id",
+            "sweep"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id",
+            "sweep"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "RANGE_CONFIRMED",
+        "BOUNDARY_SWEEP",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "TARGET_CREATION_FAILURE",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "step_range_reaction",
+      "direction": "sell",
+      "fixture_id": "step_range_reaction_sell",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "WAITING_FOR_TARGET",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id",
+            "sweep"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_smc",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "RANGE_CONFIRMED",
+        "BOUNDARY_SWEEP",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "TARGET_CREATION_FAILURE",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "step_structure_pullback",
+      "direction": "buy",
+      "fixture_id": "step_structure_pullback_buy",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id",
+            "sweep"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id",
+            "sweep"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": true
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "DIRECTIONAL_CONTEXT",
+        "LOCATION",
+        "DISPLACEMENT",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "TARGET_CREATION_FAILURE",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "step_structure_pullback",
+      "direction": "sell",
+      "fixture_id": "step_structure_pullback_sell",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_range_reaction",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_range_reaction",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": true
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "DIRECTIONAL_CONTEXT",
+        "LOCATION",
+        "DISPLACEMENT",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "TARGET_CREATION_FAILURE",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "step_breakout_and_retest",
+      "direction": "buy",
+      "fixture_id": "step_breakout_and_retest_buy",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id",
+            "sweep"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id",
+            "sweep"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id",
+            "sweep"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "RANGE_CONFIRMED",
+        "ACCEPTED_BREAKOUT",
+        "RETEST",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "TARGET_CREATION_FAILURE",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "step_breakout_and_retest",
+      "direction": "sell",
+      "fixture_id": "step_breakout_and_retest_sell",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "PLAN_REJECTED",
+          "lifecycle_reached": [],
+          "first_blocker": "NO_STRUCTURAL_TARGET",
+          "entities_available": [
+            "dealing_range",
+            "decision_owner",
+            "overlay_owner",
+            "setup_id"
+          ],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": true,
+          "invariant_violations": [],
+          "observed_strategy_id": "step_structure_pullback",
+          "strategy_identity_matches": false
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "RANGE_CONFIRMED",
+        "ACCEPTED_BREAKOUT",
+        "RETEST",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "TARGET_CREATION_FAILURE",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "boom_crash_spike_state",
+      "direction": "buy",
+      "fixture_id": "boom_spike_state",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "NO_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": false,
+          "invariant_violations": [
+            {
+              "code": "OWNER_MISMATCH",
+              "message": "Selected model, decision owner, and overlay owner must match.",
+              "blocking": true
+            }
+          ],
+          "observed_strategy_id": "boom_crash_spike_state",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "NO_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": false,
+          "invariant_violations": [
+            {
+              "code": "OWNER_MISMATCH",
+              "message": "Selected model, decision owner, and overlay owner must match.",
+              "blocking": true
+            }
+          ],
+          "observed_strategy_id": "boom_crash_spike_state",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "NO_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": false,
+          "invariant_violations": [
+            {
+              "code": "OWNER_MISMATCH",
+              "message": "Selected model, decision owner, and overlay owner must match.",
+              "blocking": true
+            }
+          ],
+          "observed_strategy_id": "boom_crash_spike_state",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "NO_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": false,
+          "invariant_violations": [
+            {
+              "code": "OWNER_MISMATCH",
+              "message": "Selected model, decision owner, and overlay owner must match.",
+              "blocking": true
+            }
+          ],
+          "observed_strategy_id": "boom_crash_spike_state",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "NO_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": false,
+          "invariant_violations": [
+            {
+              "code": "OWNER_MISMATCH",
+              "message": "Selected model, decision owner, and overlay owner must match.",
+              "blocking": true
+            }
+          ],
+          "observed_strategy_id": "boom_crash_spike_state",
+          "strategy_identity_matches": true
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "SPIKE_COMPLETED",
+        "COOLDOWN",
+        "FRESH_STRUCTURE",
+        "DISPLACEMENT",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "DIRECTIONAL_CONTEXT_ABSENT",
+      "production_pipeline": true
+    },
+    {
+      "strategy_id": "boom_crash_spike_state",
+      "direction": "sell",
+      "fixture_id": "crash_spike_state",
+      "transitions": [
+        {
+          "decision_time": "2026-01-01T01:35:00+00:00",
+          "stage": "NO_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": false,
+          "invariant_violations": [
+            {
+              "code": "OWNER_MISMATCH",
+              "message": "Selected model, decision owner, and overlay owner must match.",
+              "blocking": true
+            }
+          ],
+          "observed_strategy_id": "boom_crash_spike_state",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-01T04:55:00+00:00",
+          "stage": "NO_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": false,
+          "invariant_violations": [
+            {
+              "code": "OWNER_MISMATCH",
+              "message": "Selected model, decision owner, and overlay owner must match.",
+              "blocking": true
+            }
+          ],
+          "observed_strategy_id": "boom_crash_spike_state",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-03T11:00:00+00:00",
+          "stage": "NO_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": false,
+          "invariant_violations": [
+            {
+              "code": "OWNER_MISMATCH",
+              "message": "Selected model, decision owner, and overlay owner must match.",
+              "blocking": true
+            }
+          ],
+          "observed_strategy_id": "boom_crash_spike_state",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-03T11:35:00+00:00",
+          "stage": "NO_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": false,
+          "invariant_violations": [
+            {
+              "code": "OWNER_MISMATCH",
+              "message": "Selected model, decision owner, and overlay owner must match.",
+              "blocking": true
+            }
+          ],
+          "observed_strategy_id": "boom_crash_spike_state",
+          "strategy_identity_matches": true
+        },
+        {
+          "decision_time": "2026-01-03T11:55:00+00:00",
+          "stage": "NO_CONTEXT",
+          "lifecycle_reached": [],
+          "first_blocker": "strategy_reachability",
+          "entities_available": [],
+          "entry": null,
+          "stop": null,
+          "target": null,
+          "rr": null,
+          "asserted_trade_ready": false,
+          "invariants_valid": false,
+          "invariant_violations": [
+            {
+              "code": "OWNER_MISMATCH",
+              "message": "Selected model, decision owner, and overlay owner must match.",
+              "blocking": true
+            }
+          ],
+          "observed_strategy_id": "boom_crash_spike_state",
+          "strategy_identity_matches": true
+        }
+      ],
+      "trade_ready_reached": false,
+      "paper_registered": false,
+      "outcome_resolved": false,
+      "paper_result": null,
+      "required_stages_missing": [
+        "SPIKE_COMPLETED",
+        "COOLDOWN",
+        "FRESH_STRUCTURE",
+        "DISPLACEMENT",
+        "M5_STRUCTURE_BREAK",
+        "ENTRY",
+        "TARGET_EVALUATION",
+        "PLAN_VALIDATION",
+        "TRADE_READY"
+      ],
+      "future_candle_access": false,
+      "classification": "DIRECTIONAL_CONTEXT_ABSENT",
+      "production_pipeline": true
+    }
+  ],
+  "thresholds_changed": false,
+  "finished_decisions_injected": false,
+  "historical_profitability_claimed": false
+}

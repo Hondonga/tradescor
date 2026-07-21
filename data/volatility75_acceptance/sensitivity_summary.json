@@ -1,0 +1,12 @@
+{
+  "dataset": "dataset-53a36aaf6b2bdfd2c608f350.json",
+  "method": "All balanced structural thresholds shifted together by plus or minus 10 percent; minimum RR remained 1.5R.",
+  "profiles": [
+    {"name": "minus_10_percent", "trade_ready": 245, "buy": 104, "sell": 141, "acceptance_passed": true},
+    {"name": "balanced", "trade_ready": 230, "buy": 94, "sell": 136, "acceptance_passed": true},
+    {"name": "plus_10_percent", "trade_ready": 194, "buy": 81, "sell": 113, "acceptance_passed": true}
+  ],
+  "stable_region": true,
+  "selection": "balanced",
+  "selection_reason": "The center profile preserves completed-candle safety checks and remains bidirectionally reachable under nearby stricter and looser settings; it was not selected to maximize trade count."
+}

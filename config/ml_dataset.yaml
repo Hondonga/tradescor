@@ -1,0 +1,32 @@
+{
+  "schema_version": "smc-ml-features-v1",
+  "symbol": "R_75",
+  "strategy_id": "volatility_structure_pullback",
+  "period_days": 90,
+  "snapshot_policy": "every_stage_transition",
+  "sequence_length": 64,
+  "minimum_rr": 1.5,
+  "checkpoint_every_candles": 100,
+  "expiration_candles": 12,
+  "splits": {"train": 0.60, "validation": 0.20, "test": 0.20},
+  "worker_count": 1,
+  "dataset_workers": 1,
+  "history_download_workers": 1,
+  "maximum_processing_batch": 100,
+  "yield_between_batches": true,
+  "live_latency_threshold_ms": 750,
+  "chronological_block_days": 15,
+  "readiness_minimums": {
+    "minimum_unique_setup_candidates": 500,
+    "minimum_trade_ready_plans": 100,
+    "minimum_resolved_entries": 100,
+    "minimum_buy_resolved": 35,
+    "minimum_sell_resolved": 35,
+    "minimum_positive_outcomes": 25,
+    "minimum_negative_outcomes": 25,
+    "maximum_leakage_violations": 0,
+    "maximum_unresolved_label_ratio": 0.35,
+    "minimum_independent_market_periods": 6
+  },
+  "allow_model_training": false
+}
