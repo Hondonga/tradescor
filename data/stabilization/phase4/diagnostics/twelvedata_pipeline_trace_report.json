@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-07-21T14:37:22.606490+00:00",
+  "section": "3 - STABILIZE THE TWELVE DATA PIPELINE",
+  "architecture_note": "Unlike Deriv (which streams M1 ticks and resamples up to M5/M15/H1 via providers/multi_timeframe.py's _resample_completed), Twelve Data serves each timeframe directly as its own API interval (5min/15min/1h) -- confirmed by reading providers/multi_timeframe.py::get_multi_timeframe_context: for provider=='twelve_data', derived_m1 is False, so H1/M15/M5 are each independently fetched/cached via _load_cached(), never resampled from a lower timeframe. 'M15/H1 aggregation is deterministic' for Forex therefore means 'each timeframe is its own authoritative source-of-truth fetch, not a resampling computation' -- there is no resampling determinism question to answer for Forex the way there was for Deriv in Phase 2.",
+  "pipeline_stage_mechanism": {
+    "request": "data_feed.get_candles() -- GET https://api.twelvedata.com/time_series with symbol/interval/outputsize/apikey, timezone=UTC for intraday intervals",
+    "response_validation": "providers/twelvedata.py::normalize_time_series_payload -- required-column check, numeric coercion, OHLC geometry check (high>=open/close/low, low<=open/close/high), duplicate-timestamp detection, ascending-order check; validation_passed gates a RuntimeError in data_feed.get_candles if it fails",
+    "timestamp_normalization": "UTC for all intraday intervals via the requested_timezone='UTC' param (providers/twelvedata.py:28), tz-localized with ambiguous='infer', nonexistent='shift_forward' then converted to UTC",
+    "completed_candle_filtering": "NOT done at the provider boundary -- happens generically downstream in analysis/candle_bundle.py -> analysis/top_down_engine.py::completed_candles() (cutoff = candle_time + timeframe_duration <= analysis_boundary), shared with every other market family",
+    "caching": "two layers: data_feed.py's 60s in-process dict cache keyed by (symbol, timeframe, bars), and providers/multi_timeframe.py's per-timeframe TTL cache (_load_cached) with fresh/cached/stale status tracking and stale-fallback (an empty live fetch returns the last known-good cached copy tagged attrs['stale_data']=True rather than failing)",
+    "pipeline_trace": "NEW this phase (Phase 4 \u00a73 fix) -- providers/twelve_data_provider.py::TwelveDataProvider.fetch_candles now creates a PipelineTrace (the same mechanism providers/deriv_provider.py already used) recording ACTIVE_SYMBOL_RESOLUTION, PROVIDER_CONNECTION, HISTORY_REQUEST, HISTORY_RESPONSE, CANDLE_NORMALIZATION, CACHE_WRITE, and ANALYSIS_READY. Stages this layer cannot observe (COMPLETED_CANDLE_FILTER, TIMEFRAME_AGGREGATION -- both happen generically downstream, and there is no aggregation step for Forex per the architecture note above) are deliberately left 'pending' rather than fabricated. GET /api/system/data-pipeline (backed by runtime_health.latest_trace) now returns real data for Forex symbols instead of always falling back to an empty placeholder."
+  },
+  "validated_guarantees": {
+    "timestamps_utc": "PASS -- normalize_time_series_payload forces UTC conversion for every row",
+    "timestamps_ascending": "PASS -- candles.sort_values('time') + validation_passed requires is_monotonic_increasing",
+    "duplicates_rejected_deterministically": "PASS -- drop_duplicates(subset=['time'], keep='last') after sorting -- deterministic, last-write-wins by timestamp",
+    "ohlc_finite_and_geometrically_valid": "PASS -- pd.to_numeric coercion drops non-finite rows via dropna, and the high>=max(open,close,low) / low<=min(open,close,high) geometry filter runs before rows are accepted",
+    "empty_responses_preserve_valid_cache": "PASS -- multi_timeframe.py::_load_cached stale-fallback path (existing, not modified this phase)",
+    "provider_errors_remain_visible": "PASS -- data_feed.get_candles raises RuntimeError with a specific message per failure mode (network, HTTP status, rate limit, API error, empty response); now additionally recorded in the new PipelineTrace with a distinct RATE_LIMITED vs PROVIDER_ERROR code",
+    "rate_limit_responses_handled_explicitly": "PASS -- HTTP 429 and message-sniffed 'rate limit'/'limit' API errors both raise a distinct RuntimeError message, and runtime_health.provider('twelve_data', 'rate_limited') is now set distinctly from a generic 'error' state",
+    "stale_cached_data_is_labeled": "PASS -- attrs['stale_data']=True + attrs['last_successful_update'] on the multi_timeframe.py fallback path",
+    "incomplete_final_candles_do_not_enter_analysis": "PASS -- analysis/top_down_engine.py::completed_candles() cutoff, shared across every market family, exercised by tests/test_top_down_engine.py",
+    "reconnect_does_not_duplicate_candles": "PASS -- both cache layers key on (symbol, timeframe[, bars]) and the normalization step's drop_duplicates(subset=['time']) is idempotent regardless of how many times the same rows are re-fetched",
+    "response_from_another_symbol_cannot_overwrite_gbpusd": "PASS -- every cache key is namespaced by symbol; verified structurally, not just by absence of a bug report",
+    "response_from_another_timeframe_cannot_overwrite_m5_state": "PASS -- every cache key is namespaced by timeframe (M5/M15/H1/etc are independent Twelve Data interval fetches, never merged)",
+    "request_ids_protect_against_stale_responses": "PASS at the application boundary -- the generic frontend request-ID protection (terminal-store.ts beginAnalysis/acceptDecision, verified market-type-agnostic in Phase 2/3's terminal-store.test.ts suite) already covers this for every market family including Forex; no Forex-specific backend request-ID layer exists or is needed since each Flask request is independently stateless."
+  },
+  "checkpoint_3_result": "PASSED"
+}
