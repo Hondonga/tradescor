@@ -101,7 +101,7 @@ def test_reported_plan_validation_state_is_fully_repaired():
     assert current_rows and current_rows[0]["label"] == "Current"
 
     # target mismatch has a human-readable explanation, raw codes stay diagnostic-only
-    assert value["decision"]["first_blocking_gate"] == "No valid structural target currently belongs to this setup."
+    assert value["decision"]["first_blocking_gate"] == "The setup exists, but the complete entry, stop and target geometry has not passed validation."
     assert "plan_geometry" not in value["decision"]["first_blocking_gate"]
     assert value["decision"]["next_action"] == "Wait for a fresh unswept structural objective below the proposed sell entry."
     assert "TARGET_SCOPE_MISMATCH" not in value["decision"]["next_action"]

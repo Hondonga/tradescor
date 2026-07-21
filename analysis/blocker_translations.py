@@ -13,9 +13,11 @@ BLOCKER_TEXT = {
     "m15_location": "Waiting for the M15 pullback to reach a valid location.",
     "m5_displacement_break": "Waiting for a completed M5 displacement and structure break.",
     "m5_retrace": "Waiting for the M5 retracement after the completed structure break.",
-    "plan_geometry": "No valid structural target currently belongs to this setup.",
+    "plan_geometry": "The setup exists, but the complete entry, stop and target geometry has not passed validation.",
     "chase": "Price has moved too far from the entry to chase.",
     "m15_range_position": "Price is at a hostile extreme of the M15 dealing range.",
+    "waiting_for_structure_confirmation": "Waiting for completed M5 structure confirmation.",
+    "m5_structure_confirmation": "Waiting for completed M5 structure confirmation.",
 }
 
 NEXT_REQUIREMENT_TEXT = {

@@ -5,6 +5,9 @@ import type { InstrumentPrecision, Overlay } from "@/types";
 import { formatPrice } from "@/lib/utils";
 
 const TAG_HEIGHT = 16;
+// Phase 2 stabilization §8: a clean default chart never shows more than a
+// handful of permanent right-edge tags regardless of available height.
+const MAX_DEFAULT_RIGHT_EDGE_TAGS = 7;
 
 export interface ChartPriceTagsProps {
   overlays: Overlay[]; // line-type overlays only (overlay.price != null)
@@ -42,6 +45,19 @@ export function ChartPriceTags({
     })),
     { minGap: 3, viewportHeight: chartHeight },
   );
+  // Cap permanent tags at MAX_DEFAULT_RIGHT_EDGE_TAGS regardless of how much
+  // vertical room resolveCollisions found — lowest priority drops first.
+  const visibleCount = resolved.filter((item) => item.visible).length;
+  if (visibleCount > MAX_DEFAULT_RIGHT_EDGE_TAGS) {
+    const keep = new Set(
+      [...resolved]
+        .filter((item) => item.visible)
+        .sort((a, b) => b.priority - a.priority)
+        .slice(0, MAX_DEFAULT_RIGHT_EDGE_TAGS)
+        .map((item) => item.id),
+    );
+    for (const item of resolved) if (!keep.has(item.id)) item.visible = false;
+  }
 
   const byId = new Map(placed.map((row) => [row.overlay.overlay_id, row]));
 

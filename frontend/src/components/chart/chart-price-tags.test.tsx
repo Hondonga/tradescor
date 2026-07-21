@@ -79,6 +79,31 @@ describe("ChartPriceTags", () => {
     expect(screen.queryByText(/STRUCTURAL/)).not.toBeInTheDocument();
   });
 
+  it("never shows more than 7 permanent tags, even with abundant vertical room", () => {
+    const overlays = Array.from({ length: 12 }, (_, i) =>
+      overlay({
+        overlay_id: `o${i}`,
+        category: "context",
+        actionable: false,
+        type: "structural_reference",
+        label: `Structural Reference ${i}`,
+        priority: 50 - i, // strictly decreasing priority
+        metadata: {},
+        price: 100 + i,
+      }),
+    );
+    const { container } = render(
+      <ChartPriceTags
+        overlays={overlays}
+        chartHeight={5000} // plenty of room for all 12
+        priceToY={(price) => (price - 100) * 100} // spread far apart, no collisions
+        selectedOverlayId=""
+        onSelect={() => {}}
+      />,
+    );
+    expect(container.querySelectorAll("button")).toHaveLength(7);
+  });
+
   it("shows the correct backend price on each tag", () => {
     const entry = overlay({ overlay_id: "entry", price: 51500, metadata: { plan_role: "entry" } });
     render(
