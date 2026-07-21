@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-07-21T12:57:04.916918+00:00",
+  "section": "29 - CROSS-MARKET REGRESSION",
+  "structural_guarantee": "Zero backend (.py) files were modified anywhere in Phase 3 -- verified via `git diff --name-only <checkpoint-0-commit>..HEAD` excluding frontend/ and data/stabilization/phase3/, which returns empty. Every result below is therefore expected to be unchanged by construction; the checks re-run and re-verify that expectation empirically rather than assuming it.",
+  "volatility": {
+    "golden_path_unchanged": true,
+    "buy_reachable": true,
+    "sell_reachable": true,
+    "trade_plan_geometry_identical": true,
+    "evidence": "tests/test_phase2_engine_zone_planinvariants.py, tests/test_phase2_golden_path_fixtures.py, tests/test_phase2_golden_path_contract.py, tests/test_phase2_replay_parity.py -- 35/35 passed"
+  },
+  "forex": {
+    "gbpusd_still_loads": true,
+    "ict_analysis_remains_separate": true,
+    "session_logic_unchanged": "24_5 schedule, unchanged (app.py market_schedule assignment untouched)",
+    "precision_unchanged": {
+      "gbp_usd": {
+        "price_decimals": 5,
+        "pip_size": 0.0001,
+        "tick_size": 1e-05
+      },
+      "note": "Re-verified via analysis.instrument_precision.precision_registry() directly -- identical to the Phase 2 baseline values."
+    },
+    "evidence": "56 Forex/Jump/Step/Boom-Crash-scoped tests passed; precision_registry() spot check passed"
+  },
+  "jump": {
+    "remains_research_only": true,
+    "no_active_trade_presentation": true,
+    "no_paper_signals": true,
+    "research_scenario_appears_only_in_research_mode": {
+      "status": "IMPROVED this phase",
+      "detail": "Phase 3 \u00a718 added a genuinely new frontend guarantee here: applySetupFocus() now treats any research_only decision as having no active setup while density mode is CLEAN, hiding its developing-setup evidence entirely; that evidence only becomes visible in STANDARD/RESEARCH density modes. ChartSetupSummary was also fixed to render 'RESEARCH SCENARIO' instead of 'BUY SETUP'/'SELL SETUP' for any research-only candidate. Both verified via the new setupFocus.test.ts and chart-setup-summary.test.tsx cases, and empirically via the research-only-scenario Chrome acceptance capture."
+    },
+    "evidence": "strategy_quarantine_view()['jump_post_event_continuation']/['jump_post_event_reversal']: auto_eligible=False, research_only=True, paper_signal_allowed=False (unchanged from Phase 2)"
+  },
+  "step": {
+    "remains_non_auto": true,
+    "no_production_trade_presentation": true,
+    "evidence": "strategy_quarantine_view()['step_range_reaction']/['step_structure_pullback']/['step_breakout_and_retest']: auto_eligible=False, research_only=True (unchanged from Phase 2); 56-test Step-scoped run passed"
+  },
+  "boom_crash": {
+    "remains_non_auto": true,
+    "event_context_still_renders": true,
+    "evidence": "strategy_quarantine_view()['boom_crash_spike_state']: auto_eligible=False, research_only=True (unchanged from Phase 2); tests/test_boom_crash_*.py (5 files) passed as part of the 56-test cross-market run"
+  },
+  "ml": {
+    "dataset_unchanged": true,
+    "rejected_model_unchanged": true,
+    "no_training": true,
+    "no_frontend_activation": true,
+    "no_recommendation_panel": true,
+    "evidence": "Byte-for-byte SHA-256 re-verification of every dataset/model artifact file (data/stabilization/phase3/diagnostics/ml_integrity_recheck.json), model_status still REJECTED_POOR_CALIBRATION, live_activation_available still False, exactly the same 2 training-run files on disk as the Phase 1 baseline"
+  },
+  "quarantine_snapshot": {
+    "volatility_structure_pullback": {
+      "auto_eligible": true,
+      "research_only": false,
+      "paper_signal_allowed": true
+    },
+    "everything_else": "auto_eligible=False, research_only=True, paper_signal_allowed=False for all 9 other registry strategies plus ml -- identical posture to Phase 2"
+  },
+  "checkpoint_29_result": "PASSED"
+}
