@@ -51,6 +51,7 @@ def normalize_global_decision(product,*,instrument_metadata=None,mode="LIVE"):
     rows=_deduplicate(rows);rows=_cluster(rows,precision,(value.get("market") or {}).get("atr"));value["overlays"]=rows;value["decision"]=public;value["setup"]=active or _empty_setup(setup)
     if value["overlay_mode"]=="PREVIOUS_SETUP":value["overlays"]=[row for row in value["overlays"] if row["category"]=="historical"]
     value["paper_registration_allowed"]=bool(value["overlay_mode"]=="LIVE" and ready and not contradiction and readiness=="ready")
+    value.setdefault("research_scenario",None)
     return value
 
 def _active_setup(setup,public,terminal,readiness):
