@@ -37,10 +37,29 @@ _NORMALIZED_SYMBOL_MAP = {
 }
 
 
+def _forex_aliases(api_symbol: str) -> list[str]:
+    """Alternate spellings a caller might send for a slash-delimited forex
+    pair (e.g. Twelve-Data-native or TradingView-style forms). These all
+    normalize to the SAME canonical identity the slash form already
+    resolves to -- they are not separate frontend symbols (Phase 4 §2)."""
+    concatenated = api_symbol.replace("/", "")
+    return [concatenated, api_symbol.replace("/", "-"), f"FX:{concatenated}", f"FX:{api_symbol}"]
+
+
+_ALIAS_SYMBOL_MAP = {
+    _normalize_symbol(alias): canonical
+    for display_symbol, details in SYMBOL_MAP.items()
+    if details["type"] == "forex"
+    for canonical in [_NORMALIZED_SYMBOL_MAP[_normalize_symbol(display_symbol)]]
+    for alias in _forex_aliases(details["api_symbol"])
+}
+
+
 def resolve_symbol(symbol: str | None) -> dict[str, str]:
     """Return display/API symbol details for the selected market."""
     cleaned = " ".join((symbol or "EUR/USD").strip().split()) or "EUR/USD"
-    mapped = _NORMALIZED_SYMBOL_MAP.get(_normalize_symbol(cleaned))
+    normalized = _normalize_symbol(cleaned)
+    mapped = _NORMALIZED_SYMBOL_MAP.get(normalized) or _ALIAS_SYMBOL_MAP.get(normalized)
 
     if mapped:
         return mapped.copy()

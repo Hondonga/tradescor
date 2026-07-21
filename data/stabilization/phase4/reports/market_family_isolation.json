@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-07-21T14:17:45.567420+00:00",
+  "section": "1 - ISOLATE FOREX FROM DERIVED MARKETS",
+  "method": "Empirical registry inspection (providers/market_registry.py) plus the existing normalization-boundary cross-contamination test (tests/test_forex_pipeline_repair.py::test_derived_normalization_does_not_receive_forex_fields), plus a new symmetric Phase 4 test file (tests/test_phase4_market_family_isolation.py, 6 tests) proving both directions explicitly.",
+  "forex_gbpusd": {
+    "provider": "twelve_data",
+    "market_type": "forex",
+    "family": "FOREX",
+    "analysis_engine": "forex",
+    "market_schedule": "24_5",
+    "available_models": [
+      "auto",
+      "ict_2022",
+      "supply_demand",
+      "breakout_retest",
+      "universal_structure"
+    ],
+    "precision": {
+      "price_decimals": 5,
+      "pip_size": 0.0001,
+      "tick_size": 1e-05
+    },
+    "never_receives": {
+      "volatility_structure_pullback": "confirmed absent from available_models",
+      "jump_strategy": "confirmed absent (no JUMP-family model IDs)",
+      "step_strategy": "confirmed absent (no STEP-family model IDs)",
+      "boom_crash_strategy": "confirmed absent (no boom_crash_spike_state)",
+      "derived_session_labels": "market_schedule is 24_5, not 24_7",
+      "derived_precision": "5 decimals / pip 0.0001, not R_75's 4 decimals",
+      "deriv_provider_state": "market_source is twelve_data, not deriv"
+    }
+  },
+  "derived_r75": {
+    "provider": "deriv",
+    "market_type": "derived",
+    "family": "VOLATILITY",
+    "analysis_engine": "derived_smc",
+    "market_schedule": "24_7",
+    "available_models": [
+      "auto",
+      "volatility_smc"
+    ],
+    "precision": {
+      "price_decimals": 4,
+      "pip_size": 0.0001,
+      "tick_size": 0.0001
+    },
+    "never_receives": {
+      "forex_ict_session_gating": "market_schedule is 24_7, no weekend/session concept applies",
+      "kill_zone_requirements": "no session-engine call in the derived analysis path",
+      "forex_precision": "4 decimals, not GBP/USD's 5",
+      "twelve_data_provider_ownership": "market_source is deriv, not twelve_data",
+      "forex_setup_ids": "setup identity is computed from the volatility_structure_pullback engine only"
+    }
+  },
+  "ownership_invariant": {
+    "decision_owner_id_equals_overlay_owner_id": "Holds by construction for Forex: analysis/market_decision_normalizer.py sets both selected_model_id, decision_owner_id, and overlay_owner_id from the same `owner` variable. The generic normalize_global_decision() boundary (analysis/global_overlay_contract.py) additionally enforces this at render time for every market family -- a future regression would surface as STATE CONTRADICTION rather than silently rendering mismatched overlays."
+  },
+  "architectural_note": "Forex's authoritative strategy id for the ICT model is 'ict_2022' (labeled 'ICT Precision' in the registry), not the literal string 'forex_ict' the milestone's contract example uses. Per the same precedent established in Phase 2 (not renaming the Volatility engine's internal stage strings to match a spec's literal listed vocabulary), this phase treats 'forex_ict' as the conceptual name for the real 'ict_2022' strategy_id throughout, rather than renaming a live, tested, externally-referenced identifier. The golden path is reached by explicitly requesting model=ict_2022 (the 'ICT Precision' option) -- 'auto' mode arbitrates between three Forex strategies (ict_2022/supply_demand/breakout_retest) by evidence-weighted score and does not deterministically select ICT, so it is not equivalent to the Phase 4 golden path.",
+  "checkpoint_1_result": "PASSED"
+}
