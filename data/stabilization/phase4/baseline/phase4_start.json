@@ -1,0 +1,17 @@
+{
+  "started_at": "2026-07-21T13:12:03.367113+00:00",
+  "phase3_commit": "6806ffad45e730e6200367912a0bcb787103d1f0",
+  "working_branch": "tradescor-phase4-gbpusd-forex-ict-stabilization",
+  "working_tree_status": [
+    "?? data/stabilization/phase4/"
+  ],
+  "python_baseline": 818,
+  "frontend_baseline": 152,
+  "frozen_ml_integrity": true,
+  "golden_path": {
+    "provider": "twelve_data",
+    "symbol": "GBP/USD",
+    "timeframe": "M5",
+    "strategy": "forex_ict"
+  }
+}
