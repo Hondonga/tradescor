@@ -23,6 +23,7 @@ import { ChartPriceTags } from "./chart-price-tags";
 import { ChartEventMarkers } from "./chart-event-markers";
 import { ChartSetupSummary } from "./chart-setup-summary";
 import { DrawingInspector } from "./drawing-inspector";
+import { OverlayTooltip } from "./overlay-tooltip";
 import type { Overlay } from "@/types";
 
 async function loadCandles(
@@ -76,6 +77,7 @@ export function MarketChart() {
     chartHeight: 0,
   });
   const [selectedOverlayId, setSelectedOverlayId] = useState("");
+  const [hovered, setHovered] = useState<{ id: string; x: number; y: number } | null>(null);
   const store = useTerminalStore();
   const query = useQuery({
     queryKey: [
@@ -143,6 +145,9 @@ export function MarketChart() {
   const selectedOverlay = visibleOverlays.find(
     (overlay) => overlay.overlay_id === selectedOverlayId,
   );
+  const hoveredOverlay = hovered
+    ? visibleOverlays.find((overlay) => overlay.overlay_id === hovered.id)
+    : undefined;
 
   useEffect(() => {
     if (!root.current) return;
@@ -348,6 +353,11 @@ export function MarketChart() {
           precision={store.decision?.precision}
           selectedOverlayId={selectedOverlayId}
           onSelect={setSelectedOverlayId}
+          onHover={(id, clientX, clientY) => {
+            const rect = root.current?.getBoundingClientRect();
+            setHovered({ id, x: clientX - (rect?.left || 0), y: clientY - (rect?.top || 0) });
+          }}
+          onHoverEnd={() => setHovered(null)}
         />
         <ChartEventMarkers
           overlays={layout.markerOverlays}
@@ -361,6 +371,15 @@ export function MarketChart() {
           decision={store.decision}
           visible={store.overlayVisibility.trade_plan && chartWidth >= 420}
         />
+        {hoveredOverlay && hovered && (
+          <OverlayTooltip
+            overlay={hoveredOverlay}
+            x={hovered.x}
+            y={hovered.y}
+            precision={store.decision?.precision}
+            diagnosticsVisible={store.diagnosticsVisible}
+          />
+        )}
         {selectedOverlay && (
           <DrawingInspector
             overlay={selectedOverlay}

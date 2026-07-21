@@ -33,7 +33,11 @@ export function ChartZoneLayer({
         const rgb = hexToRgbTriplet(style.color);
         const oversized = isOversizedZone(rect, chartHeight);
         const selected = overlay.overlay_id === selectedOverlayId;
-        const zIndex = Math.max(1, Math.min(10, Math.round(overlay.priority / 10)));
+        // lightweight-charts renders its own interaction canvas at z-index 2
+        // inside the chart root; every zone must clear that so real pointer
+        // events (hover/click) reach it instead of being silently captured
+        // by the (visually transparent, but still hit-testable) canvas.
+        const zIndex = 20 + Math.max(1, Math.min(10, Math.round(overlay.priority / 10)));
 
         return (
           <div

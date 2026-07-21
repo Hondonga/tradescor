@@ -16,6 +16,8 @@ export interface ChartPriceTagsProps {
   precision?: InstrumentPrecision;
   selectedOverlayId: string;
   onSelect: (id: string) => void;
+  onHover?: (id: string, x: number, y: number) => void;
+  onHoverEnd?: () => void;
 }
 
 /**
@@ -30,6 +32,8 @@ export function ChartPriceTags({
   precision,
   selectedOverlayId,
   onSelect,
+  onHover,
+  onHoverEnd,
 }: ChartPriceTagsProps) {
   const placed = overlays
     .filter((overlay) => overlay.price != null)
@@ -76,7 +80,7 @@ export function ChartPriceTags({
         const selected = overlay.overlay_id === selectedOverlayId;
 
         return (
-          <div key={item.id} className="pointer-events-none absolute right-1" style={{ top: item.resolvedY - TAG_HEIGHT / 2 }}>
+          <div key={item.id} className="pointer-events-none absolute right-1 z-30" style={{ top: item.resolvedY - TAG_HEIGHT / 2 }}>
             {Math.abs(item.offset) > 1 && (
               <svg className="absolute right-full top-1/2 h-px w-3 -translate-y-1/2 overflow-visible">
                 <line
@@ -93,6 +97,10 @@ export function ChartPriceTags({
               type="button"
               title={title}
               onClick={() => onSelect(overlay.overlay_id)}
+              onMouseEnter={(event) => onHover?.(overlay.overlay_id, event.clientX, event.clientY)}
+              onMouseLeave={() => onHoverEnd?.()}
+              onFocus={(event) => onHover?.(overlay.overlay_id, event.currentTarget.getBoundingClientRect().left, event.currentTarget.getBoundingClientRect().top)}
+              onBlur={() => onHoverEnd?.()}
               className="pointer-events-auto flex items-center gap-1 whitespace-nowrap rounded-sm border px-1 font-mono text-[9px] leading-4"
               style={{
                 borderColor: `rgba(${rgb}, .5)`,

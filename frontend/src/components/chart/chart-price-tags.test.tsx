@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { ChartPriceTags } from "./chart-price-tags";
 import type { Overlay } from "@/types";
 
@@ -117,5 +117,38 @@ describe("ChartPriceTags", () => {
       />,
     );
     expect(screen.getByText("51500.00")).toBeInTheDocument();
+  });
+
+  it("calls onHover on mouse enter/focus and onHoverEnd on mouse leave/blur (Phase 3 §15)", () => {
+    const onHover = vi.fn();
+    const onHoverEnd = vi.fn();
+    const entry = overlay({ overlay_id: "entry", price: 51500 });
+    render(
+      <ChartPriceTags
+        overlays={[entry]}
+        chartHeight={400}
+        priceToY={() => 100}
+        selectedOverlayId=""
+        onSelect={() => {}}
+        onHover={onHover}
+        onHoverEnd={onHoverEnd}
+      />,
+    );
+    const button = screen.getByRole("button");
+    fireEvent.mouseEnter(button, { clientX: 10, clientY: 20 });
+    expect(onHover).toHaveBeenCalledWith("entry", 10, 20);
+    fireEvent.mouseLeave(button);
+    expect(onHoverEnd).toHaveBeenCalled();
+    fireEvent.focus(button);
+    expect(onHover).toHaveBeenCalledTimes(2);
+    fireEvent.blur(button);
+    expect(onHoverEnd).toHaveBeenCalledTimes(2);
+  });
+
+  it("stacks above the chart's internal interaction canvas (z-index 2), so real pointer events reach the tag instead of being captured by the canvas", () => {
+    const entry = overlay({ overlay_id: "entry", price: 51500 });
+    render(<ChartPriceTags overlays={[entry]} chartHeight={400} priceToY={() => 100} selectedOverlayId="" onSelect={() => {}} />);
+    const wrapper = screen.getByRole("button").parentElement as HTMLElement;
+    expect(wrapper.className).toMatch(/\bz-30\b/);
   });
 });

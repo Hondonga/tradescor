@@ -69,6 +69,20 @@ describe("ChartZoneLayer", () => {
     expect(opacity).toBeLessThanOrEqual(0.14);
   });
 
+  it("stacks above the chart's internal interaction canvas (z-index 2)", () => {
+    const rect: ZoneRect = { overlayId: "zone", top: 100, height: 150, left: 40, width: 300 };
+    const { container } = render(
+      <ChartZoneLayer
+        zones={[{ rect, overlay: overlay() }]}
+        chartHeight={600}
+        selectedOverlayId=""
+        onSelect={() => {}}
+      />,
+    );
+    const zIndex = Number((container.firstElementChild as HTMLElement).style.zIndex);
+    expect(zIndex).toBeGreaterThan(2);
+  });
+
   it("renders an oversized zone as boundary lines instead of a filled rectangle", () => {
     const rect: ZoneRect = { overlayId: "zone", top: 0, height: 500, left: 40, width: 300 }; // 500/600 > 45%
     const { container } = render(

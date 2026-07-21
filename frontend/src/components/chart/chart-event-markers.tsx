@@ -57,7 +57,7 @@ export function ChartEventMarkers({
             key={overlay.overlay_id}
             type="button"
             onClick={() => onSelect(overlay.overlay_id)}
-            className="pointer-events-auto absolute rounded-sm border px-1 font-mono text-[8px] font-medium leading-3"
+            className="pointer-events-auto absolute z-30 rounded-sm border px-1 font-mono text-[8px] font-medium leading-3"
             style={{
               left,
               top: above ? y - 20 : y + 6,
