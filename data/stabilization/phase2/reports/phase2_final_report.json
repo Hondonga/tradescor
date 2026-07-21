@@ -1,0 +1,72 @@
+{
+  "generated_at": "2026-07-21T03:50:30.042938+00:00",
+  "phase": "PHASE 2 - ISOLATE AND STABILIZE THE VOLATILITY 75 GOLDEN PATH",
+  "1_status": "PASSED",
+  "2_working_branch": "tradescor-phase2-volatility75-stabilization",
+  "3_starting_baseline_commit": "437e876097af3806a9df2f4437a211ad367d71c3",
+  "4_final_phase2_commit": "2bc9302e589d37adefbf25d18863d8d36b86b7a4",
+  "5_files_changed": {
+    "total": 78,
+    "modified_count": 7,
+    "added_count": 71,
+    "modified": [
+      "analysis/blocker_translations.py",
+      "analysis/global_overlay_contract.py",
+      "frontend/src/components/chart/chart-price-tags.test.tsx",
+      "frontend/src/components/chart/chart-price-tags.tsx",
+      "frontend/src/components/chart/market-chart.stories.tsx",
+      "frontend/src/store/terminal-store.test.ts",
+      "tests/test_volatility75_plan_validation_regression.py"
+    ],
+    "added_code_and_config": [
+      "analysis/strategy_quarantine_registry.py",
+      "frontend/scripts/phase2_chrome_acceptance.mjs",
+      "tests/test_phase2_engine_zone_planinvariants.py",
+      "tests/test_phase2_golden_path_contract.py",
+      "tests/test_phase2_golden_path_fixtures.py",
+      "tests/test_phase2_labels_and_density.py",
+      "tests/test_phase2_lifecycle_coherence.py",
+      "tests/test_phase2_r75_aggregation.py",
+      "tests/test_phase2_replay_parity.py",
+      "tests/test_strategy_quarantine_registry.py"
+    ],
+    "added_phase2_artifact_count": 61,
+    "note": "Full added-file list (including all Phase 2 report/screenshot artifacts) is in git history via `git diff --name-status 448da63..HEAD`."
+  },
+  "6_strategy_quarantine_result": "PASSED - analysis/strategy_quarantine_registry.py provides an authoritative, tested read-only view over the existing reachability gate; only volatility_structure_pullback is auto_eligible; all others (Jump, Step, Boom/Crash, ML) are research_only with paper_signal_allowed=False.",
+  "7_r75_data_pipeline_result": "PASSED - M1->M5/M15/H1 resampling verified deterministic, gap-free, no lookahead, duplicate/out-of-order candles normalized correctly (tests/test_phase2_r75_aggregation.py, 5/5).",
+  "8_buy_reachability_result": "PASSED - BUY golden path reaches TRADE_READY with complete entry/stop/TP1/TP2 geometry (tests/test_phase2_engine_zone_planinvariants.py, tests/test_phase2_golden_path_fixtures.py).",
+  "9_sell_reachability_result": "PASSED - SELL golden path reaches TRADE_READY with complete entry/stop/TP1/TP2 geometry (same test files, parametrized both directions).",
+  "10_lifecycle_result": "PASSED - terminal states (TOO_LATE, EXPIRED, INVALIDATED, STATE CONTRADICTION) archive correctly, active/previous setup separation holds, chart and decision rail read the same normalized object (tests/test_phase2_lifecycle_coherence.py, 6/6).",
+  "11_trade_plan_invariant_result": "PASSED - TRADE_READY is impossible without TP1; incomplete plans render zero actionable overlays; complete-plan overlay values exactly equal trade_plan values; oversized pullback zones are rejected without affecting setup validity (tests/test_phase2_engine_zone_planinvariants.py, 12/12).",
+  "12_chart_cleanliness_result": "PASSED - Chrome acceptance across 11 required states x 4 resolutions (45 captures) shows no malformed zones, no swing-label walls, no duplicate lifecycle prefixes, no overlapping permanent tags (7-tag cap enforced), no actionable levels before TRADE_READY. Two non-blocking observations logged (see item 21).",
+  "13_symbol_timeframe_switching_result": "PASSED - rapid R_75 M5 -> other symbol -> R_75 M15 -> R_75 M5 switching leaves no stale decision/overlay/candle state and rejects late-arriving stale-timeframe responses (frontend/src/store/terminal-store.test.ts).",
+  "14_paper_result": "PASSED - three independent safety layers confirmed (reachability gate strips incomplete/non-reachable plans; registerable_paper_setup enforces geometry completeness incl. tp1_rr>=1.5; SQLite UNIQUE constraints prevent duplicate registration). Live paper DB confirmed being written by the independently-running production backend, not by this session's tests.",
+  "15_replay_parity_result": "PASSED - identical inputs run through two independent invocations produce field-for-field identical decisions; truncated (replay-style) history cannot see future candles (tests/test_phase2_replay_parity.py, 3/3).",
+  "16_python_test_result": "818 passed, 13 subtests passed, 0 failed (full suite, exit_code=0). 168 passed in the named-subsystem focused run. 50 passed in the Phase-2-only isolated run.",
+  "17_frontend_test_build_result": "67/67 Vitest tests passed across 11 files; TypeScript build (tsc -b) clean with 0 errors; Vite production build succeeded.",
+  "18_chrome_acceptance_result": "PASSED - 45/45 Playwright/Chromium captures succeeded (11 required states x 4 resolutions + 1 live-app smoke check) with zero console errors. Full checklist in data/stabilization/phase2/browser/chrome_acceptance_checklist.json.",
+  "19_frozen_ml_integrity_result": "PASSED - dataset ml-r75-f4c52d93c7a8dc3e95f1 and rejected model run ml-run-610209ec3d9146ae re-hashed byte-for-byte identical to the Phase 1 baseline across every recorded artifact file. model_status still REJECTED_POOR_CALIBRATION, live_activation_available still False, no new training runs exist on disk.",
+  "20_cross_market_regression_result": "PASSED - Forex (GBP/USD) precision (5 decimals, pip 0.0001) and session (24_5) logic intact, no derived-strategy family exists to be selected. Jump/Step/Boom-Crash confirmed research-only (auto_eligible=False, paper_signal_allowed=False) with underlying detection/presentation logic still passing 40/40 subsystem tests.",
+  "21_remaining_blockers": [
+    "None. All 18 checkpoints (0-17) PASSED with no unresolved failures.",
+    "Two non-blocking observations were logged during Chrome acceptance (checkpoint 16), not treated as failures: (a) TP1/TP2 price tags fall outside the visible price axis in the narrow-amplitude synthetic Storybook fixture used for trade-ready scenarios -- a fixture-scale artifact, not a data-ownership defect (entry/stop remain correctly linked); real live candle data spans a wider range. (b) A fresh/cold live-app page load shows a DISCONNECTED/loading state until the user explicitly triggers chart loading -- verified pixel-identical to the Phase 1 baseline screenshot for the same URL, so this is pre-existing, unchanged behavior, not a Phase 2 regression."
+  ],
+  "22_profitability_claim_confirmation": "No profitability claim is made anywhere in this phase. Reachability (the system can produce a valid, complete, correctly-owned trade plan for both BUY and SELL on the R_75 golden path) was verified. This does not prove, and is not represented as, a trading edge. historical_edge_proven and profitability_claim_allowed are hardcoded False for every single strategy in strategy_quarantine_view(), including volatility_structure_pullback.",
+  "protected_baseline_verification": {
+    "phase1_baseline_commit_unchanged": true,
+    "safety_branch_unchanged": true,
+    "safety_tag_unchanged": true,
+    "all_pinned_to": "437e876097af3806a9df2f4437a211ad367d71c3"
+  },
+  "constraints_honored": [
+    "Did not modify the Phase 1 baseline commit, safety branch, or safety tag.",
+    "Did not stabilize multiple markets simultaneously -- only R_75/Volatility Structure Pullback code paths were touched; Forex/Jump/Step/Boom-Crash were verified read-only.",
+    "Did not add new strategies.",
+    "Did not restart or retrain ML.",
+    "Did not add order execution or broker account connections.",
+    "Did not tune strategy thresholds to produce more setups.",
+    "Did not fabricate entry, stop, TP1, or TP2 anywhere.",
+    "Did not merge the Phase 2 branch into main/baseline automatically."
+  ]
+}
