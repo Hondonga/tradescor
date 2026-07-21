@@ -2,6 +2,7 @@
 // overlays. This module never invents structure, prices, or ownership — it
 // only decides how an already-normalized overlay should look on the chart.
 import type { Overlay } from "@/types";
+import { SEMANTIC_COLORS } from "./chart/semanticColors";
 
 export type OverlayTier = 1 | 2 | 3 | 4;
 export type LineStyleToken = "solid" | "dashed" | "dotted";
@@ -19,17 +20,38 @@ export interface OverlayStyle {
   renderAs: RenderAs;
 }
 
+// Chart-role aliases onto the single centralized semantic palette
+// (lib/chart/semanticColors.ts) — kept as named roles here because a chart
+// role (e.g. "confirmation") and a generic UI category (e.g. "warning")
+// aren't always the same word, but they must always resolve to the same
+// underlying color value. Never add a literal hex value below; alias an
+// existing SEMANTIC_COLORS entry instead.
 const PALETTE = {
-  entry: "#5d98f8",
-  stop: "#ef6767",
-  target: "#36bd80",
-  invalidation: "#ef6767",
-  confirmation: "#e0b064",
-  potentialObjective: "#8fa8c9",
-  structure: "#5b6b85",
-  diagnostic: "#5b6478",
-  currentPrice: "#8b97ab",
+  entry: SEMANTIC_COLORS.actionable,
+  stop: SEMANTIC_COLORS.bearish,
+  target: SEMANTIC_COLORS.bullish,
+  invalidation: SEMANTIC_COLORS.bearish,
+  confirmation: SEMANTIC_COLORS.warning,
+  potentialObjective: SEMANTIC_COLORS.neutral,
+  structure: SEMANTIC_COLORS.historical,
+  diagnostic: SEMANTIC_COLORS.disabled,
+  currentPrice: SEMANTIC_COLORS.neutral,
 };
+
+/**
+ * Setup-area zones (tier 2, e.g. an M15 pullback area) previously always
+ * rendered in the same blue regardless of trade direction, so a developing
+ * BUY setup and a developing SELL setup looked identical on the chart. When
+ * the overlay carries direction metadata, color it bullish/bearish like the
+ * rest of the terminal already does for direction-aware UI; otherwise fall
+ * back to the neutral "entry" tone unchanged.
+ */
+function directionAwareZoneColor(overlay: Overlay): string {
+  const direction = String(overlay.metadata.direction || "").toLowerCase();
+  if (direction === "buy" || direction === "bullish") return SEMANTIC_COLORS.bullish;
+  if (direction === "sell" || direction === "bearish") return SEMANTIC_COLORS.bearish;
+  return PALETTE.entry;
+}
 
 /** Event-evidence kinds that render as compact candle markers, never full-width lines. */
 const EVENT_MARKER_TYPES = new Set([
@@ -95,7 +117,7 @@ export function styleForOverlay(overlay: Overlay): OverlayStyle {
           ? PALETTE.confirmation
           : isObjective
             ? PALETTE.potentialObjective
-            : PALETTE.entry,
+            : directionAwareZoneColor(overlay),
       lineStyle: isInvalidation ? "solid" : isConfirmation ? "dashed" : "dotted",
       lineWidth: 1,
       zoneFillOpacity: 0.1,

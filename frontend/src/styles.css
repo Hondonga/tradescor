@@ -3,10 +3,35 @@
 @theme {
   --font-sans: "Geist", ui-sans-serif, system-ui;
   --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  /* App chrome. --color-terminal/panel/elevated/active predate this token
+     set and remain in place for backward compatibility with existing
+     usages; app-bg/panel-bg/elevated-panel/border-subtle/text-primary/
+     text-secondary are their Phase 3 semantic aliases. */
   --color-terminal: #07090d;
   --color-panel: #0b0e14;
   --color-elevated: #10141c;
   --color-active: #4f8df7;
+  --color-app-bg: #07090d;
+  --color-chart-bg: #080b10;
+  --color-panel-bg: #0b0e14;
+  --color-elevated-panel: #10141c;
+  --color-border-subtle: rgba(255, 255, 255, 0.07);
+  --color-text-primary: #edf1f7;
+  --color-text-secondary: #7c8797;
+
+  /* Semantic state tokens. Canvas-rendered chart output (lightweight-charts
+     draws to a <canvas>, so it cannot read CSS variables at draw time) uses
+     the numerically-identical constants in
+     frontend/src/lib/chart/semanticColors.ts -- keep both in sync. */
+  --color-bullish: #36bd80;
+  --color-bearish: #e2685f;
+  --color-neutral: #8b97ab;
+  --color-warning: #e0b064;
+  --color-research: #8a7cd6;
+  --color-actionable: #5d98f8;
+  --color-historical: #5b6b85;
+  --color-disabled: #454e5c;
 }
 :root {
   color-scheme: dark;
