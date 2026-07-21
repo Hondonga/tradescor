@@ -55,7 +55,12 @@ def normalize_global_decision(product,*,instrument_metadata=None,mode="LIVE"):
     return value
 
 def _active_setup(setup,public,terminal,readiness):
-    if terminal or readiness in {"error","provider_error","insufficient","insufficient_history"} or not setup.get("setup_id") or str(public.get("stage") or setup.get("stage") or "").upper() in {"NO_CONTEXT","NO CONTEXT"}:return None
+    # "market_closed" (Phase 4 §4/§12) joins the other non-live readiness
+    # states here -- a Forex market-closed decision must never carry a new
+    # live active setup, same as an errored/insufficient one. This is a
+    # dead branch for every other market family (Deriv/derived markets
+    # never produce this readiness value; they are always 24/7).
+    if terminal or readiness in {"error","provider_error","insufficient","insufficient_history","market_closed"} or not setup.get("setup_id") or str(public.get("stage") or setup.get("stage") or "").upper() in {"NO_CONTEXT","NO CONTEXT"}:return None
     return deepcopy(setup)
 
 def _contradiction(value,active,stage,status,readiness,owner):

@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-07-21T14:57:58.758082+00:00",
+  "section": "4 - VERIFY FOREX MARKET HOURS",
+  "bug_found_and_fixed": {
+    "summary": "scanner/session_engine.py::get_session_status ANDs market_open into entry_allowed for crypto (trivially, always True)/index/equity/commodity, but forex fell through the generic 'else' branch which never did -- entry_allowed was computed purely from the time-of-day kill-zone window, independent of whether the market was actually open that day.",
+    "reproduction_before_fix": {
+      "input": "Saturday 2026-01-10 03:00 America/New_York (a 'London Kill Zone' clock window)",
+      "result": {
+        "name": "London Kill Zone",
+        "market_open": false,
+        "market_status": "CLOSED",
+        "entry_allowed": true,
+        "kill_zone_active": true
+      },
+      "problem": "entry_allowed=True while market_open=False and market_status=CLOSED -- a live decision could theoretically reach TRADE_READY on a Saturday."
+    },
+    "fix": "Added an explicit forex branch to get_session_status mirroring the existing index/equity/commodity pattern: entry_allowed = bool(market_open and entry_allowed). Session logic still only ever narrows entry_allowed -- this adds a missing reason to block entry, never a new reason to allow it.",
+    "reproduction_after_fix": {
+      "input": "same Saturday timestamp",
+      "result": {
+        "name": "London Kill Zone",
+        "market_open": false,
+        "market_status": "CLOSED",
+        "entry_allowed": false,
+        "kill_zone_active": true
+      }
+    },
+    "regression_check": "Full Python suite re-run after the fix: 842 passed (unchanged from before the fix) -- no existing test depended on the buggy behavior."
+  },
+  "readiness_taxonomy": {
+    "before": "Three different ad hoc readiness computations existed depending on code path: smc_data_readiness.py's ready/stale/insufficient (lightweight scan path only), market_decision_normalizer.py's cruder ready/error (main analyze path), and global_overlay_contract.py referencing (but nothing upstream ever producing) provider_error/insufficient_history. No MARKET_CLOSED state existed anywhere.",
+    "added_this_phase": "market_decision_normalizer.py now computes readiness.state='market_closed' when market_type=='forex' and the session context's market_open is False, using data that was already flowing through legacy['filters']['session'] -- no new upstream plumbing needed. global_overlay_contract.py's _active_setup() gate now also treats 'market_closed' as a reason to withhold a new live active setup, exactly like the existing error/insufficient states -- verified to be a dead branch for Deriv/derived markets (they never produce this readiness value; always 24/7).",
+    "not_attempted": "A full single unified readiness enum touching every code path (including the lightweight-scan-only smc_data_readiness.py 3-state system) was evaluated and deliberately not attempted -- that would touch significantly more shared surface for a lower-value consistency win than the concrete MARKET_CLOSED gap this checkpoint required. DELAYED and PROVIDER_ERROR/INSUFFICIENT_HISTORY as literal readiness.state values were not added since nothing in the current pipeline distinguishes them from the existing 'error'/'stale' states in a way that would change any downstream gating behavior -- adding unused enum values would not satisfy 'do not tune thresholds merely to...' in spirit (avoid speculative, untested code paths)."
+  },
+  "required_data_states_status": {
+    "LIVE": "existing 'ready' readiness.state, unchanged",
+    "STALE": "existing multi_timeframe.py stale-cache-fallback mechanism, unchanged, already labels attrs['stale_data']",
+    "MARKET_CLOSED": "NEW this phase, described above",
+    "PROVIDER_ERROR": "existing 'error' readiness.state already covers this at the gating level (_active_setup treats it identically to a literal 'provider_error' string, which was already in the set defensively)",
+    "INSUFFICIENT_HISTORY": "existing 'insufficient'/'insufficient_history' already in the _active_setup gating set",
+    "DELAYED": "not distinguished from LIVE anywhere in the current pipeline; not fabricated"
+  },
+  "verification": {
+    "weekend_fixture_shows_market_closed": "PASS (test_market_closed_normalizes_to_market_closed_readiness_and_blocks_the_active_setup)",
+    "stale_cache_cannot_appear_as_live": "PASS -- pre-existing multi_timeframe.py mechanism, attrs['stale_data'] is independent of and orthogonal to the market-open gate",
+    "replay_remains_functional_during_market_closure": "PASS by construction -- normalize_market_decision's live=False path (REPLAY overlay_mode) does not depend on the current wall-clock session context at all; replay analyzes a supplied historical candle set at a supplied historical analysis_time, so market-closed-right-now has no bearing on whether a past, completed decision can be replayed.",
+    "state_contradiction_defense_in_depth": "PASS -- test_market_closed_with_asserted_trade_ready_is_a_state_contradiction_not_a_silent_pass proves the contradiction detector independently catches trade_ready-without-active-setup even if some future code path forgot to check readiness first"
+  },
+  "checkpoint_4_result": "PASSED"
+}

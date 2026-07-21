@@ -215,6 +215,18 @@ def get_session_status(
                 "entry_allowed": bool(market_open and context.get("entry_allowed")),
             }
         )
+    elif normalized == "forex":
+        # Phase 4 §4/§5 fix: every other gated asset type (index/equity/
+        # commodity, above) explicitly ANDs market_open into entry_allowed;
+        # forex was the one branch that never did, so entry_allowed could
+        # read True purely because the wall-clock time-of-day matched a
+        # kill-zone window even while the weekend/Friday-close closure made
+        # market_open False -- i.e. the market could appear tradable while
+        # actually closed. Session logic still only ever narrows
+        # entry_allowed, never creates it -- this does not add a new
+        # reason to allow entry, only a missing reason to block it.
+        context["entry_allowed"] = bool(context.get("market_open") and context.get("entry_allowed"))
+        context["market_status_label"] = "Open" if context.get("market_open") else "Closed"
     else:
         context["market_status_label"] = "Open" if context.get("market_open") else "Closed"
     context["asset_type"] = normalized
