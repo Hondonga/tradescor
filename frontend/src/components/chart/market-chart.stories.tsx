@@ -394,13 +394,14 @@ export const AdvancedSmcEnabled: Story = {
   render: () => renderScenario(advancedSmcEnabled, { advanced_smc: true }, "research"),
 };
 
-// --- responsive spot-checks (§16/§20 widths) — one illustrative scenario ---
+// --- responsive spot-checks (Phase 3 §16 widths) — one illustrative scenario ---
 
 const RESOLUTIONS: Array<[string, number, number]> = [
   ["1920x1080", 1920, 1080],
   ["1536x864", 1536, 864],
   ["1440x900", 1440, 900],
   ["1280x800", 1280, 800],
+  ["1024x768", 1024, 768],
 ];
 
 function renderAtWidth(decision: NormalizedDecision, width: number, height: number) {
@@ -433,3 +434,4 @@ export const TradeReadySell_1920x1080: Story = { render: () => renderAtWidth(tra
 export const TradeReadySell_1536x864: Story = { render: () => renderAtWidth(tradeReadySell, RESOLUTIONS[1][1], RESOLUTIONS[1][2]) };
 export const TradeReadySell_1440x900: Story = { render: () => renderAtWidth(tradeReadySell, RESOLUTIONS[2][1], RESOLUTIONS[2][2]) };
 export const TradeReadySell_1280x800: Story = { render: () => renderAtWidth(tradeReadySell, RESOLUTIONS[3][1], RESOLUTIONS[3][2]) };
+export const TradeReadySell_1024x768: Story = { render: () => renderAtWidth(tradeReadySell, RESOLUTIONS[4][1], RESOLUTIONS[4][2]) };
