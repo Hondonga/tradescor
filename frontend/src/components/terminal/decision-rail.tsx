@@ -13,6 +13,13 @@ import { Button } from "@/components/ui/button";
 import { formatPrice, titleCase } from "@/lib/utils";
 import type { NormalizedDecision } from "@/types";
 
+// Phase 3 §11 — required top-level section order: MARKET STATE, ACTIVE
+// SETUP, WHAT IS MISSING, TRADE PLAN, NEXT ACTION, DETAILS, DIAGNOSTICS.
+// Every blocker/next-action string rendered here already arrives
+// pre-translated from the backend (analysis/blocker_translations.py, wired
+// into first_blocking_gate/next_action at the engine layer) -- this
+// component never shows a raw underscored code as primary text; raw codes
+// only ever appear inside the collapsed DIAGNOSTICS group.
 export function DecisionRail() {
   const store = useTerminalStore();
   const { decision, dataReadiness } = store;
@@ -59,10 +66,14 @@ export function DecisionRail() {
     string,
     string | undefined
   >;
+  const tradeReady = Boolean(decision.decision.trade_ready);
   const planVisible = Boolean(
-    activeSetup &&
-      decision.trade_plan?.available === true &&
-      decision.decision.trade_ready,
+    activeSetup && decision.trade_plan?.available === true && tradeReady,
+  );
+  const primaryBlocker =
+    activeSetup?.first_blocking_gate || decision.decision.first_blocking_gate;
+  const strategyLabel = titleCase(
+    decision.ownership.selected_strategy_id || decision.ownership.selected_model_id,
   );
 
   return (
@@ -75,17 +86,10 @@ export function DecisionRail() {
       )}
       <DecisionHeader decision={decision} />
 
+      {/* 1. MARKET STATE */}
       <section className="border-b border-white/[.07] p-4">
-        <p className="label">Current market</p>
+        <p className="label">Market state</p>
         <dl className="detail-grid mt-3">
-          <dt>External structure</dt>
-          <dd>{titleCase(currentMarket.external_structure) || "—"}</dd>
-          <dt>Condition</dt>
-          <dd>
-            {titleCase(
-              text(currentMarket.condition) || currentMarket.internal_structure,
-            ) || "—"}
-          </dd>
           <dt>Direction</dt>
           <dd>
             {titleCase(
@@ -94,12 +98,22 @@ export function DecisionRail() {
                 "neutral",
             )}
           </dd>
+          <dt>External structure</dt>
+          <dd>{titleCase(currentMarket.external_structure) || "—"}</dd>
+          <dt>Condition</dt>
+          <dd>
+            {titleCase(
+              text(currentMarket.condition) || currentMarket.internal_structure,
+            ) || "—"}
+          </dd>
+          <dt>Data freshness</dt>
+          <dd>{titleCase(decision.readiness.state)}</dd>
+          <dt>Strategy</dt>
+          <dd>{strategyLabel || "—"}</dd>
           <dt>Current price</dt>
           <dd className="font-mono">
             {formatPrice(currentMarket.current_price, decision.precision)}
           </dd>
-          <dt>Data state</dt>
-          <dd>{titleCase(decision.readiness.state)}</dd>
         </dl>
       </section>
 
@@ -120,6 +134,7 @@ export function DecisionRail() {
         </section>
       )}
 
+      {/* 2. ACTIVE SETUP */}
       {activeSetup ? (
         <section className="border-b border-white/[.07] p-4">
           <p className="label">Active setup</p>
@@ -127,7 +142,9 @@ export function DecisionRail() {
             {titleCase(activeSetup.setup_type || "Active setup")}
           </h3>
           <dl className="detail-grid mt-3">
-            <dt>Stage</dt>
+            <dt>Direction</dt>
+            <dd>{titleCase(text(activeSetup.direction)) || "—"}</dd>
+            <dt>Lifecycle</dt>
             <dd>
               {titleCase(
                 text(activeSetup.lifecycle) ||
@@ -135,15 +152,15 @@ export function DecisionRail() {
                   activeSetup.stage,
               )}
             </dd>
-            <dt>Blocker</dt>
+            <dt>Setup area</dt>
             <dd>
-              {activeSetup.first_blocking_gate ||
-                decision.decision.first_blocking_gate ||
-                "None"}
+              {decision.setup.entry_area
+                ? `${formatPrice(decision.setup.entry_area.low, decision.precision)} – ${formatPrice(decision.setup.entry_area.high, decision.precision)}`
+                : "—"}
             </dd>
-            <dt>Waiting for</dt>
-            <dd>{activeSetup.next_required_condition || "—"}</dd>
-            <dt>Idea invalidation</dt>
+            <dt>Confirmation</dt>
+            <dd>{decision.setup.completed_confirmation ? "Confirmed" : "Pending"}</dd>
+            <dt>Invalidation</dt>
             <dd>
               {formatPrice(activeSetup.invalidation?.price, decision.precision)}
             </dd>
@@ -153,12 +170,6 @@ export function DecisionRail() {
               {activeSetup.invalidation.condition}
             </p>
           )}
-          <details className="mt-3">
-            <summary className="cursor-pointer text-[9px] text-zinc-600">Setup ID</summary>
-            <p className="mt-1 break-all font-mono text-[9px] text-zinc-600">
-              {activeSetup.setup_id}
-            </p>
-          </details>
         </section>
       ) : (
         <section className="border-b border-white/[.07] p-4">
@@ -185,20 +196,57 @@ export function DecisionRail() {
               <br />
               Bearish: {jumpLevels.bearish || "—"}
             </dd>
-            <dt>Plan blocker</dt>
-            <dd>{decision.setup.plan_blocker || "Trade plan unavailable"}</dd>
           </dl>
         </section>
       )}
 
+      {/* 3. WHAT IS MISSING -- one clear primary blocker, plain translated text */}
+      {activeSetup && !tradeReady && (
+        <section className="border-b border-white/[.07] p-4">
+          <p className="label">What is missing</p>
+          <p className="mt-2 text-xs leading-5 text-zinc-300">
+            {primaryBlocker || "Waiting for the next completed structural condition."}
+          </p>
+          {activeSetup.next_required_condition && (
+            <p className="mt-2 text-[11px] leading-5 text-zinc-500">
+              {activeSetup.next_required_condition}
+            </p>
+          )}
+        </section>
+      )}
+
+      {/* 4. TRADE PLAN -- only when available */}
       {planVisible && <TradeReadyPlan decision={decision} />}
 
+      {/* 5. NEXT ACTION -- plain language */}
       <section className="border-b border-white/[.07] p-4">
         <p className="label">Next action</p>
         <p className="mt-2 text-xs leading-5 text-zinc-300">
           {decision.decision.next_action}
         </p>
       </section>
+
+      {/* 6. DETAILS -- target source, structural source, setup ownership, timeframe context */}
+      {activeSetup && (
+        <details className="border-b border-white/[.07] p-4">
+          <summary className="flex cursor-pointer list-none items-center justify-between text-xs text-zinc-400">
+            Details
+            <ChevronDown size={13} />
+          </summary>
+          <dl className="detail-grid mt-3">
+            <dt>Target source</dt>
+            <dd>{titleCase(decision.setup.target_source) || "—"}</dd>
+            <dt>Target timeframe</dt>
+            <dd>{decision.setup.target_timeframe || "—"}</dd>
+            <dt>Structural timeframe</dt>
+            <dd>{decision.meta.timeframe}</dd>
+            <dt>Setup ownership</dt>
+            <dd className="break-all">{decision.ownership.decision_owner_id}</dd>
+            <dt>Setup ID</dt>
+            <dd className="break-all font-mono">{activeSetup.setup_id}</dd>
+          </dl>
+        </details>
+      )}
 
       {Boolean(decision.previous_setup) && (
         <details className="border-b border-white/[.07] p-4">
@@ -239,12 +287,15 @@ export function DecisionRail() {
         </section>
       )}
 
+      {/* 7. DIAGNOSTICS -- collapsed by default; opens only via the
+          toolbar's explicit Diagnostics toggle. Raw codes live here, never
+          in the sections above. */}
       {[
         ["Evidence", activeSetup || currentMarket],
         ["SMC entities", activeSetup || currentMarket],
         ["Diagnostics", decision.diagnostics],
       ].map(([label, value]) => (
-        <details key={label as string} className="border-b border-white/[.07] p-4">
+        <details key={label as string} open={store.diagnosticsVisible} className="border-b border-white/[.07] p-4">
           <summary className="flex cursor-pointer list-none items-center justify-between text-xs text-zinc-400">
             {label as string}
             <ChevronDown size={13} />
