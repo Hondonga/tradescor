@@ -1,0 +1,24 @@
+{
+  "generated_at": "2026-07-21T03:24:34.612560+00:00",
+  "layers": {
+    "1_strategy_reachability_gate": "analysis/strategy_reachability_gate.py clears trade_ready/entry/stop/targets for any non-reachable strategy before a decision ever reaches the paper layer (verified in tests/test_strategy_quarantine_registry.py).",
+    "2_registerable_paper_setup_geometry_gate": "paper_testing/derived_setup_tracker.py:registerable_paper_setup requires trade_ready, valid invariants, setup_id, buy/sell direction, entry, stop, tp1, positive risk, tp1_rr>=1.5, and a non-terminal timing_state. Deliberately strategy-agnostic -- it verifies plan COMPLETENESS, not strategy eligibility (that's layer 1's job); tests/test_smc_structural_target_repair.py::test_setup_constructor_geometry_is_symmetric_for_registered_setup_names exercises this as a pure geometry-construction check across setup shapes and would break if strategy-eligibility were added here, so it was deliberately left alone.",
+    "3_database_uniqueness_constraints": "paper_testing/derived_paper_store.py: paper_setups.setup_id is UNIQUE, paper_decisions.dedupe_key is UNIQUE -- duplicate registration is rejected at the SQLite layer regardless of application-level bugs."
+  },
+  "checks": {
+    "buy_paper_fixture_registers_once": true,
+    "sell_paper_fixture_registers_once": true,
+    "incomplete_plans_do_not_register": true,
+    "duplicate_registration_prevented": true,
+    "existing_paper_databases_intact": true,
+    "research_only_strategies_cannot_reach_registerable_state": true
+  },
+  "evidence": [
+    "tests/test_strategy_setup_proof_harness.py::test_focused_buy_and_sell_complete_paper_lifecycle (passed)",
+    "tests/test_smc_structural_target_repair.py::test_jd75_event_risk_and_missing_levels_can_never_be_ready_or_registered (passed)",
+    "tests/test_strategy_quarantine_registry.py::test_auto_gate_actually_blocks_a_non_reachable_jump_result / _boom_crash_result (passed)",
+    "data/derived_paper_testing.db's byte checksum has changed since the Phase 1 backup, but this is the independently-running live backend process (pid confirmed running since before Phase 1) organically recording real periodic analysis -- paper_decisions rows are timestamped ~5-10 minutes apart matching live polling cadence, not a burst consistent with a test run. No Phase 2 code or test wrote to this file; schema and existing rows are untouched, only new rows were appended by normal live operation."
+  ],
+  "checkpoint_12_result": "PASSED",
+  "code_changes": "None. This is a verification-only checkpoint."
+}
