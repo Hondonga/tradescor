@@ -1,0 +1,1186 @@
+{
+  "generated_at": "2026-07-21T04:03:44.928071+00:00",
+  "section": "PHASE 3 checkpoint 0 - frozen ML checksum re-verification",
+  "method": "Recomputed SHA-256 over the exact file set recorded in the Phase 1 baseline (data/stabilization/reports/ml_artifact_integrity.json) and compared byte-for-byte, without touching any ML artifact.",
+  "dataset_id": "ml-r75-f4c52d93c7a8dc3e95f1",
+  "dataset_recheck": {
+    "data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/manifest.json": {
+      "baseline_hash_prefix64": "0cb86750ec4fef5364c17ab7d160a96a1ef02f8b8685ff3375aa4e9fb5e6d1b9",
+      "current_hash": "0cb86750ec4fef5364c17ab7d160a96a1ef02f8b8685ff3375aa4e9fb5e6d1b9",
+      "unchanged": true
+    },
+    "data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/features.parquet": {
+      "baseline_hash_prefix64": "17f781c67e93a6887c2386cb181e01e638961d1c71268a90f5cce8b277e720c3",
+      "current_hash": "17f781c67e93a6887c2386cb181e01e638961d1c71268a90f5cce8b277e720c3",
+      "unchanged": true
+    },
+    "data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/sequences.npz": {
+      "baseline_hash_prefix64": "94098e2acc269498c66a7fb1c0b64c0c7436c0b3499ac781c348c53fa6f2bbe4",
+      "current_hash": "94098e2acc269498c66a7fb1c0b64c0c7436c0b3499ac781c348c53fa6f2bbe4",
+      "unchanged": true
+    },
+    "data/ml/checkpoints/ml-r75-f4c52d93c7a8dc3e95f1.json": {
+      "baseline_hash_prefix64": "984c28b74f261b97dc9c721a2e1d0caf88d83ce112e2bd3875b3a0f322158add",
+      "current_hash": "984c28b74f261b97dc9c721a2e1d0caf88d83ce112e2bd3875b3a0f322158add",
+      "unchanged": true
+    },
+    "data/ml/checkpoints/ml-r75-f4c52d93c7a8dc3e95f1-audit.json": {
+      "baseline_hash_prefix64": "1dad92dc85d8412e30bdf71578789b96c7c265f7a8297b9fcb3dafb5655b305f",
+      "current_hash": "1dad92dc85d8412e30bdf71578789b96c7c265f7a8297b9fcb3dafb5655b305f",
+      "unchanged": true
+    }
+  },
+  "dataset_all_unchanged": true,
+  "model_run_id": "ml-run-610209ec3d9146ae",
+  "model_recheck": {
+    "data/ml/models/ml-run-610209ec3d9146ae/metadata.json": {
+      "baseline_hash_prefix64": "ec23b4fe67d203aa9878f81e44d980708e139786ef99707ea4d416daf7768c4b",
+      "current_hash": "ec23b4fe67d203aa9878f81e44d980708e139786ef99707ea4d416daf7768c4b",
+      "unchanged": true
+    },
+    "data/ml/models/ml-run-610209ec3d9146ae/model.pkl": {
+      "baseline_hash_prefix64": "4e56be1db505d0eaa6743257a53abafe65fc1d51277626937ce73c039bf7e661",
+      "current_hash": "4e56be1db505d0eaa6743257a53abafe65fc1d51277626937ce73c039bf7e661",
+      "unchanged": true
+    },
+    "data/ml/models/ml-run-610209ec3d9146ae/preprocessor.pkl": {
+      "baseline_hash_prefix64": "4031ae71ecad5a7beadbeba04d8e33d6cf1b1b59f29afa496c9fa2c3ff4ec239",
+      "current_hash": "4031ae71ecad5a7beadbeba04d8e33d6cf1b1b59f29afa496c9fa2c3ff4ec239",
+      "unchanged": true
+    },
+    "data/ml/models/ml-run-610209ec3d9146ae/test_predictions.parquet": {
+      "baseline_hash_prefix64": "909014830d26ab4e603a861d0f74034a8b95ef328f18ad60f3916cef48af8923",
+      "current_hash": "909014830d26ab4e603a861d0f74034a8b95ef328f18ad60f3916cef48af8923",
+      "unchanged": true
+    },
+    "data/ml/models/ml-run-610209ec3d9146ae/training_weights.parquet": {
+      "baseline_hash_prefix64": "e98a9a4f2a2ef06ce8e4dce1f771f30dc25b729d493d65206cddbcc103ef102f",
+      "current_hash": "e98a9a4f2a2ef06ce8e4dce1f771f30dc25b729d493d65206cddbcc103ef102f",
+      "unchanged": true
+    },
+    "data/ml/training_runs/ml-run-610209ec3d9146ae.json": {
+      "baseline_hash_prefix64": "2facdd43170d171a3c682f3acde56adaff8270dbd171724963b1ffe73b782946",
+      "current_hash": "2facdd43170d171a3c682f3acde56adaff8270dbd171724963b1ffe73b782946",
+      "unchanged": true
+    },
+    "data/ml/training_reports/ml-run-610209ec3d9146ae.json": {
+      "baseline_hash_prefix64": "90a4c3217944bff9c4625a141e1e47298ac8b365acb4c90cfdeeda609297e374",
+      "current_hash": "90a4c3217944bff9c4625a141e1e47298ac8b365acb4c90cfdeeda609297e374",
+      "unchanged": true
+    }
+  },
+  "model_all_unchanged": true,
+  "current_training_run_model_status": "REJECTED_POOR_CALIBRATION",
+  "current_training_run_live_activation_available": false,
+  "current_training_run_dataset_checksum_verified": true,
+  "current_training_run_record_full": {
+    "artifact_path": "data/ml/models/ml-run-610209ec3d9146ae",
+    "created_at": "2026-07-20T13:43:08.520300+00:00",
+    "current_model": "logistic_unweighted",
+    "dataset_checksum_verified": true,
+    "dataset_id": "ml-r75-f4c52d93c7a8dc3e95f1",
+    "elapsed_seconds": 2.099,
+    "excluded_samples": 1769,
+    "finished_at": "2026-07-20T13:43:10.620407+00:00",
+    "live_activation_available": false,
+    "model_status": "REJECTED_POOR_CALIBRATION",
+    "progress": 100,
+    "report": {
+      "dataset": {
+        "application_version": "tradescor-smc-ml-foundation-v1",
+        "buy_setups": 975,
+        "candle_checksum": "b57b907d51b856de88428312f91f3dcbd4c36bc6114788068f1ea14ee5e2908b",
+        "checksum": "737b02ea7c98fa68131920cc0fb6f5b438a8504dc2898aea14c1ce4c0b178b23",
+        "config_hash": "b01471f25a7f63e300a2c7f92e68fa5f141cc4880b1d8353935faff5f8fa4b98",
+        "coverage": {
+          "actual_end": "2026-07-20T05:44:00+00:00",
+          "actual_start": "2026-04-21T05:45:00+00:00",
+          "duplicate_intervals": 0,
+          "missing_m1_count": 0,
+          "missing_m1_intervals": [],
+          "requested_end": "2026-07-20T05:45:00+00:00",
+          "requested_start": "2026-04-21T05:45:00+00:00",
+          "total_m1_candles": 129600
+        },
+        "dataset_id": "ml-r75-f4c52d93c7a8dc3e95f1",
+        "engine_version": "volatility_structure_pullback_engine-v1",
+        "feature_schema_hash": "a1fed054f38cf3f064d820df2e0abbdfe40992bbd8e129c680217e2e39cbaac1",
+        "frozen": true,
+        "immutable": true,
+        "leakage_violations": 0,
+        "period": {
+          "actual_end": "2026-07-20T05:44:00+00:00",
+          "actual_start": "2026-04-21T05:45:00+00:00",
+          "days": 90,
+          "requested_end": "2026-07-20T05:45:00+00:00",
+          "requested_start": "2026-04-21T05:45:00+00:00",
+          "selection": "fixed_trailing_calendar_period"
+        },
+        "resolved_rows": 674,
+        "rows": 2442,
+        "schema_version": "smc-ml-features-v1",
+        "sell_setups": 751,
+        "setups": 1726,
+        "source": "real_deriv_public_m1",
+        "source_dataset_id": "dataset-d59388b117ef24de8742535d",
+        "splits": {
+          "test": {
+            "end": "2026-07-20T04:00:00+00:00",
+            "purged_sequence_overlap": true,
+            "rows": 475,
+            "shuffled": false,
+            "start": "2026-07-03T05:15:00+00:00",
+            "untouched": true
+          },
+          "train": {
+            "end": "2026-06-14T22:10:00+00:00",
+            "purged_sequence_overlap": true,
+            "rows": 1466,
+            "shuffled": false,
+            "start": "2026-04-22T15:00:00+00:00",
+            "untouched": false
+          },
+          "validation": {
+            "end": "2026-07-02T22:50:00+00:00",
+            "purged_sequence_overlap": true,
+            "rows": 490,
+            "shuffled": false,
+            "start": "2026-06-15T05:00:00+00:00",
+            "untouched": false
+          }
+        },
+        "strategy": "volatility_structure_pullback",
+        "symbol": "R_75",
+        "trade_ready_rows": 674,
+        "training_allowed": false,
+        "training_readiness": {
+          "blocking_requirements": [],
+          "manual_override_allowed": false,
+          "ready": true,
+          "requirements": [
+            {
+              "current": 0,
+              "name": "maximum_leakage_violations",
+              "passed": true,
+              "required": 0
+            },
+            {
+              "current": 0.0,
+              "name": "maximum_unresolved_label_ratio",
+              "passed": true,
+              "required": 0.35
+            },
+            {
+              "current": 329,
+              "name": "minimum_buy_resolved",
+              "passed": true,
+              "required": 35
+            },
+            {
+              "current": 6,
+              "name": "minimum_independent_market_periods",
+              "passed": true,
+              "required": 6
+            },
+            {
+              "current": 456,
+              "name": "minimum_negative_outcomes",
+              "passed": true,
+              "required": 25
+            },
+            {
+              "current": 218,
+              "name": "minimum_positive_outcomes",
+              "passed": true,
+              "required": 25
+            },
+            {
+              "current": 674,
+              "name": "minimum_resolved_entries",
+              "passed": true,
+              "required": 100
+            },
+            {
+              "current": 345,
+              "name": "minimum_sell_resolved",
+              "passed": true,
+              "required": 35
+            },
+            {
+              "current": 674,
+              "name": "minimum_trade_ready_plans",
+              "passed": true,
+              "required": 100
+            },
+            {
+              "current": 1726,
+              "name": "minimum_unique_setup_candidates",
+              "passed": true,
+              "required": 500
+            }
+          ]
+        }
+      },
+      "exclusions": {
+        "not_trade_ready": 1758,
+        "purged_split_boundary": 11
+      },
+      "feature_importance": [
+        {
+          "association": "lower",
+          "feature": "target_source_internal_swing",
+          "standardized_coefficient": -0.9330906708570996
+        },
+        {
+          "association": "lower",
+          "feature": "m15_pullback_depth_pct",
+          "standardized_coefficient": -0.8668242928838154
+        },
+        {
+          "association": "higher",
+          "feature": "target_source_external_swing",
+          "standardized_coefficient": 0.8531836757103936
+        },
+        {
+          "association": "higher",
+          "feature": "m15_pullback_depth_atr",
+          "standardized_coefficient": 0.7234883870659283
+        },
+        {
+          "association": "lower",
+          "feature": "target_age",
+          "standardized_coefficient": -0.556693610910131
+        },
+        {
+          "association": "lower",
+          "feature": "m15_range_width_atr",
+          "standardized_coefficient": -0.5416912072631163
+        },
+        {
+          "association": "lower",
+          "feature": "m5_target_timeframe",
+          "standardized_coefficient": -0.5029257542608474
+        },
+        {
+          "association": "higher",
+          "feature": "h1_atr",
+          "standardized_coefficient": 0.47129641330836586
+        },
+        {
+          "association": "lower",
+          "feature": "m15_setup_distance_atr",
+          "standardized_coefficient": -0.4441521518915098
+        },
+        {
+          "association": "lower",
+          "feature": "m15_premium_discount",
+          "standardized_coefficient": -0.4356238068742714
+        },
+        {
+          "association": "lower",
+          "feature": "h1_swing_low_distance_atr",
+          "standardized_coefficient": -0.41394358240644996
+        },
+        {
+          "association": "higher",
+          "feature": "m15_swing_low_distance_atr",
+          "standardized_coefficient": 0.28910260884308553
+        },
+        {
+          "association": "higher",
+          "feature": "h1_overlap_ratio",
+          "standardized_coefficient": 0.26386740156690486
+        },
+        {
+          "association": "lower",
+          "feature": "m5_retracement_depth",
+          "standardized_coefficient": -0.2357247306723955
+        },
+        {
+          "association": "higher",
+          "feature": "returns_20",
+          "standardized_coefficient": 0.23252756547869324
+        },
+        {
+          "association": "higher",
+          "feature": "m5_confirmation_age",
+          "standardized_coefficient": 0.23100595304867183
+        },
+        {
+          "association": "higher",
+          "feature": "rolling_volatility",
+          "standardized_coefficient": 0.2036182114785376
+        },
+        {
+          "association": "higher",
+          "feature": "m5_entry_distance_atr",
+          "standardized_coefficient": 0.1816923954137319
+        },
+        {
+          "association": "higher",
+          "feature": "m5_chase_distance_atr",
+          "standardized_coefficient": 0.1816923954137319
+        },
+        {
+          "association": "higher",
+          "feature": "m5_close_location",
+          "standardized_coefficient": 0.1779562962678924
+        },
+        {
+          "association": "higher",
+          "feature": "m5_displacement_body_atr",
+          "standardized_coefficient": 0.1624367010507788
+        },
+        {
+          "association": "higher",
+          "feature": "h1_external_structure",
+          "standardized_coefficient": 0.16055301133157732
+        },
+        {
+          "association": "higher",
+          "feature": "h1_active_leg_direction",
+          "standardized_coefficient": 0.16055301133157732
+        },
+        {
+          "association": "higher",
+          "feature": "h1_latest_bos_direction",
+          "standardized_coefficient": 0.16055301133157732
+        },
+        {
+          "association": "higher",
+          "feature": "h1_directional_efficiency",
+          "standardized_coefficient": 0.14526530631030868
+        },
+        {
+          "association": "lower",
+          "feature": "m5_tp1_rr",
+          "standardized_coefficient": -0.13329777578290616
+        },
+        {
+          "association": "higher",
+          "feature": "returns_5",
+          "standardized_coefficient": 0.132986096852192
+        },
+        {
+          "association": "lower",
+          "feature": "m5_displacement_range_atr",
+          "standardized_coefficient": -0.10351897112277215
+        },
+        {
+          "association": "lower",
+          "feature": "returns_10",
+          "standardized_coefficient": -0.07796506645252502
+        },
+        {
+          "association": "higher",
+          "feature": "m15_swing_high_distance_atr",
+          "standardized_coefficient": 0.06797523120934379
+        },
+        {
+          "association": "lower",
+          "feature": "m5_directional_close_count",
+          "standardized_coefficient": -0.053177719339678665
+        },
+        {
+          "association": "lower",
+          "feature": "m15_displacement_strength",
+          "standardized_coefficient": -0.051934473646688635
+        },
+        {
+          "association": "higher",
+          "feature": "h1_swing_high_distance_atr",
+          "standardized_coefficient": 0.05193115481095768
+        },
+        {
+          "association": "lower",
+          "feature": "h1_active_leg_age",
+          "standardized_coefficient": -0.04948959384780783
+        },
+        {
+          "association": "lower",
+          "feature": "h1_latest_bos_age",
+          "standardized_coefficient": -0.04948959384780783
+        },
+        {
+          "association": "lower",
+          "feature": "m5_target_distance_atr",
+          "standardized_coefficient": -0.04664108344629797
+        },
+        {
+          "association": "higher",
+          "feature": "returns_50",
+          "standardized_coefficient": 0.03807522566887663
+        },
+        {
+          "association": "lower",
+          "feature": "m5_structure_break_distance_atr",
+          "standardized_coefficient": -0.03486447504109931
+        },
+        {
+          "association": "higher",
+          "feature": "m5_stop_distance_atr",
+          "standardized_coefficient": 0.022521920499049553
+        },
+        {
+          "association": "higher",
+          "feature": "h1_active_leg_distance_atr",
+          "standardized_coefficient": 0.005790011218386162
+        },
+        {
+          "association": "lower",
+          "feature": "rolling_directional_efficiency",
+          "standardized_coefficient": -0.003564250854269438
+        },
+        {
+          "association": "lower",
+          "feature": "m15_condition",
+          "standardized_coefficient": 0.0
+        },
+        {
+          "association": "lower",
+          "feature": "m15_location_valid",
+          "standardized_coefficient": 0.0
+        },
+        {
+          "association": "lower",
+          "feature": "m5_bos",
+          "standardized_coefficient": 0.0
+        },
+        {
+          "association": "lower",
+          "feature": "m5_mss",
+          "standardized_coefficient": 0.0
+        },
+        {
+          "association": "lower",
+          "feature": "target_consumed",
+          "standardized_coefficient": 0.0
+        }
+      ],
+      "metadata": {
+        "calibration_method": "isotonic",
+        "code_version": "tradescor-offline-baseline-v1",
+        "configuration_hash": "4138ffb90f790d6fec3b9c0b4134e7f1b681c3727452e69025225920229a6d15",
+        "dataset_checksum": "737b02ea7c98fa68131920cc0fb6f5b438a8504dc2898aea14c1ce4c0b178b23",
+        "dataset_id": "ml-r75-f4c52d93c7a8dc3e95f1",
+        "dependencies": {
+          "numpy": "2.4.4",
+          "python": "3.14.4",
+          "scikit_learn": "1.8.0"
+        },
+        "feature_ordering": [
+          "h1_external_structure",
+          "h1_active_leg_direction",
+          "h1_active_leg_distance_atr",
+          "h1_active_leg_age",
+          "h1_latest_bos_direction",
+          "h1_latest_bos_age",
+          "h1_swing_high_distance_atr",
+          "h1_swing_low_distance_atr",
+          "h1_atr",
+          "h1_directional_efficiency",
+          "h1_overlap_ratio",
+          "m15_condition",
+          "m15_pullback_depth_pct",
+          "m15_pullback_depth_atr",
+          "m15_setup_distance_atr",
+          "m15_premium_discount",
+          "m15_swing_high_distance_atr",
+          "m15_swing_low_distance_atr",
+          "m15_displacement_strength",
+          "m15_range_width_atr",
+          "m15_location_valid",
+          "m5_displacement_body_atr",
+          "m5_displacement_range_atr",
+          "m5_close_location",
+          "m5_directional_close_count",
+          "m5_bos",
+          "m5_mss",
+          "m5_structure_break_distance_atr",
+          "m5_retracement_depth",
+          "m5_entry_distance_atr",
+          "m5_stop_distance_atr",
+          "m5_target_distance_atr",
+          "m5_target_timeframe",
+          "m5_tp1_rr",
+          "m5_chase_distance_atr",
+          "m5_confirmation_age",
+          "target_source",
+          "target_age",
+          "target_consumed",
+          "returns_5",
+          "returns_10",
+          "returns_20",
+          "returns_50",
+          "rolling_volatility",
+          "rolling_directional_efficiency"
+        ],
+        "feature_schema_version": "smc-ml-features-v1",
+        "model_id": "model-495e93f5c3331938",
+        "model_type": "logistic_unweighted",
+        "selected_threshold": 0.4,
+        "training_timestamp": "2026-07-20T13:43:10.615001+00:00",
+        "transformed_features": [
+          "h1_external_structure",
+          "h1_active_leg_direction",
+          "h1_active_leg_distance_atr",
+          "h1_active_leg_age",
+          "h1_latest_bos_direction",
+          "h1_latest_bos_age",
+          "h1_swing_high_distance_atr",
+          "h1_swing_low_distance_atr",
+          "h1_atr",
+          "h1_directional_efficiency",
+          "h1_overlap_ratio",
+          "m15_condition",
+          "m15_pullback_depth_pct",
+          "m15_pullback_depth_atr",
+          "m15_setup_distance_atr",
+          "m15_premium_discount",
+          "m15_swing_high_distance_atr",
+          "m15_swing_low_distance_atr",
+          "m15_displacement_strength",
+          "m15_range_width_atr",
+          "m15_location_valid",
+          "m5_displacement_body_atr",
+          "m5_displacement_range_atr",
+          "m5_close_location",
+          "m5_directional_close_count",
+          "m5_bos",
+          "m5_mss",
+          "m5_structure_break_distance_atr",
+          "m5_retracement_depth",
+          "m5_entry_distance_atr",
+          "m5_stop_distance_atr",
+          "m5_target_distance_atr",
+          "m5_target_timeframe",
+          "m5_tp1_rr",
+          "m5_chase_distance_atr",
+          "m5_confirmation_age",
+          "target_age",
+          "target_consumed",
+          "returns_5",
+          "returns_10",
+          "returns_20",
+          "returns_50",
+          "rolling_volatility",
+          "rolling_directional_efficiency",
+          "target_source_external_swing",
+          "target_source_internal_swing"
+        ]
+      },
+      "model_status": "REJECTED_POOR_CALIBRATION",
+      "models": [
+        {
+          "calibration": "none",
+          "name": "dummy_majority",
+          "selected_threshold": 0.5,
+          "validation_metrics": {
+            "balanced_accuracy": 0.5,
+            "brier_score": 0.3333333333333333,
+            "confusion_matrix": [
+              [
+                96,
+                0
+              ],
+              [
+                48,
+                0
+              ]
+            ],
+            "ece": 0.3333333333333333,
+            "f1": 0.0,
+            "log_loss": 12.014551129705717,
+            "mcc": 0.0,
+            "pr_auc": 0.3333333333333333,
+            "precision": 0.0,
+            "recall": 0.0,
+            "roc_auc": 0.5,
+            "specificity": 1.0
+          }
+        },
+        {
+          "calibration": "none",
+          "name": "dummy_prior",
+          "selected_threshold": 0.5,
+          "validation_metrics": {
+            "balanced_accuracy": 0.5,
+            "brier_score": 0.22259894247716716,
+            "confusion_matrix": [
+              [
+                96,
+                0
+              ],
+              [
+                48,
+                0
+              ]
+            ],
+            "ece": 0.01940928270042197,
+            "f1": 0.0,
+            "log_loss": 0.637379362446309,
+            "mcc": 0.0,
+            "pr_auc": 0.3333333333333333,
+            "precision": 0.0,
+            "recall": 0.0,
+            "roc_auc": 0.5,
+            "specificity": 1.0
+          }
+        },
+        {
+          "calibration": "none",
+          "name": "logistic_unweighted",
+          "selected_threshold": 0.7,
+          "validation_metrics": {
+            "balanced_accuracy": 0.6041666666666666,
+            "brier_score": 0.27090987919249404,
+            "confusion_matrix": [
+              [
+                52,
+                44
+              ],
+              [
+                16,
+                32
+              ]
+            ],
+            "ece": 0.2559992170523921,
+            "f1": 0.5161290322580645,
+            "log_loss": 0.7559026473878897,
+            "mcc": 0.19672236884115843,
+            "pr_auc": 0.4377143100588101,
+            "precision": 0.42105263157894735,
+            "recall": 0.6666666666666666,
+            "roc_auc": 0.6026475694444444,
+            "specificity": 0.5416666666666666
+          }
+        },
+        {
+          "calibration": "sigmoid",
+          "name": "logistic_unweighted",
+          "selected_threshold": 0.35,
+          "validation_metrics": {
+            "balanced_accuracy": 0.5052083333333334,
+            "brier_score": 0.2151126364460487,
+            "confusion_matrix": [
+              [
+                93,
+                3
+              ],
+              [
+                46,
+                2
+              ]
+            ],
+            "ece": 0.02098465972053271,
+            "f1": 0.07547169811320754,
+            "log_loss": 0.6199549082375886,
+            "mcc": 0.026822089039291005,
+            "pr_auc": 0.4377143100588101,
+            "precision": 0.4,
+            "recall": 0.041666666666666664,
+            "roc_auc": 0.6026475694444444,
+            "specificity": 0.96875
+          }
+        },
+        {
+          "calibration": "isotonic",
+          "name": "logistic_unweighted",
+          "selected_threshold": 0.4,
+          "validation_metrics": {
+            "balanced_accuracy": 0.5208333333333334,
+            "brier_score": 0.20063950257915775,
+            "confusion_matrix": [
+              [
+                96,
+                0
+              ],
+              [
+                46,
+                2
+              ]
+            ],
+            "ece": 2.0816681711721685e-17,
+            "f1": 0.08,
+            "log_loss": 0.5728836266015424,
+            "mcc": 0.16783627165933782,
+            "pr_auc": 0.45474137578145213,
+            "precision": 1.0,
+            "recall": 0.041666666666666664,
+            "roc_auc": 0.6583116319444444,
+            "specificity": 1.0
+          }
+        },
+        {
+          "calibration": "none",
+          "name": "logistic_balanced",
+          "selected_threshold": 0.8,
+          "validation_metrics": {
+            "balanced_accuracy": 0.5416666666666666,
+            "brier_score": 0.3408552809929749,
+            "confusion_matrix": [
+              [
+                26,
+                70
+              ],
+              [
+                9,
+                39
+              ]
+            ],
+            "ece": 0.3306180860118954,
+            "f1": 0.4968152866242038,
+            "log_loss": 0.9498905613182386,
+            "mcc": 0.0915857103095044,
+            "pr_auc": 0.44576757838228315,
+            "precision": 0.3577981651376147,
+            "recall": 0.8125,
+            "roc_auc": 0.6011284722222222,
+            "specificity": 0.2708333333333333
+          }
+        },
+        {
+          "calibration": "sigmoid",
+          "name": "logistic_balanced",
+          "selected_threshold": 0.35,
+          "validation_metrics": {
+            "balanced_accuracy": 0.5052083333333334,
+            "brier_score": 0.2151296449132635,
+            "confusion_matrix": [
+              [
+                93,
+                3
+              ],
+              [
+                46,
+                2
+              ]
+            ],
+            "ece": 0.028965706932010497,
+            "f1": 0.07547169811320754,
+            "log_loss": 0.6201786804908438,
+            "mcc": 0.026822089039291005,
+            "pr_auc": 0.44576757838228315,
+            "precision": 0.4,
+            "recall": 0.041666666666666664,
+            "roc_auc": 0.6011284722222222,
+            "specificity": 0.96875
+          }
+        },
+        {
+          "calibration": "isotonic",
+          "name": "logistic_balanced",
+          "selected_threshold": 0.4,
+          "validation_metrics": {
+            "balanced_accuracy": 0.5260416666666666,
+            "brier_score": 0.2051308699477658,
+            "confusion_matrix": [
+              [
+                93,
+                3
+              ],
+              [
+                44,
+                4
+              ]
+            ],
+            "ece": 0.00694444444444446,
+            "f1": 0.14545454545454545,
+            "log_loss": 0.5892424312495563,
+            "mcc": 0.11416834431938576,
+            "pr_auc": 0.44605431285163805,
+            "precision": 0.5714285714285714,
+            "recall": 0.08333333333333333,
+            "roc_auc": 0.636501736111111,
+            "specificity": 0.96875
+          }
+        },
+        {
+          "calibration": "none",
+          "name": "logistic_setup_weighted",
+          "selected_threshold": 0.7,
+          "validation_metrics": {
+            "balanced_accuracy": 0.6041666666666666,
+            "brier_score": 0.27090987919249404,
+            "confusion_matrix": [
+              [
+                52,
+                44
+              ],
+              [
+                16,
+                32
+              ]
+            ],
+            "ece": 0.2559992170523921,
+            "f1": 0.5161290322580645,
+            "log_loss": 0.7559026473878897,
+            "mcc": 0.19672236884115843,
+            "pr_auc": 0.4377143100588101,
+            "precision": 0.42105263157894735,
+            "recall": 0.6666666666666666,
+            "roc_auc": 0.6026475694444444,
+            "specificity": 0.5416666666666666
+          }
+        },
+        {
+          "calibration": "sigmoid",
+          "name": "logistic_setup_weighted",
+          "selected_threshold": 0.35,
+          "validation_metrics": {
+            "balanced_accuracy": 0.5052083333333334,
+            "brier_score": 0.2151126364460487,
+            "confusion_matrix": [
+              [
+                93,
+                3
+              ],
+              [
+                46,
+                2
+              ]
+            ],
+            "ece": 0.02098465972053271,
+            "f1": 0.07547169811320754,
+            "log_loss": 0.6199549082375886,
+            "mcc": 0.026822089039291005,
+            "pr_auc": 0.4377143100588101,
+            "precision": 0.4,
+            "recall": 0.041666666666666664,
+            "roc_auc": 0.6026475694444444,
+            "specificity": 0.96875
+          }
+        },
+        {
+          "calibration": "isotonic",
+          "name": "logistic_setup_weighted",
+          "selected_threshold": 0.4,
+          "validation_metrics": {
+            "balanced_accuracy": 0.5208333333333334,
+            "brier_score": 0.20063950257915775,
+            "confusion_matrix": [
+              [
+                96,
+                0
+              ],
+              [
+                46,
+                2
+              ]
+            ],
+            "ece": 2.0816681711721685e-17,
+            "f1": 0.08,
+            "log_loss": 0.5728836266015424,
+            "mcc": 0.16783627165933782,
+            "pr_auc": 0.45474137578145213,
+            "precision": 1.0,
+            "recall": 0.041666666666666664,
+            "roc_auc": 0.6583116319444444,
+            "specificity": 1.0
+          }
+        },
+        {
+          "calibration": "none",
+          "name": "gradient_boosting",
+          "selected_threshold": 0.5,
+          "validation_metrics": {
+            "balanced_accuracy": 0.4635416666666667,
+            "brier_score": 0.26883541999551586,
+            "confusion_matrix": [
+              [
+                81,
+                15
+              ],
+              [
+                44,
+                4
+              ]
+            ],
+            "ece": 0.23477605003909593,
+            "f1": 0.11940298507462686,
+            "log_loss": 0.7503383108214884,
+            "mcc": -0.10156667501540163,
+            "pr_auc": 0.2815526542997233,
+            "precision": 0.21052631578947367,
+            "recall": 0.08333333333333333,
+            "roc_auc": 0.4053819444444445,
+            "specificity": 0.84375
+          }
+        },
+        {
+          "calibration": "sigmoid",
+          "name": "gradient_boosting",
+          "selected_threshold": 0.35,
+          "validation_metrics": {
+            "balanced_accuracy": 0.5104166666666666,
+            "brier_score": 0.2167765116640617,
+            "confusion_matrix": [
+              [
+                96,
+                0
+              ],
+              [
+                47,
+                1
+              ]
+            ],
+            "ece": 0.09575477465252856,
+            "f1": 0.04081632653061224,
+            "log_loss": 0.623261828529245,
+            "mcc": 0.11826247919781652,
+            "pr_auc": 0.3921660386785535,
+            "precision": 1.0,
+            "recall": 0.020833333333333332,
+            "roc_auc": 0.5946180555555556,
+            "specificity": 1.0
+          }
+        },
+        {
+          "calibration": "isotonic",
+          "name": "gradient_boosting",
+          "selected_threshold": 0.35,
+          "validation_metrics": {
+            "balanced_accuracy": 0.5,
+            "brier_score": 0.21992982456140353,
+            "confusion_matrix": [
+              [
+                96,
+                0
+              ],
+              [
+                48,
+                0
+              ]
+            ],
+            "ece": 1.0003572044799588e-16,
+            "f1": 0.0,
+            "log_loss": 0.6309923742018491,
+            "mcc": 0.0,
+            "pr_auc": 0.35044444444444445,
+            "precision": 0.0,
+            "recall": 0.0,
+            "roc_auc": 0.5364583333333333,
+            "specificity": 1.0
+          }
+        }
+      ],
+      "periods": {
+        "block-5": {
+          "smc_only": {
+            "average_realized_r": -0.4588242977232915,
+            "buy": {
+              "expectancy": -0.3966318613395129,
+              "total_realized_r": -1.9831593066975644,
+              "trades": 5,
+              "wins": 1
+            },
+            "expectancy": -0.4588242977232915,
+            "losses": 13,
+            "maximum_drawdown_r": 9.358029456875098,
+            "profit_factor": 0.43529317203287204,
+            "sell": {
+              "expectancy": -0.48709358698864536,
+              "total_realized_r": -5.358029456875099,
+              "trades": 11,
+              "wins": 2
+            },
+            "total_realized_r": -7.341188763572664,
+            "trades": 16,
+            "wins": 3
+          },
+          "smc_plus_ml": {
+            "average_realized_r": -1.0,
+            "buy": {
+              "expectancy": -1.0,
+              "total_realized_r": -4.0,
+              "trades": 4,
+              "wins": 0
+            },
+            "expectancy": -1.0,
+            "losses": 8,
+            "maximum_drawdown_r": 8.0,
+            "profit_factor": 0.0,
+            "sell": {
+              "expectancy": -1.0,
+              "total_realized_r": -4.0,
+              "trades": 4,
+              "wins": 0
+            },
+            "total_realized_r": -8.0,
+            "trades": 8,
+            "wins": 0
+          }
+        },
+        "block-6": {
+          "smc_only": {
+            "average_realized_r": 0.10937402244111843,
+            "buy": {
+              "expectancy": 0.4613170652654129,
+              "total_realized_r": 31.830877503313488,
+              "trades": 69,
+              "wins": 30
+            },
+            "expectancy": 0.10937402244111843,
+            "losses": 77,
+            "maximum_drawdown_r": 13.703176491780335,
+            "profit_factor": 1.1698175611585786,
+            "sell": {
+              "expectancy": -0.3862192419441125,
+              "total_realized_r": -18.924742855261513,
+              "trades": 49,
+              "wins": 11
+            },
+            "total_realized_r": 12.906134648051975,
+            "trades": 118,
+            "wins": 41
+          },
+          "smc_plus_ml": {
+            "average_realized_r": 0.26509257458355856,
+            "buy": {
+              "expectancy": 0.5697260794524253,
+              "total_realized_r": 31.334934369883392,
+              "trades": 55,
+              "wins": 25
+            },
+            "expectancy": 0.26509257458355856,
+            "losses": 53,
+            "maximum_drawdown_r": 11.703176491780335,
+            "profit_factor": 1.438422334888193,
+            "sell": {
+              "expectancy": -0.2753862243773338,
+              "total_realized_r": -8.536972955697347,
+              "trades": 31,
+              "wins": 8
+            },
+            "total_realized_r": 22.797961414186037,
+            "trades": 86,
+            "wins": 33
+          }
+        }
+      },
+      "selection": {
+        "calibration": "isotonic",
+        "frozen_at": "2026-07-20T13:43:10.525369+00:00",
+        "model": "logistic_unweighted",
+        "selected_using": "validation_only",
+        "threshold": 0.4
+      },
+      "smc_only": {
+        "average_realized_r": 0.04152944689909935,
+        "buy": {
+          "expectancy": 0.4033475431975125,
+          "total_realized_r": 29.847718196615922,
+          "trades": 74,
+          "wins": 31
+        },
+        "expectancy": 0.04152944689909935,
+        "losses": 90,
+        "maximum_drawdown_r": 22.685516139552263,
+        "profit_factor": 1.062527481848082,
+        "sell": {
+          "expectancy": -0.4047128718689435,
+          "total_realized_r": -24.28277231213661,
+          "trades": 60,
+          "wins": 13
+        },
+        "total_realized_r": 5.564945884479313,
+        "trades": 134,
+        "wins": 44
+      },
+      "smc_plus_ml": {
+        "average_realized_r": 0.15742512142751108,
+        "buy": {
+          "expectancy": 0.4633039723709049,
+          "total_realized_r": 27.334934369883392,
+          "trades": 59,
+          "wins": 25
+        },
+        "expectancy": 0.15742512142751108,
+        "losses": 61,
+        "maximum_drawdown_r": 11.703176491780336,
+        "profit_factor": 1.246632690236434,
+        "sell": {
+          "expectancy": -0.3581992273056385,
+          "total_realized_r": -12.536972955697347,
+          "trades": 35,
+          "wins": 8
+        },
+        "total_realized_r": 14.797961414186041,
+        "trades": 94,
+        "wins": 33
+      },
+      "stability": "UNSTABLE",
+      "target": "TP1_BEFORE_STOP",
+      "test": {
+        "balanced_accuracy": 0.5406991260923846,
+        "brier_score": 0.2935638300596546,
+        "confusion_matrix": [
+          [
+            29,
+            60
+          ],
+          [
+            11,
+            34
+          ]
+        ],
+        "ece": 0.21675485475871756,
+        "f1": 0.4892086330935252,
+        "log_loss": 3.59124577042867,
+        "mcc": 0.08400834275350325,
+        "pr_auc": 0.39935212232964284,
+        "precision": 0.3617021276595745,
+        "recall": 0.7555555555555555,
+        "roc_auc": 0.5937578027465668,
+        "specificity": 0.3258426966292135
+      },
+      "validation": {
+        "balanced_accuracy": 0.5208333333333334,
+        "brier_score": 0.20063950257915775,
+        "confusion_matrix": [
+          [
+            96,
+            0
+          ],
+          [
+            46,
+            2
+          ]
+        ],
+        "ece": 2.0816681711721685e-17,
+        "f1": 0.08,
+        "log_loss": 0.5728836266015424,
+        "mcc": 0.16783627165933782,
+        "pr_auc": 0.45474137578145213,
+        "precision": 1.0,
+        "recall": 0.041666666666666664,
+        "roc_auc": 0.6583116319444444,
+        "specificity": 1.0
+      }
+    },
+    "report_path": "data/ml/training_reports/ml-run-610209ec3d9146ae.json",
+    "run_id": "ml-run-610209ec3d9146ae",
+    "selection": {
+      "calibration": "isotonic",
+      "frozen_at": "2026-07-20T13:43:10.525369+00:00",
+      "model": "logistic_unweighted",
+      "selected_using": "validation_only",
+      "threshold": 0.4
+    },
+    "split_counts": {
+      "test": 134,
+      "train": 395,
+      "validation": 144
+    },
+    "stage": "completed",
+    "state": "completed",
+    "test_accessed": false,
+    "test_evaluated_after_selection_frozen": true
+  },
+  "all_training_run_files_present": [
+    "ml-run-610209ec3d9146ae.json",
+    "ml-run-a1a6422badea422c.json"
+  ],
+  "no_new_training_runs_since_baseline": true,
+  "actions_taken": "None. Read-only re-verification only."
+}
