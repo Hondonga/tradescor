@@ -1,0 +1,21 @@
+
+ RUN  v3.2.7 /Users/user/Documents/Codex/ tradescor/ict_flask_scanner/frontend
+
+ ✓ src/lib/overlay-labels.test.ts (8 tests) 6ms
+ ✓ src/components/chart/chart-zone-layer.test.tsx (3 tests) 216ms
+ ✓ src/lib/overlays.test.ts (14 tests) 81ms
+ ✓ src/components/chart/chart-setup-summary.test.tsx (3 tests) 92ms
+ ✓ src/components/chart/chart-toolbar.test.tsx (5 tests) 276ms
+ ✓ src/components/chart/chart-price-tags.test.tsx (4 tests) 509ms
+ ✓ src/components/chart/drawing-inspector.test.tsx (3 tests) 201ms
+ ✓ src/lib/overlay-layout.test.ts (6 tests) 8ms
+ ✓ src/store/terminal-store.test.ts (12 tests) 63ms
+ ✓ src/lib/overlay-density.test.ts (4 tests) 8ms
+ ✓ src/lib/overlay-collision.test.ts (5 tests) 17ms
+
+ Test Files  11 passed (11)
+      Tests  67 passed (67)
+   Start at  23:28:27
+   Duration  7.06s (transform 452ms, setup 4.80s, collect 1.33s, tests 1.48s, environment 16.14s, prepare 4.68s)
+
+exit_code=0

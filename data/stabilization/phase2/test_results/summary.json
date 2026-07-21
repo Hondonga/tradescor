@@ -1,0 +1,54 @@
+{
+  "generated_at": "2026-07-21T03:33:33.984051+00:00",
+  "section": "15 - AUTOMATED TEST REQUIREMENTS",
+  "python_full": {
+    "command": "python3 -m pytest tests/ -q",
+    "result": "818 passed, 13 subtests passed",
+    "exit_code": 0,
+    "file": "data/stabilization/phase2/test_results/python_full.txt"
+  },
+  "python_focused": {
+    "command": "python3 -m pytest tests/ -q -k \"overlay or lifecycle or volatility_structure_pullback or reachability or deriv_provider or forex or paper or replay or ml_dataset or ml_training or ml_model\"",
+    "subsystems_covered": [
+      "global overlays",
+      "lifecycle",
+      "Volatility Structure Pullback",
+      "strategy reachability",
+      "Deriv provider",
+      "Forex",
+      "paper testing",
+      "replay",
+      "ML dataset",
+      "ML training"
+    ],
+    "result": "168 passed, 650 deselected, 4 subtests passed",
+    "exit_code": 0,
+    "file": "data/stabilization/phase2/test_results/python_focused.txt"
+  },
+  "phase2_only": {
+    "command": "python3 -m pytest tests/ -k phase2 -q",
+    "result": "50 passed, 768 deselected",
+    "exit_code": 0,
+    "note": "All new Phase 2 test files (checkpoints 1-14), run in isolation."
+  },
+  "frontend_tests": {
+    "command": "npx vitest run",
+    "result": "67 tests passed (11 test files)",
+    "exit_code": 0,
+    "file": "data/stabilization/phase2/test_results/frontend_tests.txt"
+  },
+  "typescript_build": {
+    "command": "npx tsc -b",
+    "result": "clean, 0 errors",
+    "exit_code": 0,
+    "file": "data/stabilization/phase2/test_results/typescript_build.txt"
+  },
+  "frontend_build": {
+    "command": "npx vite build",
+    "result": "production build succeeded",
+    "exit_code": 0,
+    "file": "data/stabilization/phase2/test_results/frontend_build.txt"
+  },
+  "regressions_detected": false,
+  "checkpoint_15_result": "PASSED"
+}
