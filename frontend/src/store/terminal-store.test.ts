@@ -272,4 +272,46 @@ describe("terminal decision ownership", () => {
     expect(useTerminalStore.getState().workspaceMode).toBe("live");
     expect(useTerminalStore.getState().decision?.decision_id).toBe("decision-1");
   });
+
+  it("leaves no stale state after rapid R_75 M5 -> other symbol -> R_75 M15 -> R_75 M5 switching (Phase 2 checkpoint 10)", () => {
+    const r75: SymbolInfo = { ...symbol, symbol_id: "deriv:R_75", provider_symbol: "R_75", display_name: "Volatility 75 Index" };
+    const r75Decision = {
+      ...decision,
+      decision_id: "r75-m5-1",
+      precision: { ...decision.precision, symbol_id: "deriv:R_75" },
+      meta: { ...decision.meta, symbol: "R_75", timeframe: "M5" },
+    } satisfies NormalizedDecision;
+    const other: SymbolInfo = { ...symbol, symbol_id: "deriv:R_50", provider_symbol: "R_50", display_name: "Volatility 50 Index" };
+
+    // R_75 M5 with a live decision, candles, and an owner.
+    useTerminalStore.setState({ model: "auto" }); // avoid leaking `model` from an earlier test in this file
+    useTerminalStore.getState().selectMarket({ symbol: r75, decision: r75Decision });
+    useTerminalStore.setState({ historicalCandles: [{ time: "2026-07-19T12:00:00Z", open: 1, high: 1, low: 1, close: 1 }] });
+    expect(useTerminalStore.getState().decision?.decision_id).toBe("r75-m5-1");
+
+    // -> another symbol: R_75 decision/candles/owner must not survive.
+    useTerminalStore.getState().setSymbol(other);
+    expect(useTerminalStore.getState().decision).toBeUndefined();
+    expect(useTerminalStore.getState().overlayOwner).toBeUndefined();
+    expect(useTerminalStore.getState().historicalCandles).toEqual([]);
+
+    // -> back to R_75, but M15: still no stale decision from the earlier M5 session.
+    useTerminalStore.getState().setSymbol(r75);
+    useTerminalStore.getState().setTimeframe("M15");
+    expect(useTerminalStore.getState().decision).toBeUndefined();
+    expect(useTerminalStore.getState().timeframe).toBe("M15");
+
+    // -> back to R_75 M5: a stale M15-tagged response must not be accepted as current.
+    useTerminalStore.getState().setTimeframe("M5");
+    useTerminalStore.getState().beginAnalysis("late-m15");
+    const staleM15Decision = { ...r75Decision, decision_id: "stale-m15", meta: { ...r75Decision.meta, timeframe: "M15" } } satisfies NormalizedDecision;
+    expect(useTerminalStore.getState().acceptDecision("late-m15", staleM15Decision)).toBe(false);
+    expect(useTerminalStore.getState().decision).toBeUndefined();
+
+    // A correctly-tagged fresh R_75 M5 response is still accepted normally.
+    useTerminalStore.getState().beginAnalysis("fresh-m5");
+    const freshDecision = { ...r75Decision, decision_id: "fresh-m5-1" } satisfies NormalizedDecision;
+    expect(useTerminalStore.getState().acceptDecision("fresh-m5", freshDecision)).toBe(true);
+    expect(useTerminalStore.getState().decision?.decision_id).toBe("fresh-m5-1");
+  });
 });
