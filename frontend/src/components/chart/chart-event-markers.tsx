@@ -11,6 +11,10 @@ const MARKER_TEXT: Record<string, string> = {
   mss: "MSS",
   rejection: "REJ",
   confirmation: "CONF",
+  swing_high: "SW HI",
+  swing_low: "SW LO",
+  equal_high: "EQ HI",
+  equal_low: "EQ LO",
 };
 
 export interface ChartEventMarkersProps {

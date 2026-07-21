@@ -92,3 +92,12 @@ describe("tierOf", () => {
     expect(tierOf(overlay({ category: "actionable" }))).toBe(1);
   });
 });
+
+describe("styleForOverlay swing/equal-high-low rendering (Phase 3 §1/§9)", () => {
+  it("renders swing highs/lows and equal highs/lows as compact markers, never a permanent full-width line", () => {
+    for (const type of ["swing_high", "swing_low", "equal_high", "equal_low"]) {
+      const style = styleForOverlay(overlay({ category: "diagnostic" as any, display_group: "advanced_smc", type, low: null, high: null }));
+      expect(style.renderAs).toBe("marker");
+    }
+  });
+});

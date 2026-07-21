@@ -64,6 +64,13 @@ const EVENT_MARKER_TYPES = new Set([
   "mss",
   "rejection",
   "confirmation",
+  // Phase 3 §9/§1 -- swings and equal highs/lows are RESEARCH-mode
+  // diagnostic evidence, never a permanent full-width line ("do not render
+  // every swing as a full-width line").
+  "swing_high",
+  "swing_low",
+  "equal_high",
+  "equal_low",
 ]);
 
 function normalizedRole(overlay: Overlay) {
