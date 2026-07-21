@@ -1,0 +1,132 @@
+{
+  "generated_at": "2026-07-21T03:28:04.354647+00:00",
+  "fixtures": [
+    {
+      "id": "1",
+      "name": "Data loading",
+      "test": "tests/test_phase2_golden_path_fixtures.py::test_fixture_01_data_loading",
+      "expected_lifecycle": "DATA_LOADING"
+    },
+    {
+      "id": "2",
+      "name": "Insufficient history",
+      "test": "tests/test_phase2_golden_path_fixtures.py::test_fixture_02_insufficient_history",
+      "expected_lifecycle": "DATA_LOADING (readiness=insufficient)"
+    },
+    {
+      "id": "3",
+      "name": "Market context only",
+      "test": "tests/test_phase2_golden_path_fixtures.py::test_fixture_03_market_context_only",
+      "expected_lifecycle": "non-terminal, non-ready"
+    },
+    {
+      "id": "4",
+      "name": "Developing BUY pullback",
+      "test": "tests/test_phase2_golden_path_fixtures.py::test_fixture_04_05_developing_pullback[buy-75]",
+      "expected_lifecycle": "WAITING_FOR_PULLBACK/LOCATION/DISPLACEMENT"
+    },
+    {
+      "id": "5",
+      "name": "Developing SELL pullback",
+      "test": "tests/test_phase2_golden_path_fixtures.py::test_fixture_04_05_developing_pullback[sell-75]",
+      "expected_lifecycle": "WAITING_FOR_PULLBACK/LOCATION/DISPLACEMENT"
+    },
+    {
+      "id": "6",
+      "name": "Waiting for M5 confirmation",
+      "test": "tests/test_phase2_golden_path_fixtures.py::test_fixture_06_waiting_for_m5_confirmation",
+      "expected_lifecycle": "WAITING_FOR_DISPLACEMENT"
+    },
+    {
+      "id": "7",
+      "name": "Plan validation with no valid target",
+      "test": "tests/test_phase2_golden_path_fixtures.py::test_fixture_07_plan_validation_no_target",
+      "expected_lifecycle": "PLAN_VALIDATION"
+    },
+    {
+      "id": "8",
+      "name": "Trade-ready BUY",
+      "test": "tests/test_phase2_golden_path_fixtures.py::test_fixture_08_09_trade_ready[buy-READY TO BUY]",
+      "expected_lifecycle": "TRADE_READY"
+    },
+    {
+      "id": "9",
+      "name": "Trade-ready SELL",
+      "test": "tests/test_phase2_golden_path_fixtures.py::test_fixture_08_09_trade_ready[sell-READY TO SELL]",
+      "expected_lifecycle": "TRADE_READY"
+    },
+    {
+      "id": "10",
+      "name": "Too late",
+      "test": "tests/test_phase2_golden_path_fixtures.py::test_fixture_10_too_late",
+      "expected_lifecycle": "TOO_LATE (terminal, archived)"
+    },
+    {
+      "id": "11",
+      "name": "Expired",
+      "test": "tests/test_phase2_golden_path_fixtures.py::test_fixture_11_expired",
+      "expected_lifecycle": "EXPIRED (terminal, archived)"
+    },
+    {
+      "id": "12",
+      "name": "Invalidated",
+      "test": "tests/test_phase2_golden_path_fixtures.py::test_fixture_12_invalidated",
+      "expected_lifecycle": "INVALIDATED (terminal, archived)"
+    },
+    {
+      "id": "13",
+      "name": "State contradiction",
+      "test": "tests/test_phase2_golden_path_fixtures.py::test_fixture_13_state_contradiction",
+      "expected_lifecycle": "STATE CONTRADICTION"
+    },
+    {
+      "id": "14",
+      "name": "Stale provider data",
+      "test": "tests/test_phase2_golden_path_fixtures.py::test_fixture_14_stale_provider_data",
+      "expected_lifecycle": "STATE CONTRADICTION (stale + live-ready)"
+    },
+    {
+      "id": "15",
+      "name": "Symbol switch cleanup",
+      "test": "frontend/src/store/terminal-store.test.ts (rapid R_75 M5 -> other -> R_75 M15 -> R_75 M5)",
+      "expected_lifecycle": "n/a (frontend state)"
+    },
+    {
+      "id": "16",
+      "name": "Timeframe switch cleanup",
+      "test": "frontend/src/store/terminal-store.test.ts (same test)",
+      "expected_lifecycle": "n/a (frontend state)"
+    },
+    {
+      "id": "17",
+      "name": "Previous setup hidden",
+      "test": "frontend/src/lib/overlays.test.ts (hides archived overlays by default)",
+      "expected_lifecycle": "n/a (frontend state)"
+    },
+    {
+      "id": "18",
+      "name": "Previous setup revealed",
+      "test": "frontend/src/lib/overlays.test.ts (reveals only the previous setup)",
+      "expected_lifecycle": "n/a (frontend state)"
+    },
+    {
+      "id": "19",
+      "name": "Replay parity",
+      "test": "tests/test_phase2_replay_parity.py",
+      "expected_lifecycle": "n/a (parity check)"
+    },
+    {
+      "id": "20",
+      "name": "Paper registration",
+      "test": "tests/test_strategy_setup_proof_harness.py::test_focused_buy_and_sell_complete_paper_lifecycle",
+      "expected_lifecycle": "TRADE_READY -> registered"
+    }
+  ],
+  "checkpoint_14_result": {
+    "every_fixture_returns_expected_lifecycle": true,
+    "every_fixture_has_expected_overlay_categories": true,
+    "actionable_overlays_only_in_the_two_ready_fixtures": true,
+    "terminal_fixtures_archive_correctly": true
+  },
+  "note": "Fixtures 1-14 are new (tests/test_phase2_golden_path_fixtures.py). Fixtures 15-20 already had dedicated, passing coverage from prior work in this session and are referenced, not duplicated."
+}
