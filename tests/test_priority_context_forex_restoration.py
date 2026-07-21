@@ -50,5 +50,13 @@ def test_forex_registry_and_lightweight_rows_are_non_registerable():
     assert not registerable_paper_setup(payload)
 
 def test_navigation_contains_no_automatic_full_analysis_trigger():
-    source=open("frontend/src/pages/workspace-page.tsx",encoding="utf-8").read()
-    assert "useEffect" not in source and "analysis.mutate()" in source and "Analyze now" in source
+    # Phase 3: the "Analyze now" button and its analysis.mutate() wiring
+    # were extracted from workspace-page.tsx into a dedicated
+    # OpportunityQueue component (components/terminal/opportunity-queue.tsx),
+    # which workspace-page.tsx renders. Check the combined source so this
+    # keeps protecting the same invariant (no useEffect-driven auto-trigger,
+    # a real manual "Analyze now" affordance exists) across the refactor.
+    workspace_source=open("frontend/src/pages/workspace-page.tsx",encoding="utf-8").read()
+    queue_source=open("frontend/src/components/terminal/opportunity-queue.tsx",encoding="utf-8").read()
+    combined=workspace_source+queue_source
+    assert "useEffect" not in workspace_source and "analysis.mutate()" in combined and "Analyze now" in combined

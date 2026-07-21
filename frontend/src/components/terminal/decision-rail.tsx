@@ -70,8 +70,15 @@ export function DecisionRail() {
   const planVisible = Boolean(
     activeSetup && decision.trade_plan?.available === true && tradeReady,
   );
+  // Falls through to plan_blocker/trade_plan.reason too -- a Jump-family
+  // decision's plan-level blocker can carry detail the setup-stage
+  // first_blocking_gate doesn't, and WHAT IS MISSING must show the single
+  // primary blocker without losing that family-specific detail.
   const primaryBlocker =
-    activeSetup?.first_blocking_gate || decision.decision.first_blocking_gate;
+    activeSetup?.first_blocking_gate ||
+    decision.decision.first_blocking_gate ||
+    (typeof activeSetup?.plan_blocker === "string" ? activeSetup.plan_blocker : undefined) ||
+    decision.trade_plan?.reason;
   const strategyLabel = titleCase(
     decision.ownership.selected_strategy_id || decision.ownership.selected_model_id,
   );

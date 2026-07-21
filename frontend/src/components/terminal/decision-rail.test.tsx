@@ -194,6 +194,24 @@ describe("DecisionRail section order (Phase 3 §11)", () => {
     expect(screen.getByText("Trade plan · paper only")).toBeInTheDocument();
   });
 
+  it("falls through to plan_blocker when first_blocking_gate is absent, so Jump-family plan-level detail is never lost (Phase 3 §25 regression fix)", () => {
+    renderRail(
+      baseDecision({
+        decision: { status: "SELL SETUP DEVELOPING", direction: "sell", stage: "WAITING_FOR_DISPLACEMENT", headline: "", summary: "", next_action: "", trade_ready: false },
+        active_setup: {
+          setup_id: "vsp-1",
+          lifecycle: "WAITING_FOR_DISPLACEMENT",
+          setup_type: "structure_pullback",
+          direction: "sell",
+          plan_blocker: "No valid opposing structural target currently provides acceptable geometry.",
+          targets: [],
+        },
+      }),
+    );
+    const whatIsMissing = screen.getByText("What is missing").closest("section");
+    expect(whatIsMissing?.textContent).toContain("No valid opposing structural target currently provides acceptable geometry.");
+  });
+
   it("shows target source and setup ownership in DETAILS", () => {
     renderRail(baseDecision());
     const details = screen.getByText("Details").closest("details");

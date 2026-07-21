@@ -77,8 +77,17 @@ def test_jump_views_keep_setup_and_plan_blockers_separate():
 
 
 def test_jump_research_rail_contains_non_predictive_confirmation_copy():
+    # Phase 3 §11: the rail was reorganized into MARKET STATE / ACTIVE SETUP /
+    # WHAT IS MISSING / TRADE PLAN / NEXT ACTION / DETAILS / DIAGNOSTICS.
+    # plan_blocker is no longer a separately labeled "Plan blocker" row inside
+    # the Jump-specific section -- it was consolidated into the single WHAT
+    # IS MISSING primary-blocker line (falling through from
+    # first_blocking_gate to plan_blocker to trade_plan.reason) so it is
+    # never duplicated across two sections. The field itself must still be
+    # read from source, and the non-predictive event/confirmation copy must
+    # still be present.
     source = (Path(__file__).parents[1] / "frontend/src/components/terminal/decision-rail.tsx").read_text()
     assert 'decision.setup.jump_mode === "JUMP_POST_EVENT_SMC"' in source
     assert "Future jump direction" in source
     assert "Confirmation levels" in source
-    assert "Plan blocker" in source
+    assert "plan_blocker" in source
