@@ -321,6 +321,17 @@ export function MarketChart() {
         overlays={visibleOverlays}
         selectedOverlayId={selectedOverlayId}
         onSelectOverlay={setSelectedOverlayId}
+        densityMode={store.densityMode}
+        onDensityModeChange={store.setDensityMode}
+        workspaceMode={store.workspaceMode}
+        connection={store.connection}
+        onAutoFit={() => chartRef.current?.timeScale().fitContent()}
+        onResetView={() => {
+          chartRef.current?.timeScale().fitContent();
+          seriesRef.current?.priceScale().applyOptions({ autoScale: true });
+        }}
+        diagnosticsVisible={store.diagnosticsVisible}
+        onToggleDiagnostics={store.toggleDiagnostics}
       />
       <div className="relative min-h-0 flex-1">
         <div ref={root} className="absolute inset-0" />

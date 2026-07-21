@@ -67,6 +67,7 @@ interface TerminalState {
   rightPanel: number;
   systemMenuOpen: boolean;
   commandOpen: boolean;
+  diagnosticsVisible: boolean;
   setRoute: (route: RouteId) => void;
   setSymbol: (symbol: SymbolInfo) => void;
   selectMarket: (row: MarketRow) => void;
@@ -83,6 +84,7 @@ interface TerminalState {
   setPanels: (left: number, right: number) => void;
   setSystemMenu: (open: boolean) => void;
   setCommandOpen: (open: boolean) => void;
+  toggleDiagnostics: () => void;
   clearDecision: () => void;
   showHistorical: (jobId:string, decision:NormalizedDecision, candles:HistoricalCandle[]) => void;
   showReplay: (decision:NormalizedDecision, candles:HistoricalCandle[]) => void;
@@ -122,6 +124,7 @@ export const useTerminalStore = create<TerminalState>()(
       rightPanel: 24,
       systemMenuOpen: false,
       commandOpen: false,
+      diagnosticsVisible: false,
       setRoute: (route) => set({ route }),
       setSymbol: (symbol) =>
         set((state) => {
@@ -320,6 +323,7 @@ export const useTerminalStore = create<TerminalState>()(
       setDensityMode: (densityMode) => set({ densityMode }),
       setPanels: (leftPanel, rightPanel) => set({ leftPanel, rightPanel }),
       setSystemMenu: (systemMenuOpen) => set({ systemMenuOpen }),
+      toggleDiagnostics: () => set((state) => ({ diagnosticsVisible: !state.diagnosticsVisible })),
       setCommandOpen: (commandOpen) => set({ commandOpen }),
       clearDecision: () =>
         set({
