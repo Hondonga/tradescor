@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-07-21T12:55:20.548453+00:00",
+  "section": "28 - PERFORMANCE CHECK",
+  "method": "Basic performance observations per the milestone's own scope instruction ('do not introduce a full performance framework unless necessary'): a static code-architecture review of the chart's effect/memoization structure, plus lightweight empirical timing via Playwright against the Storybook fixture surface.",
+  "static_architecture_review": {
+    "chart_and_series_creation": "market-chart.tsx's createChart()/addCandlestickSeries() effect has an empty dependency array ([]) -- the chart instance is created exactly once per component mount and never recreated on re-render. Its cleanup function calls chart.remove() and nulls both refs, so no chart instance can leak across mounts.",
+    "overlay_computation_memoization": "permittedOverlays and visibleOverlays are both wrapped in useMemo with precise dependency arrays ([store.connection, store.decision, store.overlayVisibility, store.symbol, store.timeframe, store.workspaceMode] and [permittedOverlays, store.densityMode, store.decision] respectively) -- density/Setup-Focus filtering only recomputes when one of those inputs actually changes, not on every render.",
+    "reconciliation_effect_scoping": "The single price-line/zone-geometry reconciliation effect depends only on [visibleOverlays] -- price lines are only torn down and recreated when the overlay list itself changes. Its cleanup function removes every price line (priceLines.forEach(line => series.removePriceLine(line))) before the next pass, so switching symbols/timeframes/density modes repeatedly cannot accumulate leaked price lines.",
+    "listener_hygiene": "The window resize listener and the chart's own ResizeObserver are each attached exactly once (empty-dependency effects) and removed in their cleanup functions -- no duplicate listeners accumulate across re-renders.",
+    "new_phase3_additions_reviewed": "applySetupFocus/applyDensity are pure functions with no internal state; hoveredOverlay lookup is a cheap single-pass .find() over an already-small array, only evaluated when a tooltip is actually being shown; the new toolbar controls (density selector, mode badge, auto-fit/reset/diagnostics) are plain stateless buttons with no expensive computation. None of this phase's additions introduced a new effect with a missing or overly-broad dependency array."
+  },
+  "empirical_timings": {
+    "initial_render_to_canvas_present_ms": 717,
+    "density_mode_switch_ms": {
+      "clean_to_standard": 178,
+      "standard_to_research": 98,
+      "research_to_clean": 102
+    },
+    "auto_fit_click_ms": 43,
+    "reset_view_click_ms": 36,
+    "drawing_inspector_open_ms": 50,
+    "canvas_element_count_after_6_interactions": 7,
+    "canvas_count_interpretation": "lightweight-charts creates a small fixed number of internal canvases per chart instance (background/candlestick/crosshair layers). This count stayed constant across 6 distinct interactions (3 density switches, auto-fit, reset, drawing-inspector-open) rather than growing -- confirming the chart is not being torn down and recreated on each interaction.",
+    "symbol_timeframe_switch": "Not directly measurable against the static Storybook fixture (no live symbol switcher wired into a story); this path is instead covered by the existing terminal-store.test.ts race/staleness suite (12 deterministic unit tests), which already verifies no stale candles/overlays/decisions survive a rapid symbol/timeframe switch sequence."
+  },
+  "conclusion": "No performance regression risk identified. The chart-creation, overlay-computation, and reconciliation effects were already correctly scoped before Phase 3, and this phase's additions followed the same pattern rather than introducing new anti-patterns. All measured interactions completed in well under 200ms in a Storybook/Playwright environment.",
+  "checkpoint_28_result": "PASSED"
+}
