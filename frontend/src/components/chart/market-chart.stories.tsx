@@ -296,6 +296,15 @@ const expiredSetup = buildDecision({
   previousSetup: { setup_id: "vsp-expired-1", terminal_status: "EXPIRED", terminal_reason: "Setup expired before entry confirmation." },
 });
 
+const invalidatedSetup = buildDecision({
+  direction: null,
+  stage: "NO_DIRECTIONAL_CONTEXT",
+  status: "SETUP INVALIDATED",
+  setupId: null,
+  overlays: [currentPriceOverlay(), ...structureOverlays()],
+  previousSetup: { setup_id: "vsp-invalidated-1", terminal_status: "INVALIDATED", terminal_reason: "Price closed beyond the protected M5 structural level before entry." },
+});
+
 const previousSetupOverlays: Overlay[] = [
   overlay({ type: "historical_entry", setup_id: "vsp-expired-1", category: "historical", historical: true, active: false, price: 51600, priority: 20, display_group: "previous_setup", label: "Previous Entry", metadata: { overlay_mode: "HISTORICAL_INSPECTION" } }),
   overlay({ type: "historical_stop", setup_id: "vsp-expired-1", category: "historical", historical: true, active: false, price: 51750, priority: 20, display_group: "previous_setup", label: "Previous Stop", metadata: { overlay_mode: "HISTORICAL_INSPECTION" } }),
@@ -377,6 +386,7 @@ export const WaitingForConfirmation: Story = { render: () => renderScenario(wait
 export const TradeReadyBuy: Story = { render: () => renderScenario(tradeReadyBuy) };
 export const TradeReadySell: Story = { render: () => renderScenario(tradeReadySell) };
 export const ExpiredSetup: Story = { render: () => renderScenario(expiredSetup) };
+export const InvalidatedSetup: Story = { render: () => renderScenario(invalidatedSetup) };
 export const PreviousSetupEnabled: Story = {
   render: () => renderScenario(previousSetupEnabled, { previous_setup: true }),
 };
