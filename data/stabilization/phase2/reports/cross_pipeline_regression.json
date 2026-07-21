@@ -1,0 +1,86 @@
+{
+  "generated_at": "2026-07-21T03:45:29.455819+00:00",
+  "section": "17 - CROSS-PIPELINE REGRESSION",
+  "forex": {
+    "checks": {
+      "gbp_usd_precision_correct": true,
+      "gbp_usd_precision_evidence": "analysis.instrument_precision.precision_registry(symbol='GBP/USD', provider='twelve_data', market_type='forex') -> price_decimals=5, pip_size=0.0001, tick_size=1e-05 (standard forex pip convention; distinct shape from derived R_75 -> price_decimals=2, pip_size=None)",
+      "session_logic_intact": true,
+      "session_logic_evidence": "app.py market_schedule assignment: '24_5' for asset_type=='forex' vs '24_7' for derived_index/crypto -- unchanged, read directly from source",
+      "no_derived_strategy_selectable_for_forex": true,
+      "no_derived_strategy_evidence": [
+        "validation.strategy_reachability_registry().strategy_reachability_registry() contains only families {VOLATILITY, JUMP, STEP, BOOM_CRASH} -- no FOREX family exists in the derived-strategy registry at all, so a derived strategy_id can never structurally be selected for a forex decision.",
+        "tests/test_forex_pipeline_repair.py::test_derived_normalization_does_not_receive_forex_fields (passed) asserts this separation directly at the normalization layer."
+      ],
+      "api_reachable": "Endpoint responds (HTTP 400, 'Click Load Chart to fetch candles.') identically to every other symbol on a cold/job-less request -- this is the app's existing session/job-based architecture, not forex-specific, and is unchanged from Phase 1 baseline behavior."
+    },
+    "tests_run": [
+      "tests/test_forex_pipeline_repair.py (11 tests)",
+      "tests/test_priority_context_forex_restoration.py"
+    ],
+    "result": "PASSED"
+  },
+  "jump": {
+    "checks": {
+      "research_only": true,
+      "no_auto_promotion": true,
+      "no_paper_signals": true,
+      "event_detection_still_available": true,
+      "evidence": "analysis.strategy_quarantine_registry.strategy_quarantine_view()['jump_post_event_continuation'] and ['jump_post_event_reversal'] both show production_supported=False, auto_eligible=False, research_only=True, paper_signal_allowed=False, reachability_status='NOT_PRODUCTION_SUPPORTED'. Jump event-detection logic itself (separate from the strategy layer) is exercised by tests/test_jump_dex_lifecycle.py, tests/test_jump_dex_ui_consistency.py, tests/test_jump_post_event_research_presentation.py -- all passing, confirming detection/presentation still functions in its research capacity."
+    },
+    "tests_run": [
+      "tests/test_jump_dex_lifecycle.py",
+      "tests/test_jump_dex_ui_consistency.py",
+      "tests/test_jump_post_event_research_presentation.py"
+    ],
+    "result": "PASSED"
+  },
+  "step": {
+    "checks": {
+      "registry_available": true,
+      "research_response_available": true,
+      "no_auto_promotion": true,
+      "evidence": "strategy_quarantine_view()['step_range_reaction'], ['step_structure_pullback'], ['step_breakout_and_retest'] all show production_supported=False, auto_eligible=False, research_only=True, reachability_status='NOT_PRODUCTION_SUPPORTED', disabled_reason='FOCUSED_CONFIGURATION_DISABLED'."
+    },
+    "tests_run": [
+      "tests/test_step_market_profile.py",
+      "tests/test_step_regime_classifier.py",
+      "tests/test_step_risk_adjuster.py",
+      "tests/test_step_sequence_analyzer.py",
+      "tests/test_step_structure_research.py",
+      "tests/test_step_ui_consistency.py"
+    ],
+    "result": "PASSED"
+  },
+  "boom_crash": {
+    "checks": {
+      "event_state_logic_imports_and_tests_pass": true,
+      "no_auto_promotion": true,
+      "evidence": "strategy_quarantine_view()['boom_crash_spike_state'] shows production_supported=False, auto_eligible=False, research_only=True, reachability_status='NOT_PRODUCTION_SUPPORTED', disabled_reason='LEGACY_RESEARCH_ONLY'."
+    },
+    "tests_run": [
+      "tests/test_boom_crash_directional_symmetry.py",
+      "tests/test_boom_crash_family_context.py",
+      "tests/test_boom_crash_lifecycle.py",
+      "tests/test_boom_crash_spike_state.py",
+      "tests/test_boom_crash_ui_consistency.py"
+    ],
+    "result": "PASSED"
+  },
+  "ml": {
+    "checks": {
+      "dataset_checksum_unchanged": true,
+      "rejected_model_unchanged": true,
+      "no_live_activation": true,
+      "no_retraining": true,
+      "evidence": "Recomputed SHA-256 over every file recorded in the Phase 1 baseline (data/stabilization/reports/ml_artifact_integrity.json) -- dataset (manifest, features.parquet, sequences.npz, checkpoint, checkpoint-audit) and model run (metadata, model.pkl, preprocessor.pkl, test_predictions.parquet, training_weights.parquet, training_runs record, training_reports record) are byte-for-byte identical to Phase 1. Live training_runs record for ml-run-610209ec3d9146ae still reads model_status='REJECTED_POOR_CALIBRATION', live_activation_available=False. Exactly the same 2 training-run files exist on disk as at the Phase 1 baseline (no new run appeared).",
+      "full_recheck_report": "data/stabilization/phase2/reports/ml_integrity_recheck.json"
+    },
+    "result": "PASSED"
+  },
+  "checkpoint_17_result": "PASSED",
+  "phase1_baseline_untouched": {
+    "checked": true,
+    "note": "This section performed read-only verification only -- no ML artifact, config, or baseline file was modified."
+  }
+}
