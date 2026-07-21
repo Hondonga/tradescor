@@ -16,6 +16,7 @@ import { applyDensity, hiddenEvidenceCount } from "@/lib/overlay-density";
 import { styleForOverlay, type LineStyleToken } from "@/lib/overlay-style-registry";
 import { computeZoneRect, type ZoneRect } from "@/lib/overlay-layout";
 import { actionablePriceRange } from "@/lib/chart/priceScaleRange";
+import { applySetupFocus } from "@/lib/chart/setupFocus";
 import { ChartToolbar } from "./chart-toolbar";
 import { ChartZoneLayer } from "./chart-zone-layer";
 import { ChartPriceTags } from "./chart-price-tags";
@@ -120,11 +121,16 @@ export function MarketChart() {
 
   // Density is a further default-view refinement on top of the toggle-based
   // permission list above — it never widens what's already been filtered
-  // out by ownership/lifecycle/toggle rules.
-  const visibleOverlays = useMemo(
-    () => applyDensity(permittedOverlays, store.densityMode),
-    [permittedOverlays, store.densityMode],
-  );
+  // out by ownership/lifecycle/toggle rules. Setup Focus (Phase 3 §5) is a
+  // further narrowing on top of that, enabled by default specifically in
+  // CLEAN mode — switching density mode away from CLEAN is how a trader
+  // turns it off.
+  const visibleOverlays = useMemo(() => {
+    const densityFiltered = applyDensity(permittedOverlays, store.densityMode);
+    return store.densityMode === "clean"
+      ? applySetupFocus(densityFiltered, store.decision)
+      : densityFiltered;
+  }, [permittedOverlays, store.densityMode, store.decision]);
   const hiddenByDensity = useMemo(
     () => hiddenEvidenceCount(permittedOverlays, store.densityMode),
     [permittedOverlays, store.densityMode],
