@@ -43,8 +43,11 @@ const structureHigh = overlay({ overlay_id: "structure-high", category: "context
 const structureLow = overlay({ overlay_id: "structure-low", category: "context", type: "structural_range", priority: 75 });
 const displacement = overlay({ overlay_id: "displacement", category: "context", type: "m5_displacement", priority: 50 });
 const internalSwing = overlay({ overlay_id: "swing", category: "context", type: "swing_high", priority: 40 });
+const oldFvg = overlay({ overlay_id: "old-fvg", category: "context", type: "fvg", priority: 30, historical: true });
+const mitigatedFvg = overlay({ overlay_id: "mitigated-fvg", category: "context", type: "fvg", priority: 35, metadata: { state: "fully_mitigated" } });
 
 const all = [currentPrice, entry, pullbackZone, confirmation, structureHigh, structureLow, displacement, internalSwing];
+const allWithFvgs = [...all, oldFvg, mitigatedFvg];
 
 describe("applyDensity", () => {
   it("CLEAN keeps current price, actionable, developing, and only the single strongest structure reference", () => {
@@ -72,6 +75,28 @@ describe("applyDensity", () => {
   it("RESEARCH returns every overlay, including diagnostic tier", () => {
     const result = applyDensity(all, "research");
     expect(result).toHaveLength(all.length);
+  });
+
+  it("keeps old/mitigated FVGs hidden in CLEAN mode (Phase 3 §1/§10)", () => {
+    const result = applyDensity(allWithFvgs, "clean");
+    const ids = result.map((r) => r.overlay_id);
+    expect(ids).not.toContain("old-fvg");
+    expect(ids).not.toContain("mitigated-fvg");
+  });
+
+  it("still surfaces old/mitigated FVGs in RESEARCH mode -- density hides evidence by default, it never deletes it", () => {
+    const result = applyDensity(allWithFvgs, "research");
+    const ids = result.map((r) => r.overlay_id);
+    expect(ids).toContain("old-fvg");
+    expect(ids).toContain("mitigated-fvg");
+  });
+
+  it("never mutates the input overlay array or its objects (Phase 3 §24: density mode cannot change backend decision data)", () => {
+    const snapshot = JSON.parse(JSON.stringify(all));
+    applyDensity(all, "clean");
+    applyDensity(all, "standard");
+    applyDensity(all, "research");
+    expect(JSON.parse(JSON.stringify(all))).toEqual(snapshot);
   });
 
   it("hiddenEvidenceCount reports how many rows CLEAN/STANDARD are hiding", () => {

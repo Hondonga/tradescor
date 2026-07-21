@@ -2,6 +2,7 @@ import { describe, expect, it, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { DecisionRail } from "./decision-rail";
+import { ChartSetupSummary } from "@/components/chart/chart-setup-summary";
 import { useTerminalStore } from "@/store/terminal-store";
 import type { NormalizedDecision, SymbolInfo } from "@/types";
 
@@ -205,6 +206,19 @@ describe("DecisionRail section order (Phase 3 §11)", () => {
     renderRail(baseDecision());
     const diag = screen.getByText("Diagnostics").closest("details");
     expect(diag).not.toHaveAttribute("open");
+  });
+
+  it("agrees with the chart's Setup Focus card on direction and lifecycle for the same decision (Phase 3 §24)", () => {
+    const decision = baseDecision();
+    renderRail(decision);
+    expect(screen.getAllByText("Sell").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Waiting For Displacement").length).toBe(1); // from the rail, before the chart card mounts
+    const { container: chartCard } = render(<ChartSetupSummary decision={decision} visible />);
+    expect(chartCard.textContent).toContain("SELL SETUP");
+    expect(chartCard.textContent).toContain("Waiting For Displacement");
+    // Both components now describe the same setup on screen simultaneously,
+    // in agreement -- neither invented a different direction or lifecycle.
+    expect(screen.getAllByText("Waiting For Displacement").length).toBe(2);
   });
 
   it("opens DIAGNOSTICS when the toolbar's diagnostics toggle is on", () => {

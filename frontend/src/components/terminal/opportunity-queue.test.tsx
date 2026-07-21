@@ -133,6 +133,20 @@ describe("OpportunityQueue", () => {
     expect(screen.getByText("Star symbols in Markets to build the queue.")).toBeInTheDocument();
   });
 
+  it("never shows 'waiting for target' language for a neutral-direction row, even in the defensive edge case where one somehow carries an active setup", () => {
+    render(
+      <OpportunityQueue
+        rows={[row("R_75", decisionFor({ decision: { status: "MARKET CONTEXT", direction: null, stage: "NO_DIRECTIONAL_CONTEXT", headline: "", summary: "", next_action: "", trade_ready: false } }))]}
+        onSelect={() => {}}
+        dataReadiness="ready"
+        onAnalyzeNow={() => {}}
+        analyzePending={false}
+      />,
+    );
+    expect(screen.getByText(/Neutral/)).toBeInTheDocument();
+    expect(screen.queryByText(/WAITING FOR TARGET/i)).not.toBeInTheDocument();
+  });
+
   it("calls onAnalyzeNow when the Analyze now button is clicked", () => {
     const onAnalyzeNow = vi.fn();
     render(<OpportunityQueue rows={[]} onSelect={() => {}} dataReadiness="ready" onAnalyzeNow={onAnalyzeNow} analyzePending={false} />);

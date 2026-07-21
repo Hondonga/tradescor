@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { DrawingInspector } from "./drawing-inspector";
 import type { Overlay } from "@/types";
@@ -85,6 +85,18 @@ describe("DrawingInspector", () => {
       />,
     );
     expect(screen.getByText("Partially Mitigated")).toBeInTheDocument();
+  });
+
+  it("never mutates analysis state -- it only ever calls close() in response to an explicit user click (Phase 3 §24)", () => {
+    const close = vi.fn();
+    render(<DrawingInspector overlay={overlay()} close={close} />);
+    // The component's props are (overlay, close, precision) -- it holds no
+    // store reference and cannot dispatch any store action. Rendering it
+    // must never itself invoke close() or otherwise signal a change; it may
+    // only do so from the explicit close button.
+    expect(close).not.toHaveBeenCalled();
+    screen.getByLabelText("Close drawing metadata").click();
+    expect(close).toHaveBeenCalledTimes(1);
   });
 
   it("labels an actionable overlay's priority as Actionable", () => {
