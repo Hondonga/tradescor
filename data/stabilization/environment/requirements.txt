@@ -1,0 +1,10 @@
+Flask
+pandas
+numpy
+pyarrow
+PyYAML
+requests
+python-dotenv
+websocket-client
+selenium
+scikit-learn

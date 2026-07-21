@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-07-21T02:43:29.474655+00:00",
+  "golden_path": {
+    "provider": "Deriv",
+    "market": "Volatility 75 Index",
+    "symbol": "R_75",
+    "timeframe": "M5",
+    "strategy": "Volatility Structure Pullback"
+  },
+  "verified_via": "formal reachability fixtures (validation/strategy_reachability_fixtures.py:_focused_frames), not a live market requirement",
+  "checks": {
+    "symbol_resolution": true,
+    "candle_loading": true,
+    "completed_candle_exclusion": true,
+    "timeframe_aggregation": true,
+    "current_market_context_produced": true,
+    "normalized_decision_produced": true,
+    "normalized_overlays_returned": true,
+    "actionable_fields_absent_when_not_ready": true,
+    "buy_fixture_complete_plan": {
+      "status": "READY TO BUY",
+      "entry": 117.65,
+      "stop": 115.76264285714285,
+      "target_count": 2,
+      "actionable_overlay_count": 5
+    },
+    "sell_fixture_complete_plan": {
+      "status": "READY TO SELL",
+      "entry": 102.35,
+      "stop": 104.23735714285715,
+      "target_count": 2,
+      "actionable_overlay_count": 5
+    },
+    "formal_paper_fixture_registerable": true
+  },
+  "evidence": {
+    "buy_sell_reachability": "tests/test_focused_volatility75_engine.py::test_focused_engine_produces_complete_bidirectional_ready_plans (passed)",
+    "developing_stage_contract": "tests/test_focused_volatility75_engine.py::test_developing_workspace_contract_has_specific_backend_stage_fields (passed)",
+    "paper_registration_reachability": "tests/test_smc_structural_target_repair.py::test_setup_constructor_geometry_is_symmetric_for_registered_setup_names (passed)",
+    "90_day_acceptance_audit": "data/volatility75_acceptance/latest_audit.json (verified by tests/test_focused_volatility75_engine.py::test_fixed_real_month_meets_frequency_and_symmetry_acceptance, passed)"
+  },
+  "classification": {
+    "pipeline_operational": true,
+    "buy_fixture_reachable": true,
+    "sell_fixture_reachable": true,
+    "historical_edge_proven": false
+  },
+  "note": "This confirms the golden path is operational and reachable in both directions via formal fixtures. It does not claim a proven profitable historical edge, consistent with the current strategy roster classification."
+}

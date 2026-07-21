@@ -1,0 +1,80 @@
+{
+  "generated_at": "2026-07-21T02:26:14.446572+00:00",
+  "router": "@tanstack/react-router (frontend/src/router.tsx)",
+  "routes": [
+    {
+      "path": "/",
+      "component": "redirect -> /markets",
+      "file": "frontend/src/router.tsx"
+    },
+    {
+      "path": "/markets",
+      "component": "MarketsPage",
+      "file": "frontend/src/pages/markets-page.tsx",
+      "description": "Multi-symbol scanner table grouped by lifecycle segment (Trade Ready / Developing / Waiting / No Opportunity / Data Problems / Unsupported Model)."
+    },
+    {
+      "path": "/workspace",
+      "component": "WorkspacePage",
+      "file": "frontend/src/pages/workspace-page.tsx",
+      "description": "3-pane layout: opportunity queue, MarketChart, DecisionRail. Live/historical toggle, historical search."
+    },
+    {
+      "path": "/research",
+      "component": "ResearchPage",
+      "file": "frontend/src/pages/research-page.tsx",
+      "description": "Tabbed research hub: Replay, ML Dataset, ML Training, Evidence, Diagnostics, Paper Log."
+    }
+  ],
+  "chart_component": "frontend/src/components/chart/market-chart.tsx",
+  "chart_sub_components": [
+    "frontend/src/components/chart/chart-toolbar.tsx",
+    "frontend/src/components/chart/chart-zone-layer.tsx",
+    "frontend/src/components/chart/chart-price-tags.tsx",
+    "frontend/src/components/chart/chart-event-markers.tsx",
+    "frontend/src/components/chart/chart-setup-summary.tsx",
+    "frontend/src/components/chart/drawing-inspector.tsx"
+  ],
+  "decision_rail_component": "frontend/src/components/terminal/decision-rail.tsx",
+  "global_store": {
+    "file": "frontend/src/store/terminal-store.ts",
+    "library": "zustand (with persist middleware, localStorage key 'tradescor-terminal-v2')",
+    "domains": [
+      "route",
+      "symbol/marketSource/marketType/marketSchedule",
+      "timeframe",
+      "model",
+      "connection + providerStates",
+      "dataReadiness",
+      "decision/liveDecision",
+      "workspaceMode + historical search/job/outcome",
+      "analysis request lifecycle",
+      "markets + watchlist",
+      "overlayVisibility + densityMode",
+      "panel sizes",
+      "systemMenuOpen/commandOpen"
+    ]
+  },
+  "selectors": {
+    "symbol": "inline <select> in frontend/src/components/shell/app-shell.tsx",
+    "timeframe": "inline <select> in frontend/src/components/shell/app-shell.tsx (M5/M15/H1/H4)",
+    "model": "inline <select> in frontend/src/components/shell/app-shell.tsx"
+  },
+  "provider_state_handling": {
+    "connection_dot": "frontend/src/components/shell/app-shell.tsx",
+    "status_badge": "frontend/src/components/shell/app-shell.tsx (StatusBadge)",
+    "state_components": "frontend/src/components/terminal/status-components.tsx (ProviderErrorState, StaleConnectionState)",
+    "derivation": "connection state derived inside terminal-store.ts (acceptDecision/failAnalysis, connectionFromProvider helper) from each /analyze response; no separate polling hook."
+  },
+  "overlay_toggle_toolbar": "frontend/src/components/chart/chart-toolbar.tsx",
+  "chart_density_module": "frontend/src/lib/overlay-density.ts",
+  "package_scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "test": "vitest run",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dev_server_port": 5173,
+  "api_proxy_target": "http://127.0.0.1:5000 (/api/* proxied from vite dev server to Flask)"
+}

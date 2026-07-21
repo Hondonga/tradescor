@@ -1,0 +1,493 @@
+{
+  "generated_at": "2026-07-21T02:22:45.128236+00:00",
+  "file_count": 81,
+  "total_bytes": 209415963,
+  "files": [
+    {
+      "original_path": "data/derived_paper_testing.db",
+      "backup_path": "data/stabilization/backups/data/derived_paper_testing.db",
+      "size_bytes": 133545984,
+      "sha256": "dec0a184d553b40d05d43845f16ed212003d4a416839896ce54c07495539ec3b"
+    },
+    {
+      "original_path": "data/derived_replay.db",
+      "backup_path": "data/stabilization/backups/data/derived_replay.db",
+      "size_bytes": 50810880,
+      "sha256": "4d05007920ddf7829c37284cd89a59b12f558270e6fcb58be0e2859d2521d8a4"
+    },
+    {
+      "original_path": "data/strategy_gate_diagnostics.db",
+      "backup_path": "data/stabilization/backups/data/strategy_gate_diagnostics.db",
+      "size_bytes": 45056,
+      "sha256": "dc9694db71e3f685de7c1b34e109a18162027245327bc10708c8eb3b063c3e45"
+    },
+    {
+      "original_path": "data/smc_acceptance.db",
+      "backup_path": "data/stabilization/backups/data/smc_acceptance.db",
+      "size_bytes": 8556544,
+      "sha256": "0c4ebf55cf537d2902e12f50a874a4c7d8aa2f8c11a172827a87a0decd4777c4"
+    },
+    {
+      "original_path": "data/strategy_setup_proof/baseline_before_causal_geometry.json",
+      "backup_path": "data/stabilization/backups/data/strategy_setup_proof/baseline_before_causal_geometry.json",
+      "size_bytes": 91097,
+      "sha256": "0a2bcaea44ab981784280d1a1096cb0cb2bafeb3ed00393e4bb79bea4c866ccb"
+    },
+    {
+      "original_path": "data/strategy_setup_proof/baseline_geometry_snapshot.json",
+      "backup_path": "data/stabilization/backups/data/strategy_setup_proof/baseline_geometry_snapshot.json",
+      "size_bytes": 7565,
+      "sha256": "9899f7d11708989399055230aef69627a9bfb3483ac92efec4282f71790c2a53"
+    },
+    {
+      "original_path": "data/strategy_setup_proof/latest.json",
+      "backup_path": "data/stabilization/backups/data/strategy_setup_proof/latest.json",
+      "size_bytes": 9625858,
+      "sha256": "aeeb37dfb3ba11463e7ff00388f8c955a789535c58b4a0368d8321faa0e1bd3b"
+    },
+    {
+      "original_path": "data/browser_acceptance/chart-1440.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/chart-1440.png",
+      "size_bytes": 87068,
+      "sha256": "3e77cdfe7bef2a93eac2cd6f2fef125621c5e8a2309b0dac84302fee7d00d531"
+    },
+    {
+      "original_path": "data/browser_acceptance/chart-1920.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/chart-1920.png",
+      "size_bytes": 89060,
+      "sha256": "f2c6c3acecb3ae421fe61076db85ab74f5715a49d5a7a0db176126d8bf72c72a"
+    },
+    {
+      "original_path": "data/browser_acceptance/home-1440.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/home-1440.png",
+      "size_bytes": 75023,
+      "sha256": "d44568e0990fdb765499c89bacbd7873c41fd61b7821bb07b8afd67b37d1f93b"
+    },
+    {
+      "original_path": "data/browser_acceptance/paper-1024.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/paper-1024.png",
+      "size_bytes": 51197,
+      "sha256": "fb8e1280dee4666256e7c3d9e23ebc7525212b8e95db3831834f7f3177d5f59b"
+    },
+    {
+      "original_path": "data/browser_acceptance/performance-768.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/performance-768.png",
+      "size_bytes": 52597,
+      "sha256": "5e4a43852b64e7a7d1ad358202d81c0b3c488fe4c487d9bd727340fedae95953"
+    },
+    {
+      "original_path": "data/browser_acceptance/react-terminal/markets-1440.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/react-terminal/markets-1440.png",
+      "size_bytes": 42635,
+      "sha256": "1a3a97341ce89d637047fbfa5b3440d542e9256108d976729d076f20e127c26a"
+    },
+    {
+      "original_path": "data/browser_acceptance/react-terminal/markets.log",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/react-terminal/markets.log",
+      "size_bytes": 1711,
+      "sha256": "66604265b5fa2343e7452b8957b81bf2bebdb638c04ec9eab9cd11212a3bf3c3"
+    },
+    {
+      "original_path": "data/browser_acceptance/react-terminal/research-1440.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/react-terminal/research-1440.png",
+      "size_bytes": 48404,
+      "sha256": "01734ccd99e5caa7f32c3d62cec655646f61b0b755522e3d50d110f06b3bfb8f"
+    },
+    {
+      "original_path": "data/browser_acceptance/react-terminal/research.log",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/react-terminal/research.log",
+      "size_bytes": 1393,
+      "sha256": "9c9c1da7e98dc1b080eaa1fa2c51b0bf1ff7a0b37a69ee9fd7cf076472375576"
+    },
+    {
+      "original_path": "data/browser_acceptance/react-terminal/workspace-1440.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/react-terminal/workspace-1440.png",
+      "size_bytes": 51190,
+      "sha256": "8b0ce9d83ce106a68c1b850c0cb97f74cac11639f503d4ee75f226efba6e10fc"
+    },
+    {
+      "original_path": "data/browser_acceptance/react-terminal/workspace.log",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/react-terminal/workspace.log",
+      "size_bytes": 1394,
+      "sha256": "8ff9dc75ec5a2b4ab9418ae56b03c66d6b1cc038e9255f6335fbf0ab0cb83bc6"
+    },
+    {
+      "original_path": "data/browser_acceptance/replay-1280-final.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/replay-1280-final.png",
+      "size_bytes": 107850,
+      "sha256": "6abf7c26c9fbd98ba7838d65ce4440cf1cbcb8d63c7a3fe020970da1af8cc98a"
+    },
+    {
+      "original_path": "data/browser_acceptance/replay-1280.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/replay-1280.png",
+      "size_bytes": 113602,
+      "sha256": "d9382ca7bb2d58f78b602e29c2ab0eebaf9b21a348d4b6848b405ae7e4b68351"
+    },
+    {
+      "original_path": "data/browser_acceptance/runtime-recovery/workspace-analyzed.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/runtime-recovery/workspace-analyzed.png",
+      "size_bytes": 105410,
+      "sha256": "2bc13f94ee22698d4ea6882f30060436f84bc8239d4bd27534fe218537e4ab8f"
+    },
+    {
+      "original_path": "data/browser_acceptance/runtime-recovery/workspace-live.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/runtime-recovery/workspace-live.png",
+      "size_bytes": 75758,
+      "sha256": "5451ead029f667266f4397642d9e275e294ae27d7c141083a4c86fedee1e3311"
+    },
+    {
+      "original_path": "data/browser_acceptance/scanner-1280.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/scanner-1280.png",
+      "size_bytes": 62596,
+      "sha256": "c15f6e35dbf84149779ec87aa669f99ccc0037450de9f57df1527879d36ea8eb"
+    },
+    {
+      "original_path": "data/browser_acceptance/settings-390-final.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/settings-390-final.png",
+      "size_bytes": 49527,
+      "sha256": "b427dfd91137228231942b01df5554ec7d98270b96dd1c2a9f0cdbef4587b4ea"
+    },
+    {
+      "original_path": "data/browser_acceptance/settings-390.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/settings-390.png",
+      "size_bytes": 45273,
+      "sha256": "26c165c9d2ff177bf876844ddd3a3c055a7bd3d675cd22eee008d206219a4699"
+    },
+    {
+      "original_path": "data/browser_acceptance/target-inspector-replay-1440.png",
+      "backup_path": "data/stabilization/backups/data/browser_acceptance/target-inspector-replay-1440.png",
+      "size_bytes": 139035,
+      "sha256": "6265b60728e993714036efe796509abbb556acfabef0e9252620a431ae343e3b"
+    },
+    {
+      "original_path": "data/ml/checkpoints/ml-r75-587037bb3a918adf604d.json",
+      "backup_path": "data/stabilization/backups/data/ml/checkpoints/ml-r75-587037bb3a918adf604d.json",
+      "size_bytes": 26767,
+      "sha256": "c49b27d224394f464d1d89f0aea3a3ec43ec4202d1791fe83508355b3b8d6c72"
+    },
+    {
+      "original_path": "data/ml/checkpoints/ml-r75-7158f2dfdb1e03ecdc1f.json",
+      "backup_path": "data/stabilization/backups/data/ml/checkpoints/ml-r75-7158f2dfdb1e03ecdc1f.json",
+      "size_bytes": 322,
+      "sha256": "8afbe1b6da1804ce87123604285e275544f947f504d3319edd1a232324d794c8"
+    },
+    {
+      "original_path": "data/ml/checkpoints/ml-r75-f4c52d93c7a8dc3e95f1-audit.json",
+      "backup_path": "data/stabilization/backups/data/ml/checkpoints/ml-r75-f4c52d93c7a8dc3e95f1-audit.json",
+      "size_bytes": 267779,
+      "sha256": "1dad92dc85d8412e30bdf71578789b96c7c265f7a8297b9fcb3dafb5655b305f"
+    },
+    {
+      "original_path": "data/ml/checkpoints/ml-r75-f4c52d93c7a8dc3e95f1.json",
+      "backup_path": "data/stabilization/backups/data/ml/checkpoints/ml-r75-f4c52d93c7a8dc3e95f1.json",
+      "size_bytes": 159,
+      "sha256": "984c28b74f261b97dc9c721a2e1d0caf88d83ce112e2bd3875b3a0f322158add"
+    },
+    {
+      "original_path": "data/ml/datasets/ml-r75-7158f2dfdb1e03ecdc1f/features.parquet",
+      "backup_path": "data/stabilization/backups/data/ml/datasets/ml-r75-7158f2dfdb1e03ecdc1f/features.parquet",
+      "size_bytes": 53515,
+      "sha256": "de552aacf198579a647a1d37ec37d33e144f668a972b65cfdd07aebe7796f421"
+    },
+    {
+      "original_path": "data/ml/datasets/ml-r75-7158f2dfdb1e03ecdc1f/manifest.json",
+      "backup_path": "data/stabilization/backups/data/ml/datasets/ml-r75-7158f2dfdb1e03ecdc1f/manifest.json",
+      "size_bytes": 1607,
+      "sha256": "d4eb817daf31ec6f9c9b9790561877bdbf8c21f8d3e7b38261ac48709fe06d55"
+    },
+    {
+      "original_path": "data/ml/datasets/ml-r75-7158f2dfdb1e03ecdc1f/sequences.npz",
+      "backup_path": "data/stabilization/backups/data/ml/datasets/ml-r75-7158f2dfdb1e03ecdc1f/sequences.npz",
+      "size_bytes": 5475,
+      "sha256": "683a39b6aebf7825a1fca80285e8f0d115aa0ad7b7e441c4bab0d5456c44f9d2"
+    },
+    {
+      "original_path": "data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/features.parquet",
+      "backup_path": "data/stabilization/backups/data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/features.parquet",
+      "size_bytes": 856712,
+      "sha256": "17f781c67e93a6887c2386cb181e01e638961d1c71268a90f5cce8b277e720c3"
+    },
+    {
+      "original_path": "data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/manifest.json",
+      "backup_path": "data/stabilization/backups/data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/manifest.json",
+      "size_bytes": 3729,
+      "sha256": "0cb86750ec4fef5364c17ab7d160a96a1ef02f8b8685ff3375aa4e9fb5e6d1b9"
+    },
+    {
+      "original_path": "data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/sequences.npz",
+      "backup_path": "data/stabilization/backups/data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/sequences.npz",
+      "size_bytes": 1547397,
+      "sha256": "94098e2acc269498c66a7fb1c0b64c0c7436c0b3499ac781c348c53fa6f2bbe4"
+    },
+    {
+      "original_path": "data/ml/models/ml-run-610209ec3d9146ae/metadata.json",
+      "backup_path": "data/stabilization/backups/data/ml/models/ml-run-610209ec3d9146ae/metadata.json",
+      "size_bytes": 3167,
+      "sha256": "ec23b4fe67d203aa9878f81e44d980708e139786ef99707ea4d416daf7768c4b"
+    },
+    {
+      "original_path": "data/ml/models/ml-run-610209ec3d9146ae/model.pkl",
+      "backup_path": "data/stabilization/backups/data/ml/models/ml-run-610209ec3d9146ae/model.pkl",
+      "size_bytes": 1852,
+      "sha256": "4e56be1db505d0eaa6743257a53abafe65fc1d51277626937ce73c039bf7e661"
+    },
+    {
+      "original_path": "data/ml/models/ml-run-610209ec3d9146ae/preprocessor.pkl",
+      "backup_path": "data/stabilization/backups/data/ml/models/ml-run-610209ec3d9146ae/preprocessor.pkl",
+      "size_bytes": 6978,
+      "sha256": "4031ae71ecad5a7beadbeba04d8e33d6cf1b1b59f29afa496c9fa2c3ff4ec239"
+    },
+    {
+      "original_path": "data/ml/models/ml-run-610209ec3d9146ae/test_predictions.parquet",
+      "backup_path": "data/stabilization/backups/data/ml/models/ml-run-610209ec3d9146ae/test_predictions.parquet",
+      "size_bytes": 8232,
+      "sha256": "909014830d26ab4e603a861d0f74034a8b95ef328f18ad60f3916cef48af8923"
+    },
+    {
+      "original_path": "data/ml/models/ml-run-610209ec3d9146ae/training_weights.parquet",
+      "backup_path": "data/stabilization/backups/data/ml/models/ml-run-610209ec3d9146ae/training_weights.parquet",
+      "size_bytes": 22552,
+      "sha256": "e98a9a4f2a2ef06ce8e4dce1f771f30dc25b729d493d65206cddbcc103ef102f"
+    },
+    {
+      "original_path": "data/ml/models/ml-run-a1a6422badea422c/preprocessor.pkl",
+      "backup_path": "data/stabilization/backups/data/ml/models/ml-run-a1a6422badea422c/preprocessor.pkl",
+      "size_bytes": 6978,
+      "sha256": "4031ae71ecad5a7beadbeba04d8e33d6cf1b1b59f29afa496c9fa2c3ff4ec239"
+    },
+    {
+      "original_path": "data/ml/reports/ml-r75-7158f2dfdb1e03ecdc1f.html",
+      "backup_path": "data/stabilization/backups/data/ml/reports/ml-r75-7158f2dfdb1e03ecdc1f.html",
+      "size_bytes": 28563,
+      "sha256": "2f2cfc8a4cfac1e1103045a640562d78b55ef4ab9295e071a7ef6738f7296969"
+    },
+    {
+      "original_path": "data/ml/reports/ml-r75-7158f2dfdb1e03ecdc1f.json",
+      "backup_path": "data/stabilization/backups/data/ml/reports/ml-r75-7158f2dfdb1e03ecdc1f.json",
+      "size_bytes": 28228,
+      "sha256": "47b2f777c690053d59de32aa4beb84037565fb1a4c8e7feeb0d2351c027d1507"
+    },
+    {
+      "original_path": "data/ml/reports/ml-r75-f4c52d93c7a8dc3e95f1.html",
+      "backup_path": "data/stabilization/backups/data/ml/reports/ml-r75-f4c52d93c7a8dc3e95f1.html",
+      "size_bytes": 65089,
+      "sha256": "222dd12a5fb0f38613a56f091f186e5c302a75fb8ae32c95be16e1b38e163854"
+    },
+    {
+      "original_path": "data/ml/reports/ml-r75-f4c52d93c7a8dc3e95f1.json",
+      "backup_path": "data/stabilization/backups/data/ml/reports/ml-r75-f4c52d93c7a8dc3e95f1.json",
+      "size_bytes": 64754,
+      "sha256": "30efa74598b62b1366e2c2dd96792a0574a9df4fd0771e58d7b69bff2edd207f"
+    },
+    {
+      "original_path": "data/ml/training_reports/ml-run-610209ec3d9146ae.html",
+      "backup_path": "data/stabilization/backups/data/ml/training_reports/ml-run-610209ec3d9146ae.html",
+      "size_bytes": 38165,
+      "sha256": "de854db0e461d848bd21e57a2f7cc4d92118a85878628edde0f7db20bcfd693b"
+    },
+    {
+      "original_path": "data/ml/training_reports/ml-run-610209ec3d9146ae.json",
+      "backup_path": "data/stabilization/backups/data/ml/training_reports/ml-run-610209ec3d9146ae.json",
+      "size_bytes": 28722,
+      "sha256": "90a4c3217944bff9c4625a141e1e47298ac8b365acb4c90cfdeeda609297e374"
+    },
+    {
+      "original_path": "data/ml/training_runs/ml-run-610209ec3d9146ae.json",
+      "backup_path": "data/stabilization/backups/data/ml/training_runs/ml-run-610209ec3d9146ae.json",
+      "size_bytes": 31856,
+      "sha256": "2facdd43170d171a3c682f3acde56adaff8270dbd171724963b1ffe73b782946"
+    },
+    {
+      "original_path": "data/ml/training_runs/ml-run-a1a6422badea422c.json",
+      "backup_path": "data/stabilization/backups/data/ml/training_runs/ml-run-a1a6422badea422c.json",
+      "size_bytes": 508,
+      "sha256": "6e2776c2c078060566d8ff4e93fb81d5f653831503265b32195c1e4fc7b4f689"
+    },
+    {
+      "original_path": "data/strategy_feasibility/consumed_ledger.json",
+      "backup_path": "data/stabilization/backups/data/strategy_feasibility/consumed_ledger.json",
+      "size_bytes": 802,
+      "sha256": "708f29b518e62488534ee5b60d6244e154bb256f14225e2108ae80c153a72c51"
+    },
+    {
+      "original_path": "data/strategy_feasibility/jdbr_feasibility_selftest_2026-07.json",
+      "backup_path": "data/stabilization/backups/data/strategy_feasibility/jdbr_feasibility_selftest_2026-07.json",
+      "size_bytes": 6751,
+      "sha256": "ce994bfd0dcdec3003c50c8b1eca9e41891654beeff1450a5ad6683370ed3506"
+    },
+    {
+      "original_path": "data/forex_audits/eur_usd-20260720T125431Z/audit.json",
+      "backup_path": "data/stabilization/backups/data/forex_audits/eur_usd-20260720T125431Z/audit.json",
+      "size_bytes": 3351,
+      "sha256": "633462f273c5390e295b6d42ba3e7574c98fbc90ec4e291351bd9fbb73e985b2"
+    },
+    {
+      "original_path": "data/forex_audits/eur_usd-20260720T125431Z/h1-raw.json",
+      "backup_path": "data/stabilization/backups/data/forex_audits/eur_usd-20260720T125431Z/h1-raw.json",
+      "size_bytes": 61448,
+      "sha256": "ea82804befcc58cdc9d7df2722ca5d2e576632c97083405d8fc8874643d154ad"
+    },
+    {
+      "original_path": "data/forex_audits/eur_usd-20260720T125431Z/m1-raw.json",
+      "backup_path": "data/stabilization/backups/data/forex_audits/eur_usd-20260720T125431Z/m1-raw.json",
+      "size_bytes": 183417,
+      "sha256": "a10a09affe3685d79fc1c36c8343c748f89e5b95554e987946c279613b4d2c54"
+    },
+    {
+      "original_path": "data/forex_audits/eur_usd-20260720T125431Z/m15-raw.json",
+      "backup_path": "data/stabilization/backups/data/forex_audits/eur_usd-20260720T125431Z/m15-raw.json",
+      "size_bytes": 76700,
+      "sha256": "6759a5be0f12e33f6bd21be62da637da25bce7f6d094167be53ea6871a527aa8"
+    },
+    {
+      "original_path": "data/forex_audits/eur_usd-20260720T125431Z/m5-raw.json",
+      "backup_path": "data/stabilization/backups/data/forex_audits/eur_usd-20260720T125431Z/m5-raw.json",
+      "size_bytes": 76658,
+      "sha256": "9acfdd4e5640e2fae0d5d8255bfd6bc81a8c770b7c4a1c25a23450fa4adec74f"
+    },
+    {
+      "original_path": "data/forex_audits/gbp_usd-20260720T125417Z/audit.json",
+      "backup_path": "data/stabilization/backups/data/forex_audits/gbp_usd-20260720T125417Z/audit.json",
+      "size_bytes": 3353,
+      "sha256": "9cbbc0c50491fc5e305f74102b43e7d16e274456abc557cd14362675cd8b2d77"
+    },
+    {
+      "original_path": "data/forex_audits/gbp_usd-20260720T125417Z/h1-raw.json",
+      "backup_path": "data/stabilization/backups/data/forex_audits/gbp_usd-20260720T125417Z/h1-raw.json",
+      "size_bytes": 61425,
+      "sha256": "295404ab2fcd21e1abe931400cf524264140f5b152df25289131d343c23e4079"
+    },
+    {
+      "original_path": "data/forex_audits/gbp_usd-20260720T125417Z/m1-raw.json",
+      "backup_path": "data/stabilization/backups/data/forex_audits/gbp_usd-20260720T125417Z/m1-raw.json",
+      "size_bytes": 183509,
+      "sha256": "e8fa247d404bdb15e8a43c4276d3b3bce68c1e303382d6279b495531c261ae0b"
+    },
+    {
+      "original_path": "data/forex_audits/gbp_usd-20260720T125417Z/m15-raw.json",
+      "backup_path": "data/stabilization/backups/data/forex_audits/gbp_usd-20260720T125417Z/m15-raw.json",
+      "size_bytes": 76715,
+      "sha256": "8d76d51c491df45d979add82be9fb63d8f0104a65ca380b1a83030a38d73a792"
+    },
+    {
+      "original_path": "data/forex_audits/gbp_usd-20260720T125417Z/m5-raw.json",
+      "backup_path": "data/stabilization/backups/data/forex_audits/gbp_usd-20260720T125417Z/m5-raw.json",
+      "size_bytes": 76698,
+      "sha256": "acf1a71d084c227eaab9f57eac11a5d627d35a8fae13970e5873afe61fd0463c"
+    },
+    {
+      "original_path": "data/forex_audits/usd_jpy-20260720T125659Z/audit.json",
+      "backup_path": "data/stabilization/backups/data/forex_audits/usd_jpy-20260720T125659Z/audit.json",
+      "size_bytes": 3353,
+      "sha256": "31f900bda990389beb97d05b04df172b59b45e1e6671695332786d8faf850f4a"
+    },
+    {
+      "original_path": "data/forex_audits/usd_jpy-20260720T125659Z/h1-raw.json",
+      "backup_path": "data/stabilization/backups/data/forex_audits/usd_jpy-20260720T125659Z/h1-raw.json",
+      "size_bytes": 64610,
+      "sha256": "43ded93bd3fdee233e2c18ad016efa2c2f79f771d7439be29c7a087848871677"
+    },
+    {
+      "original_path": "data/forex_audits/usd_jpy-20260720T125659Z/m1-raw.json",
+      "backup_path": "data/stabilization/backups/data/forex_audits/usd_jpy-20260720T125659Z/m1-raw.json",
+      "size_bytes": 193056,
+      "sha256": "6bde1bc6499c51ee8ffcb5caa9399b606db5e73a7575f2eaefc54fe1af475026"
+    },
+    {
+      "original_path": "data/forex_audits/usd_jpy-20260720T125659Z/m15-raw.json",
+      "backup_path": "data/stabilization/backups/data/forex_audits/usd_jpy-20260720T125659Z/m15-raw.json",
+      "size_bytes": 80626,
+      "sha256": "f1bf6e4c4a5634b03b692f6a032b2e27c6a6335b678d6970aedd26ff04fa8919"
+    },
+    {
+      "original_path": "data/forex_audits/usd_jpy-20260720T125659Z/m5-raw.json",
+      "backup_path": "data/stabilization/backups/data/forex_audits/usd_jpy-20260720T125659Z/m5-raw.json",
+      "size_bytes": 80586,
+      "sha256": "190217674fa499897fa013aa1d52e9b2bc07c4d7828117991b3d5f48e3440ec4"
+    },
+    {
+      "original_path": "data/volatility75_acceptance/dataset-53a36aaf6b2bdfd2c608f350.json",
+      "backup_path": "data/stabilization/backups/data/volatility75_acceptance/dataset-53a36aaf6b2bdfd2c608f350.json",
+      "size_bytes": 929227,
+      "sha256": "dfcdd8263e7238b4d3f022a41522dfc02202eda49888321abb81773020f3cdec"
+    },
+    {
+      "original_path": "data/volatility75_acceptance/latest_audit.json",
+      "backup_path": "data/stabilization/backups/data/volatility75_acceptance/latest_audit.json",
+      "size_bytes": 84487,
+      "sha256": "b3601b3007824173b5a781a04124e25796bf1f77b9946e5f7837b25c8bddb0b7"
+    },
+    {
+      "original_path": "data/volatility75_acceptance/sensitivity_minus10.json",
+      "backup_path": "data/stabilization/backups/data/volatility75_acceptance/sensitivity_minus10.json",
+      "size_bytes": 97113,
+      "sha256": "7d452c4f8f822f5dfa97c0eaaf046bcd5832bb0cc5688fa732ec24120fd4dcf5"
+    },
+    {
+      "original_path": "data/volatility75_acceptance/sensitivity_plus10.json",
+      "backup_path": "data/stabilization/backups/data/volatility75_acceptance/sensitivity_plus10.json",
+      "size_bytes": 77222,
+      "sha256": "ee35f28c45912b805ecc6645aa813e73995d64964951560d148ba14796e80049"
+    },
+    {
+      "original_path": "data/volatility75_acceptance/sensitivity_summary.json",
+      "backup_path": "data/stabilization/backups/data/volatility75_acceptance/sensitivity_summary.json",
+      "size_bytes": 769,
+      "sha256": "5c9a44fef598825ff350fa41f16693b394cc1a9aa5874541e8c2feafdbef26a2"
+    },
+    {
+      "original_path": "config/derived_indices.yaml",
+      "backup_path": "data/stabilization/backups/config/derived_indices.yaml",
+      "size_bytes": 1257,
+      "sha256": "f1cb4169389b3cb4365c7c54bfb0027e7891b7e291463e2dc1ec26ff31f1f7c2"
+    },
+    {
+      "original_path": "config/derived_market_thresholds.yaml",
+      "backup_path": "data/stabilization/backups/config/derived_market_thresholds.yaml",
+      "size_bytes": 291,
+      "sha256": "c329662a2aa3a86426be081c729584e7b03fc3ac6f95159159e9a386da3065a2"
+    },
+    {
+      "original_path": "config/derived_paper_testing.yaml",
+      "backup_path": "data/stabilization/backups/config/derived_paper_testing.yaml",
+      "size_bytes": 695,
+      "sha256": "08961b7431b77a62b1b74463e8a598e2522e0b3fbe30f3c8ad3863e6a40c7c34"
+    },
+    {
+      "original_path": "config/derived_replay.yaml",
+      "backup_path": "data/stabilization/backups/config/derived_replay.yaml",
+      "size_bytes": 822,
+      "sha256": "54aa17fafca8858a8fcab9f72130cba18d42f43481d980bb71c01935543caa09"
+    },
+    {
+      "original_path": "config/derived_strategy_thresholds.yaml",
+      "backup_path": "data/stabilization/backups/config/derived_strategy_thresholds.yaml",
+      "size_bytes": 5535,
+      "sha256": "19c6d8309db171c41a91b658a9e6ee44073d576d42ffa580cf0212b0497203d8"
+    },
+    {
+      "original_path": "config/ict_2022_v2.yaml",
+      "backup_path": "data/stabilization/backups/config/ict_2022_v2.yaml",
+      "size_bytes": 800,
+      "sha256": "3350383bc58ade51fe15bd8ab5c15211ff1f40677d2df4b669c99702493fa768"
+    },
+    {
+      "original_path": "config/ml_dataset.yaml",
+      "backup_path": "data/stabilization/backups/config/ml_dataset.yaml",
+      "size_bytes": 1018,
+      "sha256": "0d874d24d5703582542b91baa6b179ec558b436c7281b8c559f4cdada37879c9"
+    },
+    {
+      "original_path": "config/ml_training.yaml",
+      "backup_path": "data/stabilization/backups/config/ml_training.yaml",
+      "size_bytes": 617,
+      "sha256": "177926720a5e437f0dbbd5490e75ee32edf4d5425e2719c269a1ead16a7c7ef3"
+    },
+    {
+      "original_path": "config/strategy_diagnostics.yaml",
+      "backup_path": "data/stabilization/backups/config/strategy_diagnostics.yaml",
+      "size_bytes": 239,
+      "sha256": "3e2990d4eb08a857be3d84ba2281e8b6527e86c23320cd4caa68afdef896ddf8"
+    }
+  ]
+}

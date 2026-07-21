@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-07-21T02:44:27.887795+00:00",
+  "backend": {
+    "flask_starts_successfully": true,
+    "no_import_errors": true,
+    "no_database_migration_errors": true,
+    "note": "Verified against an already-running backend process (pid confirmed live, uptime >11h at time of check) rather than starting a second instance, to avoid leaving duplicate development servers running. A second `python3 app.py` was attempted and correctly failed with 'Address already in use' on port 5000, confirming no duplicate was started.",
+    "routes_checked": {
+      "/": 200,
+      "/workspace": 200,
+      "/markets": 200,
+      "/research": 200,
+      "/api/system/runtime-health": 200,
+      "/api/deriv/symbols": 200,
+      "/api/candles?symbol=R_75&...": 200
+    }
+  },
+  "frontend": {
+    "typescript_build": "clean, 0 errors (see data/stabilization/test_results/typescript_build.txt)",
+    "production_build": "succeeds (see data/stabilization/test_results/frontend_production_build.txt)",
+    "served_by_backend": true,
+    "workspace_route_loads": true,
+    "markets_route_loads": true,
+    "research_route_loads": true,
+    "no_immediate_runtime_crash": true,
+    "note": "The Flask backend serves the built frontend (frontend/dist) directly; confirmed by fetching /, /workspace, /markets, /research and by capturing Playwright screenshots of the rendered pages (see data/stabilization/baseline/screenshots/). No separate `npm run dev` server was left running."
+  },
+  "duplicate_servers_left_running": false
+}

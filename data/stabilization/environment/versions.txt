@@ -1,0 +1,5 @@
+python: Python 3.14.4
+node: v25.9.0
+npm: 11.12.1
+os: Darwin Users-MBP 23.6.0 Darwin Kernel Version 23.6.0: Thu Mar  6 21:58:03 PST 2025; root:xnu-10063.141.1.704.6~1/RELEASE_X86_64 x86_64
+pip freeze snapshot:

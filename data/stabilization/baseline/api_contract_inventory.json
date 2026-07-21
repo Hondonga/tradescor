@@ -1,0 +1,637 @@
+{
+  "generated_at": "2026-07-21T02:37:11.043841+00:00",
+  "total_routes_found": 68,
+  "note": "Detailed entries (params + response fields) are provided for the routes explicitly named in the Phase 1 milestone. All other discovered routes are listed with method/path/classification only. No API response was changed while producing this inventory.",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/candles",
+      "line": 367,
+      "request_parameters": [
+        "symbol",
+        "display_name",
+        "timeframe",
+        "provider",
+        "asset_class",
+        "bars"
+      ],
+      "response_top_level_fields": [
+        "symbol",
+        "display_symbol",
+        "api_symbol",
+        "asset_type",
+        "timeframe",
+        "interval",
+        "bars",
+        "time_metadata",
+        "candles"
+      ],
+      "provider_dependency": "Deriv or Twelve Data (via provider registry, selected by 'provider' param)",
+      "frontend_consumer": "frontend/src/components/chart/market-chart.tsx (loadCandles)",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/api/deriv/symbols",
+      "line": 394,
+      "request_parameters": [],
+      "response_top_level_fields": [
+        "provider",
+        "asset_class",
+        "cached_for_seconds",
+        "symbols"
+      ],
+      "provider_dependency": "Deriv",
+      "frontend_consumer": "Markets page symbol registry / symbol selector",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/api/deriv/candles",
+      "line": 405,
+      "request_parameters": [
+        "symbol",
+        "timeframe",
+        "count"
+      ],
+      "response_top_level_fields": [
+        "ok",
+        "provider",
+        "symbol",
+        "timeframe",
+        "granularity",
+        "count",
+        "received_count",
+        "valid_count",
+        "candles"
+      ],
+      "provider_dependency": "Deriv",
+      "frontend_consumer": "Diagnostic/manual chart data probe (not the primary chart path, which uses /api/candles)",
+      "classification": "diagnostic"
+    },
+    {
+      "method": "GET",
+      "path": "/api/deriv/profile",
+      "line": 430,
+      "request_parameters": [
+        "symbol",
+        "display_name",
+        "family"
+      ],
+      "response_top_level_fields": [
+        "provider",
+        "asset_class",
+        "symbol",
+        "...analyze_derived_index() result"
+      ],
+      "provider_dependency": "Deriv",
+      "frontend_consumer": "Research/diagnostic symbol profile view",
+      "classification": "diagnostic"
+    },
+    {
+      "method": "GET",
+      "path": "/api/deriv/intelligence",
+      "line": 443,
+      "request_parameters": [
+        "symbol",
+        "timeframe",
+        "display_name",
+        "refresh"
+      ],
+      "response_top_level_fields": [
+        "ok",
+        "intelligence"
+      ],
+      "provider_dependency": "Deriv",
+      "frontend_consumer": "Research page market intelligence panel",
+      "classification": "research"
+    },
+    {
+      "method": "GET,POST",
+      "path": "/api/analyze",
+      "line": 512,
+      "request_parameters": [
+        "symbol/timeframe/provider (GET query, via _get_chart_query)",
+        "candles+context (POST JSON, via _get_replay_query)",
+        "priority",
+        "analysis_depth"
+      ],
+      "response_top_level_fields": [
+        "decision",
+        "candles (lightweight mode)",
+        "... full NormalizedDecision-shaped fields via _acyclic_projection"
+      ],
+      "provider_dependency": "Deriv or Twelve Data, routed by asset class",
+      "frontend_consumer": "frontend/src/store/terminal-store.ts (core analysis call driving Workspace + Markets)",
+      "classification": "production",
+      "note": "The core decision-engine entry point. Every strategy family and normalize_global_decision() are reached through this route."
+    },
+    {
+      "method": "POST",
+      "path": "/api/analyze-replay",
+      "line": 545,
+      "request_parameters": [
+        "candles (JSON body)",
+        "context_candles (JSON body)",
+        "symbol/timeframe/provider metadata"
+      ],
+      "response_top_level_fields": [
+        "decision",
+        "..."
+      ],
+      "provider_dependency": "none (client-provided candle slice; no live provider call)",
+      "frontend_consumer": "Replay tab / historical inspection point-in-time re-analysis",
+      "classification": "production"
+    },
+    {
+      "method": "POST",
+      "path": "/api/backtest",
+      "line": 2341,
+      "request_parameters": [
+        "symbol",
+        "timeframe",
+        "bars",
+        "risk_per_trade",
+        "starting_balance",
+        "strategies"
+      ],
+      "response_top_level_fields": [
+        "...report fields",
+        "result_identity",
+        "ok"
+      ],
+      "provider_dependency": "Twelve Data (forex-oriented legacy strategies: universal_structure, supply_demand, breakout_retest)",
+      "frontend_consumer": "Research page backtest tooling",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/system/runtime-health",
+      "line": 90,
+      "request_parameters": [],
+      "response_top_level_fields": [
+        "...runtime_health.snapshot() fields"
+      ],
+      "provider_dependency": "none (internal coordinator state)",
+      "frontend_consumer": "system/provider health indicators",
+      "classification": "diagnostic"
+    },
+    {
+      "method": "GET",
+      "path": "/api/system/data-pipeline",
+      "line": 93,
+      "request_parameters": [
+        "symbol",
+        "timeframe"
+      ],
+      "response_top_level_fields": [
+        "request_id",
+        "symbol",
+        "provider_symbol",
+        "timeframe",
+        "state",
+        "stages"
+      ],
+      "provider_dependency": "none (internal trace)",
+      "frontend_consumer": "diagnostics",
+      "classification": "diagnostic"
+    },
+    {
+      "method": "GET,POST",
+      "path": "/api/system/analysis-priority",
+      "line": 98,
+      "request_parameters": [
+        "mode (POST JSON)"
+      ],
+      "response_top_level_fields": [
+        "...coordinator.snapshot() fields"
+      ],
+      "provider_dependency": "none",
+      "frontend_consumer": "diagnostics",
+      "classification": "diagnostic"
+    },
+    {
+      "method": "POST",
+      "path": "/api/ml/datasets/build",
+      "line": 161,
+      "request_parameters": [
+        "dataset build spec (JSON body)"
+      ],
+      "response_top_level_fields": [
+        "dataset build job fields"
+      ],
+      "provider_dependency": "none (offline, historical candles + frozen feature pipeline)",
+      "frontend_consumer": "Research page ML Dataset tab",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ml/datasets",
+      "line": 166,
+      "request_parameters": [],
+      "response_top_level_fields": [
+        "datasets list"
+      ],
+      "provider_dependency": "none",
+      "frontend_consumer": "Research page ML Dataset tab",
+      "classification": "research"
+    },
+    {
+      "method": "POST",
+      "path": "/api/ml/training/runs",
+      "line": 125,
+      "request_parameters": [
+        "training run spec (JSON body)"
+      ],
+      "response_top_level_fields": [
+        "training run job fields"
+      ],
+      "provider_dependency": "none (offline training only, no Workspace integration)",
+      "frontend_consumer": "Research page ML Training tab",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ml/training/runs",
+      "line": 130,
+      "request_parameters": [],
+      "response_top_level_fields": [
+        "training runs list"
+      ],
+      "provider_dependency": "none",
+      "frontend_consumer": "Research page ML Training tab",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/markets/registry",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "Markets page symbol registry",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ml/training/runs/<run_id>",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ml/training/runs/<run_id>/progress",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ml/training/runs/<run_id>/report",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "POST",
+      "path": "/api/ml/training/runs/<run_id>/cancel",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "POST",
+      "path": "/api/ml/training/runs/<run_id>/validate",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ml/datasets/<dataset_id>",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ml/datasets/<dataset_id>/progress",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ml/datasets/<dataset_id>/report",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "POST",
+      "path": "/api/ml/datasets/<dataset_id>/validate",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "POST",
+      "path": "/api/ml/datasets/<dataset_id>/<action>",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "POST",
+      "path": "/api/workspace/latest-valid-setup",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "Workspace 'Find latest valid setup' historical search",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/api/workspace/latest-valid-setup/<job_id>",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "production"
+    },
+    {
+      "method": "POST",
+      "path": "/api/workspace/latest-valid-setup/<job_id>/cancel",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "production"
+    },
+    {
+      "method": "POST",
+      "path": "/api/workspace/latest-valid-setup/<job_id>/reveal-outcome",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "SPA index (serves frontend build)",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/<path:filename>",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "SPA static asset serving",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/favicon.svg",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/markets",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "SPA route fallback (client-side router takes over)",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/workspace",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "SPA route fallback",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/research",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "SPA route fallback",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/api/paper/summary",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "Paper Log tab",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/api/paper/decisions",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "Paper Log tab",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/api/paper/setups",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "Paper Log tab",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/api/paper/outcomes",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "Paper Log tab",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/api/paper/active",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "Paper Log tab",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/api/paper/performance",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "Paper Log tab",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/api/paper/evidence",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "Paper Log tab",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/api/paper/setup/<paper_setup_id>",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "production"
+    },
+    {
+      "method": "POST",
+      "path": "/api/paper/reconcile",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "diagnostic"
+    },
+    {
+      "method": "GET",
+      "path": "/api/strategy-diagnostics/gates",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "diagnostic"
+    },
+    {
+      "method": "POST",
+      "path": "/api/replay/runs",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "Replay tab",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/replay/runs",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "Replay tab",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/replay/runs/<run_id>",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "POST",
+      "path": "/api/replay/runs/<run_id>/pause",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "POST",
+      "path": "/api/replay/runs/<run_id>/resume",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "POST",
+      "path": "/api/replay/runs/<run_id>/cancel",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/replay/runs/<run_id>/progress",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/replay/runs/<run_id>/decisions",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/replay/runs/<run_id>/setups",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/replay/runs/<run_id>/outcomes",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "GET",
+      "path": "/api/replay/runs/<run_id>/report",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "POST",
+      "path": "/api/replay/runs/<run_id>/validate",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "research"
+    },
+    {
+      "method": "POST",
+      "path": "/api/smc-validation/runs/<run_id>",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "diagnostic"
+    },
+    {
+      "method": "GET",
+      "path": "/api/smc-validation/reports",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "diagnostic"
+    },
+    {
+      "method": "GET",
+      "path": "/api/smc-validation/reports/<report_id>",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "diagnostic"
+    },
+    {
+      "method": "GET",
+      "path": "/api/smc-validation/reports/<report_id>/html",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "diagnostic"
+    },
+    {
+      "method": "GET",
+      "path": "/api/smc-validation/runs/<run_id>/decisions/<decision_id>",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "diagnostic"
+    },
+    {
+      "method": "GET",
+      "path": "/api/strategy-reachability",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "Used by strategy roster / reachability gating",
+      "classification": "diagnostic"
+    },
+    {
+      "method": "GET",
+      "path": "/api/debug/deriv/connection",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "diagnostic"
+    },
+    {
+      "method": "GET",
+      "path": "/api/stream/deriv",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "SSE projection of shared Deriv subscription",
+      "classification": "production"
+    },
+    {
+      "method": "GET",
+      "path": "/api/debug/deriv/live",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "-",
+      "classification": "diagnostic"
+    },
+    {
+      "method": "GET",
+      "path": "/api/fvg",
+      "provider_dependency": "see pipeline_inventory.json / route path",
+      "frontend_consumer": "Predates the SMC/global-overlay engine; standalone FVG-only endpoint",
+      "classification": "legacy"
+    }
+  ]
+}

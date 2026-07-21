@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-07-21T02:23:33.765400+00:00",
+  "dataset": {
+    "dataset_id": "ml-r75-f4c52d93c7a8dc3e95f1",
+    "expected_checksum": "737b02ea7c98fa68131920cc0fb6f5b438a8504dc2898aea14c1ce4c0b178b23",
+    "manifest_recorded_checksum": "737b02ea7c98fa68131920cc0fb6f5b438a8504dc2898aea14c1ce4c0b178b23",
+    "checksum_matches_expected": true,
+    "frozen": true,
+    "immutable": true,
+    "leakage_violations": 0,
+    "rows": 2442,
+    "resolved_rows": 674,
+    "test_split": {
+      "end": "2026-07-20T04:00:00+00:00",
+      "purged_sequence_overlap": true,
+      "rows": 475,
+      "shuffled": false,
+      "start": "2026-07-03T05:15:00+00:00",
+      "untouched": true,
+      "status": "CONSUMED_FINAL_TEST"
+    },
+    "current_file_hashes": {
+      "data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/manifest.json": "0cb86750ec4fef5364c17ab7d160a96a1ef02f8b8685ff3375aa4e9fb5e6d1b9",
+      "data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/features.parquet": "17f781c67e93a6887c2386cb181e01e638961d1c71268a90f5cce8b277e720c3",
+      "data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/sequences.npz": "94098e2acc269498c66a7fb1c0b64c0c7436c0b3499ac781c348c53fa6f2bbe4",
+      "data/ml/checkpoints/ml-r75-f4c52d93c7a8dc3e95f1.json": "984c28b74f261b97dc9c721a2e1d0caf88d83ce112e2bd3875b3a0f322158add",
+      "data/ml/checkpoints/ml-r75-f4c52d93c7a8dc3e95f1-audit.json": "1dad92dc85d8412e30bdf71578789b96c7c265f7a8297b9fcb3dafb5655b305f"
+    }
+  },
+  "model_run": {
+    "run_id": "ml-run-610209ec3d9146ae",
+    "model_id": "model-495e93f5c3331938",
+    "model_type": "logistic_unweighted",
+    "dataset_id": "ml-r75-f4c52d93c7a8dc3e95f1",
+    "dataset_checksum_recorded_on_model": "737b02ea7c98fa68131920cc0fb6f5b438a8504dc2898aea14c1ce4c0b178b23",
+    "dataset_checksum_matches_dataset_manifest": true,
+    "training_run_model_status": "REJECTED_POOR_CALIBRATION",
+    "status_label": "REJECTED_POOR_CALIBRATION",
+    "dataset_checksum_verified_flag": true,
+    "live_activation_available": false,
+    "current_file_hashes": {
+      "data/ml/models/ml-run-610209ec3d9146ae/metadata.json": "ec23b4fe67d203aa9878f81e44d980708e139786ef99707ea4d416daf7768c4b",
+      "data/ml/models/ml-run-610209ec3d9146ae/model.pkl": "4e56be1db505d0eaa6743257a53abafe65fc1d51277626937ce73c039bf7e661",
+      "data/ml/models/ml-run-610209ec3d9146ae/preprocessor.pkl": "4031ae71ecad5a7beadbeba04d8e33d6cf1b1b59f29afa496c9fa2c3ff4ec239",
+      "data/ml/models/ml-run-610209ec3d9146ae/test_predictions.parquet": "909014830d26ab4e603a861d0f74034a8b95ef328f18ad60f3916cef48af8923",
+      "data/ml/models/ml-run-610209ec3d9146ae/training_weights.parquet": "e98a9a4f2a2ef06ce8e4dce1f771f30dc25b729d493d65206cddbcc103ef102f",
+      "data/ml/training_runs/ml-run-610209ec3d9146ae.json": "2facdd43170d171a3c682f3acde56adaff8270dbd171724963b1ffe73b782946",
+      "data/ml/training_reports/ml-run-610209ec3d9146ae.json": "90a4c3217944bff9c4625a141e1e47298ac8b365acb4c90cfdeeda609297e374"
+    }
+  },
+  "integrity_result": "PASS",
+  "actions_taken": "None. Read-only verification and checksum recording only. No retraining, recalibration, threshold change, prediction change, split change, manifest rewrite, artifact deletion, or activation performed.",
+  "notes": [
+    "Dataset manifest's self-recorded 'checksum' field matches the milestone's expected dataset checksum exactly.",
+    "Model metadata's dataset_checksum matches the dataset manifest's checksum, confirming the model was trained against this exact frozen dataset.",
+    "Model run is marked REJECTED_POOR_CALIBRATION in its own training_run record and has live_activation_available=false; the model is not wired into any live Workspace decision path (confirmed separately via strategy_roster.json / pipeline_inventory.json).",
+    "Test split (475 rows, 2026-07-03..2026-07-20) is marked untouched=true in the manifest and is recorded here as CONSUMED_FINAL_TEST per the milestone's instruction; it was not re-touched during this phase."
+  ]
+}

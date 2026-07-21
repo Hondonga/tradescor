@@ -1,0 +1,79 @@
+{
+  "generated_at": "2026-07-21T02:24:46.428261+00:00",
+  "strategies": [
+    {
+      "strategy_id": "volatility_structure_pullback",
+      "market_family": "VOLATILITY",
+      "production_supported": true,
+      "research_only": false,
+      "auto_eligible": true,
+      "buy_reachable": true,
+      "sell_reachable": true,
+      "historical_edge_proven": false,
+      "paper_signal_allowed": true,
+      "disabled_reason": "",
+      "notes": "The only golden-path / production-supported strategy as of this baseline. Reachability gate reports REACHABLE with both directions fixture-proven. Historically observed in backtest data, but not described as profitable \u2014 a formally proven edge has not been established."
+    },
+    {
+      "strategy_id": "jump_dex_post_event",
+      "market_family": "JUMP",
+      "production_supported": false,
+      "research_only": true,
+      "auto_eligible": false,
+      "buy_reachable": false,
+      "sell_reachable": false,
+      "historical_edge_proven": false,
+      "paper_signal_allowed": false,
+      "disabled_reason": "Research-only family; no confirmed directional edge (JDBR feasibility self-test recorded outcome REJECTED_INSUFFICIENT_SAMPLE in data/strategy_feasibility/consumed_ledger.json)."
+    },
+    {
+      "strategy_id": "step_structure_research",
+      "market_family": "STEP",
+      "production_supported": false,
+      "research_only": true,
+      "auto_eligible": false,
+      "buy_reachable": false,
+      "sell_reachable": false,
+      "historical_edge_proven": false,
+      "paper_signal_allowed": false,
+      "disabled_reason": "Not Auto-eligible; not formally proven via the strategy reachability/setup-proof harness."
+    },
+    {
+      "strategy_id": "boom_crash_spike_state",
+      "market_family": "BOOM_CRASH",
+      "production_supported": false,
+      "research_only": true,
+      "auto_eligible": false,
+      "buy_reachable": false,
+      "sell_reachable": false,
+      "historical_edge_proven": false,
+      "paper_signal_allowed": false,
+      "disabled_reason": "Not Auto-eligible; not formally proven via the strategy reachability/setup-proof harness."
+    },
+    {
+      "strategy_id": "ict_2022_v2",
+      "market_family": "FOREX",
+      "production_supported": false,
+      "research_only": false,
+      "auto_eligible": true,
+      "buy_reachable": true,
+      "sell_reachable": true,
+      "historical_edge_proven": false,
+      "paper_signal_allowed": true,
+      "disabled_reason": "",
+      "notes": "Separate engine from the Derived family. Setup construction and lifecycle are reachable, but historical edge is still under validation, not yet formally proven the way the golden path is."
+    },
+    {
+      "strategy_id": "ml_logistic_unweighted (ml-run-610209ec3d9146ae)",
+      "market_family": "ML",
+      "production_supported": false,
+      "research_only": true,
+      "auto_eligible": false,
+      "buy_reachable": false,
+      "sell_reachable": false,
+      "historical_edge_proven": false,
+      "paper_signal_allowed": false,
+      "disabled_reason": "REJECTED_POOR_CALIBRATION; live_activation_available=false. Inactive \u2014 cannot alter any deterministic decision. Frozen dataset ml-r75-f4c52d93c7a8dc3e95f1 and this model run must not be modified (see ml_artifact_integrity.json)."
+    }
+  ]
+}

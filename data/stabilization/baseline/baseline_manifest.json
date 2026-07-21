@@ -1,0 +1,80 @@
+{
+  "created_at": "2026-07-21T02:45:16.697504+00:00",
+  "git_branch": "main",
+  "git_commit": "437e876097af3806a9df2f4437a211ad367d71c3",
+  "git_status": [],
+  "git_status_note": "No pre-existing git repository existed at ict_flask_scanner/ before this phase (verified: `git status` returned 'not a git repository' at the parent and repo directory). A repository was initialized and the entire current working tree (minus secrets and generated caches, see .gitignore) was committed as the single baseline commit above. Working tree is clean as of this commit.",
+  "safety_branch": "tradescor-stabilization-baseline",
+  "safety_tag": "tradescor-before-stabilization-v1",
+  "python_version": "Python 3.14.4",
+  "node_version": "v25.9.0",
+  "npm_version": "11.12.1",
+  "operating_system": "Darwin 23.6.0 (macOS, x86_64)",
+  "backend_entrypoint": "app.py (python3 app.py; Flask serves on 127.0.0.1:5000)",
+  "frontend_directory": "frontend/ (Vite dev server on :5173 in dev, or served by Flask from frontend/dist in production)",
+  "database_files": [
+    "data/derived_paper_testing.db",
+    "data/derived_replay.db",
+    "data/strategy_gate_diagnostics.db",
+    "data/smc_acceptance.db"
+  ],
+  "config_files": [
+    "config/derived_market_thresholds.yaml",
+    "config/ml_training.yaml",
+    "config/derived_paper_testing.yaml",
+    "config/strategy_diagnostics.yaml",
+    "config/derived_strategy_thresholds.yaml",
+    "config/derived_replay.yaml",
+    "config/ml_dataset.yaml",
+    "config/ict_2022_v2.yaml",
+    "config/derived_indices.yaml"
+  ],
+  "dataset_files": [
+    "data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/manifest.json",
+    "data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/features.parquet",
+    "data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/sequences.npz"
+  ],
+  "model_run_files": [
+    "data/ml/models/ml-run-610209ec3d9146ae/metadata.json",
+    "data/ml/models/ml-run-610209ec3d9146ae/model.pkl",
+    "data/ml/models/ml-run-610209ec3d9146ae/preprocessor.pkl",
+    "data/ml/models/ml-run-610209ec3d9146ae/test_predictions.parquet",
+    "data/ml/models/ml-run-610209ec3d9146ae/training_weights.parquet",
+    "data/ml/training_runs/ml-run-610209ec3d9146ae.json",
+    "data/ml/training_reports/ml-run-610209ec3d9146ae.json"
+  ],
+  "test_counts": {
+    "python_full_suite": {
+      "collected": 759,
+      "passed": 759,
+      "failed": 0,
+      "skipped": 0,
+      "subtests_passed": 13
+    },
+    "frontend_vitest": {
+      "test_files": 11,
+      "passed": 65,
+      "failed": 0
+    }
+  },
+  "known_working_paths": [
+    "GET /api/candles (chart data)",
+    "GET /api/deriv/symbols",
+    "GET,POST /api/analyze (core decision engine, Deriv + Twelve Data)",
+    "POST /api/analyze-replay",
+    "Volatility Structure Pullback golden path (buy + sell fixture reachable, see golden_path_baseline.json)",
+    "Paper testing registration/fill/resolution pipeline",
+    "Replay pipeline",
+    "Frontend Markets / Workspace / Research routes"
+  ],
+  "known_broken_paths": [],
+  "known_issues_not_yet_fixed": [
+    "Chart-density and lifecycle presentation issues noted in the milestone context (partially addressed by prior chart-redesign work in this session, not fully verified end-to-end with live market data at time of this baseline).",
+    "Only Volatility Structure Pullback is production-supported; Jump/Step/Boom-Crash remain research-only.",
+    "Forex ICT historical edge remains under validation.",
+    "Current ML model run is REJECTED_POOR_CALIBRATION and inactive."
+  ],
+  "rollback_instructions": [
+    "See docs/stabilization_rollback.md"
+  ]
+}

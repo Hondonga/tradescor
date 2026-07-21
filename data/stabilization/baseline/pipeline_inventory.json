@@ -1,0 +1,91 @@
+{
+  "generated_at": "2026-07-21T02:24:16.385680+00:00",
+  "pipelines": [
+    {
+      "pipeline_id": "derived_data",
+      "provider": "deriv",
+      "entry_module": "app.py:/api/analyze (derived branch) -> analysis/derived_engine.py:analyze_derived_index",
+      "important_modules": [
+        "providers/deriv_provider.py",
+        "providers/market_registry.py",
+        "analysis/derived_family_classifier.py",
+        "analysis/derived_market_profile.py",
+        "analysis/volatility_structure_pullback_engine.py",
+        "analysis/smc/smc_router.py",
+        "analysis/global_overlay_contract.py"
+      ],
+      "frontend_consumer": "frontend/src/pages/workspace-page.tsx via MarketChart + DecisionRail",
+      "current_status": "working",
+      "must_preserve": true,
+      "known_issue": "Only Volatility Structure Pullback is production-supported end to end; other derived families are research-only or gated by reachability checks."
+    },
+    {
+      "pipeline_id": "forex_data",
+      "provider": "twelve_data",
+      "entry_module": "app.py:/api/analyze (forex branch) -> analysis/forex_decision_normalizer.py",
+      "important_modules": [
+        "providers/market_registry.py",
+        "strategies/ict_2022_v2.py",
+        "strategies/ict_2022.py",
+        "analysis/forex_overlay_contract.py",
+        "analysis/global_overlay_contract.py"
+      ],
+      "frontend_consumer": "frontend/src/pages/workspace-page.tsx via MarketChart + DecisionRail",
+      "current_status": "partial",
+      "must_preserve": true,
+      "known_issue": "Forex ICT historical edge is still under validation; not yet formally proven the way Volatility Structure Pullback is."
+    },
+    {
+      "pipeline_id": "paper_testing",
+      "provider": "internal (consumes normalized decisions from derived_data/forex_data)",
+      "entry_module": "paper_testing/derived_paper_service.py",
+      "important_modules": [
+        "paper_testing/derived_setup_tracker.py",
+        "paper_testing/derived_fill_engine.py",
+        "paper_testing/derived_outcome_resolver.py",
+        "paper_testing/derived_mfe_mae_tracker.py",
+        "paper_testing/derived_r_multiple.py",
+        "paper_testing/derived_paper_store.py"
+      ],
+      "frontend_consumer": "frontend/src/pages/research-page.tsx (Paper Log tab)",
+      "current_status": "working",
+      "must_preserve": true,
+      "known_issue": "Only trade-ready decisions register; registration is gated by the same invariants as chart actionable overlays."
+    },
+    {
+      "pipeline_id": "replay",
+      "provider": "internal (historical candles, chronological point-in-time re-analysis)",
+      "entry_module": "replay/derived_replay_service.py",
+      "important_modules": [
+        "replay/derived_replay_pipeline.py",
+        "replay/derived_replay_clock.py",
+        "replay/derived_replay_timeframe_slicer.py",
+        "replay/derived_replay_outcome_engine.py",
+        "replay/derived_replay_store.py",
+        "replay/derived_replay_report.py"
+      ],
+      "frontend_consumer": "frontend/src/pages/research-page.tsx (Replay tab) and Workspace historical-inspection mode",
+      "current_status": "working",
+      "must_preserve": true,
+      "known_issue": "None recorded beyond general chart-density/presentation issues shared with the live Workspace."
+    },
+    {
+      "pipeline_id": "ml",
+      "provider": "internal (offline, frozen dataset -> offline training only)",
+      "entry_module": "ml/dataset_builder.py, ml/training/training_service.py",
+      "important_modules": [
+        "ml/feature_extractor.py",
+        "ml/outcome_labeler.py",
+        "ml/leakage_validator.py",
+        "ml/training/logistic_model.py",
+        "ml/training/calibration.py",
+        "ml/training/threshold_selection.py",
+        "ml/training/model_registry.py"
+      ],
+      "frontend_consumer": "frontend/src/pages/research-page.tsx (ML Dataset / ML Training tabs) \u2014 read-only reporting only",
+      "current_status": "research_only",
+      "must_preserve": true,
+      "known_issue": "Current model run ml-run-610209ec3d9146ae is REJECTED_POOR_CALIBRATION and has live_activation_available=false; not wired into any Workspace decision path."
+    }
+  ]
+}

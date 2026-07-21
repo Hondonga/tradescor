@@ -1,0 +1,73 @@
+{
+  "generated_at": "2026-07-21T02:36:16.018038+00:00",
+  "full_suite": {
+    "collected": 759,
+    "passed": 759,
+    "failed": 0,
+    "skipped": 0,
+    "subtests_passed": 13,
+    "duration_seconds": 159.35
+  },
+  "focused_suites": {
+    "global_overlays": {
+      "passed": 37,
+      "failed": 0,
+      "command": "pytest tests/test_global_overlay_contract.py"
+    },
+    "lifecycle": {
+      "passed": 16,
+      "failed": 0,
+      "deselected": 743,
+      "command": "pytest tests/ -k lifecycle"
+    },
+    "volatility_structure_pullback": {
+      "passed": 13,
+      "failed": 0,
+      "command": "pytest tests/test_focused_volatility75_engine.py tests/test_volatility_structure_pullback.py tests/test_volatility75_plan_validation_regression.py"
+    },
+    "strategy_reachability": {
+      "passed": 4,
+      "failed": 0,
+      "deselected": 755,
+      "command": "pytest tests/ -k reachab"
+    },
+    "deriv_provider": {
+      "passed": 142,
+      "failed": 0,
+      "deselected": 617,
+      "command": "pytest tests/ -k deriv"
+    },
+    "forex": {
+      "passed": 91,
+      "failed": 0,
+      "deselected": 668,
+      "subtests_passed": 4,
+      "command": "pytest tests/ -k 'forex or ict'"
+    },
+    "paper_testing": {
+      "passed": 11,
+      "failed": 0,
+      "deselected": 748,
+      "command": "pytest tests/ -k paper"
+    },
+    "replay": {
+      "passed": 20,
+      "failed": 0,
+      "deselected": 739,
+      "command": "pytest tests/ -k replay"
+    },
+    "ml_dataset": {
+      "passed": 22,
+      "failed": 0,
+      "deselected": 737,
+      "command": "pytest tests/ -k dataset"
+    },
+    "ml_training": {
+      "passed": 9,
+      "failed": 0,
+      "deselected": 750,
+      "command": "pytest tests/ -k 'training or calibrat or threshold_selection'"
+    }
+  },
+  "note": "All suites green at baseline. No tests were altered to make this baseline pass."
+}
