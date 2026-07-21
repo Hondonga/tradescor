@@ -57,4 +57,44 @@ describe("DrawingInspector", () => {
     expect(details).not.toBeNull();
     expect(details).not.toHaveAttribute("open");
   });
+
+  it("shows the zone's price range, a named priority level, and lifecycle status (Phase 3 §14)", () => {
+    render(<DrawingInspector overlay={overlay()} close={() => {}} />);
+    expect(screen.getByText("51350 – 51650")).toBeInTheDocument();
+    expect(screen.getByText("Active setup")).toBeInTheDocument();
+    expect(screen.getByText("Active")).toBeInTheDocument();
+  });
+
+  it("shows a real invalidated timestamp when present, and a placeholder when absent", () => {
+    const { rerender } = render(<DrawingInspector overlay={overlay()} close={() => {}} />);
+    expect(screen.getAllByText("—").length).toBeGreaterThan(0);
+    rerender(<DrawingInspector overlay={overlay({ invalidated_at: "2026-07-20T09:00:00Z" })} close={() => {}} />);
+    expect(screen.getByText("2026-07-20T09:00:00Z")).toBeInTheDocument();
+  });
+
+  it("reports mitigation as not applicable when the backend sent no mitigation data", () => {
+    render(<DrawingInspector overlay={overlay()} close={() => {}} />);
+    expect(screen.getByText("Not applicable")).toBeInTheDocument();
+  });
+
+  it("reports a real mitigation state when the backend sent one", () => {
+    render(
+      <DrawingInspector
+        overlay={overlay({ metadata: { state: "partially_mitigated" } })}
+        close={() => {}}
+      />,
+    );
+    expect(screen.getByText("Partially Mitigated")).toBeInTheDocument();
+  });
+
+  it("labels an actionable overlay's priority as Actionable", () => {
+    render(
+      <DrawingInspector
+        overlay={overlay({ category: "actionable", actionable: true, type: "entry", low: null, high: null, price: 51500 })}
+        close={() => {}}
+      />,
+    );
+    const priorityLabel = screen.getByText("Priority");
+    expect(priorityLabel.nextElementSibling?.textContent).toBe("Actionable");
+  });
 });

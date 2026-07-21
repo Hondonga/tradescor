@@ -354,6 +354,7 @@ export function MarketChart() {
           <DrawingInspector
             overlay={selectedOverlay}
             close={() => setSelectedOverlayId("")}
+            precision={store.decision?.precision}
           />
         )}
         {store.workspaceMode === "live" && query.isError && (
