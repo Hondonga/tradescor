@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-07-22T04:39:40.357588+00:00",
+  "requested_start": "2025-10-15T00:00:00+00:00",
+  "requested_end": "2026-04-14T00:00:00+00:00",
+  "requests_made": 53,
+  "raw_rows_fetched": 264948,
+  "rows_in_window": 260640,
+  "actual_start": "2025-10-15T00:00:00+00:00",
+  "actual_end": "2026-04-13T23:59:00+00:00",
+  "utc_timestamps": true,
+  "ascending_order": true,
+  "unique_timestamps": true,
+  "valid_ohlc": true,
+  "gap_count_over_1min": 0,
+  "duplicate_count": 0,
+  "csv_path": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase5/data/r75_m1_raw.csv",
+  "csv_sha256": "187361ef16d54b697baf5fff7157f1b12da436efd11351a826af499c2a675ef5",
+  "elapsed_seconds": 131.21684312820435
+}

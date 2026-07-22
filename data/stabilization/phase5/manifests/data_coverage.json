@@ -1,0 +1,67 @@
+{
+  "generated_at": "2026-07-22T04:45:00Z",
+  "part": "H - CHECK NEW R_75 HISTORY FIRST",
+  "provider": "deriv",
+  "symbol": "R_75",
+  "fetch_method": "providers.deriv_ws_client.DerivWebSocketClient, public ticks_history (granularity=60, style=candles), paginated backward via `end`, 53 sequential requests",
+  "history_depth_probe": {
+    "method": "Empirically tested how far back Deriv's public ticks_history honors an explicit `end` timestamp for R_75 M5 candles, from 1 hour back up to 3 years back.",
+    "honored_up_to_days_back": 364,
+    "clamped_to_latest_beyond_days_back": 365,
+    "conclusion": "Deriv's public feed retains roughly 364-365 days of R_75 history; requests further back silently return the latest candles instead of erroring."
+  },
+  "raw_pull": {
+    "requested_start": "2025-10-15T00:00:00Z",
+    "requested_end": "2026-04-14T00:00:00Z",
+    "actual_start": "2025-10-15T00:00:00Z",
+    "actual_end": "2026-04-13T23:59:00Z",
+    "granularity": "M1",
+    "requests_made": 53,
+    "rows": 260640,
+    "expected_rows_for_181_continuous_days": 260640,
+    "csv_path": "data/stabilization/phase5/data/r75_m1_raw.csv",
+    "csv_sha256": "187361ef16d54b697baf5fff7157f1b12da436efd11351a826af499c2a675ef5"
+  },
+  "integrity_checks": {
+    "utc_timestamps": true,
+    "ascending_order": true,
+    "unique_timestamps": true,
+    "valid_ohlc": true,
+    "gap_count_over_1min": 0,
+    "duplicate_count": 0,
+    "completed_candles_only": "R_75 is a continuously-generated synthetic index with no market close; all M1 candles returned by ticks_history with style=candles are completed by construction (the in-progress candle is never included in a historical count-style request).",
+    "forward_filled_candles": false,
+    "duplicate_downloads": false,
+    "stale_cache_presented_as_new": false
+  },
+  "deterministic_aggregation": {
+    "method": "providers/multi_timeframe.py::_resample_completed (the exact function production uses for Deriv derived-index symbols, since provider=='deriv' and asset_class=='derived_index' triggers client-side M1->M5/M15/H1 resampling in get_multi_timeframe_context) -- reused verbatim, not reimplemented, to guarantee causal/production fidelity.",
+    "m5_rows": 52128,
+    "m5_expected": 52128,
+    "m15_rows": 17376,
+    "m15_expected": 17376,
+    "h1_rows": 4344,
+    "h1_expected": 4344,
+    "row_counts_match_exactly": true,
+    "m5_checksum": "7c7cbd5c109780e2aaeafc961cf8d817a29131634aade37b67ecf5845331b7d4",
+    "m15_checksum": "6154d193a37e13ff368441b7d4413c023bd2a4c250afd9e12da7a76153e68532",
+    "h1_checksum": "770654a7a9ea6052104338a8a249f3c2abcda21e6fe4850b1e305e01c5273abb"
+  },
+  "consumed_data_exclusion": {
+    "consumed_window": "2026-04-21T05:45Z to 2026-07-20T05:44Z (ML dataset ml-r75-f4c52d93c7a8dc3e95f1)",
+    "pulled_window_end": "2026-04-13T23:59:00Z",
+    "embargo_margin_days": 7,
+    "overlap_with_consumed_window": false
+  },
+  "sufficiency_assessment": {
+    "genuinely_new_calendar_days_available_via_api": 364,
+    "genuinely_new_days_actually_pulled": 181,
+    "reason_for_using_less_than_the_full_available_364_days": "The frozen engine (evaluate_volatility_structure_pullback) takes ~64ms per causal decision-point evaluation with a production-faithful 300-candle trailing window per timeframe. Evaluating at every completed M5 candle across the full available ~364 fresh days (~104,000 decision points) would take several hours of continuous compute inside a single session. 181 days (~52,000 M5 decision points, ~55 minutes of engine evaluation) was chosen as the largest window that is both genuinely new, causally clean, and computationally tractable within this session. This is a disclosed session-resource limitation, not a data-availability limitation -- the additional ~183 days of genuinely fresh, never-consumed history remain available via the same method for a future extension.",
+    "preferred_12_months_target_met": false,
+    "required_minimums_assessed_against_181_days": {
+      "at_least_8_independent_folds_at_15_day_step": "181 days / 15 = 12 possible folds before splitting for holdout; the realized design (below) uses 8 development folds plus a sealed holdout, meeting the >=8 requirement.",
+      "final_genuinely_unconsumed_period_available_for_holdout": true
+    }
+  },
+  "decision": "PROCEED -- sufficient genuinely new, causally clean history exists to preregister and run the Phase 5 experiment. Full available depth (364 days) was not exhausted; scope and rationale are disclosed above and in the final report."
+}
