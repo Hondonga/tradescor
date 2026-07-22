@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-07-22T00:32:00Z",
+  "part": "D - CREATE THE REAL PHASE 5 BRANCH",
+  "phase4_frozen_base": "b87e72d8730629734740d4ec1a840d32770813cb",
+  "phase5_working_base": "c42a2626a25006b3a035f0a95321b23dd9771962",
+  "status_patch_scope": "PRESENTATION_ONLY",
+  "phase5_branch": "tradescor-phase5-volatility-walk-forward-validation",
+  "phase4_branch_frozen_at": "b87e72d8730629734740d4ec1a840d32770813cb",
+  "python_baseline_before_phase5_work": 937,
+  "frontend_baseline_before_phase5_work": 174,
+  "scope": {
+    "provider": "Deriv",
+    "symbol": "R_75",
+    "strategy": "volatility_structure_pullback",
+    "selected_timeframe": "M5",
+    "context_timeframes": ["H1", "M15", "M5"],
+    "directions": ["BUY", "SELL"]
+  },
+  "purpose": "Determine whether the frozen deterministic Volatility Structure Pullback strategy has a repeatable post-cost edge, via causal walk-forward validation with matched controls.",
+  "maximum_positive_verdict": "ELIGIBLE_FOR_PAPER_SHADOW",
+  "forbidden_verdicts": ["PRODUCTION_READY", "LIVE_READY", "AUTO_EXECUTION_ELIGIBLE", "GUARANTEED_PROFITABLE"],
+  "negative_result_is_valid_success": true,
+  "hard_constraints": [
+    "Do not add UI features.",
+    "Do not build Home or Lab panels.",
+    "Do not change strategy logic.",
+    "Do not tune thresholds.",
+    "Do not restart ML."
+  ],
+  "phase5_status": "NOT_STARTED"
+}
