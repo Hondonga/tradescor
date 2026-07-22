@@ -1,0 +1,272 @@
+[
+  {
+    "storyId": "workspace-gbpusd--market-closed",
+    "filename": "01_market_closed",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--market-context",
+    "filename": "02_market_context",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--waiting-for-session",
+    "filename": "03_waiting_for_session",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--waiting-for-liquidity-sweep",
+    "filename": "04_waiting_for_liquidity_sweep",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": true
+  },
+  {
+    "storyId": "workspace-gbpusd--waiting-for-displacement",
+    "filename": "05_waiting_for_displacement",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": true
+  },
+  {
+    "storyId": "workspace-gbpusd--waiting-for-structure-confirmation",
+    "filename": "06_waiting_for_structure_confirmation",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--waiting-for-retrace",
+    "filename": "07_waiting_for_retrace",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": true
+  },
+  {
+    "storyId": "workspace-gbpusd--plan-validation",
+    "filename": "08_plan_validation",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": true
+  },
+  {
+    "storyId": "workspace-gbpusd--trade-ready-buy",
+    "filename": "09_trade_ready_buy",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--trade-ready-sell",
+    "filename": "10_trade_ready_sell",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--too-late",
+    "filename": "11_too_late",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--expired",
+    "filename": "12_expired",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--invalidated",
+    "filename": "13_invalidated",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--state-contradiction",
+    "filename": "14_state_contradiction",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--stale-provider-data",
+    "filename": "15_stale_provider_data",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": true
+  },
+  {
+    "storyId": "workspace-gbpusd--replay-mode",
+    "filename": "16_replay",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--historical-mode",
+    "filename": "17_historical",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--standard-density",
+    "filename": "18_standard_density",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--research-density",
+    "filename": "19_research_density",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--switch-to-r-75-after-gbp-trade-ready",
+    "filename": "20_switched_to_r75",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--trade-ready-buy-1920-x-1080",
+    "filename": "res_trade_ready_buy_1920x1080",
+    "width": 1920,
+    "height": 1080,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--trade-ready-buy-1536-x-864",
+    "filename": "res_trade_ready_buy_1536x864",
+    "width": 1536,
+    "height": 864,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--trade-ready-buy-1440-x-900",
+    "filename": "res_trade_ready_buy_1440x900",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--trade-ready-buy-1280-x-800",
+    "filename": "res_trade_ready_buy_1280x800",
+    "width": 1280,
+    "height": 800,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--trade-ready-buy-1024-x-768",
+    "filename": "res_trade_ready_buy_1024x768",
+    "width": 1024,
+    "height": 768,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--trade-ready-sell-1920-x-1080",
+    "filename": "res_trade_ready_sell_1920x1080",
+    "width": 1920,
+    "height": 1080,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--trade-ready-sell-1536-x-864",
+    "filename": "res_trade_ready_sell_1536x864",
+    "width": 1536,
+    "height": 864,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--trade-ready-sell-1440-x-900",
+    "filename": "res_trade_ready_sell_1440x900",
+    "width": 1440,
+    "height": 900,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--trade-ready-sell-1280-x-800",
+    "filename": "res_trade_ready_sell_1280x800",
+    "width": 1280,
+    "height": 800,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  },
+  {
+    "storyId": "workspace-gbpusd--trade-ready-sell-1024-x-768",
+    "filename": "res_trade_ready_sell_1024x768",
+    "width": 1024,
+    "height": 768,
+    "consoleErrors": [],
+    "hasHorizontalOverflow": false,
+    "hasRawUnderscoreCode": false
+  }
+]
