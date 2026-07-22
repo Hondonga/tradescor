@@ -245,3 +245,64 @@ describe("DecisionRail section order (Phase 3 §11)", () => {
     expect(diag).toHaveAttribute("open");
   });
 });
+
+describe("DecisionRail Forex-specific content (Phase 4 §18)", () => {
+  beforeEach(() => {
+    useTerminalStore.persist.clearStorage();
+  });
+
+  function forexDecision(overrides: Partial<NormalizedDecision> = {}): NormalizedDecision {
+    return baseDecision({
+      meta: {
+        symbol: "GBP/USD",
+        display_symbol: "GBP/USD",
+        timeframe: "M5",
+        analysis_time: "2026-07-20T12:00:00Z",
+        live: true,
+        market_schedule: "24_5",
+        analysis_clock: "UTC",
+        market_source: "twelve_data",
+        market_type: "forex",
+      },
+      market: { external_structure: "bullish", internal_structure: "pullback", current_price: 1.271, session: "London Kill Zone" },
+      forex: {
+        htf_bias: "buy",
+        market_structure: "aligned",
+        session: "London Kill Zone",
+        liquidity_event: { direction: "buy", liquidity_price: 1.262, sweep_price: 1.261, confirmed_at: "2026-07-20T11:30:00Z" },
+        displacement: { direction: "buy", confirmed: true, structure_effect: "local_structure_broken" },
+        structure_confirmation: { close_confirmed: true, level: 1.274, break_time: "2026-07-20T11:45:00Z" },
+        dealing_range: { premium_discount_state: "discount", current_position_pct: 28.4, range_high: 1.29, range_low: 1.26, equilibrium: 1.275, source_timeframe: "H4" },
+        scenario_state: "WAITING_FOR_M5_CONFIRMATION",
+      },
+      ...overrides,
+    });
+  }
+
+  it("shows session/kill-zone and premium/discount in MARKET STATE for a Forex decision", () => {
+    renderRail(forexDecision());
+    const marketState = screen.getByText("Market state").closest("section");
+    expect(marketState?.textContent).toContain("London Kill Zone");
+    expect(marketState?.textContent).toContain("Discount");
+    expect(marketState?.textContent).toContain("28%");
+  });
+
+  it("shows liquidity sweep, displacement and structure confirmation in ACTIVE SETUP for a Forex decision", () => {
+    renderRail(forexDecision());
+    const activeSetup = screen.getByText("Active setup").closest("section");
+    expect(activeSetup?.textContent).toContain("Buy @");
+    expect(activeSetup?.textContent).toContain("Displacement");
+    expect(activeSetup?.textContent).toContain("Structure confirmation");
+    expect(activeSetup?.textContent).toContain("Confirmed (MSS)");
+  });
+
+  it("does not render Forex-only rows for a non-Forex (Derived) decision", () => {
+    renderRail(baseDecision());
+    const marketState = screen.getByText("Market state").closest("section");
+    expect(marketState?.textContent).not.toContain("Session / kill zone");
+    expect(marketState?.textContent).not.toContain("Premium / discount");
+    const activeSetup = screen.getByText("Active setup").closest("section");
+    expect(activeSetup?.textContent).not.toContain("Liquidity sweep");
+    expect(activeSetup?.textContent).not.toContain("Structure confirmation");
+  });
+});

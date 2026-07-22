@@ -82,6 +82,10 @@ export function DecisionRail() {
   const strategyLabel = titleCase(
     decision.ownership.selected_strategy_id || decision.ownership.selected_model_id,
   );
+  // Phase 4 §18 — Forex-specific decision-rail content, additive within the
+  // existing MARKET STATE / ACTIVE SETUP sections (no new sections, no
+  // redesign). Absent for every other market family.
+  const forex = decision.meta.market_type === "forex" ? decision.forex : undefined;
 
   return (
     <aside className="h-full overflow-y-auto bg-[#0b0e14]">
@@ -121,6 +125,22 @@ export function DecisionRail() {
           <dd className="font-mono">
             {formatPrice(currentMarket.current_price, decision.precision)}
           </dd>
+          {forex && (
+            <>
+              <dt>Session / kill zone</dt>
+              <dd>{forex.session || "Outside trading hours"}</dd>
+              <dt>Premium / discount</dt>
+              <dd>
+                {forex.dealing_range?.premium_discount_state
+                  ? `${titleCase(forex.dealing_range.premium_discount_state)}${
+                      forex.dealing_range.current_position_pct != null
+                        ? ` (${forex.dealing_range.current_position_pct.toFixed(0)}%)`
+                        : ""
+                    }`
+                  : "—"}
+              </dd>
+            </>
+          )}
         </dl>
       </section>
 
@@ -176,6 +196,20 @@ export function DecisionRail() {
             <p className="mt-3 text-[11px] leading-4 text-zinc-500">
               {activeSetup.invalidation.condition}
             </p>
+          )}
+          {forex && (
+            <dl className="detail-grid mt-3">
+              <dt>Liquidity sweep</dt>
+              <dd>
+                {forex.liquidity_event
+                  ? `${titleCase(forex.liquidity_event.direction)} @ ${formatPrice(forex.liquidity_event.sweep_price, decision.precision)}`
+                  : "Not yet swept"}
+              </dd>
+              <dt>Displacement</dt>
+              <dd>{forex.displacement?.confirmed ? "Confirmed" : "Not yet confirmed"}</dd>
+              <dt>Structure confirmation</dt>
+              <dd>{forex.structure_confirmation?.close_confirmed ? "Confirmed (MSS)" : "Not yet confirmed"}</dd>
+            </dl>
           )}
         </section>
       ) : (

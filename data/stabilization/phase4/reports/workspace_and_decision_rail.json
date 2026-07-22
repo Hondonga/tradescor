@@ -1,0 +1,41 @@
+{
+  "generated_at": "2026-07-22T02:41:34.581718+00:00",
+  "section": "17-18 - PROFESSIONAL WORKSPACE PRESENTATION AND FOREX DECISION RAIL CONTENT",
+  "checkpoint_17_workspace_presentation": {
+    "method": "Grepped frontend/src/lib/chart, frontend/src/lib/overlay*.ts and frontend/src/components/chart for hardcoded Deriv/Volatility family assumptions (R_75, 'deriv', VOLATILITY literals). The only hit was frontend/src/components/chart/market-chart.stories.tsx (a Storybook fixture, not production code) -- chart rendering, the CLEAN/STANDARD/RESEARCH density-mode tiering (lib/overlay-density.ts), collision handling (lib/overlay-collision.ts, lib/overlay-layout.ts), Setup Focus (lib/chart/setupFocus.ts), and Drawing Inspector are all market-agnostic, operating purely on the shared NormalizedDecision / overlay contract. No redesign was needed or performed.",
+    "gbpusd_decision_rendered_through_the_unmodified_shared_pipeline": "PASS -- tests/test_phase4_gbpusd_reachability_fixtures.py and frontend decision-rail.test.tsx both exercise a real GBP/USD decision through the identical component tree used for every other market family",
+    "chart_decision_rail_agreement": "PASS -- pre-existing Phase 3 test decision-rail.test.tsx::'agrees with the chart's Setup Focus card on direction and lifecycle for the same decision' covers this generically; not market-specific, so it already covers Forex",
+    "collision_handling_intact": "PASS -- lib/overlay-collision.test.ts, lib/overlay-layout.test.ts, chart-price-tags.test.tsx unchanged and passing (5/5/6 tests)",
+    "readable_within_3_seconds": "Verified visually via Chrome/Playwright capture in checkpoint 24 (browser screenshots under data/stabilization/phase4/browser/)",
+    "checkpoint_17_result": "PASSED"
+  },
+  "checkpoint_18_forex_decision_rail_content": {
+    "finding": "analysis/forex_decision_normalizer.py::enforce_forex_invariants already computes a dedicated product['forex'] object on every Forex decision (htf_bias, market_structure, session, liquidity_event, dealing_range with premium_discount_state and current_position_pct from Phase 4 checkpoint 11, entry_zone, m5_confirmation, scenario_state, direction, trade_plan) -- it was computed on every request but never rendered by the frontend. displacement and structure_confirmation (MSS) were computed by the strict-ICT engine but not included in that object at all.",
+    "changes": [
+      "analysis/forex_decision_normalizer.py::normalize_forex_fields -- added displacement and structure_confirmation to the returned fields dict (both branches, including the no-ICT fallback)",
+      "frontend/src/types.ts -- added the forex? field to NormalizedDecision",
+      "frontend/src/components/terminal/decision-rail.tsx -- added conditional rows to MARKET STATE (Session / kill zone, Premium / discount) and ACTIVE SETUP (Liquidity sweep, Displacement, Structure confirmation), gated on meta.market_type === 'forex'; zero new sections, existing 7-section order unchanged"
+    ],
+    "market_state_requirements": {
+      "h1_bias": "Already present as 'External structure' (H1 timeframe structure) -- no change needed, same information",
+      "session_and_kill_zone_status": "PASS (new) -- 'Session / kill zone' row",
+      "premium_discount_location": "PASS (new) -- 'Premium / discount' row with current_position_pct",
+      "data_freshness": "Already present as 'Data freshness' -- unchanged"
+    },
+    "active_setup_requirements": {
+      "ict_setup_name_direction_lifecycle": "Already present (setup type / direction / lifecycle rows) -- unchanged",
+      "liquidity_sweep": "PASS (new)",
+      "displacement": "PASS (new)",
+      "structure_confirmation": "PASS (new)",
+      "execution_area": "Already present as 'Setup area' -- unchanged",
+      "invalidation": "Already present -- unchanged"
+    },
+    "next_action_plain_language": "PASS by construction -- decision.decision.next_action is always pre-translated plain text from strategies/ict_2022_v2.py::_next() / analysis/blocker_translations.py, never a raw code, unchanged this checkpoint",
+    "non_forex_markets_unaffected": "PASS -- forex-only rows gated on meta.market_type === 'forex'; new test 'does not render Forex-only rows for a non-Forex (Derived) decision' confirms zero visual change for Volatility 75/other families",
+    "tests": [
+      "frontend decision-rail.test.tsx: 3 new tests (session/premium-discount in MARKET STATE, sweep/displacement/structure in ACTIVE SETUP, absence for non-Forex) -- all passing, full frontend suite 155/155 (152 baseline + 3 new)",
+      "backend: full forex/decision_engine/ict_2022_v2/global_overlay/market_decision test slice re-run, 104 passed, zero regressions"
+    ],
+    "checkpoint_18_result": "PASSED"
+  }
+}

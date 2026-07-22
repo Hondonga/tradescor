@@ -139,6 +139,18 @@ export interface NormalizedDecision {
     event_state?: string;
     session?: string;
   };
+  // Forex-only ICT context (analysis/forex_decision_normalizer.py); absent
+  // for other market families.
+  forex?: {
+    htf_bias?: string;
+    market_structure?: string;
+    session?: string;
+    liquidity_event?: { direction?: string; liquidity_price?: number; sweep_price?: number; confirmed_at?: string | null } | null;
+    displacement?: { direction?: string; confirmed?: boolean; structure_effect?: string } | null;
+    structure_confirmation?: { close_confirmed?: boolean; level?: number; break_time?: string | null } | null;
+    dealing_range?: { premium_discount_state?: string; current_position_pct?: number; range_high?: number; range_low?: number; equilibrium?: number; source_timeframe?: string } | null;
+    scenario_state?: string;
+  };
   analysis_depth?: "lightweight" | "full";
   market_analysis?: {
     available: boolean;
