@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-07-22T03:02:11.099549+00:00",
+  "python_baseline": 818,
+  "python_full_result": "937 passed, 13 subtests passed",
+  "python_full_count": 937,
+  "python_new_tests_this_phase": 119,
+  "python_focused_phase4_result": "119 passed, 818 deselected",
+  "frontend_baseline": 152,
+  "frontend_result": "156 passed (19 test files)",
+  "frontend_new_tests_this_phase": 4,
+  "typescript_build": "clean, zero errors",
+  "frontend_production_build": "succeeded (vite build, 2303 modules transformed)",
+  "tests_removed": 0,
+  "regressions": 0
+}

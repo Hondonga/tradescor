@@ -1,0 +1,39 @@
+
+ RUN  v3.2.7 /Users/user/Documents/Codex/ tradescor/ict_flask_scanner/frontend
+
+ ✓ src/components/chart/chart-event-markers.test.tsx (4 tests) 372ms
+ ✓ src/components/chart/chart-zone-layer.test.tsx (4 tests) 618ms
+   ✓ ChartZoneLayer > strips a duplicated DEVELOPING prefix from the on-chart label  387ms
+ ✓ src/components/chart/chart-price-tags.test.tsx (6 tests) 1279ms
+   ✓ ChartPriceTags > does not overlap tags whose natural positions collide  332ms
+   ✓ ChartPriceTags > calls onHover on mouse enter/focus and onHoverEnd on mouse leave/blur (Phase 3 §15)  366ms
+ ✓ src/components/chart/chart-toolbar.test.tsx (9 tests) 1395ms
+   ✓ ChartToolbar > shows a density mode selector and calls onDensityModeChange when a mode is chosen (§4/§24: keyboard-accessible, no mouse required)  734ms
+ ✓ src/components/terminal/opportunity-queue.test.tsx (9 tests) 495ms
+ ✓ src/components/chart/drawing-inspector.test.tsx (9 tests) 627ms
+   ✓ DrawingInspector > shows a clean title without the lifecycle prefix  332ms
+stderr | src/components/terminal/decision-rail.test.tsx > DecisionRail section order (Phase 3 §11) > omits WHAT IS MISSING once TRADE_READY, and shows the trade plan instead
+Each child in a list should have a unique "key" prop.
+
+Check the render method of `dl`. It was passed a child from TradeReadyPlan. See https://react.dev/link/warning-keys for more information.
+
+ ✓ src/components/terminal/decision-rail.test.tsx (12 tests) 1060ms
+   ✓ DecisionRail section order (Phase 3 §11) > renders MARKET STATE, ACTIVE SETUP, WHAT IS MISSING, NEXT ACTION and DETAILS in the required order for a developing setup  409ms
+ ✓ src/lib/overlays.test.ts (14 tests) 144ms
+ ✓ src/components/chart/overlay-tooltip.test.tsx (4 tests) 250ms
+ ✓ src/lib/chart/setupFocus.test.ts (12 tests) 28ms
+ ✓ src/components/chart/chart-setup-summary.test.tsx (4 tests) 167ms
+ ✓ src/lib/overlay-collision.test.ts (5 tests) 16ms
+ ✓ src/lib/overlay-density.test.ts (7 tests) 42ms
+ ✓ src/store/terminal-store.test.ts (13 tests) 44ms
+ ✓ src/lib/chart/priceScaleRange.test.ts (5 tests) 9ms
+ ✓ src/lib/overlay-style-registry.test.ts (11 tests) 10ms
+ ✓ src/lib/overlay-labels.test.ts (12 tests) 8ms
+ ✓ src/lib/chart/overlayPriority.test.ts (10 tests) 8ms
+ ✓ src/lib/overlay-layout.test.ts (6 tests) 40ms
+
+ Test Files  19 passed (19)
+      Tests  156 passed (156)
+   Start at  23:00:33
+   Duration  12.36s (transform 698ms, setup 8.60s, collect 5.47s, tests 6.61s, environment 31.18s, prepare 7.51s)
+

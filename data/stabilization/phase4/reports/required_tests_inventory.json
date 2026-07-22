@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-07-22T03:02:11.100379+00:00",
+  "section": "23 - REQUIRED AUTOMATED TESTS",
+  "note": "Every item below maps to a real, passing test file. Items marked 'pre-existing' were already covered by Phase 1-3 infrastructure (generic or GBP/USD-inclusive) and needed no new Phase 4 test. Items marked N/A document a real architecture finding: no such engine/step exists for Forex, so there is nothing to test without inventing new production behavior outside Phase 4's scope.",
+  "required_tests": {
+    "gbpusd_symbol_normalization": "PASS -- tests/test_phase4_gbpusd_symbol_resolution.py (13 tests)",
+    "twelve_data_provider_ownership": "PASS -- tests/test_phase4_twelvedata_pipeline_trace.py (5 tests)",
+    "forex_precision": "PASS (pre-existing) -- tests/test_price_precision.py::test_standard_forex_uses_five_decimals / test_jpy_pairs_use_three_decimals (GBP/USD explicit)",
+    "pip_pipette_handling": "PASS (pre-existing) -- tests/test_price_precision.py (5-decimal pip vs 3-decimal JPY-pipette distinction)",
+    "utc_normalization": "PASS -- tests/test_phase4_twelvedata_pipeline_trace.py + tests/test_phase4_h1_m15_m5_responsibilities.py",
+    "completed_candle_filtering": "PASS -- tests/test_phase4_h1_m15_m5_responsibilities.py, reusing analysis/top_down_engine.py::completed_candles",
+    "deterministic_m15_h1_aggregation": "N/A -- architecture finding: Forex has no aggregation step. Twelve Data returns each of H1/M15/M5 directly from its own provider request; unlike Deriv (M1 aggregated into M5/M15/H1 client-side), there is no aggregation code path to test",
+    "weekend_market_closure": "PASS -- tests/test_phase4_forex_market_hours.py (7 tests, includes the entry_allowed weekend bug fix)",
+    "stale_market_state": "PASS -- tests/test_phase4_trade_plan_invariants.py, test_phase4_forex_paper_safety.py, test_phase4_gbpusd_reachability_fixtures.py (fixture 24)",
+    "dst_aware_session_boundaries": "PASS -- tests/test_phase4_forex_market_hours.py",
+    "kill_zone_boundaries": "PASS -- tests/test_phase4_forex_market_hours.py, test_phase4_gbpusd_reachability_fixtures.py (fixture 5)",
+    "market_family_isolation": "PASS -- tests/test_phase4_market_family_isolation.py (6 tests)",
+    "liquidity_sweep_causality": "PASS -- tests/test_phase4_liquidity_sweep_identity.py (6 tests)",
+    "displacement_quality": "PASS -- tests/test_phase4_gbpusd_reachability_fixtures.py (fixtures 12-13), analysis/ict_displacement.py unit coverage in tests/test_ict_2022_v2.py",
+    "choch_mss_confirmation": "PASS -- tests/test_phase4_gbpusd_reachability_fixtures.py (fixture 14), tests/test_ict_v2_false_negative_diagnostics.py",
+    "fvg_ownership": "PASS -- tests/test_phase4_liquidity_sweep_identity.py / test_phase4_premium_discount_range.py lineage (checkpoint 10), displacement_id linkage verified in tests/test_ict_2022_v2.py",
+    "order_block_ownership": "N/A -- architecture finding: no order-block identification engine exists for Forex (optional_context.order_block.enabled is always False); nothing to own or test",
+    "premium_discount_range": "PASS -- tests/test_phase4_premium_discount_range.py (3 tests)",
+    "ote_ownership": "N/A -- architecture finding: no OTE (optimal trade entry) computation exists for Forex (optional_context.ote.enabled is always False)",
+    "buy_reachability": "PASS -- tests/test_phase4_gbpusd_reachability_fixtures.py (fixtures 9,12,18 + symmetric test)",
+    "sell_reachability": "PASS -- tests/test_phase4_gbpusd_reachability_fixtures.py (fixtures 10,13,19 + symmetric test)",
+    "target_hierarchy": "PASS -- tests/test_phase4_target_hierarchy.py (5 tests) + pre-existing tests/test_liquidity_target_engine.py (9 tests, asset_class=forex)",
+    "target_scope": "PASS -- covered within target_hierarchy tests (wrong-side/future-created/swept-target rejection)",
+    "lifecycle_coherence": "PASS -- tests/test_phase4_forex_lifecycle_coherence.py (8 tests)",
+    "actionable_plan_invariants": "PASS -- tests/test_phase4_trade_plan_invariants.py (7 tests)",
+    "stale_response_rejection": "PASS -- frontend terminal-store.test.ts (GBP/USD<->R_75 sequence)",
+    "symbol_switching": "PASS -- frontend terminal-store.test.ts",
+    "timeframe_switching": "PASS -- frontend terminal-store.test.ts",
+    "provider_switching": "PASS -- frontend terminal-store.test.ts (twelve_data <-> deriv)",
+    "mode_isolation": "PASS -- tests/test_phase4_state_safety_isolation.py + pre-existing frontend replay/historical isolation tests",
+    "paper_safety": "PASS -- tests/test_phase4_forex_paper_safety.py (13 tests)",
+    "replay_parity": "PASS -- tests/test_phase4_forex_replay_parity.py (3 tests)",
+    "no_lookahead": "PASS -- tests/test_phase4_h1_m15_m5_responsibilities.py + tests/test_phase4_forex_replay_parity.py",
+    "frozen_ml_integrity": "PASS -- data/stabilization/phase4/diagnostics/ml_integrity_recheck.json (checkpoint 0), reconfirmed unchanged (no ML files touched this phase)",
+    "volatility_75_regression": "PASS -- see checkpoint 25 report (data/stabilization/phase4/reports/cross_market_regression.json)"
+  },
+  "full_python_suite": {
+    "baseline": 818,
+    "result": "937 passed, 13 subtests passed",
+    "new_tests_added": 119,
+    "tests_removed": 0,
+    "stored_at": "data/stabilization/phase4/test_results/python_full.txt"
+  },
+  "focused_phase4_python_suite": {
+    "result": "119 passed, 818 deselected",
+    "stored_at": "data/stabilization/phase4/test_results/python_focused.txt"
+  },
+  "full_frontend_suite": {
+    "baseline": 152,
+    "result": "156 passed (19 test files)",
+    "new_tests_added": 4,
+    "stored_at": "data/stabilization/phase4/test_results/frontend_tests.txt"
+  },
+  "typescript_build": {
+    "result": "clean",
+    "stored_at": "data/stabilization/phase4/test_results/typescript_build.txt"
+  },
+  "frontend_production_build": {
+    "result": "succeeded",
+    "stored_at": "data/stabilization/phase4/test_results/frontend_build.txt"
+  },
+  "checkpoint_23_result": "PASSED"
+}
