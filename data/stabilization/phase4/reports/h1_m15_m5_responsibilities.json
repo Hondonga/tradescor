@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-07-22T01:56:11.288426+00:00",
+  "section": "7 - FORMALIZE FOREX ICT RESPONSIBILITIES",
+  "responsibility_map": {
+    "H1": {
+      "owns": [
+        "external structure",
+        "directional bias",
+        "premium/discount context (via H4 dealing range)",
+        "major liquidity",
+        "invalidation context"
+      ],
+      "file": "analysis/top_down_engine.py::analyze_top_down_market (H1 row) + analysis/ict_dealing_range.py + analysis/ict_liquidity.py"
+    },
+    "M15": {
+      "owns": [
+        "location within the H1 narrative",
+        "pullback/retracement",
+        "liquidity sweep",
+        "displacement",
+        "CHoCH/MSS",
+        "setup zone",
+        "FVG relevance"
+      ],
+      "file": "analysis/top_down_engine.py::analyze_top_down_market (M15 row) + analysis/ict_sweep.py + analysis/ict_displacement.py + analysis/ict_structure_shift.py + analysis/ict_fvg.py (all operate on the M15 frame)"
+    },
+    "M5": {
+      "owns": [
+        "execution confirmation",
+        "micro structure",
+        "retracement into the execution area",
+        "entry timing",
+        "protected stop source",
+        "nearest valid structural target",
+        "chase validation",
+        "reward-to-risk validation"
+      ],
+      "file": "analysis/m5_execution_engine.py::build_m5_execution_plan / execution/ict_m5_execution.py::build_ict_m5_execution"
+    }
+  },
+  "no_lookahead_verification": {
+    "method": "Direct empirical test: analyze_top_down_market() called twice at the SAME analysis_timestamp boundary -- once with candles_by_timeframe truncated exactly at that boundary, once with 50 additional future candles per timeframe appended beyond it. Both calls must produce identical alignment/H1/M15 results, proving completed_candles()'s boundary-based cutoff genuinely excludes future data rather than merely limiting row count.",
+    "result": "PASS -- tests/test_phase4_h1_m15_m5_responsibilities.py::test_analysis_at_a_fixed_boundary_is_identical_regardless_of_future_rows_present",
+    "additional_boundary_precision_check": "completed_candles() also correctly excludes a candle whose own timeframe duration has not yet elapsed past the boundary even when the boundary falls exactly on that candle's OPEN time -- verified with test_completed_candles_excludes_a_row_that_has_not_closed_at_the_boundary."
+  },
+  "no_m5_only_bypass": "strategies/ict_2022_v2.py's core-sequence evaluation (_observe_direction) chains sweep -> displacement -> MSS -> FVG in strict order, each stage requiring the previous stage `valid`; M5 execution (analysis/m5_execution_engine.py) is only invoked with a zone/setup that already passed the H1/M15 gates, and auto_strategy_router.py's _ict_candidate requires ALL of opposing_liquidity/liquidity_sweep/displacement/mss/fvg to be true before the candidate is even eligible -- there is no code path where M5-only evidence produces a TRADE_READY decision without a valid H1/M15 setup behind it.",
+  "checkpoint_7_result": "PASSED"
+}

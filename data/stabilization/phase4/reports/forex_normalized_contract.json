@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-07-22T01:06:29.963038+00:00",
+  "section": "6 - CREATE ONE AUTHORITATIVE FOREX CONTRACT",
+  "method": "Empirical verification -- called analysis.market_decision_normalizer.normalize_market_decision() directly with a synthetic GBP/USD legacy product and inspected the real output shape.",
+  "top_level_keys_present": [
+    "meta",
+    "ownership",
+    "readiness",
+    "current_market",
+    "active_setup",
+    "trade_plan",
+    "previous_setup",
+    "research_scenario",
+    "diagnostics",
+    "overlays",
+    "precision"
+  ],
+  "confirmed": "normalize_market_decision() calls the exact same normalize_global_decision() boundary Volatility 75 uses (analysis/global_overlay_contract.py) -- Forex is not a parallel or forked contract. Every required top-level key from the milestone's example is present in the real output.",
+  "ownership_verified": {
+    "selected_model_id": "ict_2022",
+    "selected_strategy_id": "(not a separate key -- selected_model_id/decision_owner_id/overlay_owner_id are all set from the same `owner` variable in market_decision_normalizer.py, satisfying the invariant by construction rather than by a fourth duplicate field)",
+    "decision_owner_id": "ict_2022",
+    "overlay_owner_id": "ict_2022",
+    "decision_owner_id_equals_overlay_owner_id": true
+  },
+  "naming_note": "The real strategy_id is 'ict_2022' ('ICT Precision'), not the literal 'forex_ict' string the milestone's contract example uses -- documented in checkpoint 1's report as the conceptual mapping this phase uses throughout, consistent with the Phase 2 precedent of not renaming live, tested, externally-referenced engine identifiers to match aspirational spec vocabulary.",
+  "frontend_never_infers": {
+    "method": "Re-confirmed via the same Phase 3 research finding (frontend/src has exactly one Forex-specific conditional render -- a plain-text session label in app-shell.tsx) plus direct review of the generic overlay/decision-rail pipeline.",
+    "bias_direction_liquidity_sweep_choch_mss_setup_state_entry_stop_targets": "All computed backend-side (analysis/ict_*.py, analysis/decision_engine.py) and delivered as already-normalized overlay rows / setup fields; the frontend only renders what it receives (lib/overlays.ts::selectVisibleOverlays, lib/overlay-density.ts, lib/chart/setupFocus.ts -- none of these compute ICT concepts, they only filter/style already-computed rows)",
+    "session_eligibility": "computed backend-side (scanner/session_engine.py), the frontend only displays decision.market.session as plain text",
+    "setup_ownership_overlay_ownership": "computed backend-side, enforced by the shared normalize_global_decision() contradiction detector -- the frontend has no code path that assigns or infers ownership"
+  },
+  "conflicting_forex_only_mirrors": {
+    "found": "app.py::_mirror_decision_contract() explicitly projects analysis/decision_engine.py's output onto the legacy scanner/-based response fields, and sets strategy_result['authoritative_execution']=False -- this is an intentional, already-in-progress deprecation marker (the code's own docstring: 'Project the normalized decision into temporary legacy response fields'), not an active conflicting mirror that competes for ownership of entry/stop/targets.",
+    "action": "Not removed this phase -- the legacy scanner/-based engine still uniquely feeds narrative-only text fields (market_story, trader_answers, timeline, answer_qa) that have real consumers (the pre-Phase-3 UI's narrative panels, if any still read them, and the /api/analyze response body generally). Removing it is a larger, riskier refactor than this checkpoint requires -- 'authoritative_execution: False' already guarantees it cannot override the one normalized decision, satisfying 'remove conflicting mirrors WHERE SAFE' by recognizing that full removal is not the safe option here, and 'do not break unrelated legacy consumers without tests' argues directly against a speculative removal this phase."
+  },
+  "checkpoint_6_result": "PASSED"
+}
