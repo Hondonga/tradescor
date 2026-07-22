@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-07-22T02:44:56.026524+00:00",
+  "section": "19-20 - SYMBOL/TIMEFRAME/PROVIDER STATE SAFETY AND LIVE/HISTORICAL/REPLAY ISOLATION",
+  "finding": "The cross-contamination guard (frontend/src/store/terminal-store.ts setSymbol/setTimeframe/acceptDecision + frontend/src/lib/overlays.ts::decisionMatchesWorkspace) is already fully generic and was already proven with an analogous Derived-family sequence (Phase 2 checkpoint 10: rapid R_75 M5 -> other symbol -> R_75 M15 -> R_75 M5) and a Forex-vs-Derived switch (existing test: 'cannot apply a Forex response after switching back to Derived', using EUR/USD). No production code changed for these checkpoints -- only new tests using the exact GBP/USD <-> R_75 combination the Phase 4 spec names.",
+  "checkpoint_19_state_safety": {
+    "test": "frontend/src/store/terminal-store.test.ts :: 'leaves no stale state and rejects late responses across GBP/USD M5 -> GBP/USD M15 -> R_75 M5 -> GBP/USD M5 (Phase 4 checkpoint 19)'",
+    "verified": [
+      "GBP/USD M5 -> GBP/USD M15: M5 decision cleared, late M5-tagged response rejected on the M15 view",
+      "GBP/USD M15 -> R_75 M5 (provider switch twelve_data -> deriv): no Forex decision/owner/session leaks into the Deriv workspace; marketSource/marketSchedule correctly become deriv/24_7",
+      "R_75 M5 -> GBP/USD M5 (provider switch deriv -> twelve_data): R_75 decision/owner cleared; a late Deriv response tagged for R_75 is rejected once back on Forex",
+      "a correctly-tagged fresh GBP/USD M5 response is still accepted normally, with its session field intact"
+    ],
+    "stale_response_rejection_both_providers": "PASS -- both a late Twelve Data (GBP/USD) response and a late Deriv (R_75) response are rejected by requestId + decisionMatchesWorkspace at each hop",
+    "backend_tagging_consistency": "PASS -- tests/test_phase4_state_safety_isolation.py confirms GBP/USD decisions always carry symbol_id namespaced twelve_data:, market_type=forex, decision_owner_id=ict_2022, and meta.symbol/timeframe matching the request -- exactly what decisionMatchesWorkspace keys off of",
+    "checkpoint_19_result": "PASSED"
+  },
+  "checkpoint_20_live_historical_replay_isolation": {
+    "mechanism": "workspaceMode (live/historical/replay) + overlay_mode (LIVE/REPLAY/HISTORICAL) double-gating in terminal-store.ts::showReplay/showHistorical/returnLive/acceptDecision -- unchanged, generic, already covered by 3 pre-existing Phase 2/3 tests ('never presents a live refresh as part of historical inspection', 'isolates replay drawings and clears them when returning live', 'refuses an inspection decision tagged for a different overlay mode')",
+    "gbpusd_specific_verification": "PASS -- tests/test_phase4_state_safety_isolation.py confirms the same GBP/USD candle bundle produces overlay_mode=LIVE/meta.live=True when evaluated live, and overlay_mode=REPLAY/meta.live=False when evaluated in replay, via the identical normalize_market_decision(..., live=...) call app.py makes for both modes",
+    "no_forex_specific_isolation_gap_found": "The isolation boundary operates on overlay_mode/workspaceMode alone, never on market_type -- so it structurally cannot special-case (or fail to protect) Forex differently from any other market family",
+    "checkpoint_20_result": "PASSED"
+  },
+  "tests_added": [
+    "frontend/src/store/terminal-store.test.ts (+1 test, 13 total)",
+    "tests/test_phase4_state_safety_isolation.py (5 new tests)"
+  ]
+}

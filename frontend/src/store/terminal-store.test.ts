@@ -314,4 +314,75 @@ describe("terminal decision ownership", () => {
     expect(useTerminalStore.getState().acceptDecision("fresh-m5", freshDecision)).toBe(true);
     expect(useTerminalStore.getState().decision?.decision_id).toBe("fresh-m5-1");
   });
+
+  it("leaves no stale state and rejects late responses across GBP/USD M5 -> GBP/USD M15 -> R_75 M5 -> GBP/USD M5 (Phase 4 checkpoint 19)", () => {
+    const gbpusd: SymbolInfo = {
+      ...symbol,
+      symbol_id: "twelve_data:GBP/USD",
+      provider_symbol: "GBP/USD",
+      display_name: "GBP/USD",
+      family: "FOREX",
+      market_source: "twelve_data",
+      market_type: "forex",
+      market_schedule: "24_5",
+      analysis_engine: "forex_strategy",
+      available_models: [{ id: "auto", label: "Forex ICT" }],
+    };
+    const r75: SymbolInfo = { ...symbol, symbol_id: "deriv:R_75", provider_symbol: "R_75", display_name: "Volatility 75 Index" };
+    const gbpM5 = {
+      ...decision,
+      decision_id: "gbpusd-m5-1",
+      precision: { ...decision.precision, symbol_id: "twelve_data:GBP/USD" },
+      meta: { ...decision.meta, symbol: "GBP/USD", timeframe: "M5", market_source: "twelve_data", market_type: "forex" },
+      market: { ...decision.market, session: "London Kill Zone" },
+    } satisfies NormalizedDecision;
+
+    useTerminalStore.setState({ model: "auto" });
+    useTerminalStore.getState().selectMarket({ symbol: gbpusd, decision: gbpM5 });
+    expect(useTerminalStore.getState().decision?.decision_id).toBe("gbpusd-m5-1");
+    expect(useTerminalStore.getState().marketSource).toBe("twelve_data");
+
+    // -> GBP/USD M15: the M5 decision must not survive the timeframe switch,
+    // and a late-arriving M5-tagged response (from before the switch) must
+    // be rejected, not silently applied to the M15 view.
+    useTerminalStore.getState().beginAnalysis("late-gbp-m5");
+    useTerminalStore.getState().setTimeframe("M15");
+    expect(useTerminalStore.getState().decision).toBeUndefined();
+    expect(useTerminalStore.getState().acceptDecision("late-gbp-m5", gbpM5)).toBe(false);
+    expect(useTerminalStore.getState().decision).toBeUndefined();
+
+    // -> R_75 M5 (provider switch: Twelve Data -> Deriv). No Forex state,
+    // owner, or session data may leak into the Deriv workspace.
+    useTerminalStore.getState().setSymbol(r75);
+    useTerminalStore.getState().setTimeframe("M5");
+    expect(useTerminalStore.getState().decision).toBeUndefined();
+    expect(useTerminalStore.getState().marketSource).toBe("deriv");
+    expect(useTerminalStore.getState().marketSchedule).toBe("24_7");
+    const r75Decision = {
+      ...decision,
+      decision_id: "r75-m5-1",
+      precision: { ...decision.precision, symbol_id: "deriv:R_75" },
+      meta: { ...decision.meta, symbol: "R_75", timeframe: "M5", market_source: "deriv", market_type: "derived" },
+    } satisfies NormalizedDecision;
+    useTerminalStore.getState().beginAnalysis("r75-request");
+    expect(useTerminalStore.getState().acceptDecision("r75-request", r75Decision)).toBe(true);
+    expect(useTerminalStore.getState().decision?.market.session).toBeUndefined();
+
+    // -> back to GBP/USD M5 (provider switch: Deriv -> Twelve Data). The
+    // R_75 decision/owner must not survive, and a late Deriv response tagged
+    // for R_75 must be rejected once we are back on Forex.
+    useTerminalStore.getState().beginAnalysis("late-r75");
+    useTerminalStore.getState().setSymbol(gbpusd);
+    expect(useTerminalStore.getState().decision).toBeUndefined();
+    expect(useTerminalStore.getState().marketSource).toBe("twelve_data");
+    expect(useTerminalStore.getState().acceptDecision("late-r75", r75Decision)).toBe(false);
+    expect(useTerminalStore.getState().decision).toBeUndefined();
+
+    // A correctly-tagged fresh GBP/USD M5 response is still accepted normally.
+    useTerminalStore.getState().beginAnalysis("fresh-gbp-m5");
+    const freshGbp = { ...gbpM5, decision_id: "gbpusd-m5-2" } satisfies NormalizedDecision;
+    expect(useTerminalStore.getState().acceptDecision("fresh-gbp-m5", freshGbp)).toBe(true);
+    expect(useTerminalStore.getState().decision?.decision_id).toBe("gbpusd-m5-2");
+    expect(useTerminalStore.getState().decision?.market.session).toBe("London Kill Zone");
+  });
 });
