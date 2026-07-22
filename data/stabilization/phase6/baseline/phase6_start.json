@@ -1,0 +1,20 @@
+{
+  "started_at": "2026-07-23T00:00:00Z",
+  "starting_commit": "0b28f14f21cae5e8f450e2980ea3090ea3ce97a9",
+  "working_branch": "tradescor-phase6-apply-validation-verdicts",
+  "working_tree_status": [],
+  "phase5_experiment_id": "phase5-r75-vsp-walkforward-v1",
+  "phase5_strategy_verdict": "REJECTED_NO_EDGE_AFTER_COSTS",
+  "phase5_holdout_status": "SEALED",
+  "frozen_ml_integrity": true,
+  "scope": "eligibility_and_presentation_only",
+  "pre_checks": {
+    "phase5_commit_exists": true,
+    "phase5_frozen_experiment_exists": true,
+    "phase5_experiment_checksums_verified": true,
+    "working_tree_clean": true,
+    "phase4_branch_frozen_at": "b87e72d8730629734740d4ec1a840d32770813cb",
+    "status_label_branch_intact_at": "b99e399ba30acaf7f0d9cb44d7138525371554e7",
+    "frozen_ml_artifacts_byte_identical": true
+  }
+}
