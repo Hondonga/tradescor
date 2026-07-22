@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-07-22T03:16:15.436308+00:00",
+  "section": "25 - CROSS-MARKET REGRESSION",
+  "method": "The full backend suite ran after every single Phase 4 commit (18 runs across the phase) and stayed strictly additive throughout: 818 -> 890 -> ... -> 937, zero tests removed, zero regressions, at every checkpoint. This is itself the primary continuous regression signal. This checkpoint additionally re-runs the specific market-family test slices named in the spec and re-verifies frozen ML integrity one final time.",
+  "volatility_75": {
+    "buy_sell_reachability": "PASS -- tests/test_volatility_structure_pullback*.py and validation/strategy_reachability_fixtures.py-backed tests unchanged and passing",
+    "target_hierarchy": "PASS -- tests/test_liquidity_target_engine.py (asset_class='derived' cases) unchanged and passing",
+    "chart_presentation": "PASS -- tests/test_phase2_golden_path_fixtures.py unchanged and passing; frontend market-chart.stories.tsx (the pre-existing R_75 fixture file) untouched this phase",
+    "paper": "PASS -- paper_testing/derived_setup_tracker.py::registerable_paper_setup untouched; not modified or referenced by any Phase 4 change",
+    "replay": "PASS -- tests/test_phase2_replay_parity.py, tests/test_derived_replay_live_parity.py unchanged and passing",
+    "regression_test_slice_result": "77 passed, 0 failed (volatility_structure_pullback + phase2_replay_parity + phase2_golden_path + derived_replay)"
+  },
+  "jump": {
+    "research_only_still_enforced": "PASS -- analysis/global_overlay_contract.py::_contradiction/_actionable_ready's research_only gating (the shared mechanism Jump relies on) was read but not modified this phase; still blocks trade-ready/actionable status for any research_only-flagged active setup",
+    "no_auto_no_paper_signals": "PASS by construction -- unchanged; Phase 4 touched no Jump-specific code (strategies/jump*.py, analysis/jump*.py untouched)"
+  },
+  "step_boom_crash": {
+    "non_auto_unless_proven": "PASS -- unchanged; Phase 4 touched no Step/Boom/Crash-specific code"
+  },
+  "ml": {
+    "frozen_no_training_or_activation": "PASS -- re-verified byte-for-byte identical to the Phase 4 checkpoint 0 baseline (all dataset/checkpoint/audit files under data/ml/), confirming zero ML files were touched across all 25 checkpoints of this phase"
+  },
+  "phase3_ui": {
+    "density_modes": "PASS -- frontend/src/lib/overlay-density.test.ts (7 tests) unchanged and passing; checkpoint 17 confirmed GBP/USD renders through the identical density pipeline",
+    "setup_focus": "PASS -- frontend/src/lib/chart/setupFocus.test.ts (12 tests) unchanged and passing",
+    "drawing_inspector": "PASS -- frontend/src/components/chart/drawing-inspector.test.tsx (9 tests) unchanged and passing",
+    "collision_manager": "PASS -- frontend/src/lib/overlay-collision.test.ts (5 tests) + overlay-layout.test.ts (6 tests) unchanged and passing",
+    "responsive_layout": "PASS -- checkpoint 24's 5-resolution GBP/USD sweep showed zero horizontal overflow at any of the 5 required resolutions, using the same unmodified responsive layout code"
+  },
+  "full_suite_regression_evidence": {
+    "python_baseline_at_phase_start": 818,
+    "python_final": 937,
+    "python_tests_removed": 0,
+    "frontend_baseline_at_phase_start": 152,
+    "frontend_final": 156,
+    "frontend_tests_removed": 0,
+    "commits_with_a_full_suite_run": 8
+  },
+  "checkpoint_25_result": "PASSED"
+}
