@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-07-22T02:50:33.543277+00:00",
+  "section": "21 - FOREX PAPER-TESTING SAFETY GATE",
+  "finding": "analysis/global_overlay_contract.py::normalize_global_decision already computes a correct, shared, market-agnostic paper_registration_allowed boolean (overlay_mode=='LIVE' and trade-ready with complete geometry and no lifecycle contradiction and readiness=='ready') that Volatility 75 also relies on -- this was NOT modified, per the constraint that shared-contract changes require full regression testing and this one needed none. What was genuinely missing was (a) a dedicated, Forex-named eligibility function the spec explicitly asks for (analogous to paper_testing/derived_setup_tracker.py::registerable_paper_setup), and (b) the three explicit safety flags (historical_edge_proven/profitability_claim_allowed/live_execution_allowed), which did not exist anywhere in the Forex paper-eligibility path.",
+  "new_file": "analysis/forex_paper_eligibility.py::registerable_forex_paper_setup(product)",
+  "design": "Deliberately narrows-only: re-asserts the shared gate's conditions (overlay_mode==LIVE, market_type==forex, trade_ready, readiness==ready, active setup with entry/stop/TP1) as defense in depth rather than a second source of truth, then unconditionally sets historical_edge_proven=False, profitability_claim_allowed=False, live_execution_allowed=False regardless of eligibility -- Phase 4 proves reachability and contract correctness only.",
+  "invariants_verified": {
+    "trade_ready_buy_eligible": "PASS",
+    "trade_ready_sell_eligible": "PASS",
+    "market_context_blocked": "PASS",
+    "waiting_state_blocked": "PASS",
+    "plan_validation_no_target_blocked": "PASS",
+    "stale_data_blocked_even_with_complete_geometry": "PASS",
+    "market_closed_blocked_even_with_complete_geometry": "PASS",
+    "expired_blocked": "PASS",
+    "invalidated_blocked": "PASS",
+    "replay_mode_blocked_even_with_complete_ready_plan": "PASS",
+    "historical_inspection_mode_blocked": "PASS",
+    "state_contradiction_blocked": "PASS",
+    "never_grants_eligibility_the_shared_gate_denied": "PASS (defense-in-depth tamper test)",
+    "never_auto_promotes_to_live_trading": "PASS by construction -- live_execution_allowed is always False and no code path reads this flag to enable order execution (no broker execution code exists in this repo at all)"
+  },
+  "tests": "tests/test_phase4_forex_paper_safety.py (13 tests, all passing)",
+  "checkpoint_21_result": "PASSED"
+}
