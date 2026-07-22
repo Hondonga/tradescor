@@ -10,30 +10,33 @@ import {
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
-import { StatusBadge, type StatusTone } from "@/components/ui/status-badge";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { formatPrice, titleCase } from "@/lib/utils";
+import {
+  canonicalStatus,
+  canonicalStatusSubtitle,
+  canonicalStatusTone,
+  directionLabel,
+} from "@/lib/status-labels";
 import type { NormalizedDecision } from "@/types";
 
 export function DecisionHeader({ decision }: { decision: NormalizedDecision }) {
-  const tone: StatusTone = decision.decision.trade_ready
-    ? "ready"
-    : decision.decision.status.includes("CONTRADICTION")
-      ? "error"
-      : decision.decision.direction
-        ? "developing"
-        : "waiting";
+  const status = canonicalStatus(decision);
   return (
     <motion.header layout className="border-b border-white/[.07] p-4">
       <div className="flex items-center justify-between gap-3">
-        <StatusBadge tone={tone}>{decision.decision.status}</StatusBadge>
+        <StatusBadge tone={canonicalStatusTone(status)}>{status}</StatusBadge>
         <span className="font-mono text-[10px] text-zinc-500">
           {decision.setup.setup_quality_score == null
             ? "Quality —"
             : `${decision.setup.quality_grade} · ${decision.setup.setup_quality_score}`}
         </span>
       </div>
-      <h2 className="mt-3 text-base font-semibold">
-        {decision.decision.headline}
+      <p className="mt-3 text-xs text-zinc-400">
+        Looking for: {directionLabel(decision.decision.direction)}
+      </p>
+      <h2 className="mt-1 text-base font-semibold">
+        {canonicalStatusSubtitle(status)}
       </h2>
       <p className="mt-1 text-xs text-zinc-500">
         {titleCase(decision.ownership.selected_model_id)}

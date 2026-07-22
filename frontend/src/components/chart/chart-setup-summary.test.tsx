@@ -83,4 +83,29 @@ describe("ChartSetupSummary", () => {
     expect(screen.getByText("RESEARCH SCENARIO")).toBeInTheDocument();
     expect(screen.queryByText("SELL SETUP")).not.toBeInTheDocument();
   });
+
+  it("does not show its own waiting-for/too-late text when entry timing is late — the decision rail owns that message", () => {
+    render(
+      <ChartSetupSummary
+        decision={decision({
+          entry_timing: {
+            status: "too_late",
+            message: "Too late to enter now. Price is too far from entry and reward is reduced.",
+            next_action: "Do not chase. Wait for a new setup or a clean pullback.",
+            can_enter_now: false,
+          },
+        })}
+        visible
+      />,
+    );
+    expect(screen.getByText("SELL SETUP")).toBeInTheDocument();
+    expect(screen.queryByText("Waiting for")).not.toBeInTheDocument();
+    expect(screen.queryByText(/Too late/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Do not chase/i)).not.toBeInTheDocument();
+  });
+
+  it("still shows waiting-for text when entry timing is not late (at_entry/near_entry, or none)", () => {
+    render(<ChartSetupSummary decision={decision()} visible />);
+    expect(screen.getByText("Waiting for")).toBeInTheDocument();
+  });
 });

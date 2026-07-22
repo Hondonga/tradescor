@@ -245,6 +245,15 @@ export interface NormalizedDecision {
     m5_confirmation_status?: string;
     completed_confirmation?: unknown;
   };
+  // Entry-timing classification (analysis/entry_timing.py), forex/crypto/
+  // index only -- absent for derived markets and for decisions with no
+  // valid trade plan to time against.
+  entry_timing?: {
+    status: "at_entry" | "near_entry" | "extended" | "too_late" | "missed" | "invalid" | string;
+    message: string;
+    next_action: string;
+    can_enter_now: boolean;
+  };
   diagnostics: {
     gate_funnel?: unknown;
     invariants?: {

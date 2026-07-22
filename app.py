@@ -882,6 +882,14 @@ def _build_analysis_response(
         analysis["decision"]=decision;analysis["overlays"]=decision["overlays"]
     if isinstance(decision,dict) and decision.get("setup"):
         decision["market_analysis"]=build_market_analysis(market=decision.get("market") or {},setup=decision["setup"],smc=decision.get("smc") or {},scenario=(decision.get("decision") or {}).get("summary"));decision["trade_plan"]=build_trade_plan(decision["setup"],(decision.get("decision") or {}).get("status",""),(decision.get("decision") or {}).get("first_blocking_gate") or decision["setup"].get("next_required_condition"));trace=((decision.get("diagnostics") or {}).get("target_trace") or {});decision["trade_plan"]["target_candidates_checked"]=trace.get("candidates_found") or [];decision["trade_plan"]["target_rejections"]=trace.get("candidates_rejected") or []
+    if isinstance(decision,dict) and not derived:
+        # UI polish: expose the already-computed entry-timing classification
+        # (analysis/entry_timing.py) on the normalized contract so the
+        # frontend can show one consistent AT_ENTRY/NEAR_ENTRY/EXTENDED/
+        # TOO_LATE/MISSED/INVALID message instead of nothing at all -- pure
+        # data exposure, no new computation.
+        timing=analysis.get("entry_timing") or strategy_result.get("entry_timing") or {}
+        if timing.get("available"):decision["entry_timing"]={"status":timing.get("entry_timing_status"),"message":timing.get("message"),"next_action":timing.get("next_action"),"can_enter_now":timing.get("can_enter_now")}
     execution_plan = analysis["execution_plan"]
     if not replay:
         _log_live_paper_decision(decision)

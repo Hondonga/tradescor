@@ -49,7 +49,7 @@ class EntryTimingEngineTests(unittest.TestCase):
         self.assertEqual(result["entry_timing_status"], "extended")
         self.assertEqual(
             result["message"],
-            "Price has moved away from entry. Do not chase. Look for a pullback.",
+            "Price has moved away from entry. Do not chase. Wait for a pullback.",
         )
 
     def test_buy_setup_far_above_entry(self):
@@ -62,7 +62,7 @@ class EntryTimingEngineTests(unittest.TestCase):
         result = timing(current_price=1.1041)
         self.assertEqual(result["entry_timing_status"], "missed")
         self.assertFalse(result["can_enter_now"])
-        self.assertEqual(result["message"], "Setup already moved to target area. Look for the next setup.")
+        self.assertEqual(result["message"], "Setup already moved to target area. Wait for the next setup.")
 
     def test_invalid_setup_uses_standard_wording(self):
         result = timing(current_price=1.0979)
@@ -113,11 +113,11 @@ class EntryTimingEngineTests(unittest.TestCase):
         self.assertFalse(result["can_enter_now"])
         self.assertEqual(
             result["message"],
-            "Price already moved away from the entry area.",
+            "Too late to enter now. Price is too far from entry and reward is reduced.",
         )
         self.assertEqual(
             result["next_action"],
-            "Do not chase. Look for a fresh entry or a clean pullback.",
+            "Do not chase. Wait for a new setup or a clean pullback.",
         )
         self.assertEqual(result["distance_from_entry_pips"], 34.3)
 

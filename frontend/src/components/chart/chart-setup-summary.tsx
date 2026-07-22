@@ -1,4 +1,5 @@
 import { titleCase } from "@/lib/utils";
+import { isLateEntryTiming } from "@/lib/status-labels";
 import type { NormalizedDecision } from "@/types";
 
 export interface ChartSetupSummaryProps {
@@ -32,7 +33,13 @@ export function ChartSetupSummary({ decision, visible }: ChartSetupSummaryProps)
   const stage = titleCase(
     String(activeSetup.lifecycle || activeSetup.state || activeSetup.stage || decision.decision.stage || ""),
   );
-  const waitingFor = decision.decision.next_action || activeSetup.next_required_condition;
+  // Section 3 — the decision rail is the single place a "too late"-style
+  // entry-timing warning is explained (WHAT IS MISSING / NEXT ACTION); this
+  // card never repeats or contradicts it with its own "Waiting for" text.
+  const timingIsLate = isLateEntryTiming(decision.entry_timing?.status);
+  const waitingFor = timingIsLate
+    ? null
+    : decision.decision.next_action || activeSetup.next_required_condition;
 
   return (
     <div className="pointer-events-none absolute left-2 top-2 z-30 w-44 border border-white/[.08] bg-[#0b0e14]/90 p-2 backdrop-blur-sm">

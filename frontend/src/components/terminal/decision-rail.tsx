@@ -11,6 +11,7 @@ import { useAnalysis } from "@/hooks/use-analysis";
 import { revealHistoricalOutcome } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { formatPrice, titleCase } from "@/lib/utils";
+import { entryTimingCopy, isLateEntryTiming } from "@/lib/status-labels";
 import type { NormalizedDecision } from "@/types";
 
 // Phase 3 §11 — required top-level section order: MARKET STATE, ACTIVE
@@ -86,6 +87,14 @@ export function DecisionRail() {
   // existing MARKET STATE / ACTIVE SETUP sections (no new sections, no
   // redesign). Absent for every other market family.
   const forex = decision.meta.market_type === "forex" ? decision.forex : undefined;
+  // Wording polish — one canonical place for entry-timing copy. When timing
+  // is late (extended/too_late/missed/invalid), its message/next_action
+  // take over WHAT IS MISSING / NEXT ACTION below so there is exactly one
+  // warning, not a second one duplicated on the chart (chart-setup-summary
+  // never renders its own timing badge when this is present).
+  const timing = decision.entry_timing;
+  const timingCopy = entryTimingCopy(timing?.status);
+  const timingIsLate = isLateEntryTiming(timing?.status);
 
   return (
     <aside className="h-full overflow-y-auto bg-[#0b0e14]">
@@ -191,6 +200,12 @@ export function DecisionRail() {
             <dd>
               {formatPrice(activeSetup.invalidation?.price, decision.precision)}
             </dd>
+            {timingCopy && (
+              <>
+                <dt>Entry timing</dt>
+                <dd>{timingCopy.label}</dd>
+              </>
+            )}
           </dl>
           {activeSetup.invalidation?.condition && (
             <p className="mt-3 text-[11px] leading-4 text-zinc-500">
@@ -246,9 +261,11 @@ export function DecisionRail() {
         <section className="border-b border-white/[.07] p-4">
           <p className="label">What is missing</p>
           <p className="mt-2 text-xs leading-5 text-zinc-300">
-            {primaryBlocker || "Waiting for the next completed structural condition."}
+            {timingIsLate && timingCopy
+              ? timingCopy.message
+              : primaryBlocker || "Waiting for the next completed structural condition."}
           </p>
-          {activeSetup.next_required_condition && (
+          {!timingIsLate && activeSetup.next_required_condition && (
             <p className="mt-2 text-[11px] leading-5 text-zinc-500">
               {activeSetup.next_required_condition}
             </p>
@@ -259,11 +276,11 @@ export function DecisionRail() {
       {/* 4. TRADE PLAN -- only when available */}
       {planVisible && <TradeReadyPlan decision={decision} />}
 
-      {/* 5. NEXT ACTION -- plain language */}
+      {/* 5. NEXT ACTION -- one clear sentence */}
       <section className="border-b border-white/[.07] p-4">
         <p className="label">Next action</p>
         <p className="mt-2 text-xs leading-5 text-zinc-300">
-          {decision.decision.next_action}
+          {timingIsLate && timing ? timing.next_action : decision.decision.next_action}
         </p>
       </section>
 

@@ -246,6 +246,77 @@ describe("DecisionRail section order (Phase 3 §11)", () => {
   });
 });
 
+describe("DecisionRail status wording polish", () => {
+  beforeEach(() => {
+    useTerminalStore.persist.clearStorage();
+  });
+
+  it("shows only TRADE READY / WATCHLIST / AVOID as the primary status, never WAIT or NO TRADE", () => {
+    renderRail(baseDecision());
+    expect(screen.getByText("WATCHLIST")).toBeInTheDocument();
+    expect(screen.queryByText("WAIT")).not.toBeInTheDocument();
+    expect(screen.queryByText("NO TRADE")).not.toBeInTheDocument();
+    expect(screen.queryByText(/^SELL SETUP DEVELOPING$/)).not.toBeInTheDocument();
+  });
+
+  it("shows AVOID for a trade-ready-false decision with a too-late entry timing classification", () => {
+    renderRail(
+      baseDecision({
+        entry_timing: {
+          status: "too_late",
+          message: "Too late to enter now. Price is too far from entry and reward is reduced.",
+          next_action: "Do not chase. Wait for a new setup or a clean pullback.",
+          can_enter_now: false,
+        },
+      } as Partial<NormalizedDecision>),
+    );
+    expect(screen.getByText("AVOID")).toBeInTheDocument();
+    expect(screen.queryByText("WATCHLIST")).not.toBeInTheDocument();
+  });
+
+  it("shows TRADE READY for a trade-ready decision", () => {
+    renderRail(
+      baseDecision({
+        decision: { status: "READY TO SELL", direction: "sell", stage: "TRADE_READY", headline: "READY TO SELL", summary: "", next_action: "x", trade_ready: true },
+        trade_plan: { available: true, status: "READY TO SELL", entry: 51500, stop: 51650, targets: [{ name: "TP1", price: 51150, risk_reward: 2.3 }] },
+      }),
+    );
+    expect(screen.getByText("TRADE READY")).toBeInTheDocument();
+  });
+
+  it('shows "Looking for: SELL setup" for a sell-direction decision', () => {
+    renderRail(baseDecision());
+    expect(screen.getByText("Looking for: SELL setup")).toBeInTheDocument();
+  });
+
+  it('shows "Looking for: Neutral" when there is no direction yet', () => {
+    renderRail(baseDecision({ decision: { status: "MARKET CONTEXT", direction: null, stage: "NO_DIRECTIONAL_CONTEXT", headline: "", summary: "", next_action: "x", trade_ready: false }, active_setup: null }));
+    expect(screen.getByText("Looking for: Neutral")).toBeInTheDocument();
+  });
+
+  it("uses the too-late entry-timing message and next action in WHAT IS MISSING / NEXT ACTION, and the chart card does not repeat it", () => {
+    const decision = baseDecision({
+      entry_timing: {
+        status: "too_late",
+        message: "Too late to enter now. Price is too far from entry and reward is reduced.",
+        next_action: "Do not chase. Wait for a new setup or a clean pullback.",
+        can_enter_now: false,
+      },
+    } as Partial<NormalizedDecision>);
+    renderRail(decision);
+    const whatIsMissing = screen.getByText("What is missing").closest("section");
+    expect(whatIsMissing?.textContent).toContain("Too late to enter now. Price is too far from entry and reward is reduced.");
+    const nextAction = screen.getByText("Next action").closest("section");
+    expect(nextAction?.textContent).toContain("Do not chase. Wait for a new setup or a clean pullback.");
+
+    const { container: chartCard } = render(<ChartSetupSummary decision={decision} visible />);
+    // The rail already explains the too-late warning -- the chart card must
+    // not repeat or contradict it with its own "Waiting for" text.
+    expect(chartCard.textContent).not.toContain("Waiting for");
+    expect(chartCard.textContent).not.toContain("Too late to enter now");
+  });
+});
+
 describe("DecisionRail Forex-specific content (Phase 4 §18)", () => {
   beforeEach(() => {
     useTerminalStore.persist.clearStorage();

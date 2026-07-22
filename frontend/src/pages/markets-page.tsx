@@ -13,8 +13,14 @@ import { analyze, listSymbols } from "@/lib/api";
 import { useTerminalStore } from "@/store/terminal-store";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
-import { StatusBadge, type StatusTone } from "@/components/ui/status-badge";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { formatPrice, titleCase } from "@/lib/utils";
+import {
+  canonicalStatus,
+  canonicalStatusTone,
+  directionLabel,
+  isLateEntryTiming,
+} from "@/lib/status-labels";
 import type { MarketRow } from "@/types";
 const helper = createColumnHelper<MarketRow>();
 function segment(row: MarketRow) {
@@ -164,36 +170,55 @@ export function MarketsPage() {
       }),
       helper.accessor((x) => x.decision?.decision.direction, {
         id: "direction",
-        header: "Direction",
-        cell: (i) => titleCase(i.getValue()) || "—",
+        header: "Looking for",
+        cell: (i) => (i.row.original.decision ? directionLabel(i.getValue()) : "—"),
       }),
       helper.accessor((x) => x.decision?.decision.stage, {
         id: "stage",
-        header: "Lifecycle",
-        cell: (i) => (
-          <StatusBadge
-            tone={
-              (i.row.original.decision?.decision.trade_ready
-                ? "ready"
-                : i.getValue()
-                  ? "developing"
-                  : "neutral") as StatusTone
-            }
-          >
-            {i.row.original.symbol.analysis_supported === false
-              ? "Unsupported model"
-              : titleCase(i.getValue()) || "Unanalyzed"}
-          </StatusBadge>
-        ),
+        header: "Status",
+        cell: (i) => {
+          const decision = i.row.original.decision;
+          if (i.row.original.symbol.analysis_supported === false)
+            return <StatusBadge tone="neutral">Unsupported model</StatusBadge>;
+          if (!decision) return <StatusBadge tone="neutral">Unanalyzed</StatusBadge>;
+          const status = canonicalStatus(decision);
+          return <StatusBadge tone={canonicalStatusTone(status)}>{status}</StatusBadge>;
+        },
       }),
+      helper.accessor((x) => x.decision?.entry_timing?.status, {
+        id: "entryTiming",
+        header: "Entry timing",
+        cell: (i) => {
+          const status = i.getValue();
+          return status ? status.replace(/_/g, " ").toUpperCase() : "—";
+        },
+      }),
+      helper.accessor(
+        (x) => {
+          const timing = x.decision?.entry_timing;
+          return timing && isLateEntryTiming(timing.status)
+            ? timing.next_action
+            : x.decision?.decision.next_action;
+        },
+        {
+          id: "nextAction",
+          header: "Next action",
+          cell: (i) => i.getValue() || "—",
+        },
+      ),
       helper.accessor((x) => x.decision?.setup.setup_quality_score, {
         id: "quality",
-        header: "Quality",
+        header: "Trade score",
         cell: (i) => <span className="financial">{i.getValue() ?? "—"}</span>,
       }),
+      helper.accessor((x) => x.decision?.setup.quality_grade, {
+        id: "confidence",
+        header: "Confidence",
+        cell: (i) => i.getValue() || "—",
+      }),
       helper.accessor((x) => x.decision?.decision.first_blocking_gate, {
-        id: "blocker",
-        header: "First blocker",
+        id: "why",
+        header: "Why",
         cell: (i) => titleCase(i.getValue()) || "—",
       }),
       helper.accessor((x) => x.decision?.readiness.state, {
@@ -333,7 +358,7 @@ function FragmentRows({
   return (
     <>
       <tr className="segment-row">
-        <td colSpan={17}>
+        <td colSpan={19}>
           {label}
           <span>{rows.length}</span>
         </td>

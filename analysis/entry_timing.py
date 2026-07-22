@@ -114,8 +114,8 @@ def evaluate_entry_timing(
             **metrics,
             "entry_timing_status": "missed",
             "chase_risk": "high",
-            "message": "Setup already moved to target area. Look for the next setup.",
-            "next_action": "Do not chase. Look for the next setup.",
+            "message": "Setup already moved to target area. Wait for the next setup.",
+            "next_action": "Do not chase. Wait for the next setup.",
         }
 
     price_label = _format_price(entry, symbol, asset_type)
@@ -142,8 +142,8 @@ def evaluate_entry_timing(
             **metrics,
             "entry_timing_status": "too_late",
             "chase_risk": "high",
-            "message": "Price already moved away from the entry area.",
-            "next_action": "Do not chase. Look for a fresh entry or a clean pullback.",
+            "message": "Too late to enter now. Price is too far from entry and reward is reduced.",
+            "next_action": "Do not chase. Wait for a new setup or a clean pullback.",
         }
 
     if extended:
@@ -151,8 +151,8 @@ def evaluate_entry_timing(
             **metrics,
             "entry_timing_status": "extended",
             "chase_risk": "high",
-            "message": "Price has moved away from entry. Do not chase. Look for a pullback.",
-            "next_action": f"Look for a clean pullback toward {price_label} before reassessing.",
+            "message": "Price has moved away from entry. Do not chase. Wait for a pullback.",
+            "next_action": f"Wait for a clean pullback toward {price_label} before reassessing.",
         }
 
     if inside_zone:
@@ -165,12 +165,12 @@ def evaluate_entry_timing(
             "message": (
                 "Price is inside the entry zone. Confirm risk before entering."
                 if can_enter
-                else "Price already moved away from the entry area."
+                else "Too late to enter now. Price is too far from entry and reward is reduced."
             ),
             "next_action": (
                 "Confirm the setup is still active before entering."
                 if can_enter
-                else "Do not chase. Look for a fresh entry or a clean pullback."
+                else "Do not chase. Wait for a new setup or a clean pullback."
             ),
         }
 
