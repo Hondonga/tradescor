@@ -1,0 +1,73 @@
+# Phase 4 Final Report: GBP/USD Forex ICT Golden Path Stabilization
+
+1. **phase4 status**: COMPLETE -- all 28 checkpoints (0-27) PASSED, no checkpoint failed or was skipped
+
+2. **working branch**: tradescor-phase4-gbpusd-forex-ict-stabilization
+
+3. **starting phase3 commit**: 6806ffad45e730e6200367912a0bcb787103d1f0 (tradescor-phase3-professional-workspace-ui)
+
+4. **final phase4 commit**: a302fe614dde95ae756c215cd79d6a2644e11f78 (this final report will be committed on top of it)
+
+5. **files changed**: 98 files changed, 4940 insertions(+), 12 deletions(-) across 16 commits
+
+6. **market family isolation result**: PASS -- GBP/USD resolves only to twelve_data/FOREX/24_5/5-decimal precision with zero derived-strategy models; R_75 resolves only to deriv/VOLATILITY/24_7 with zero forex-strategy models (checkpoint 1)
+
+7. **gbpusd symbol resolution result**: PASS -- 8 alias forms (GBP/USD, gbpusd, GBP-USD, FX:GBPUSD, etc.) all resolve to the single canonical symbol; added _forex_aliases()/_ALIAS_SYMBOL_MAP to providers/symbol_map.py (checkpoint 2)
+
+8. **twelve data pipeline result**: PASS -- wired PipelineTrace into providers/twelve_data_provider.py::fetch_candles; GET /api/system/data-pipeline previously always returned an empty placeholder for Forex, now reports real ACTIVE_SYMBOL_RESOLUTION..ANALYSIS_READY stage trace (checkpoint 3)
+
+9. **forex market hours result**: PASS -- found and fixed a real bug: Forex was the only gated asset type whose entry_allowed did not AND with market_open, meaning a Saturday kill-zone-clock-window overlap could read entry_allowed=True; added MARKET_CLOSED readiness state (checkpoint 4)
+
+10. **session dst result**: PASS -- scanner/session_engine.py's DST-aware (America/New_York) session/kill-zone logic verified correct across weekday/weekend/Sunday-reopen boundaries, unmodified (checkpoint 5)
+
+11. **normalized contract result**: PASS -- one authoritative Forex contract shape verified with decision_owner_id == overlay_owner_id enforced (checkpoint 6)
+
+12. **h1 m15 m5 responsibility result**: PASS -- no-lookahead proven via analyze_top_down_market()/completed_candles() with truncated vs. future-extended frames producing identical results at the same boundary (checkpoint 7)
+
+13. **liquidity sweep result**: PASS -- added sweep_id/liquidity_type/liquidity_price/sweep_price/swept_at/confirmed_at/active fields to analysis/ict_sweep.py, causal and structure-owned (checkpoint 8)
+
+14. **displacement result**: PASS -- analysis/ict_displacement.py verified ATR-normalized, causal, reachable for both directions (checkpoint 9, checkpoint 16 fixtures 12-13)
+
+15. **choch mss result**: PASS -- analysis/ict_structure_shift.py verified to require a known pre-sweep pivot and a completed post-displacement closing candle before confirming (checkpoint 9, checkpoint 16 fixture 14)
+
+16. **fvg order block result**: PASS for FVG (analysis/ict_fvg.py ownership via displacement_id verified, checkpoint 10); order-block is N/A -- no order-block identification engine exists for Forex (architecture finding, not a gap introduced this phase)
+
+17. **premium discount ote result**: PASS for premium/discount (added current_position_pct/range_high/range_low/premium_discount_state/source_episode_id to analysis/ict_dealing_range.py, checkpoint 11); OTE is N/A -- no OTE computation exists for Forex (architecture finding)
+
+18. **lifecycle result**: PASS -- every named impossible state (trade-ready without entry/stop/TP1, stale/closed live-ready, cross-market overlay contamination, setup_id mismatch) verified structurally unreachable via the shared analysis/global_overlay_contract.py contradiction detector, unmodified (checkpoint 12)
+
+19. **buy reachability result**: PASS -- real GBP/USD candle bundle through the unmodified build_decision() production entrypoint reaches htf_narrative/directional_draw/liquidity_sweep/displacement/mss/fvg/entry_array_touched/m5_confirmation, plus a complete TRADE_READY BUY contract fixture with entry/stop/TP1/TP2 (checkpoint 16)
+
+20. **sell reachability result**: PASS -- exact price-mirror of the BUY bundle reaches the symmetric SELL-side sequence depth, plus a complete TRADE_READY SELL contract fixture (checkpoint 16)
+
+21. **entry stop result**: PASS -- analysis/m5_execution_engine.py verified deterministic (unchanged by future candles), stop always structural and on the correct side for both directions (checkpoint 13)
+
+22. **target hierarchy result**: PASS -- analysis/liquidity_target_engine.py verified causal (rejects future-created/wrong-side/swept levels), never fabricates a target to complete a plan (checkpoint 14)
+
+23. **trade plan invariant result**: PASS -- entry-null implies no stop/targets, TP1-null implies lifecycle cannot be TRADE_READY, stale/closed data implies no new live trade-ready, overlay prices exactly equal trade_plan prices field-for-field (checkpoint 15)
+
+24. **workspace result**: PASS -- confirmed the Phase 3 Workspace (density modes, collision handling, Setup Focus, Drawing Inspector) is fully market-agnostic and renders GBP/USD through the identical shared pipeline with zero redesign; added Forex-specific session/kill-zone, premium/discount, liquidity sweep, displacement, and structure-confirmation rows to the existing MARKET STATE/ACTIVE SETUP sections, gated on market_type=='forex' (checkpoints 17-18)
+
+25. **switching result**: PASS -- GBP/USD M5 -> GBP/USD M15 -> R_75 M5 -> GBP/USD M5 sequence leaves no stale state and rejects late responses from both Twelve Data and Deriv at every hop (checkpoint 19); live/historical/replay isolation confirmed via overlay_mode/workspaceMode double-gating, unmodified (checkpoint 20)
+
+26. **paper result**: PASS -- added analysis/forex_paper_eligibility.py::registerable_forex_paper_setup, narrows-only defense-in-depth on the shared paper_registration_allowed gate; always records historical_edge_proven=false, profitability_claim_allowed=false, live_execution_allowed=false regardless of eligibility (checkpoint 21)
+
+27. **replay parity result**: PASS -- the same GBP/USD candle bundle normalized once LIVE and once REPLAY agrees field-for-field on every named parity requirement (H1 structure, dealing range, premium/discount, session/kill zone, sweep, displacement, MSS, M5 confirmation, setup ID, lifecycle, direction, entry/stop/targets/RR, blockers, ownership) plus full structural equality once the two intentional distinguishing fields are accounted for (checkpoint 22)
+
+28. **python test result**: PASS -- 937 passed, 13 subtests passed (baseline 818; +119 new; 0 removed; 0 regressions)
+
+29. **frontend test build result**: PASS -- 156 tests passed (baseline 152; +4 new; 0 removed); TypeScript build clean; production build (vite build) succeeds
+
+30. **chrome acceptance result**: PASS -- 30 screenshots captured via Playwright Chromium across 20 named GBP/USD M5 states + a 5-resolution sweep for TradeReadyBuy/TradeReadySell + a GBP/USD<->R_75 switch capture; 0 console errors, 0 horizontal overflow, 0 raw codes in visible text, 0 cross-family field leakage
+
+31. **frozen ml integrity result**: PASS -- every ML dataset/checkpoint/audit file re-verified byte-for-byte identical (SHA-256) to the Phase 1 baseline, both at checkpoint 0 and again at checkpoint 25
+
+32. **volatility 75 regression result**: PASS -- volatility_structure_pullback_engine.py, config/ict_2022_v2.yaml equivalents for Derived, and all Volatility 75 test files (77 tests in the targeted regression slice) untouched and passing
+
+33. **cross market regression result**: PASS -- Jump research-only gating, Step/Boom/Crash non-Auto gating, and Phase 3 UI (density/Setup Focus/Drawing Inspector/collision/responsive layout) all confirmed unchanged and passing via their unmodified, pre-existing test suites
+
+34. **remaining blockers**: None. All 28 checkpoints passed with no open defects. Two named checkpoint-23 items (order-block ownership, OTE ownership) are documented N/A architecture findings, not blockers: no such engine exists for Forex, and building one was explicitly out of Phase 4's scope (no new strategies, no threshold tuning to manufacture more setups).
+
+35. **no profitability claim confirmation**: CONFIRMED -- no historical edge, win rate, expectancy, or profitability claim was made anywhere in this phase's code, tests, or reports. analysis/forex_paper_eligibility.py explicitly and unconditionally sets historical_edge_proven=false and profitability_claim_allowed=false regardless of setup eligibility.
+
+36. **no optimization walkforward live execution ml confirmation**: CONFIRMED -- no strategy parameter was tuned, no walk-forward or backtesting validation was run or added, no broker order-execution code was added (none exists in this repository), and no ML training/activation/dataset/model file was created, modified, or touched -- verified byte-for-byte at both checkpoint 0 and checkpoint 25.
