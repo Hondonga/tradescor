@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-07-22T02:54:26.560320+00:00",
+  "section": "22 - GBP/USD REPLAY PARITY",
+  "method": "Mirrors tests/test_phase2_replay_parity.py's methodology for R_75: the same real, hand-built GBP/USD candle bundle (from checkpoint 16's tests/phase4_gbpusd_fixtures.py) is run through the real build_decision() once, then normalized twice -- once with live=True (LIVE) and once with live=False (REPLAY) -- at the identical analysis_timestamp, and the two resulting products are compared field-for-field on every named parity field plus a full structural-equality check with only the two intentional distinguishing fields (overlay_mode, meta.live) neutralized.",
+  "required_fields_verified": {
+    "h1_structure_bias": "PASS -- market.external_structure identical",
+    "dealing_range": "PASS -- forex.dealing_range identical (range_high/low, equilibrium, current_position_pct, premium_discount_state)",
+    "premium_discount": "PASS -- forex.dealing_range.premium_discount_state identical (covered above)",
+    "session": "PASS -- forex.session identical",
+    "kill_zone": "PASS -- forex.session (kill-zone name) identical (covered above)",
+    "m15_location": "PASS -- forex.entry_zone identical",
+    "liquidity_sweep": "PASS -- forex.liquidity_event identical",
+    "displacement": "PASS -- forex.displacement identical",
+    "choch_mss": "PASS -- forex.structure_confirmation identical",
+    "fvg_ownership": "PASS -- setup ownership identical (decision_owner_id/overlay_owner_id both ict_2022 in both modes)",
+    "order_block_ownership": "N/A -- no order-block engine exists for Forex (documented in checkpoint 10/23; nothing to diverge)",
+    "m5_confirmation": "PASS -- forex.m5_confirmation identical",
+    "setup_id": "PASS -- identical (deterministic stable_id, independent of live/replay framing)",
+    "lifecycle": "PASS -- setup.stage identical",
+    "direction": "PASS -- setup.direction and forex.direction identical",
+    "entry_stop": "PASS -- setup.entry/setup.stop identical",
+    "target_candidates_tp1_rr": "PASS -- setup.targets and setup.rr identical",
+    "blockers": "PASS -- decision.first_blocking_gate identical",
+    "overlays": "PASS on overlay *type* sequence; the previous-setup historical marker row is intentionally LIVE/PREVIOUS_SETUP-only by design (global_overlay_contract.py), never included in REPLAY -- confirmed as deliberate, not a defect, and excluded from the full-equality assertion accordingly",
+    "ownership": "PASS -- decision_owner_id/overlay_owner_id identical"
+  },
+  "full_structural_equality": "PASS -- test_only_the_intended_live_vs_replay_distinguishing_fields_differ: after neutralizing overlay_mode/meta.live and excluding the by-design historical-row overlay difference, the two products are exactly equal",
+  "no_lookahead": "PASS -- test_no_lookahead_a_truncated_gbpusd_history_cannot_see_future_candles: identical results at the same analysis_timestamp regardless of how much future M15/M5 history is appended to the frame (reconfirms checkpoint 7's guarantee against a fresh fixture)",
+  "tests": "tests/test_phase4_forex_replay_parity.py (3 tests, all passing)",
+  "checkpoint_22_result": "PASSED"
+}
