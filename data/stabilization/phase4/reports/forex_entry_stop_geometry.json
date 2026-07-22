@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-07-22T02:07:23.493512+00:00",
+  "section": "13 - STABILIZE FOREX ENTRY AND STOP GEOMETRY",
+  "method": "Verification via analysis/m5_execution_engine.py::build_m5_execution_plan (already mature, already has 6 dedicated tests) plus 5 new Phase 4 tests targeting the exact \u00a713 requirements.",
+  "entry_locking": {
+    "deterministic_across_repeated_evaluation": "PASS -- test_buy_entry_is_deterministic_across_repeated_evaluation",
+    "does_not_change_with_future_candles_appended": "PASS -- test_buy_entry_does_not_change_when_future_candles_are_appended",
+    "frontend_does_not_recalculate_it": "PASS by construction -- the frontend (Phase 3 generic overlay pipeline) only ever renders overlay.price as delivered; there is no frontend-side price computation anywhere in lib/overlays.ts or lib/chart/*"
+  },
+  "stop_geometry": {
+    "buy_stop_below_protected_structure": "PASS -- test_buy_stop_is_below_the_protected_execution_structure",
+    "sell_stop_above_protected_structure": "PASS -- test_sell_stop_is_above_the_protected_execution_structure",
+    "never_zero_distance_or_profitable_side": "PASS -- test_stop_direction_is_never_on_the_profitable_side"
+  },
+  "checkpoint_13_result": "PASSED"
+}

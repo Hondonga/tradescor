@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-07-22T02:07:23.493973+00:00",
+  "section": "15 - ACTIONABLE TRADE-PLAN INVARIANTS",
+  "method": "7 new Forex-native (GBP/USD, ict_2022 ownership) tests against the shared normalize_global_decision() boundary.",
+  "invariants_verified": {
+    "active_setup_null_implies_no_setup_specific_overlays": "PASS -- test_no_active_setup_means_no_actionable_overlays",
+    "entry_null_implies_stop_tp1_tp2_absent": "PASS -- test_entry_null_means_stop_and_targets_are_absent_from_actionable_overlays",
+    "tp1_null_implies_lifecycle_cannot_be_trade_ready": "PASS -- test_trade_ready_requires_tp1_or_lifecycle_cannot_be_trade_ready (produces STATE CONTRADICTION, not a silently-accepted TRADE_READY)",
+    "stale_data_implies_no_live_trade_ready": "PASS -- test_stale_data_makes_trade_plan_unavailable_even_with_complete_geometry",
+    "market_closed_implies_no_new_live_trade_ready": "PASS -- test_market_closed_makes_trade_plan_unavailable_even_with_complete_geometry",
+    "ownership_mismatch_implies_trade_plan_unavailable": "PASS -- test_ownership_mismatch_makes_trade_plan_unavailable",
+    "overlay_values_exactly_match_trade_plan_values": "PASS -- test_complete_ready_plan_overlay_values_exactly_equal_trade_plan_values (entry/stop/TP1/TP2 all cross-checked field-for-field)"
+  },
+  "checkpoint_15_result": "PASSED"
+}

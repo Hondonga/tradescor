@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-07-22T02:07:23.493966+00:00",
+  "section": "14 - STABILIZE FOREX TARGET SELECTION",
+  "method": "analysis/liquidity_target_engine.py::build_liquidity_targets already has 9 comprehensive existing tests (tests/test_liquidity_target_engine.py) covering exactly this checkpoint's requirements with asset_class='forex' fixtures. 5 new GBP/USD-symbol-explicit tests added rather than duplicating that coverage.",
+  "hierarchy": "M5/M15 swing candidates -> previous-day/week highs-lows -> previous-session highs-lows -> caller-supplied directional liquidity pool, clustered and scored on prominence+touches+timeframe_points+HTF-alignment+freshness+distance_realism+risk_reward",
+  "requirements_verified": {
+    "exists_at_decision_time": "PASS -- future-created levels rejected (test_gbpusd_future_created_level_is_rejected / pre-existing test_wrong_side_and_future_created_levels_are_rejected)",
+    "on_profitable_side": "PASS -- test_gbpusd_buy_target_is_above_entry / test_gbpusd_sell_target_is_below_entry / test_gbpusd_wrong_side_target_is_rejected",
+    "remains_unswept": "PASS -- pre-existing test_swept_and_already_reached_liquidity_is_rejected",
+    "satisfies_minimum_rr": "PASS -- pre-existing test_distant_tp2_cannot_hide_poor_nearest_target_reward (quality_gate blocks TP1 when nearest RR is poor)",
+    "not_forced_merely_to_complete_the_plan": "PASS -- test_gbpusd_no_valid_target_leaves_tp1_null_not_fabricated"
+  },
+  "when_no_target_passes": {
+    "remains_in_plan_validation": "PASS -- tp1 is None, no fabricated target ever appears",
+    "target_scope_mismatch_cannot_produce_a_tp_label": "PASS -- confirmed via the same rejection-reasons mechanism; a wrong-side/future/swept level never reaches selected_targets"
+  },
+  "checkpoint_14_result": "PASSED"
+}
