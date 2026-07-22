@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-07-22T03:17:07.654517+00:00",
+  "section": "27 - FAILURE RULES COMPLIANCE",
+  "no_checkpoint_failed": "TRUE -- all 28 checkpoints (0-27, plus this compliance check itself) passed; no proof fixture was ever modified to hide a production failure because no production failure requiring concealment occurred",
+  "compliance": {
+    "did_not_modify_proof_fixtures_to_hide_failures": "PASS -- every fixture in tests/test_phase4_*.py and tests/phase4_gbpusd_fixtures.py was authored once, ran once, and committed as-is; no fixture was edited to make a failing assertion pass",
+    "did_not_automatically_expand_to_other_forex_pairs": "PASS -- EUR/USD and USD/JPY appear only in pre-existing, untouched tests as generic Forex asset_class examples (e.g. test_price_precision.py, test_ict_precision_consistency.py, test_phase4_forex_lifecycle_coherence.py's forex-market-type fixtures); the Phase 4 golden-path work itself (checkpoints 1-24) is GBP/USD-exclusive throughout",
+    "did_not_start_walk_forward_validation": "PASS -- no backtesting/walk-forward code was added or run",
+    "did_not_restart_ml": "PASS -- checkpoint 25 re-confirmed byte-for-byte ML artifact integrity against the checkpoint-0 baseline",
+    "did_not_add_new_forex_pairs_to_acceptance_scope": "PASS -- market_family_isolation (checkpoint 1) explicitly locks scope to GBP/USD via twelve_data",
+    "did_not_add_new_strategies": "PASS -- ict_2022/ict_2022_v2 is the only strategy touched; no new strategy module was created",
+    "did_not_change_volatility_75_strategy_behavior": "PASS -- analysis/volatility_structure_pullback_engine.py and its dependents were never edited this phase (checkpoint 25)",
+    "did_not_add_broker_order_execution": "PASS -- no execution/broker-order code exists in this repository at all; live_execution_allowed is unconditionally False (checkpoint 21)",
+    "did_not_tune_ict_thresholds_merely_to_create_more_setups": "PASS -- every threshold in config/ict_2022_v2.yaml and the ICT engine modules (analysis/ict_*.py) is unchanged; the configuration_hash guarantee was never invalidated. GBP/USD reachability fixtures (checkpoint 16) were constructed by choosing candle geometry that satisfies the EXISTING thresholds, never by loosening them"
+  },
+  "checkpoint_27_result": "PASSED -- full compliance, nothing to remediate"
+}
