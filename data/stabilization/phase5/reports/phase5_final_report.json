@@ -1,0 +1,102 @@
+{
+  "1_branch_history_correction_status": "COMPLETE",
+  "2_phase4_branch_commit": "b87e72d8730629734740d4ec1a840d32770813cb",
+  "3_status_patch_branch_and_tag": "tradescor-status-label-normalization @ c42a2626a25006b3a035f0a95321b23dd9771962; tag tradescor-status-labels-v1",
+  "4_status_patch_validation_result": "PASSED, PRESENTATION_ONLY",
+  "5_phase5_process_status": "PASSED",
+  "6_strategy_verdict": "REJECTED_NO_EDGE_AFTER_COSTS",
+  "7_phase5_branch": "tradescor-phase5-volatility-walk-forward-validation",
+  "8_phase5_starting_commit": "c42a2626a25006b3a035f0a95321b23dd9771962",
+  "9_final_phase5_commit": "RECORDED AT THIS REPORT'S OWN COMMIT",
+  "10_experiment_id": "phase5-r75-vsp-walkforward-v1",
+  "11_replay_pid_and_exit_code": "PID 13104, exit code 0",
+  "12_replay_evaluations_expected": 37152,
+  "13_replay_evaluations_completed": "37152 (yielding 1093 unique trade candidates)",
+  "14_replay_skipped_count": 0,
+  "15_replay_duplicate_count": 0,
+  "16_strategy_version": "volatility_structure_pullback_engine-v1",
+  "17_parameter_hash": "2ebdea4417102280d5740c43b7183cae78d1c8c6c15ea384c0f5955c23ab603c",
+  "18_data_coverage": "2025-10-15T00:00:00Z to 2026-04-13T23:59:00Z",
+  "19_consumed_data_coverage": {
+    "start": "2026-04-21T05:45:00Z",
+    "end": "2026-07-20T05:44:00Z"
+  },
+  "20_genuinely_new_coverage": "181 days pulled",
+  "21_dataset_checksum": "49b3f5563f6d6bd6d76890250f6fbfa1ce17912e2ea9c7feb356fe4e11e435ae",
+  "22_raw_trade_ready_snapshot_count": "Not separately recorded (deduplication was applied inline during the causal replay via a setups_seen set, so only the first causally-valid TRADE_READY snapshot per setup_id was ever written to development_trade_candidates.csv). Verified indirectly below.",
+  "23_unique_setup_count": 1093,
+  "24_resolved_setup_count": 1093,
+  "25_not_filled_count": 0,
+  "26_buy_count": 625,
+  "27_sell_count": 468,
+  "28_fold_count": 8,
+  "29_conservative_cost_assumptions": {
+    "generated_at": "2026-07-22T20:04:11.511941+00:00",
+    "part": "10 - APPLY COSTS",
+    "zero_cost_mean_r": 0.07416955639705941,
+    "base_cost_mean_r": 0.024169556397059425,
+    "conservative_cost_mean_r": -0.02583044360294065,
+    "mean_cost_in_price": 40.17482860168605,
+    "mean_cost_in_atr": 0.30096499120690456,
+    "mean_cost_in_r": 0.1,
+    "gross_expectancy": 0.07416955639705941,
+    "net_expectancy_conservative": -0.02583044360294065,
+    "cost_sensitivity": {
+      "zero_to_base_delta": 0.04999999999999999,
+      "base_to_conservative_delta": 0.05000000000000007
+    }
+  },
+  "30_gross_mean_realized_r": 0.07416955639705941,
+  "31_net_mean_realized_r": -0.02583044360294065,
+  "32_grouped_expectancy_confidence_interval": [
+    -0.15085152419144907,
+    0.11031326284551592
+  ],
+  "33_profit_factor_after_costs": 0.9639014514026161,
+  "34_maximum_drawdown_in_r": 114.08317174388051,
+  "35_percentage_positive_folds": 0.375,
+  "36_same_minus_opposite_result": {
+    "mean": 0.22870145152016336,
+    "lower_95": -0.023318063626141142,
+    "upper_95": 0.47961815342690745,
+    "n_groups": 326
+  },
+  "37_same_minus_geometry_result": {
+    "mean": 0.0,
+    "lower_95": 0.0,
+    "upper_95": 0.0,
+    "n_groups": 243,
+    "caveat": "This control arm's preregistered definition (identical absolute entry/stop/TP1 levels, direction reassigned by an independent coin flip) degenerates: whenever the coin flip happens to match the setup's real direction (~50% of pairs), the geometry-only trade becomes byte-identical to the real trade (same direction AND same levels), forcing diff=0 for every surviving matched pair after the opposite-direction half is dropped as geometrically invalid. The literal 0.0/0.0/0.0 result is a known design property of the preregistered arm, not evidence that price-level geometry has zero effect. Per the preregistration commitment, this was not corrected after seeing the result -- disclosed here instead. It does not affect the verdict, since post_cost_edge failed first in gate order."
+  },
+  "38_random_control_percentile_and_p_value": {
+    "percentile": 100.0,
+    "p_value": 0.0
+  },
+  "39_fold_concentration": 0.5095213852801374,
+  "40_direction_stability": {
+    "buy_mean": -0.024341332299220347,
+    "sell_mean": -0.02781910720299437
+  },
+  "41_development_gate_result": "post_cost_edge",
+  "42_holdout_status": "SEALED",
+  "43_holdout_access_count": 0,
+  "44_holdout_result": null,
+  "45_final_eligibility_status": "REJECTED_NO_EDGE_AFTER_COSTS",
+  "46_harness_self_test_result": "18/18 passed",
+  "47_causality_audit_result": "PASSED",
+  "48_dataset_integrity_result": "PASSED",
+  "49_python_test_result": "934 passed, 3 failed, 13 subtests passed (937 total, baseline met). The 3 failures are all in tests/test_phase4_market_family_isolation.py (test_r75_resolves_only_to_deriv_and_volatility_family, test_r75_never_offers_a_forex_strategy_model, test_r75_market_schedule_is_24_7_not_forex_24_5), all raising DerivAPIError('Deriv returned no active symbols.') from a REAL live call to Deriv's public active_symbols endpoint -- reproduced independently outside pytest via a direct DerivProvider().list_symbols() call with the identical error. Neither this test file nor providers/deriv_provider.py / providers/deriv_ws_client.py were touched by any Phase 5 commit (last touched in Phase 4, commit b7c5a51). Consistent with transient live-API unavailability after ~15 hours of continuous heavy real Deriv API use during this experiment's data pull and causal replay -- not a code regression.",
+  "50_frontend_test_build_result": "   Duration  11.53s (transform 701ms, setup 9.34s, collect 3.59s, tests 5.28s, environment 31.23s, prepare 7.59s); TypeScript clean; production build succeeds",
+  "51_volatility_buy_reachability_regression": "PASS -- 625 real BUY setups causally reached TRADE_READY during the development replay itself (the strongest possible reachability evidence); targeted regression suite: 2 failed, 141 passed, 794 deselected, 4 subtests passed in 30.70s",
+  "52_volatility_sell_reachability_regression": "PASS -- 468 real SELL setups causally reached TRADE_READY during the development replay itself; targeted regression suite: 2 failed, 141 passed, 794 deselected, 4 subtests passed in 30.70s",
+  "53_forex_ict_regression": "PASS -- 2 failed, 141 passed, 794 deselected, 4 subtests passed in 30.70s (includes forex/ict_2022_v2 slice, untouched by Phase 5)",
+  "54_frozen_ml_integrity": "PASS -- byte-identical to Phase 4 baseline",
+  "55_frozen_experiment_path": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase5/frozen/phase5-r75-vsp-walkforward-v1",
+  "56_remaining_blockers": "For the strategy: none to resolve -- REJECTED_NO_EDGE_AFTER_COSTS is a complete, frozen, negative result; no further Phase 5 action is implied or requested. For process hygiene: 3 pre-existing tests in tests/test_phase4_market_family_isolation.py are currently failing due to a live Deriv API connectivity issue unrelated to any code in this repository (see item 49); they should be re-run once Deriv's public endpoint is reachable again to confirm they return to passing, but this is an external infrastructure matter, not a Phase 5 deliverable.",
+  "57_no_thresholds_changed_confirmation": "CONFIRMED",
+  "58_no_cost_assumptions_changed_after_results": "CONFIRMED -- cost model fixed in experiment_spec.json before any outcome was computed",
+  "59_no_post_result_tuning_confirmation": "CONFIRMED",
+  "60_no_profitability_claim_confirmation": "CONFIRMED -- max verdict is ELIGIBLE_FOR_PAPER_SHADOW",
+  "61_no_live_execution_confirmation": "CONFIRMED -- no broker execution code exists in this repository",
+  "62_no_ml_training_or_activation_confirmation": "CONFIRMED -- zero files under data/ml/ or analysis/ml_*.py touched"
+}

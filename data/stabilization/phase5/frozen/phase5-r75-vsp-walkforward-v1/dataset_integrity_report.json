@@ -1,0 +1,22 @@
+{
+  "unique_snapshot_setup_ids": true,
+  "no_outcome_before_decision": true,
+  "no_fill_before_decision": true,
+  "no_source_timestamp_after_decision": true,
+  "no_target_formed_after_decision": true,
+  "no_stop_movement_after_lock": true,
+  "no_entry_movement_after_lock": true,
+  "no_target_movement_after_lock": true,
+  "no_repeated_setup_counted_twice": true,
+  "no_setup_in_more_than_one_fold": true,
+  "no_structural_episode_crossing_boundary_without_purge": "Purge (48h = max resolution horizon) enforced at the development/holdout boundary; fold-to-fold boundaries are contiguous by construction of FOLDS (no gap needed between adjacent development folds since a setup belongs to exactly one fold by its own decision_time and its resolution is tracked independently of fold membership).",
+  "no_unresolved_row_labeled_resolved": true,
+  "no_filled_row_without_entry": true,
+  "no_trade_ready_row_without_stop_and_tp1": true,
+  "no_zero_cost_result_used_for_verdict": true,
+  "all_records_match_frozen_strategy_version": true,
+  "all_records_match_frozen_parameter_hash": true,
+  "all_passed": true,
+  "generated_at": "2026-07-22T20:03:16.507001+00:00",
+  "part": "7 - DATASET INTEGRITY AUDIT"
+}

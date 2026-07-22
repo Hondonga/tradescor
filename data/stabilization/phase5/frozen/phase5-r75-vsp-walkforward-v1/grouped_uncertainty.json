@@ -1,0 +1,55 @@
+{
+  "generated_at": "2026-07-22T20:04:14.012538+00:00",
+  "part": "11 - GROUPED UNCERTAINTY",
+  "grouping_units": [
+    "structural_episode_id",
+    "trading_day",
+    "fold"
+  ],
+  "same_direction_expectancy_ci": {
+    "mean": -0.02583044360294065,
+    "lower_95": -0.15085152419144907,
+    "upper_95": 0.11031326284551592,
+    "n_groups": 326,
+    "profit_factor": 0.9639014514026161,
+    "max_drawdown_r": 114.08317174388051
+  },
+  "same_minus_opposite_ci": {
+    "mean": 0.22870145152016336,
+    "lower_95": -0.023318063626141142,
+    "upper_95": 0.47961815342690745,
+    "n_groups": 326
+  },
+  "same_minus_geometry_ci": {
+    "mean": 0.0,
+    "lower_95": 0.0,
+    "upper_95": 0.0,
+    "n_groups": 243
+  },
+  "random_control_percentile": 100.0,
+  "random_control_empirical_p_value": 0.0,
+  "fold_level_expectancy_distribution": {
+    "1": 14.440737995463422,
+    "2": -1.2750115290077324,
+    "3": -14.380663152789232,
+    "4": 30.45211460852411,
+    "5": -18.51355952827942,
+    "6": -16.401111510898083,
+    "7": 14.873264164166144,
+    "8": -37.42844590519337
+  },
+  "buy_expectancy_ci": {
+    "mean": -0.024341332299220347,
+    "lower_95": -0.19797944439752208,
+    "upper_95": 0.16091213318600378,
+    "n_groups": 178
+  },
+  "sell_expectancy_ci": {
+    "mean": -0.02781910720299437,
+    "lower_95": -0.22369162265096723,
+    "upper_95": 0.18722481143843936,
+    "n_groups": 148
+  },
+  "bootstrap_seed": 20260722,
+  "bootstrap_resamples": 2000
+}

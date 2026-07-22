@@ -1,0 +1,37 @@
+
+ RUN  v3.2.7 /Users/user/Documents/Codex/ tradescor/ict_flask_scanner/frontend
+
+ ✓ src/components/chart/overlay-tooltip.test.tsx (4 tests) 233ms
+ ✓ src/components/chart/chart-event-markers.test.tsx (4 tests) 287ms
+ ✓ src/components/chart/chart-price-tags.test.tsx (6 tests) 671ms
+ ✓ src/components/chart/drawing-inspector.test.tsx (9 tests) 553ms
+ ✓ src/components/chart/chart-toolbar.test.tsx (9 tests) 843ms
+   ✓ ChartToolbar > shows a density mode selector and calls onDensityModeChange when a mode is chosen (§4/§24: keyboard-accessible, no mouse required)  350ms
+ ✓ src/components/terminal/opportunity-queue.test.tsx (9 tests) 541ms
+stderr | src/components/terminal/decision-rail.test.tsx > DecisionRail section order (Phase 3 §11) > omits WHAT IS MISSING once TRADE_READY, and shows the trade plan instead
+Each child in a list should have a unique "key" prop.
+
+Check the render method of `dl`. It was passed a child from TradeReadyPlan. See https://react.dev/link/warning-keys for more information.
+
+ ✓ src/components/terminal/decision-rail.test.tsx (18 tests) 1581ms
+   ✓ DecisionRail section order (Phase 3 §11) > renders MARKET STATE, ACTIVE SETUP, WHAT IS MISSING, NEXT ACTION and DETAILS in the required order for a developing setup  523ms
+ ✓ src/components/chart/chart-setup-summary.test.tsx (6 tests) 301ms
+ ✓ src/components/chart/chart-zone-layer.test.tsx (4 tests) 468ms
+   ✓ ChartZoneLayer > strips a duplicated DEVELOPING prefix from the on-chart label  379ms
+ ✓ src/store/terminal-store.test.ts (13 tests) 63ms
+ ✓ src/lib/overlays.test.ts (14 tests) 211ms
+ ✓ src/lib/status-labels.test.ts (10 tests) 12ms
+ ✓ src/lib/overlay-layout.test.ts (6 tests) 62ms
+ ✓ src/lib/overlay-density.test.ts (7 tests) 55ms
+ ✓ src/lib/chart/setupFocus.test.ts (12 tests) 42ms
+ ✓ src/lib/chart/priceScaleRange.test.ts (5 tests) 7ms
+ ✓ src/lib/overlay-style-registry.test.ts (11 tests) 59ms
+ ✓ src/lib/overlay-collision.test.ts (5 tests) 20ms
+ ✓ src/lib/chart/overlayPriority.test.ts (10 tests) 47ms
+ ✓ src/lib/overlay-labels.test.ts (12 tests) 57ms
+
+ Test Files  20 passed (20)
+      Tests  174 passed (174)
+   Start at  00:54:05
+   Duration  15.07s (transform 1.11s, setup 12.57s, collect 4.93s, tests 6.11s, environment 40.28s, prepare 9.86s)
+

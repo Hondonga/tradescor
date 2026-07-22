@@ -1,0 +1,55 @@
+{
+  "generated_at": "2026-07-22T04:47:00Z",
+  "part": "F - FREEZE THE STRATEGY",
+  "entry_point": "analysis.volatility_structure_pullback_engine.evaluate_volatility_structure_pullback",
+  "entry_point_resolution_note": "Two functions share the name evaluate_volatility_structure_pullback in this repository. analysis/derived_engine.py imports analysis.volatility_structure_pullback_engine's version aliased as evaluate_focused_volatility_pullback and calls it at line 52 whenever family=='VOLATILITY' and requested_strategy is in {auto, smc, smc_auto, volatility_smc, volatility_structure_pullback} -- this is the live path for R_75 under the default Auto strategy and is therefore the one frozen and validated here. strategies/derived/volatility_structure_pullback.py's same-named function is only reachable via non-standard explicit requested_strategy values that fall through every earlier branch in derived_engine.py and is not exercised by the standard R_75/Auto golden path; it is out of scope for this experiment.",
+  "strategy_id": "volatility_structure_pullback",
+  "engine_version": "volatility_structure_pullback_engine-v1",
+  "engine_version_source": "Matches the engine_version recorded in data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1/manifest.json, confirming this is the same engine identity already used for prior ML dataset generation.",
+  "lifecycle_version": "volatility_structure_pullback_engine-v1 (lifecycle stages are defined inline in _stage()/_status()/_blocker()/_next() within the same frozen file; no separate lifecycle module exists for this strategy)",
+  "target_engine_version": "analysis.smc.smc_target_engine (evaluate_structural_targets) as pinned by source_sha256 below",
+  "replay_version": "phase5-causal-replay-v1 (new harness built for this experiment; see analysis/replay_version below)",
+  "source_commit": "c85e56ff6353bc0a1d50e72ee1ab762283973c0b",
+  "source_files": {
+    "analysis/volatility_structure_pullback_engine.py": "82135654582252404d2e25db93812e545494452bb7706eb4ee8f525a080cda49",
+    "analysis/smc/smc_swing_engine.py": "89ead9c361d1f99f26e0a88340fbd4ed22629796fe6ad94aa2ffabe297025144",
+    "analysis/smc/smc_target_engine.py": "f3bdd623996f18facbc826c33b0f57ada7eecb6d6b4d0841a83e2161cb818b5c",
+    "analysis/smc/smc_invariants.py": "9979d70b3e7ddf8077b5dd09e356cfc0f0838a301ab0c75977c50d14b84872e7",
+    "analysis/global_overlay_contract.py": "03dae843f38e35dcfa0262feecc262f2bb03a3bd45cfc8529fc7518110897002",
+    "analysis/blocker_translations.py": "f1a6fca7a77ae09357fe40c43768a08dbc21c2bddd685517f5f4af9f63e20d10"
+  },
+  "parameters": {
+    "mode": "balanced",
+    "swing_prominence_atr": 0.15,
+    "displacement_body_atr": 0.55,
+    "displacement_range_atr": 0.75,
+    "structure_break_buffer_atr": 0.02,
+    "pullback_minimum": 0.18,
+    "pullback_maximum": 0.78,
+    "entry_chase_risk": 1.0,
+    "minimum_rr": 1.5,
+    "maximum_range_position": 0.75,
+    "range_position_window": 40,
+    "pullback_zone_max_width_atr": 8.0
+  },
+  "parameter_hash": "2ebdea4417102280d5740c43b7183cae78d1c8c6c15ea384c0f5955c23ab603c",
+  "parameter_hash_method": "sha256(json.dumps(DEFAULTS, sort_keys=True))",
+  "matches_ml_dataset_config_hash_note": "The ML dataset's recorded config_hash (b01471f25a7f63e300a2c7f92e68fa5f141cc4880b1d8353935faff5f8fa4b98) was computed over a different, wider job config dict (period_days, chronological_block_days, readiness_minimums, etc., not just the engine DEFAULTS), so it is not directly comparable to parameter_hash above. What matters for this freeze is that analysis/volatility_structure_pullback_engine.py's source SHA-256 is recorded here and has not changed since Phase 2, Phase 3, Phase 4, or the status-label patch -- verified by git diff below.",
+  "unchanged_since_prior_phases": {
+    "method": "git diff <phase2_stable>..<phase5_working_base> -- analysis/volatility_structure_pullback_engine.py analysis/smc/smc_swing_engine.py analysis/smc/smc_target_engine.py analysis/smc/smc_invariants.py",
+    "result": "EMPTY (see verification command output stored alongside this file's generation log) -- zero changes to any frozen strategy source file across Phase 2 -> Phase 5"
+  },
+  "cost_model_version": "phase5-conservative-cost-v1 (defined in preregistration/experiment_spec.json; no cost model existed previously for this strategy since it is paper-analysis-only)",
+  "frozen_rules_not_to_change_after_this_point": [
+    "H1 structure rules (_persistent_structure)",
+    "M15 pullback rules (_pullback_location)",
+    "M5 confirmation rules (_execution)",
+    "entry rules (_execution / _geometry_traces)",
+    "stop rules (_execution / _geometry_traces)",
+    "target hierarchy (analysis.smc.smc_target_engine.evaluate_structural_targets)",
+    "reward-to-risk requirement (minimum_rr=1.5)",
+    "chase rule (entry_chase_risk=1.0)",
+    "lifecycle rules (_stage)",
+    "expiration rules (interaction/freshness handling inside analysis.global_overlay_contract)"
+  ]
+}

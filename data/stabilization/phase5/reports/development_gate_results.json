@@ -1,0 +1,118 @@
+{
+  "generated_at": "2026-07-22T20:04:14.026126+00:00",
+  "part": "13 - DEVELOPMENT GATES",
+  "gates": [
+    {
+      "gate": "causality_audit",
+      "passed": true,
+      "required": "0 violations",
+      "observed": "0 violations",
+      "details": {}
+    },
+    {
+      "gate": "new_history_sufficiency",
+      "passed": true,
+      "required": ">=8 folds worth of genuinely new data",
+      "observed": "8 folds available",
+      "details": {}
+    },
+    {
+      "gate": "sample_sufficiency",
+      "passed": true,
+      "required": "total>=300, buy>=100, sell>=100, folds>=8",
+      "observed": "total=1093, buy=625, sell=468, folds=8",
+      "details": {}
+    },
+    {
+      "gate": "post_cost_edge",
+      "passed": false,
+      "required": "lower_95>0, mean>0, profit_factor>1.0, drawdown<=20R",
+      "observed": {
+        "mean": -0.02583044360294065,
+        "lower_95": -0.15085152419144907,
+        "upper_95": 0.11031326284551592,
+        "n_groups": 326,
+        "profit_factor": 0.9639014514026161,
+        "max_drawdown_r": 114.08317174388051
+      },
+      "details": {}
+    },
+    {
+      "gate": "directional_information",
+      "passed": false,
+      "required": "same-minus-opposite lower_95 > 0",
+      "observed": {
+        "mean": 0.22870145152016336,
+        "lower_95": -0.023318063626141142,
+        "upper_95": 0.47961815342690745,
+        "n_groups": 326
+      },
+      "details": {}
+    },
+    {
+      "gate": "geometry_attribution",
+      "passed": false,
+      "required": "same-minus-geometry lower_95 > 0",
+      "observed": {
+        "mean": 0.0,
+        "lower_95": 0.0,
+        "upper_95": 0.0,
+        "n_groups": 243
+      },
+      "details": {}
+    },
+    {
+      "gate": "random_direction_control",
+      "passed": true,
+      "required": "percentile>=95, p<=0.05",
+      "observed": {
+        "percentile": 100.0,
+        "p_value": 0.0
+      },
+      "details": {}
+    },
+    {
+      "gate": "fold_stability",
+      "passed": false,
+      "required": "positive_fraction>=0.60, no fold >60% of profit",
+      "observed": {
+        "positive_fold_fraction": 0.375,
+        "fold_concentration": 0.5095213852801374
+      },
+      "details": {}
+    },
+    {
+      "gate": "direction_stability",
+      "passed": true,
+      "required": "BUY and SELL both reported, neither removed",
+      "observed": {
+        "buy_mean": -0.024341332299220347,
+        "sell_mean": -0.02781910720299437
+      },
+      "details": {}
+    },
+    {
+      "gate": "drawdown",
+      "passed": false,
+      "required": "<=20R",
+      "observed": 114.08317174388051,
+      "details": {}
+    }
+  ],
+  "gate_evaluation_order": [
+    "causality_audit",
+    "new_history_sufficiency",
+    "sample_sufficiency",
+    "post_cost_edge",
+    "directional_information",
+    "geometry_attribution",
+    "random_direction_control",
+    "fold_stability",
+    "direction_stability",
+    "drawdown"
+  ],
+  "all_gates_passed": false,
+  "first_failing_gate": "post_cost_edge",
+  "development_verdict_if_rejected": "REJECTED_NO_EDGE_AFTER_COSTS",
+  "holdout_may_be_opened": false
+}

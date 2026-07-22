@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-07-22T20:04:14.027019+00:00",
+  "part": "14 - HOLDOUT ACCESS RULE",
+  "experiment_id": "phase5-r75-vsp-walkforward-v1",
+  "development_gates_passed": false,
+  "holdout_status_before": "SEALED",
+  "access_granted": false,
+  "opened_at": null
+}

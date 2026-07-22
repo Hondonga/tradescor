@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-07-22T20:02:21.415408+00:00",
+  "part": "3 - VERIFY REPLAY COMPLETENESS",
+  "expected_decision_points": 37152,
+  "actual_candidates_recorded": 1093,
+  "raw_trade_ready_snapshot_count": null,
+  "first_decision_timestamp": "2025-11-01 02:30:00+00:00",
+  "final_decision_timestamp": "2026-03-09 10:25:00+00:00",
+  "skipped_decision_points": 0,
+  "duplicated_decision_points": 0,
+  "failed_evaluations": 0,
+  "recoverable_exceptions": 0,
+  "unrecoverable_exceptions": 0,
+  "elapsed_runtime_seconds": 54930.188194036484,
+  "exit_code": 0,
+  "chronologically_sorted": true,
+  "one_snapshot_max_per_decision_timestamp": true,
+  "all_expected_decision_times_accounted_for": true
+}

@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-07-22T20:04:11.511941+00:00",
+  "part": "10 - APPLY COSTS",
+  "zero_cost_mean_r": 0.07416955639705941,
+  "base_cost_mean_r": 0.024169556397059425,
+  "conservative_cost_mean_r": -0.02583044360294065,
+  "mean_cost_in_price": 40.17482860168605,
+  "mean_cost_in_atr": 0.30096499120690456,
+  "mean_cost_in_r": 0.1,
+  "gross_expectancy": 0.07416955639705941,
+  "net_expectancy_conservative": -0.02583044360294065,
+  "cost_sensitivity": {
+    "zero_to_base_delta": 0.04999999999999999,
+    "base_to_conservative_delta": 0.05000000000000007
+  }
+}

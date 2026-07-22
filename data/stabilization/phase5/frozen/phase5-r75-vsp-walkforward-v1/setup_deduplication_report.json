@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-07-22T20:02:21.422964+00:00",
+  "part": "5 - DEDUPLICATE SETUPS CORRECTLY",
+  "raw_trade_ready_snapshot_count": "Not separately recorded (deduplication was applied inline during the causal replay via a setups_seen set, so only the first causally-valid TRADE_READY snapshot per setup_id was ever written to development_trade_candidates.csv). Verified indirectly below.",
+  "unique_setup_count": 1093,
+  "row_count": 1093,
+  "repeated_snapshot_count_in_output": 0,
+  "deduplicated_candidate_count": 1093,
+  "setup_id_is_stable": true,
+  "entry_stop_direction_confirmed_at_locked": "Entry/stop/direction are read once from the first trade_ready snapshot and never re-read from a later snapshot of the same setup_id -- confirmed by the replay's `if ... and setup_id not in setups_seen` guard.",
+  "ownership_violations": 0,
+  "lock_violations": 0,
+  "passed": true
+}

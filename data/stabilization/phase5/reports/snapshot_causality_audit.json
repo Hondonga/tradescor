@@ -1,0 +1,12 @@
+{
+  "generated_at": "2026-07-22T20:02:21.421525+00:00",
+  "part": "4 - VERIFY SNAPSHOT CAUSALITY",
+  "total_snapshots_checked": 1093,
+  "violations_found": 0,
+  "violation_setup_ids": [],
+  "rule": "max_source_time <= decision_time",
+  "h1_m15_m5_source_completeness": "By construction: trailing_slice() in phase5_causal_replay.py selects only rows with time < decision_time via np.searchsorted, and every source frame (H1/M15/M5) is built from the same production _resample_completed() aggregation, which only emits fully-closed candle buckets.",
+  "no_future_swing_target_fvg_structure_used": "By construction: the frozen engine (analysis/volatility_structure_pullback_engine.py) computes swings/structure/targets purely as a function of its candles_by_timeframe argument, which contains only the causally-sliced trailing window; no other data source is available to it at call time.",
+  "no_result_field_in_snapshot": "Confirmed: development_trade_candidates.csv columns are setup_id, decision_time, max_source_time, direction, entry, stop, tp1, tp1_rr, tp2, m5_index_at_entry only -- no outcome/resolution field exists at snapshot-capture time; resolution happens in a separate later pass (Step 3) that always reads forward from m5_index_at_entry.",
+  "passed": true
+}

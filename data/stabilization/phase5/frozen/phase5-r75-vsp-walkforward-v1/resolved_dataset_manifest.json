@@ -1,0 +1,12 @@
+{
+  "generated_at": "2026-07-22T20:03:16.495414+00:00",
+  "part": "6 - RESOLVE EVERY UNIQUE SETUP",
+  "row_count": 1093,
+  "outcome_counts": {
+    "STOP": 710,
+    "TP1": 372,
+    "TIME_LIMIT": 11
+  },
+  "csv_path": "/Users/user/Documents/Codex/ tradescor/ict_flask_scanner/data/stabilization/phase5/data/resolved_setups.csv",
+  "csv_sha256": "49b3f5563f6d6bd6d76890250f6fbfa1ce17912e2ea9c7feb356fe4e11e435ae"
+}

@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-07-22T20:04:11.511634+00:00",
+  "part": "9 - MATCHED CONTROLS",
+  "event_counts": {
+    "arm1_same_direction": 1093,
+    "arm2_paired_opposite": 1093,
+    "arm3_geometry_only": 1093,
+    "arm4_permutations": 500
+  },
+  "event_counts_match": true,
+  "shared_fields": [
+    "setup_id",
+    "decision_time",
+    "atr_at_decision_time",
+    "cost_model",
+    "maximum_resolution_horizon",
+    "resolution_policy",
+    "grouping_units"
+  ],
+  "random_permutation_count": 500,
+  "random_permutation_seeds": "1..500 deterministic"
+}

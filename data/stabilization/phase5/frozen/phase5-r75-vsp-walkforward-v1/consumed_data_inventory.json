@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-07-22T04:40:00Z",
+  "part": "G - INVENTORY CONSUMED DATA",
+  "method": "Searched data/ml/datasets/*/manifest.json for recorded real-Deriv-history windows, grepped all Phase 1-4 stabilization reports for date ranges, and inspected every script that could plausibly have consumed a fixed real-historical R_75 window (validation/volatility75_frequency_audit.py, analysis/volatility_latest_setup_search.py, validation/strategy_reachability_fixtures.py).",
+  "consumed_windows": [
+    {
+      "id": "ml-r75-f4c52d93c7a8dc3e95f1",
+      "purpose": "ML dataset generation (training/validation/test split)",
+      "start": "2026-04-21T05:45:00Z",
+      "end": "2026-07-20T05:44:00Z",
+      "days": 90,
+      "source": "real_deriv_public_m1",
+      "checksum": "737b02ea7c98fa68131920cc0fb6f5b438a8504dc2898aea14c1ce4c0b178b23",
+      "engine_version_recorded": "volatility_structure_pullback_engine-v1",
+      "splits": {
+        "train": {"start": "2026-04-22T15:00:00Z", "end": "2026-06-14T22:10:00Z", "rows": 1466},
+        "validation": {"start": "2026-06-15T05:00:00Z", "end": "2026-07-02T22:50:00Z", "rows": 490},
+        "test": {"start": "2026-07-03T05:15:00Z", "end": "2026-07-20T04:00:00Z", "rows": 475, "untouched_note": "recorded 'untouched: true' at dataset-build time; test rows were later inspected as part of Phase 2/3 ML evaluation and are treated here as CONSUMED_FINAL_TEST per the known status supplied for this milestone"}
+      },
+      "final_test_status": "CONSUMED_FINAL_TEST",
+      "rejected_model_trained_on_this_dataset": {
+        "model_id": "ml-run-610209ec3d9146ae",
+        "status": "REJECTED_POOR_CALIBRATION"
+      }
+    },
+    {
+      "id": "ml-r75-7158f2dfdb1e03ecdc1f",
+      "purpose": "Small ML smoke/validation dataset",
+      "start": "2026-07-19T05:30:00Z",
+      "end": "2026-07-20T05:30:00Z",
+      "days": 1,
+      "note": "Entirely contained within the ml-r75-f4c52d93c7a8dc3e95f1 window above; no additional calendar coverage consumed."
+    }
+  ],
+  "non_consuming_sources_checked": {
+    "validation/strategy_reachability_fixtures.py": "Uses hand-crafted synthetic OHLC (sine-wave-based _crafted() candles), never real Deriv history. Does not consume any calendar window.",
+    "validation/volatility75_frequency_audit.py": "A reusable causal chronological-audit SCRIPT/tool (30-day event-driven replay), not itself a stored dataset. No persisted report or manifest was found anywhere in the repository recording that it has ever been run against a specific real-historical window and its result retained. Treated as an available tool, not a consumed dataset. Not reused for Phase 5's own causal replay regardless (see preregistration: Phase 5 calls the full frozen evaluate_volatility_structure_pullback() at every decision point for maximum fidelity, rather than this script's internal-helper-based reimplementation).",
+    "analysis/volatility_latest_setup_search.py": "Backs the live 'Find latest valid setup' Workspace feature (30/90 trailing days from 'now' at click-time). This is a live production feature, not a frozen research artifact -- no fixed window is persisted or reused across invocations, so it is not treated as 'consumed' in the Part G sense."
+  },
+  "manual_historical_review": "No record of any manual chart-by-chart historical review of R_75 was found in any Phase 1-4 report.",
+  "conclusion": {
+    "consumed_real_calendar_window": {
+      "start": "2026-04-21T05:45:00Z",
+      "end": "2026-07-20T05:44:00Z"
+    },
+    "labeling_rule_applied": "Any Phase 5 data window overlapping [2026-04-21T05:45Z, 2026-07-20T05:44Z], or within a 7-day purge/embargo margin of it, is treated as consumed and excluded from Phase 5's development and holdout sets. Data outside this window (and its embargo margin) that has never been fetched, inspected, or stored anywhere in this repository is treated as genuinely new."
+  }
+}

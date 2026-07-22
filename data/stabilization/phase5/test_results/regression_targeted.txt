@@ -1,4 +1,68 @@
 ........................................................................ [ 50%]
-.................................................................... [ 97%]
+.............................................FF..................... [ 97%]
 ...                                                                      [100%]
-143 passed, 794 deselected, 4 subtests passed in 31.24s
+=================================== FAILURES ===================================
+_________________ test_r75_never_offers_a_forex_strategy_model _________________
+
+    def test_r75_never_offers_a_forex_strategy_model():
+>       row = _r75_row()
+              ^^^^^^^^^^
+
+tests/test_phase4_market_family_isolation.py:58: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_phase4_market_family_isolation.py:23: in _r75_row
+    return next(r for r in derived_registry(DerivProvider()) if r["provider_symbol"] == "R_75")
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+providers/market_registry.py:26: in derived_registry
+    for source in provider.list_symbols():
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <providers.deriv_provider.DerivProvider object at 0x1078f4830>
+
+    def list_symbols(self):
+        cached_at,rows=self._symbol_cache
+        if rows and time.time()-cached_at<self.SYMBOL_TTL:return [dict(row) for row in rows]
+        runtime_health.connection("LOADING_SYMBOLS");payload=self.client.request({"active_symbols":"brief","product_type":"basic"}); raw=payload.get("active_symbols") or []
+        if not raw:
+            if rows:return [dict(row) for row in rows]
+>           raise DerivAPIError("SYMBOL_UNAVAILABLE","Deriv returned no active symbols.")
+E           providers.deriv_ws_client.DerivAPIError: Deriv returned no active symbols.
+
+providers/deriv_provider.py:95: DerivAPIError
+_______________ test_r75_market_schedule_is_24_7_not_forex_24_5 ________________
+
+    def test_r75_market_schedule_is_24_7_not_forex_24_5():
+        # A derived synthetic index must never inherit Forex weekend closure --
+        # confirmed structurally via the registry's own market_schedule field,
+        # independent of whatever session/market-hours logic Phase 4 adds for
+        # Forex specifically.
+>       assert _r75_row()["market_schedule"] == "24_7"
+               ^^^^^^^^^^
+
+tests/test_phase4_market_family_isolation.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_phase4_market_family_isolation.py:23: in _r75_row
+    return next(r for r in derived_registry(DerivProvider()) if r["provider_symbol"] == "R_75")
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+providers/market_registry.py:26: in derived_registry
+    for source in provider.list_symbols():
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <providers.deriv_provider.DerivProvider object at 0x11af1bc50>
+
+    def list_symbols(self):
+        cached_at,rows=self._symbol_cache
+        if rows and time.time()-cached_at<self.SYMBOL_TTL:return [dict(row) for row in rows]
+        runtime_health.connection("LOADING_SYMBOLS");payload=self.client.request({"active_symbols":"brief","product_type":"basic"}); raw=payload.get("active_symbols") or []
+        if not raw:
+            if rows:return [dict(row) for row in rows]
+>           raise DerivAPIError("SYMBOL_UNAVAILABLE","Deriv returned no active symbols.")
+E           providers.deriv_ws_client.DerivAPIError: Deriv returned no active symbols.
+
+providers/deriv_provider.py:95: DerivAPIError
+=========================== short test summary info ============================
+FAILED tests/test_phase4_market_family_isolation.py::test_r75_never_offers_a_forex_strategy_model
+FAILED tests/test_phase4_market_family_isolation.py::test_r75_market_schedule_is_24_7_not_forex_24_5
+2 failed, 141 passed, 794 deselected, 4 subtests passed in 30.70s
