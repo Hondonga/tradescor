@@ -1,0 +1,100 @@
+{
+  "generated_at": "2026-07-22T04:49:09.130660+00:00",
+  "part": "S - FEASIBILITY-HARNESS SELF-TESTS",
+  "results": [
+    {
+      "test": "strong_bullish_edge_passes",
+      "passed": true,
+      "detail": "lower_95=0.731"
+    },
+    {
+      "test": "strong_bearish_edge_passes",
+      "passed": true,
+      "detail": "lower_95=0.715"
+    },
+    {
+      "test": "mixed_correctly_directed_passes",
+      "passed": true,
+      "detail": "lower_95=0.411"
+    },
+    {
+      "test": "iid_null_rejects",
+      "passed": true,
+      "detail": "lower_95=-0.053 (must not exceed 0)"
+    },
+    {
+      "test": "autocorrelated_null_rejects",
+      "passed": true,
+      "detail": "lower_95=-0.282"
+    },
+    {
+      "test": "volatility_clustered_null_rejects",
+      "passed": true,
+      "detail": "lower_95=-0.073"
+    },
+    {
+      "test": "heavy_tailed_null_rejects",
+      "passed": true,
+      "detail": "lower_95=-0.124"
+    },
+    {
+      "test": "regime_switching_unrelated_signal_rejects",
+      "passed": true,
+      "detail": "lower_95=-0.141"
+    },
+    {
+      "test": "geometry_only_effect_rejects_when_no_true_difference",
+      "passed": true,
+      "detail": "lower_95=-0.285"
+    },
+    {
+      "test": "cost_erased_edge_rejects",
+      "passed": true,
+      "detail": "lower_95=-0.045"
+    },
+    {
+      "test": "one_symbol_concentration_rejects",
+      "passed": true,
+      "detail": "max_single_group_profit_share=0.953 (concentration flag correctly fires above 0.60)"
+    },
+    {
+      "test": "one_period_concentration_rejects",
+      "passed": true,
+      "detail": "max_single_period_profit_share=1.000"
+    },
+    {
+      "test": "insufficient_sample_rejects",
+      "passed": true,
+      "detail": "n=45 < required 300"
+    },
+    {
+      "test": "future_data_event_fails_causality",
+      "passed": true,
+      "detail": "max_source_time=2026-01-01 00:05:00+00:00 > decision_time=2026-01-01 00:00:00+00:00"
+    },
+    {
+      "test": "repeated_run_is_deterministic",
+      "passed": true,
+      "detail": "identical: True"
+    },
+    {
+      "test": "no_setup_run_creates_complete_rejection_report",
+      "passed": true,
+      "detail": "handled without crashing"
+    },
+    {
+      "test": "production_ready_verdict_remains_impossible",
+      "passed": true,
+      "detail": "allowed/forbidden disjoint: True"
+    },
+    {
+      "test": "null_seed_false_positive_rate_within_expected_band",
+      "passed": true,
+      "detail": "2/50 = 0.040 (expected ~0.025 at 95% CI, allowing up to 0.10 for seed variance)"
+    }
+  ],
+  "passed": 18,
+  "total": 18,
+  "all_passed": true,
+  "null_seed_false_positive_rate": 0.04
+}
