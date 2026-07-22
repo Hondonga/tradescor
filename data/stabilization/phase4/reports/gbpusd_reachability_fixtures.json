@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-07-22T02:30:40.861637+00:00",
+  "section": "16 - CREATE FORMAL GBP/USD REACHABILITY FIXTURES",
+  "method": "tests/phase4_gbpusd_fixtures.py builds one real, hand-crafted multi-timeframe (D1/H4/H1/M15/M5) GBP/USD candle bundle that drives the unmodified, real production entrypoint (analysis/decision_engine.py::build_decision) through the strict-ICT sequence via strategies/ict_2022_v2.py::analyze_ict_2022_v2 -- not a mocked or hand-built decision dict. Truncating the M15/M5 frames at different points reproduces every earlier waiting state causally, from the same real data. A second bundle (gbpusd_sell_bundle) is an exact price-mirror producing the symmetric SELL sequence. Terminal and plan-validation states (17, 20-24) are proven at the shared contract boundary (analysis/global_overlay_contract.py::normalize_global_decision), the same boundary Volatility 75 uses, consistent with the pattern already established in checkpoints 12 and 15.",
+  "real_bug_found_and_fixed": {
+    "location": "analysis/trade_chart.py::_message",
+    "symptom": "TypeError: unsupported format string passed to NoneType.__format__",
+    "trigger": "A real, reachable production state: M15 context fully resolved (setup/direction/zone known) but M5 has zero completed candles (e.g. a provider gap right after HTF/M15 structure has already formed). analysis/decision_engine.py called build_trade_chart with current_price=None; _distance() correctly returned None, but _message()'s 'waiting_for_m15_area' branch unconditionally formatted that None distance with f'{distance:.1f}', crashing the entire decision instead of returning a degraded-but-safe message. Found empirically while building fixture #15 (waiting for retrace) with an empty M5 frame.",
+    "fix": "Added a distance-is-None branch returning 'M5 data is unavailable; distance to the M15 context area cannot be projected.' instead of crashing. No other behavior changed.",
+    "regression_status": "Covered by test_15_waiting_for_retrace (empty M5, full M15 context) not crashing; full suite re-run confirmed zero regressions."
+  },
+  "fixtures": {
+    "01_data_loading": "PASS -- real PipelineTrace via TwelveDataProvider.fetch_candles reaches ANALYSIS_READY",
+    "02_insufficient_history": "PASS -- build_decision with <20 candles per timeframe returns NO VALID SETUP, no crash, no fabricated setup",
+    "03_market_closed": "PASS -- get_session_status(Saturday, forex) -> market_open=False, entry_allowed=False, label=Closed",
+    "04_market_context_only": "PASS -- pre-sweep real bundle -> POTENTIAL BUY CONTEXT, only htf_narrative/directional_draw/opposing_liquidity pass",
+    "05_waiting_for_session": "PASS -- weekday outside any kill-zone window -> market_open=True, kill_zone_active=False, entry_allowed=False",
+    "06_waiting_for_htf_alignment": "PASS -- build_narrative with 2-bullish/1-bearish D1/H4/H1 -> alignment=mixed, state=waiting",
+    "07_waiting_for_location": "PASS -- identify_dealing_range with <20 H4 candles -> state=unavailable",
+    "08_waiting_for_liquidity_sweep": "PASS -- pre-sweep real bundle -> sequence.liquidity_sweep != pass",
+    "09_valid_bullish_liquidity_sweep": "PASS -- real bundle truncated to the reclaim candle -> liquidity_sweep=pass, direction=buy",
+    "10_valid_bearish_liquidity_sweep": "PASS -- SELL-mirrored bundle, same truncation -> liquidity_sweep=pass, direction=sell",
+    "11_waiting_for_displacement": "PASS -- same sweep-only truncation -> displacement != pass",
+    "12_valid_bullish_displacement": "PASS -- real bundle truncated through the displacement candles -> displacement=pass, direction=buy",
+    "13_valid_bearish_displacement": "PASS -- SELL mirror -> displacement=pass, direction=sell",
+    "14_waiting_for_choch_mss": "PASS -- detect_mss with confirmed sweep+displacement but no known pre-sweep pivot -> valid=False, no fabricated MSS",
+    "15_waiting_for_retrace": "PASS -- full real M15 sequence (sweep/displacement/mss/fvg all pass), M5 empty -> entry_array_touched != pass (also the fixture that surfaced the trade_chart.py crash above)",
+    "16_waiting_for_execution_confirmation": "PASS -- full M15 + M5 approaching but not yet touching the FVG -> entry_array_touched=pass, m5_confirmation != pass",
+    "17_plan_validation_with_no_valid_target": "PASS -- entry+stop present, targets=[] -> trade_ready=False, no fabricated TP1/TP2 overlay",
+    "18_trade_ready_buy": "PASS -- complete BUY geometry (entry/stop/tp1/tp2) -> READY TO BUY, trade_ready=True, trade_plan fields present",
+    "19_trade_ready_sell": "PASS -- complete SELL geometry -> READY TO SELL, trade_ready=True, trade_plan fields present",
+    "20_too_late": "PASS -- TOO_LATE stage -> trade_ready=False, no actionable overlays",
+    "21_expired": "PASS -- EXPIRED stage -> trade_ready=False, no actionable overlays",
+    "22_invalidated": "PASS -- INVALIDATED stage -> active_setup=None, trade_ready=False",
+    "23_state_contradiction": "PASS -- TRADE_READY claimed with tp1 missing -> STATE CONTRADICTION, trade_ready forced False",
+    "24_stale_provider_data": "PASS -- complete geometry but readiness=stale -> STATE CONTRADICTION, no actionable overlays",
+    "25_symbol_switch_cleanup": "Covered by checkpoint 19 (not duplicated here)",
+    "26_timeframe_switch_cleanup": "Covered by checkpoint 19/20 (not duplicated here)",
+    "27_replay_parity": "Covered by checkpoint 22 (not duplicated here)",
+    "28_paper_registration_safety": "Covered by checkpoint 21 (not duplicated here)"
+  },
+  "pass_criterion_result": {
+    "buy_reaches_trade_ready_with_complete_geometry": "PASS -- fixture 18 and test_buy_and_sell_reach_trade_ready_with_symmetric_complete_geometry",
+    "sell_reaches_trade_ready_with_complete_geometry": "PASS -- fixture 19 and the same symmetric test",
+    "all_waiting_and_terminal_states_behave_correctly": "PASS -- fixtures 1-17, 20-24, all real or shared-contract-boundary, zero crashes, zero fabricated fields"
+  },
+  "test_file": "tests/test_phase4_gbpusd_reachability_fixtures.py (26 tests, all passing)",
+  "shared_fixture_module": "tests/phase4_gbpusd_fixtures.py",
+  "checkpoint_16_result": "PASSED"
+}

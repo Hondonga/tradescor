@@ -52,7 +52,7 @@ def _units(distance,current,rules):
     return "points",round(distance,2),percent
 def _message(direction,state,distance,unit,entry,relation):
     side="buy" if direction=="buy" else "sell"
-    if state=="waiting_for_m15_area":return f"Price is {distance:.1f} {unit} {relation} the M15 context area. Wait for M5 execution."
+    if state=="waiting_for_m15_area":return f"Price is {distance:.1f} {unit} {relation} the M15 context area. Wait for M5 execution." if distance is not None else "M5 data is unavailable; distance to the M15 context area cannot be projected."
     if state in {"in_m15_area","m5_setup_forming"}:return "M15 context is active; M5 execution is still forming."
     if state=="waiting_for_m5_close":return "Wait for the M5 trigger candle to close."
     if state in {"m5_confirmed","entry_available"}:return f"M5 entry confirmed at {entry:.5f}." if entry is not None else "M5 execution is still forming."
