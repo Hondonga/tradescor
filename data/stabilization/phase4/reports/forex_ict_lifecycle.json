@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-07-22T02:01:00.592479+00:00",
+  "section": "12 - DEFINE THE FOREX ICT LIFECYCLE",
+  "vocabulary_mapping_note": "The Forex engine has three internal, only-partially-aligned lifecycle vocabularies (raw strict-ICT states in strategies/ict_2022_v2.py::_lifecycle -- NO_ICT_CONTEXT, HTF_NARRATIVE_IDENTIFIED, WAITING_FOR_OPPOSING_LIQUIDITY, WAITING_FOR_SWEEP, SWEEP_FORMING, WAITING_FOR_DISPLACEMENT, DISPLACEMENT_FORMING, WAITING_FOR_MSS, WAITING_FOR_FVG, WAITING_FOR_RETURN, IN_ENTRY_ARRAY, WAITING_FOR_M5_CLOSE, M5_CONFIRMED, ENTRY_AVAILABLE, ENTRY_EXTENDED, TOO_LATE, EXPIRED, INVALIDATED; normalized into analysis/forex_decision_normalizer.py::STATE_MAP's NO_CONTEXT/HTF_BIAS_IDENTIFIED/WAITING_FOR_LIQUIDITY/WAITING_FOR_DISPLACEMENT/MSS_CONFIRMED/WAITING_FOR_RETRACE/WAITING_FOR_M5_CONFIRMATION/TRADE_READY/TOO_LATE/EXPIRED/INVALIDATED; and a third, separate lowercase vocabulary in analysis/decision_engine.py::STAGE_BY_STATE for the generic, non-strict-ICT candidates). Per the same precedent Phase 2 established for Volatility 75 (treating the milestone's listed stage vocabulary as a conceptual superset rather than a required rename of live engine strings), this phase does not collapse these three vocabularies into one literal enum -- doing so would touch the ICT engine's frozen, hashed, config-driven core (strategies/ict_2022_v2.py's configuration_hash guarantee) for a naming consistency win, not a behavior fix. What this checkpoint instead verifies and locks in with tests is the OUTWARD-FACING guarantee that actually matters: every named impossible state is structurally unreachable in the final normalized decision, regardless of which internal vocabulary produced it.",
+  "terminal_states": "EXPIRED, INVALIDATED, TOO_LATE (analysis/forex_decision_normalizer.py TERMINAL_STATES, unioned into the shared TERMINAL set in analysis/global_overlay_contract.py alongside Derived's own terminal states)",
+  "impossible_states_verified": {
+    "neutral_direction_with_directional_active_setup": "PASS -- test_neutral_direction_cannot_carry_a_directional_active_setup",
+    "waiting_for_target_before_direction_exists": "Structurally unreachable -- the Forex target engine (analysis/liquidity_target_engine.py) is only ever invoked after a direction has been established by the top-down alignment/router; there is no code path that evaluates targets before a direction is set.",
+    "trade_ready_without_entry": "PASS -- test_trade_ready_without_entry_is_state_contradiction",
+    "trade_ready_without_stop": "PASS -- test_trade_ready_without_stop_is_state_contradiction",
+    "trade_ready_without_tp1": "PASS -- test_trade_ready_without_tp1_is_state_contradiction",
+    "trade_ready_outside_a_required_session": "PASS by construction (checkpoint 4/5) -- session_ok gating in analysis/auto_strategy_router.py::_ict_candidate requires entry_allowed (now correctly market_open-gated) before the ICT candidate is even eligible; a session-ineligible request cannot produce a selected ICT candidate at all.",
+    "stale_data_with_live_trade_ready": "PASS -- test_stale_data_with_live_trade_ready_is_state_contradiction",
+    "market_closed_with_new_live_trade_ready": "PASS -- test_market_closed_with_new_live_trade_ready_is_state_contradiction (checkpoint 4's fix, re-verified with a Forex-native fixture)",
+    "invalidated_setup_still_active": "PASS -- test_invalidated_setup_is_archived_not_left_active",
+    "setup_id_mismatch_across_evidence": "PASS, via exclusion rather than an explicit error state -- analysis/global_overlay_contract.py's overlay-selection pass (line ~47) filters out any non-historical overlay whose setup_id does not match the active setup's setup_id, so a mismatched overlay can never render at all, regardless of how it was produced.",
+    "forex_decision_with_derived_overlay_owner": "PASS -- test_forex_decision_cannot_carry_a_derived_owned_overlay (market_type is checked per-overlay-row in _conflicting_overlay_fields)"
+  },
+  "on_contradiction": {
+    "blocks_readiness": "PASS -- _active_setup returns None whenever _contradiction found any problem (value['active_setup']=None path in normalize_global_decision)",
+    "clears_actionable_overlays": "PASS -- with active_setup=None, no actionable-category overlay can be selected (selectVisibleOverlays/_required_rows both key off active setup)",
+    "preserves_diagnostics": "PASS -- diagnostics.global_overlay_contradictions is set to the list of specific problems found, never silently dropped",
+    "returns_state_contradiction": "PASS -- status/headline/stage all set to STATE CONTRADICTION / STATE_CONTRADICTION"
+  },
+  "checkpoint_12_result": "PASSED"
+}
