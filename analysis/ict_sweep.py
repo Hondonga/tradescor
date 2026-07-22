@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from analysis.ict_state import evidence_result
+from analysis.ict_state import evidence_result, stable_id
 
 
 def classify_sweep(candles: pd.DataFrame, pool: dict | None, *, direction: str, reclaim_window=4, accepted_closes=2, forming_candle: pd.DataFrame | None=None, tick_size=0.0, spread=0.0):
@@ -19,7 +19,15 @@ def classify_sweep(candles: pd.DataFrame, pool: dict | None, *, direction: str, 
     inside=(after.close.astype(float)>level) if direction=="buy" else (after.close.astype(float)<level); reclaim=after.loc[inside]
     outside=(after.close.astype(float)<level) if direction=="buy" else (after.close.astype(float)>level); accepted=_consecutive(outside,accepted_closes) and reclaim.empty
     excursion=after.loc[:reclaim.index[0]] if not reclaim.empty else after
-    extreme=float(excursion.low.min() if direction=="buy" else excursion.high.max()); result={"liquidity_id":pool["liquidity_id"],"pool_price":level,"direction":direction,"sweep_time":event.time.isoformat(),"sweep_extreme":extreme,"reclaim_time":reclaim.iloc[0].time.isoformat() if not reclaim.empty else None,"accepted_breakout":accepted,"confirmed":not reclaim.empty and not accepted,"pool_formed_at":pool["formed_at"]}
+    extreme=float(excursion.low.min() if direction=="buy" else excursion.high.max())
+    # Phase 4 §8 -- an explicit, stable sweep identity (previously implicit
+    # via (liquidity_id, sweep_time) only) plus liquidity_type/active so a
+    # sweep can be tracked/invalidated independently of its parent pool.
+    # Existing field names (pool_price/sweep_extreme/sweep_time/reclaim_time)
+    # are kept unchanged for existing consumers; liquidity_price/sweep_price/
+    # swept_at/confirmed_at are added as the Phase 4-named aliases.
+    sweep_id=stable_id("sweep",{"liquidity_id":pool["liquidity_id"],"direction":direction,"sweep_time":event.time.isoformat()})
+    result={"sweep_id":sweep_id,"liquidity_id":pool["liquidity_id"],"liquidity_type":pool.get("type"),"pool_price":level,"liquidity_price":level,"direction":direction,"sweep_time":event.time.isoformat(),"swept_at":event.time.isoformat(),"sweep_extreme":extreme,"sweep_price":extreme,"reclaim_time":reclaim.iloc[0].time.isoformat() if not reclaim.empty else None,"confirmed_at":reclaim.iloc[0].time.isoformat() if not reclaim.empty else None,"accepted_breakout":accepted,"confirmed":not reclaim.empty and not accepted,"active":not accepted,"pool_formed_at":pool["formed_at"]}
     state="fail" if accepted else "pass" if result["confirmed"] else "forming"
     return evidence_result(result=result,timestamp=result["reclaim_time"] if result["confirmed"] else result["sweep_time"],timeframe="M15",valid=result["confirmed"],evidence=["Price traded beyond pre-existing liquidity.","Range side was reclaimed within the configured multi-candle window."] if result["confirmed"] else ["Consecutive closes accepted beyond liquidity."] if accepted else ["Penetration occurred; reclaim is pending."],rejection_reason="Accepted breakout is not an ICT sweep." if accepted else None,state=state,detected_candidates=[result],thresholds_used=thresholds)
 

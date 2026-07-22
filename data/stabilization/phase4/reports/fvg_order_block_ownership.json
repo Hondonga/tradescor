@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-07-21T16:57:50.811250+00:00",
+  "section": "10 - STABILIZE FVG AND ORDER-BLOCK OWNERSHIP",
+  "fvg": {
+    "file": "analysis/ict_fvg.py::identify_displacement_fvg",
+    "method": "Verification checkpoint over already-mature logic -- no production code changed for FVG.",
+    "required_rules": {
+      "formed_from_completed_candles": "PASS -- operates on the already completed-candle-filtered frame, exact 3-candle (first/middle/third) geometry",
+      "directionally_compatible": "PASS -- buy requires first.high<third.low, sell requires first.low>third.high",
+      "causal_at_decision_time": "PASS -- scoped to the displacement's own candle window, no lookahead beyond what was already passed in",
+      "active_or_unmitigated_when_required": "PASS -- `active` field is False whenever `fully` (complete mitigation) is non-empty",
+      "setup_owned": "PASS -- via displacement_id, which chains through to the eventual setup_id in strategies/ict_2022_v2.py",
+      "timeframe_owned": "PASS -- M15, consistent with the rest of the core ICT sequence",
+      "not_duplicated": "PASS -- exactly one active candidate is returned (`active[0]`) even when multiple 3-candle windows qualify",
+      "not_expired": "PASS -- age_bars > max_age_bars is an explicit rejection reason",
+      "not_reused_after_invalidation": "PASS -- fully-mitigated FVGs are excluded from the `active` list entirely, not just flagged"
+    },
+    "unrelated_fvgs_cannot_complete_a_setup": "PASS -- an FVG must carry the SAME displacement_id as the displacement stage that precedes it in strategies/ict_2022_v2.py's chained evaluation; there is no code path that accepts an FVG from a different displacement/direction",
+    "mitigated_evidence_not_treated_as_fresh": "PASS -- verified above (active=False, mitigation_percentage=1.0 for fully-mitigated FVGs)"
+  },
+  "order_blocks": {
+    "current_state": "strategies/ict_2022_v2.py's optional_context.order_block = {'enabled': False, 'can_replace_core_sequence': False} -- a deliberate, explicit placeholder. No order-block detection engine exists for Forex (unlike Deriv's fully-built analysis/smc/smc_order_block_engine.py).",
+    "decision": "Not built this phase. Building a new order-block detection engine for Forex would be genuinely new strategy-evidence functionality, not a stabilization of existing behavior -- outside this phase's explicit non-negotiable scope ('Do not add new strategies', 'Do not tune ICT thresholds merely to create more setups'). The core ICT sequence (sweep -> displacement -> MSS -> FVG) is already complete and does not depend on order blocks -- FVG already serves as the entry array / execution zone the setup uses. Checkpoint 10's 'FVG and order-block evidence must belong to the active setup' is satisfied for the evidence type that is actually produced (FVG); order blocks remain optional context that is off by default and cannot silently activate.",
+    "verified_safe": "optional_context.order_block.enabled=False and can_replace_core_sequence=False were confirmed unchanged and read directly from strategies/ict_2022_v2.py -- an order block can never bypass or replace the required core sequence, so there is no path for unrelated/fabricated order-block evidence to complete a setup."
+  },
+  "verified_via": [
+    "tests/test_ict_2022_v2.py (10 tests, unchanged, all passing) -- includes exact-3-candle-FVG and fully-filled-FVG-rejected coverage",
+    "Direct source reading of analysis/ict_fvg.py and strategies/ict_2022_v2.py's optional_context stub"
+  ],
+  "checkpoint_10_result": "PASSED"
+}

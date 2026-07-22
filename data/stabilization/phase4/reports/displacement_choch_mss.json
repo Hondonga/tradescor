@@ -1,0 +1,41 @@
+{
+  "generated_at": "2026-07-21T16:57:00.646904+00:00",
+  "section": "9 - STABILIZE DISPLACEMENT AND CHOCH/MSS",
+  "method": "Verification checkpoint over already-mature, already-tested logic (analysis/ict_displacement.py, analysis/ict_structure_shift.py) -- no production code changed for this checkpoint.",
+  "displacement": {
+    "file": "analysis/ict_displacement.py::detect_displacement",
+    "required_evidence_present": {
+      "completed_candle": true,
+      "direction": true,
+      "body_range_quality": "body_atr, range_atr fields",
+      "atr_relative_strength": "close_location, directional_efficiency, weighted impulse_score",
+      "source_timeframe": true,
+      "structural_level_affected": "implicit via the sweep/MSS chain it is gated behind",
+      "setup_ownership": "via displacement_id, chained into the eventual setup_id"
+    },
+    "not_every_large_candle_is_displacement": "PASS -- gated on body_atr_threshold/range_atr_threshold/close_location_threshold/impulse_score_threshold, all configurable, tested in tests/test_ict_2022_v2.py::test_displacement_is_atr_normalized_and_after_sweep",
+    "requires_completed_post_sweep_candle": "PASS -- only scans candles after the sweep's reclaim_time"
+  },
+  "choch_mss": {
+    "file": "analysis/ict_structure_shift.py::detect_mss",
+    "requires_pre_existing_structural_reference": "PASS -- pivots are searched only in `before=rows.loc[times<sweep_time]`, i.e. strictly before the sweep; pivot_known_at_sweep=True is true by construction, never asserted for a pivot discovered after the fact",
+    "requires_completed_close_through_reference": "PASS -- breaks filter checks `.close` against the pivot level, not high/low (wick-only crossings do not qualify); close_confirmed=False until a completed candle satisfies this",
+    "correct_direction": "PASS -- buy direction requires a high pivot broken upward, sell requires a low pivot broken downward, enforced structurally not just labeled",
+    "correct_structural_episode": "PASS -- pivot search is scoped to the same candle frame passed in for this specific sweep/displacement pair, never mixed across unrelated episodes",
+    "no_future_swing_ownership": "PASS -- verified above, this is the core causality guarantee of the function",
+    "no_duplicate_confirmation": "PASS -- `pivots[-1]` selects exactly one (the most recent pre-sweep) pivot candidate per call; the caller (strategies/ict_2022_v2.py) invokes this once per direction per decision",
+    "wick_only_false_breaks_fail": "PASS -- confirmed by construction (close-only breaks filter) and by existing test coverage (test_ict_2022_v2.py's wick-only-sweep-is-forming-not-confirmed covers the analogous sweep case; MSS inherits the same completed-close discipline)",
+    "incomplete_candles_cannot_confirm_structure": "PASS -- MSS only operates on rows already filtered to completed candles by the shared upstream completed_candles() boundary (analysis/top_down_engine.py), and additionally requires `close_confirmed` from an actual close price, not a forming candle's provisional close"
+  },
+  "when_confirmation_missing": {
+    "lifecycle_remains_waiting": "PASS -- evidence_result's state defaults to 'forming' (if a forming_candle is provided) or 'waiting', never fabricates 'pass'",
+    "no_entry_emitted": "PASS -- strategies/ict_2022_v2.py's core-sequence chain (sweep -> displacement -> MSS -> FVG) requires every prior stage valid before the next runs; entry_available requires the full chain",
+    "no_actionable_overlays": "PASS -- consistent with the Phase 2/3-established rule that actionable overlays only exist when trade_ready, which requires the complete chain"
+  },
+  "verified_via": [
+    "tests/test_ict_2022_v2.py (10 tests, unchanged, all passing)",
+    "tests/test_ict_v2_false_negative_diagnostics.py (8 tests, unchanged, all passing)",
+    "Direct source reading of both functions (no test gaps found requiring new coverage)"
+  ],
+  "checkpoint_9_result": "PASSED"
+}

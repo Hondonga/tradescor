@@ -1,0 +1,39 @@
+{
+  "generated_at": "2026-07-21T17:17:17.339986+00:00",
+  "section": "5 - STABILIZE FOREX SESSION AND KILL-ZONE LOGIC",
+  "method": "Verification checkpoint over already-mature, already-DST-tested logic (scanner/session_engine.py), re-verified after the checkpoint 4 entry_allowed fix landed in the same module.",
+  "session_timezone": "America/New_York, via zoneinfo.ZoneInfo -- DST-correct by construction (no manual EST/EDT branching)",
+  "sessions_recognized": [
+    "Asian Session",
+    "London Kill Zone",
+    "New York Kill Zone",
+    "London Close",
+    "Outside Trading Hours"
+  ],
+  "kill_zones": [
+    "London Kill Zone",
+    "New York Kill Zone"
+  ],
+  "new_york_pm_kill_zone": "Not formally supported by the current session engine (only London + NY AM kill zones are defined) -- per \u00a75's own conditional wording ('New York PM kill zone when formally supported'), this is correctly omitted rather than fabricated.",
+  "dst_verification": {
+    "winter_fixture": {
+      "input": "2026-01-06 08:00 America/New_York",
+      "result_name": "New York Kill Zone",
+      "timezone_abbreviation": "EST",
+      "entry_allowed": true
+    },
+    "summer_fixture": {
+      "input": "2026-07-06 08:00 America/New_York",
+      "result_name": "New York Kill Zone",
+      "timezone_abbreviation": "EDT",
+      "entry_allowed": true
+    },
+    "conclusion": "Same session correctly identified at the equivalent local time across the DST transition, with the correct EST/EDT label -- re-confirmed after the checkpoint 4 fix; tests/test_session_engine.py::test_winter_uses_est / ::test_summer_uses_edt_without_shifting_session (both pre-existing, both still passing) already assert this at the unit level."
+  },
+  "session_gating_scope": {
+    "may_gate_ict_models_only_when_required": "PASS -- session_ok in analysis/auto_strategy_router.py::_ict_candidate is only computed and applied for the ICT candidate; supply_demand and breakout_retest candidates do not consult session context at all.",
+    "does_not_create_direction_by_itself": "PASS -- entry_allowed only ever narrows (ANDs into) eligibility; direction is determined entirely by structure (top_down alignment, sweep/displacement/MSS direction), never by which session is currently active.",
+    "forex_session_logic_does_not_affect_derived_markets": "PASS, structurally guaranteed -- app.py's derived/Deriv branch constructs a hardcoded {'entry_allowed': True, 'market_status': 'OPEN_24_7', ...} object and never calls scanner/session_engine.py at all; the derived analysis path has no reference to this module."
+  },
+  "checkpoint_5_result": "PASSED"
+}
