@@ -1,0 +1,98 @@
+{
+  "generated_at": "2026-07-22T04:52:00Z",
+  "part": "I - PREREGISTER BEFORE OUTCOMES",
+  "preregistration_notice": "This document is frozen before any trade outcome, resolution, cost calculation, control-arm result, or statistic of any kind has been computed from the pulled R_75 candle data. Only raw-candle acquisition and integrity checks (Part H, no strategy evaluation) preceded this file. It will not be edited after outcomes are seen; any post-hoc change would be recorded as a new, clearly labeled amendment file, never an edit in place.",
+  "experiment_id": "phase5-r75-vsp-walkforward-v1",
+  "strategy_version_binding_ref": "data/stabilization/phase5/preregistration/strategy_version_binding.json",
+  "hypothesis": {
+    "primary": "The frozen Volatility Structure Pullback strategy has positive post-cost expectancy and adds directional information beyond symmetric geometry controls.",
+    "operationalized_as": [
+      "H1: mean realized R after conservative costs, grouped by structural episode, has a lower confidence bound > 0.",
+      "H2: same-direction outcomes beat paired-opposite-direction outcomes at the same decision points, grouped lower confidence bound of the difference > 0.",
+      "H3: same-direction outcomes beat the geometry-only baseline, grouped lower confidence bound of the difference > 0.",
+      "H4: the same-direction result exceeds the preregistered percentile of a 500-permutation random-direction null distribution."
+    ]
+  },
+  "symbol_scope": { "provider": "deriv", "symbol": "R_75", "selected_timeframe": "M5", "context_timeframes": ["H1", "M15", "M5"], "directions": ["buy", "sell"] },
+  "entry_policy": {
+    "definition": "The engine's setup.entry price becomes the trade's entry the first completed M5 candle at which decision.trade_ready == true for a given setup_id.",
+    "fill_assumption": "Treated as filled at the locked entry price at that decision point. This is a deliberate, disclosed simplification: entry only becomes non-null after the M5 displacement-retrace candle has already overlapped the entry zone (analysis/volatility_structure_pullback_engine.py::_execution), so a retracement touch is already a structural precondition of entry existing at all; this study does not additionally require the exact midpoint price to be touched tick-for-tick.",
+    "one_trade_per_setup_id": true,
+    "re_entry_after_expiry_treated_as_a_new_setup_id": true
+  },
+  "stop_policy": { "definition": "The engine's setup.stop price at the same decision point. Never moved, trailed, or re-evaluated after entry (matches the frozen engine's own determinism guarantee)." },
+  "target_policy": { "definition": "TP1 = setup.targets[0].price if present. TP2 = setup.targets[1].price if present, tracked as a secondary informational resolution only; the primary resolution and the primary metric use TP1/STOP resolution only, consistent with the strategy's own minimum_rr gate being defined against TP1." },
+  "fill_policy": "See entry_policy.fill_assumption above.",
+  "ambiguity_policy": {
+    "rule": "After entry, walk forward through subsequent M5 candles. If an M5 candle's [low, high] range contains only the stop level -> STOP. If it contains only a target level -> that target. If it contains BOTH stop and target levels in the same M5 candle, disaggregate using the underlying M1 candles within that M5 bucket (already available from the same pulled dataset) to find whichever level was touched first chronologically at M1 resolution. If the M1 data is ALSO ambiguous (both levels touched within the same M1 candle), resolve as STOP-FIRST (conservative) and label the outcome AMBIGUOUS_STOP_FIRST rather than silently picking the more favorable side.",
+    "conservative_default": "stop_first"
+  },
+  "maximum_resolution_horizon": { "value": 576, "unit": "M5 candles", "equivalent_hours": 48, "rule": "If neither stop nor TP1 is reached within this horizon after entry, resolve as TIME_LIMIT at the horizon's close price." },
+  "outcome_labels": ["NOT_FILLED", "TP1", "TP2", "STOP", "EXPIRED", "INVALIDATED", "TIME_LIMIT", "AMBIGUOUS_STOP_FIRST"],
+  "cost_model": {
+    "version": "phase5-conservative-cost-v1",
+    "basis": "Fraction of initial risk (R), applied as a round-trip deduction from realized R. Chosen because Deriv synthetic-index live spread/commission quotes are not available to this session as a verifiable, citable data source; a risk-fraction model is the most transparent honest substitute and is applied identically and preregistered before any outcome is computed.",
+    "zero_cost_diagnostic": 0.0,
+    "base_cost": 0.05,
+    "conservative_cost": 0.10,
+    "verdict_uses": "conservative_cost"
+  },
+  "fold_schedule": {
+    "scored_window": { "start": "2025-11-01T00:00:00Z", "end": "2026-04-14T00:00:00Z", "total_days": 164 },
+    "warmup_margin_before_scored_window": { "start": "2025-10-15T00:00:00Z", "end": "2025-11-01T00:00:00Z", "purpose": "Provides >=300-candle trailing H1/M15/M5 context for the first scored decision points; never itself scored." },
+    "holdout": { "start": "2026-03-12T00:00:00Z", "end": "2026-04-14T00:00:00Z", "days": 33, "fraction_of_scored_window": 0.201, "status": "SEALED" },
+    "purge_between_development_and_holdout": { "start": "2026-03-10T00:00:00Z", "end": "2026-03-12T00:00:00Z", "days": 2, "equals": "maximum_resolution_horizon" },
+    "development": { "start": "2025-11-01T00:00:00Z", "end": "2026-03-10T00:00:00Z", "days": 129 },
+    "development_folds": [
+      { "fold": 1, "start": "2025-11-01T00:00:00Z", "end": "2025-11-17T03:00:00Z" },
+      { "fold": 2, "start": "2025-11-17T03:00:00Z", "end": "2025-12-03T06:00:00Z" },
+      { "fold": 3, "start": "2025-12-03T06:00:00Z", "end": "2025-12-19T09:00:00Z" },
+      { "fold": 4, "start": "2025-12-19T09:00:00Z", "end": "2026-01-04T12:00:00Z" },
+      { "fold": 5, "start": "2026-01-04T12:00:00Z", "end": "2026-01-20T15:00:00Z" },
+      { "fold": 6, "start": "2026-01-20T15:00:00Z", "end": "2026-02-05T18:00:00Z" },
+      { "fold": 7, "start": "2026-02-05T18:00:00Z", "end": "2026-02-21T21:00:00Z" },
+      { "fold": 8, "start": "2026-02-21T21:00:00Z", "end": "2026-03-10T00:00:00Z" }
+    ],
+    "fold_count": 8,
+    "fold_construction": "8 equal-length (~16.1 day) contiguous, non-overlapping, chronologically ordered segments of the development window. Anchored-expanding in the sense that the engine's own rolling structural context (H1/M15 direction, dealing range) at every decision point is always built causally from real preceding history back through the warmup margin -- folds here segment the OUT-OF-SAMPLE decision-point stream for grouped statistics and per-fold stability checks; the strategy has no fitted/tunable parameters, so there is no separate train-fold optimization step.",
+    "purge_within_and_between_folds": "maximum_resolution_horizon (576 M5 candles / 48h) applied at every fold boundary: a setup whose entry occurs within 48h of a fold boundary is assigned to the fold containing its entry, and its resolution is tracked to completion even if that crosses into the next fold's candle range (the resolution itself is not double-counted in fold statistics; a trade belongs to exactly one fold, keyed by entry time)."
+  },
+  "grouping_units": ["structural_episode(setup_id)", "trading_day(UTC calendar date of entry)", "fold"],
+  "sample_requirements": { "minimum_total_resolved_trades": 300, "minimum_buy": 100, "minimum_sell": 100, "minimum_folds": 8 },
+  "confidence_method": {
+    "method": "Deterministic-seed cluster bootstrap, resampling whole structural episodes (setup_id groups) with replacement -- never individual trades independently, since trades sharing an H1 structural context are not independent.",
+    "resamples": 2000,
+    "seed": 20260722,
+    "interval": "95% (2.5th/97.5th percentile of the bootstrap distribution)"
+  },
+  "matched_controls": {
+    "arm_1_same_direction": "The real strategy signal exactly as generated (the arm under test).",
+    "arm_2_paired_opposite_direction": "At every real setup's exact decision timestamp and entry/stop-distance/target-distance geometry, mechanically flip the direction (buy<->sell), mirroring entry/stop/target around the entry price by the same distances. Uses identical timing, ATR, and resolution policy as arm 1.",
+    "arm_3_geometry_only_baseline": "At every real setup's exact decision timestamp, keep the identical entry price, stop price, and target price(s) (the same absolute levels, not mirrored), but assign the trade's direction via a deterministic seeded coin flip independent of the actual H1/M15 structural direction. Tests whether the specific price levels chosen by the swing/structure engine carry inherent edge irrespective of which way the structural call pointed.",
+    "arm_4_random_direction_distribution": "500 deterministic seeded permutations (seeds 1..500), each independently reassigning every setup's direction via its own coin flip (same geometry/timing as arm 3 but re-randomized per permutation), building a null distribution of the primary metric. Arm 1's result is reported as its percentile rank within this distribution.",
+    "shared_across_all_arms": ["setup_id", "decision_timestamp", "atr_at_decision_time", "risk_normalization(R)", "cost_model", "maximum_resolution_horizon", "resolution_policy", "grouping_units"],
+    "event_count_assertion": "All four arms must resolve the exact same count of setup_ids; any mismatch fails the causality audit before any statistic is reported."
+  },
+  "stability_limits": {
+    "maximum_drawdown_r": 20.0,
+    "minimum_positive_fold_fraction": 0.60,
+    "no_single_fold_profit_share_above": 0.60,
+    "recent_sign_reversal_check": "The final 2 development folds must not both be negative when the overall development result is positive (a 'severe recent reversal' flag, not an automatic fail by itself, but reported)."
+  },
+  "acceptance_gates": "See analysis-time evaluation against Part O of the governing specification; gate thresholds themselves (sample size, confidence bounds, profit factor > 1.0, drawdown, directional/geometry/random-control comparisons, fold stability, direction stability) are exactly as stated in Part O and are not restated with different numbers here to avoid drift between documents.",
+  "holdout_policy": {
+    "opened_only_if": "every development gate in Part O passes",
+    "opened_at_most_once": true,
+    "post_holdout_tuning_forbidden": true
+  },
+  "allowed_verdicts": [
+    "FAILED_CAUSALITY_AUDIT", "REJECTED_INSUFFICIENT_NEW_HISTORY", "REJECTED_INSUFFICIENT_SAMPLE",
+    "REJECTED_NO_EDGE_AFTER_COSTS", "REJECTED_NO_DIRECTIONAL_EDGE", "REJECTED_GEOMETRY_ONLY_EFFECT",
+    "REJECTED_RANDOM_CONTROL", "REJECTED_UNSTABLE_ACROSS_FOLDS", "REJECTED_UNSTABLE_BY_DIRECTION",
+    "REJECTED_EXCESSIVE_DRAWDOWN", "REJECTED_HOLDOUT_FAILURE", "RESEARCH_EXTENSION_REQUIRED",
+    "ELIGIBLE_FOR_PAPER_SHADOW"
+  ],
+  "maximum_positive_verdict": "ELIGIBLE_FOR_PAPER_SHADOW",
+  "forbidden_verdicts": ["PRODUCTION_READY", "LIVE_READY", "AUTO_EXECUTION_ELIGIBLE", "GUARANTEED_PROFITABLE"],
+  "commitment": "No entry/stop/target/lifecycle/cost/fold/control parameter defined above will be changed after this file is committed, regardless of the outcome computed from it."
+}

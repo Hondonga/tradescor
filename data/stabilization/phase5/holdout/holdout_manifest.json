@@ -1,0 +1,12 @@
+{
+  "generated_at": "2026-07-22T04:53:00Z",
+  "part": "P - HOLDOUT",
+  "experiment_id": "phase5-r75-vsp-walkforward-v1",
+  "holdout_window": { "start": "2026-03-12T00:00:00Z", "end": "2026-04-14T00:00:00Z", "days": 33 },
+  "fraction_of_scored_window": 0.201,
+  "purge_before_holdout": { "start": "2026-03-10T00:00:00Z", "end": "2026-03-12T00:00:00Z", "days": 2 },
+  "status": "SEALED",
+  "rule": "May be opened only after every development gate in Part O passes against the 8-fold development set (2025-11-01 to 2026-03-10). Opened at most once. Never reused as fresh evidence after opening.",
+  "opened_at": null,
+  "result": null
+}
