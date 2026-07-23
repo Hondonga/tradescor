@@ -1,0 +1,6 @@
+{
+  "parent_engine_sha256": "2b70206f743f1af5155d62daba5c736d4f6c31519b0be3dbf1f280a00a8235b1",
+  "parent_engine_path": "analysis/volatility_structure_pullback_engine.py",
+  "research_variant_sha256": "227f4895c8522bae39de6ac87b97c2493980d7f883fc2ed37c91ce399967deab",
+  "research_variant_path": "strategies/research/volatility_structure_pullback_hypothesis_v2.py"
+}

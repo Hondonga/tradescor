@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-07-23T03:54:00Z",
+  "part": "4 - REQUIRED SAMPLE GATES",
+  "preregistered_minimums": {
+    "minimum_parent_resolved_setups": 250, "minimum_retained_buy": 75,
+    "minimum_retained_sell": 75, "minimum_folds": 6, "retention_requirement_pct": 50
+  },
+  "available_untouched_window": {"start": "2026-04-20T23:59:00Z", "end": "2026-04-21T05:45:00Z", "duration_hours": 5.77},
+  "engine_minimum_history_requirement": {
+    "source": "analysis/volatility_structure_pullback_engine.py::_readiness -- required={'H1':20,'M15':40,'M5':60} completed candles",
+    "implication": "A 5.77-hour window cannot supply 20 completed H1 candles (needs >=20 hours minimum), so zero scored decision points -- let alone resolved setups -- are achievable from it."
+  },
+  "actual_achievable_parent_setups": 0,
+  "actual_achievable_retained_buy": 0,
+  "actual_achievable_retained_sell": 0,
+  "actual_achievable_folds": 0,
+  "gate_result": "FAILED -- 0 achievable versus every preregistered minimum",
+  "sample_requirement_relaxed": false,
+  "period_broadened_after_viewing_results": false,
+  "verdict": "RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_UNTOUCHED_HISTORY",
+  "note": "This is the same conclusion Part 2 already reached via calendar-coverage arithmetic alone; this gate is recorded formally and separately per the Part 4 requirement, without loosening or reinterpreting any preregistered minimum."
+}

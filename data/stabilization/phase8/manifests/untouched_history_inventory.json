@@ -1,0 +1,74 @@
+{
+  "generated_at": "2026-07-23T03:48:00Z",
+  "part": "2 - VERIFY UNTOUCHED HISTORY",
+  "method": "Independent re-verification (not a copy) of Phase 7's Part 11 finding, performed fresh at this phase's own timestamp, additionally checking Phase 7's own diagnostics activity and whether any new cached candle data has appeared since Phase 7 concluded.",
+  "symbol": "R_75",
+  "periods": [
+    {
+      "start": "2025-10-15T00:00:00Z", "end": "2026-04-13T23:59:00Z",
+      "source": "data/stabilization/phase5/data/r75_m1_raw.csv (Deriv, real)",
+      "candle_count_m1": 260640,
+      "previously_accessed": true,
+      "exclusion_reason": "PHASE_5_DEVELOPMENT_AND_SEALED_HOLDOUT",
+      "embargo_status": "N/A -- directly consumed, not merely embargoed",
+      "eligible_for_phase8": false,
+      "checksum": "187361ef16d54b697baf5fff7157f1b12da436efd11351a826af499c2a675ef5"
+    },
+    {
+      "start": "2026-04-14T00:00:00Z", "end": "2026-04-20T23:59:00Z",
+      "source": "N/A -- no candle data cached for this window anywhere in the repository",
+      "candle_count_m1": 0,
+      "previously_accessed": false,
+      "exclusion_reason": "PHASE_5_EMBARGO -- 7-day purge/embargo margin after the Phase 5 raw-pull end (data/stabilization/phase5/manifests/consumed_data_inventory.json labeling_rule_applied)",
+      "embargo_status": "EMBARGOED",
+      "eligible_for_phase8": false,
+      "checksum": null
+    },
+    {
+      "start": "2026-04-21T05:45:00Z", "end": "2026-07-20T05:44:00Z",
+      "source": "data/ml/datasets/ml-r75-f4c52d93c7a8dc3e95f1 + ml-r75-7158f2dfdb1e03ecdc1f (Deriv, real, ML dataset build)",
+      "candle_count_m1": "not recomputed here (already excluded on consumption grounds, per data/stabilization/phase5/manifests/consumed_data_inventory.json)",
+      "previously_accessed": true,
+      "exclusion_reason": "ML_DATASET_TRAIN_VALIDATION_TEST -- final test split explicitly marked CONSUMED_FINAL_TEST",
+      "embargo_status": "N/A -- directly consumed, not merely embargoed",
+      "eligible_for_phase8": false,
+      "checksum": "737b02ea7c98fa68131920cc0fb6f5b438a8504dc2898aea14c1ce4c0b178b23"
+    },
+    {
+      "start": "2026-07-20T05:44:00Z", "end": "2026-07-27T05:44:00Z",
+      "source": "N/A -- no candle data cached for this window's non-overlapping tail (the 2026-06-24/07-02 smc_matrix cache falls entirely inside the ML-consumed window above, not in this embargo tail)",
+      "candle_count_m1": 0,
+      "previously_accessed": false,
+      "exclusion_reason": "ML_DATASET_EMBARGO -- 7-day purge/embargo margin after the ML-consumed window's end. Has NOT yet elapsed as of this manifest's generation time (2026-07-23T03:48Z); clears 2026-07-27T05:44:00Z (~4.08 days remaining).",
+      "embargo_status": "EMBARGOED_NOT_YET_CLEARED",
+      "eligible_for_phase8": false,
+      "checksum": null
+    },
+    {
+      "start": "2026-04-20T23:59:00Z", "end": "2026-04-21T05:45:00Z",
+      "source": "N/A -- no candle data cached; Deriv unavailable to fetch it now",
+      "candle_count_m1": 0,
+      "duration_hours": 5.77,
+      "previously_accessed": false,
+      "exclusion_reason": "TECHNICALLY_UNTOUCHED_BUT_UNUSABLE -- the only calendar window outside every embargoed/consumed range, but shorter than the engine's own minimum warm-up requirement (>=20 completed H1 candles alone requires >=20 hours; this window is 5.77 hours)",
+      "embargo_status": "CLEAR",
+      "eligible_for_phase8": false,
+      "checksum": null
+    }
+  ],
+  "phase7_diagnostics_activity_check": {
+    "finding": "All Phase 7 post-mortem/diagnostic analysis (data/stabilization/phase7/postmortem/) read exclusively from data/stabilization/phase5/data/resolved_setups.csv and data/stabilization/phase5/data/r75_m5_resampled.csv -- both fully inside the already-excluded Phase 5 window above. Phase 7 fetched zero new candle data from any provider (confirmed: Phase 7 never called providers.deriv_provider or any live fetch path; its Deriv availability check in Part 2 was a read-only connectivity probe that returned PROVIDER_UNAVAILABLE and fetched nothing)."
+  },
+  "new_cache_check": {
+    "method": "find data/smc_matrix -iname '*R_75*' -newer data/stabilization/phase7/baseline/phase7_start.json",
+    "result": "No files found -- nothing has been fetched or cached since Phase 7 began. The R_75 smc_matrix cache files are unchanged (last modified 2026-07-18/19), and in any case fall entirely inside the already-excluded ML-consumed window."
+  },
+  "provider_availability_recheck": {
+    "checked_at": "2026-07-23T03:47:51Z",
+    "provider": "deriv",
+    "result": "PROVIDER_UNAVAILABLE",
+    "error": "DerivAPIError: Deriv returned no active symbols."
+  },
+  "sufficient_untouched_data_exists": false,
+  "conclusion": "RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_UNTOUCHED_HISTORY -- unchanged from the Phase 7 finding, independently re-verified at this phase's own timestamp. No sample requirement was relaxed to work around this."
+}

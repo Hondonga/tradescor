@@ -1,0 +1,10 @@
+{
+  "generated_at": "2026-07-23T03:56:00Z",
+  "parts_covered": ["5 - BUILD THE CAUSAL PARENT CANDIDATE UNIVERSE", "6 - APPLY THE VARIANT FILTER", "7 - RESOLVE OUTCOMES IDENTICALLY", "8 - RUN MATCHED CONTROLS", "9 - GROUPED UNCERTAINTY", "10 - STABILITY ANALYSIS"],
+  "status": "NOT EXECUTED",
+  "reason": "Parts 5-10 all require a chronologically-replayable candidate universe built from genuinely untouched R_75 candles. Part 2 (untouched_history_inventory.json) and Part 4 (sample_gate_result.json) both independently establish that zero such candles are currently available: the only technically-untouched window is 5.77 hours, which is below the engine's own minimum warm-up requirement of 20 completed H1 candles (>=20 hours) needed to reach even a single scored decision point, and the live Deriv provider needed to fetch any candles at all is currently unavailable regardless.",
+  "engineering_readiness": {
+    "note": "The pipeline these parts describe is fully specified and ready to run the moment sufficient untouched history exists -- nothing about Parts 5-10 is blocked by missing code or design: the frozen parent engine (analysis/volatility_structure_pullback_engine.py), the single-change research variant (strategies/research/volatility_structure_pullback_hypothesis_v2.py), the corrected control methodology (validation/strategy_feasibility/control_methodology_v2.py, geometry_control_v2 + finite-sample p-value, 10/10 tests passing), and the full preregistered plan (data/stabilization/phase8/preregistration/experiment_spec.json) all already exist and are unit-tested. Only the input data is missing."
+  },
+  "no_data_was_fabricated_or_substituted": "No synthetic, cached-but-consumed, or partial-window data was used as a substitute for a genuine untouched-history replay. Running Parts 5-10 against 0 or a token handful of achievable setups would not produce a meaningful statistic and was not attempted, consistent with 'Do not relax the sample requirements' (Part 2) and 'Do not lower the threshold or broaden the period after viewing results' (Part 4)."
+}

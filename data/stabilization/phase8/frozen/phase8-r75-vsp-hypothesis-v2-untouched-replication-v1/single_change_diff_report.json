@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-07-23T03:50:00Z",
+  "part": "1 - VERIFY THE SINGLE-CHANGE VARIANT",
+  "method": "Static analysis of strategies/research/volatility_structure_pullback_hypothesis_v2.py: the module imports and calls analysis.volatility_structure_pullback_engine.evaluate_volatility_structure_pullback directly (line 21/73), passes it the caller's own symbol/candles_by_timeframe/tick_size/analysis_time/**kwargs unchanged, and returns a shallow-copied dict of its result with exactly one additional top-level key (`research_variant`) attached. The module defines no other function that re-implements or shadows any parent-engine behavior; `_stop_distance_atr` only reads already-completed M5 candles and the parent's own output entry/stop -- it does not construct, adjust, or feed anything back into the parent's own computation.",
+  "parent_engine_source_sha256_at_variant_creation": "verified byte-identical to the Phase 6 committed version (git show 2ab0c681...:analysis/volatility_structure_pullback_engine.py == working tree, confirmed at Phase 8 Part 0)",
+  "behavioral_categories_checked": {
+    "h1_structure": "INHERITED UNCHANGED -- computed entirely inside evaluate_volatility_structure_pullback::_persistent_structure, never called or reimplemented by the variant.",
+    "m15_pullback_logic": "INHERITED UNCHANGED -- _pullback_location, same reasoning.",
+    "m5_displacement": "INHERITED UNCHANGED -- _execution, same reasoning.",
+    "confirmation": "INHERITED UNCHANGED -- part of _execution's returned confirmation event, untouched by the variant.",
+    "entry": "INHERITED UNCHANGED -- setup['entry'] is read only, never reassigned by the variant.",
+    "stop_construction": "INHERITED UNCHANGED -- setup['stop'] is read only, never reassigned by the variant.",
+    "target_hierarchy": "INHERITED UNCHANGED -- evaluate_structural_targets is called only inside the parent engine; the variant never touches tp1/tp2.",
+    "reward_to_risk_requirement": "INHERITED UNCHANGED -- cfg['minimum_rr'] gating happens entirely inside the parent engine before it returns.",
+    "chase_rule": "INHERITED UNCHANGED -- chase_valid is computed inside the parent's _execution and merely read (not altered) by the variant's setup dict access.",
+    "expiration": "INHERITED UNCHANGED -- not touched by the variant.",
+    "lifecycle": "INHERITED UNCHANGED -- decision.stage/state values pass through verbatim.",
+    "provider_routing": "N/A TO THIS MODULE -- the variant takes candles_by_timeframe as a plain argument exactly like the parent; it performs no provider I/O of its own.",
+    "candle_aggregation": "INHERITED UNCHANGED -- the variant's own _stop_distance_atr reads the same completed-candles convention (`complete` column filter, time <= analysis_time) the parent's internal `_completed()` helper uses, but this is a read-only diagnostic recomputation for the eligibility check, not a second aggregation path feeding back into the parent's own setup/entry/stop/target construction.",
+    "cost_model": "N/A TO THIS MODULE -- cost is applied downstream during outcome resolution (Part 7), identical preregistered conservative-cost model for both parent and variant.",
+    "outcome_resolution": "N/A TO THIS MODULE -- resolution happens downstream in the replay pipeline (Part 7), applied identically to both parent-eligible and variant-retained setups."
+  },
+  "the_one_declared_change": {
+    "location": "strategies/research/volatility_structure_pullback_hypothesis_v2.py::evaluate_research_variant, field result['research_variant']['variant_eligible']",
+    "logic": "variant_eligible = parent_trade_ready AND stop_distance_atr is not None AND stop_distance_atr <= 3.975",
+    "effect": "Purely additive diagnostic field; does not mutate result['setup'], result['decision'], result['trade_plan'], or result['overlays'] -- proven by test_phase7_research_variant.py::test_research_variant_reproduces_the_parent_decision_and_setup_exactly and ::test_research_variant_adds_exactly_one_new_top_level_diagnostic_block (both still passing, re-run in Part 14 below)."
+  },
+  "exactly_one_declared_change": true,
+  "second_behavioral_change_found": false,
+  "verdict": "PASS -- exactly one declared change confirmed. No stop condition triggered."
+}

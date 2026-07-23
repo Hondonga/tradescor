@@ -1,0 +1,69 @@
+{
+  "generated_at": "2026-07-23T03:52:00Z",
+  "preregistration_notice": "Frozen before any Phase 8 untouched-history outcome has been computed or viewed. Per the Part 2 untouched_history_inventory.json finding (completed immediately before this file, using only calendar-coverage bookkeeping and a read-only provider-availability probe -- no hypothesis-specific or strategy-outcome data of any kind was fetched or computed), zero genuinely untouched, currently-fetchable R_75 history exists. This plan is preregistered in full regardless, exactly as it would be executed once sufficient untouched history exists, so that its own sample-sufficiency stopping rule (Part 4) is what formally concludes this attempt. Immutable from this point forward; any future attempt is a new, separately versioned experiment_id.",
+  "experiment_id": "phase8-r75-vsp-hypothesis-v2-untouched-replication-v1",
+  "parent_strategy": "volatility_structure_pullback",
+  "parent_strategy_version": "volatility_structure_pullback_engine-v1",
+  "parent_phase5_verdict": "REJECTED_NO_EDGE_AFTER_COSTS",
+  "variant_strategy": "volatility_structure_pullback_hypothesis_v2",
+  "variant_module": "strategies/research/volatility_structure_pullback_hypothesis_v2.py",
+  "phase7_experiment_id": "phase7-r75-vsp-hypothesis-v2-stopatr-ceiling",
+  "phase7_hypothesis_verdict": "RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_UNTOUCHED_HISTORY",
+  "exact_threshold": 3.975,
+  "threshold_unchanged_from_phase7": true,
+  "atr_definition": "Mean(high - low) over the trailing 14 completed M5 candles up to and including the decision candle (validation.strategy_feasibility not used here -- matches strategies/research/volatility_structure_pullback_hypothesis_v2.py::_stop_distance_atr exactly, which itself mirrors analysis/volatility_structure_pullback_engine.py's own internal ATR window convention).",
+  "primary_metric": "conservative-cost mean realized R (net_r_conservative_cost), grouped by structural_episode_id, on the retained (variant-eligible) population of the untouched-history candidate universe.",
+  "cost_model": {
+    "version": "phase5-conservative-cost-v1 (unchanged)",
+    "zero_cost_diagnostic": 0.0, "base_cost": 0.05, "conservative_cost": 0.1,
+    "verdict_uses": "conservative_cost",
+    "note": "Identical for parent and variant; never lowered after any outcome is computed."
+  },
+  "fill_policy": "Identical to Phase 5/7 -- setup.entry at the first completed M5 candle where decision.trade_ready == true.",
+  "ambiguity_policy": {"rule": "stop_first (conservative), identical to Phase 5/7."},
+  "maximum_resolution_horizon_m5_candles": 576,
+  "fold_schedule": {"purge_days": 2, "embargo_days": 7, "minimum_folds": 6, "rule": "Chronological walk-forward, identical construction to data/stabilization/phase5/manifests/fold_manifest.json."},
+  "control_definitions": {
+    "paired_opposite_direction": "Same event, direction flipped, symmetric geometry.",
+    "geometry_control_v2": "validation/strategy_feasibility/control_methodology_v2.py -- corrected, non-degenerate construction (Phase 7 Part 7).",
+    "random_direction": "At least 1,000 deterministic seeded permutations, finite-sample p-value p = (1 + exceedances) / (N + 1), never exactly 0.",
+    "parent_vs_variant": "Both evaluated on the identical untouched-history candidate universe; variant is always a subset of the parent's eligible setups."
+  },
+  "grouping_method": "structural_episode_id",
+  "sample_requirements": {
+    "minimum_parent_resolved_setups": 250,
+    "minimum_retained_buy": 75,
+    "minimum_retained_sell": 75,
+    "minimum_folds": 6
+  },
+  "retention_requirement": "variant retains at least 50% of parent-eligible setups",
+  "drawdown_limit": "Variant maximum drawdown must not exceed the parent's own drawdown scaled proportionally to the retained sample size.",
+  "stability_requirements": {
+    "minimum_positive_fold_percentage": 60,
+    "no_single_fold_may_exceed_pct_of_profit": 50,
+    "both_directions_must_remain_viable": true,
+    "no_severe_recent_fold_sign_reversal": true
+  },
+  "direction_requirements": "Both BUY and SELL must be represented in the retained population; a verdict is never issued from a single-direction sample.",
+  "acceptance_gates_in_order": [
+    "CAUSALITY", "UNTOUCHED_HISTORY_VALIDITY", "SAMPLE_SUFFICIENCY", "RETENTION_SUFFICIENCY",
+    "VARIANT_POST_COST_EDGE", "IMPROVEMENT_OVER_PARENT", "DIRECTIONAL_INFORMATION",
+    "GEOMETRY_CONTROL_SUPERIORITY", "RANDOM_CONTROL_SUPERIORITY", "FOLD_STABILITY",
+    "DIRECTION_STABILITY", "DRAWDOWN"
+  ],
+  "allowed_verdicts": [
+    "FAILED_CAUSALITY_AUDIT", "REJECTED_INSUFFICIENT_UNTOUCHED_HISTORY", "REJECTED_INSUFFICIENT_SAMPLE",
+    "REJECTED_INSUFFICIENT_RETENTION", "REJECTED_NO_EDGE_AFTER_COSTS", "REJECTED_NO_IMPROVEMENT_OVER_PARENT",
+    "REJECTED_NO_DIRECTIONAL_EDGE", "REJECTED_GEOMETRY_ONLY_EFFECT", "REJECTED_RANDOM_CONTROL",
+    "REJECTED_UNSTABLE_ACROSS_FOLDS", "REJECTED_UNSTABLE_BY_DIRECTION", "REJECTED_EXCESSIVE_DRAWDOWN",
+    "RESEARCH_EXTENSION_REQUIRED", "RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_UNTOUCHED_HISTORY",
+    "RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_SAMPLE", "ELIGIBLE_FOR_SECOND_INDEPENDENT_REPLICATION"
+  ],
+  "maximum_positive_verdict": "ELIGIBLE_FOR_SECOND_INDEPENDENT_REPLICATION -- never PRODUCTION_READY, LIVE_READY, AUTO_ELIGIBLE, PAPER_ELIGIBLE, or CONFIRMED_PROFITABLE.",
+  "untouched_data_boundaries": {
+    "reference": "data/stabilization/phase8/manifests/untouched_history_inventory.json",
+    "known_insufficient_at_preregistration_time": true,
+    "conclusion_carried_forward": "RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_UNTOUCHED_HISTORY applies to this preregistered plan before Parts 5-12 (replay/controls/gates) are attempted."
+  },
+  "no_changes_after_outcomes_are_viewed": "This file is immutable from this point forward. No outcome of any kind was computed before it was written."
+}

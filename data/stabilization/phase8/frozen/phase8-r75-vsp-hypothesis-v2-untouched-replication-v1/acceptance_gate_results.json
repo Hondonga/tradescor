@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-07-23T03:58:00Z",
+  "part": "11 - ACCEPTANCE GATES (evaluated in the required order; first failed gate controls the verdict; all gates reported regardless)",
+  "gates": [
+    {
+      "order": 1, "gate": "CAUSALITY",
+      "result": "PASS (vacuous)",
+      "detail": "No replay was executed (Parts 5-10 NOT EXECUTED), so zero future-data violations and zero setup-ownership violations occurred -- there was nothing to violate."
+    },
+    {
+      "order": 2, "gate": "UNTOUCHED_HISTORY_VALIDITY",
+      "result": "FAILED",
+      "detail": "The only calendar window outside every excluded/embargoed range is 5.77 hours (data/stabilization/phase8/manifests/untouched_history_inventory.json), below the parent engine's own minimum warm-up requirement of 20 completed H1 candles (>=20 hours) needed to reach even a single scored decision point.",
+      "is_first_failed_gate": true
+    },
+    {"order": 3, "gate": "SAMPLE_SUFFICIENCY", "result": "FAILED (consequence of gate 2)", "detail": "0 achievable parent setups versus the preregistered minimum of 250 (data/stabilization/phase8/untouched_data/sample_gate_result.json)."},
+    {"order": 4, "gate": "RETENTION_SUFFICIENCY", "result": "N/A", "detail": "No parent-eligible population exists to compute retention against."},
+    {"order": 5, "gate": "VARIANT_POST_COST_EDGE", "result": "N/A", "detail": "No variant-retained setups exist."},
+    {"order": 6, "gate": "IMPROVEMENT_OVER_PARENT", "result": "N/A", "detail": "No parent or variant outcomes exist to compare."},
+    {"order": 7, "gate": "DIRECTIONAL_INFORMATION", "result": "N/A", "detail": "No same/opposite-direction pairs exist."},
+    {"order": 8, "gate": "GEOMETRY_CONTROL_SUPERIORITY", "result": "N/A", "detail": "geometry_control_v2 methodology exists and is unit-tested (validation/strategy_feasibility/control_methodology_v2.py) but was never applied to any Phase 8 outcome, since none exists."},
+    {"order": 9, "gate": "RANDOM_CONTROL_SUPERIORITY", "result": "N/A", "detail": "Finite-sample p-value methodology exists and is unit-tested but was never applied to any Phase 8 outcome."},
+    {"order": 10, "gate": "FOLD_STABILITY", "result": "N/A", "detail": "0 folds achievable."},
+    {"order": 11, "gate": "DIRECTION_STABILITY", "result": "N/A", "detail": "0 BUY / 0 SELL achievable."},
+    {"order": 12, "gate": "DRAWDOWN", "result": "N/A", "detail": "No equity curve exists to measure drawdown against."}
+  ],
+  "first_failed_gate": "UNTOUCHED_HISTORY_VALIDITY",
+  "verdict_controlled_by_first_failed_gate": "RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_UNTOUCHED_HISTORY",
+  "part_12_allowed_verdict_check": "RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_UNTOUCHED_HISTORY is in the preregistered allowed_verdicts list (data/stabilization/phase8/preregistration/experiment_spec.json) and is enforced as assignable (not forbidden) by validation/strategy_feasibility/phase7_verdicts.py::assign_verdict, reused unchanged from Phase 7.",
+  "phase6_eligibility_classifications_changed": false
+}

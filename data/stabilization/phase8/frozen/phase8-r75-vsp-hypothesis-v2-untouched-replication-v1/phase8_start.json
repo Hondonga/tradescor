@@ -1,0 +1,27 @@
+{
+  "started_at": "2026-07-23T03:47:00Z",
+  "starting_phase7_commit": "d08810219fc1a2e9f6ac1c5bedcd3d9ca5af218c",
+  "working_branch": "tradescor-phase8-stop-distance-replication",
+  "working_tree_status": [],
+  "parent_strategy": "volatility_structure_pullback",
+  "parent_phase5_verdict": "REJECTED_NO_EDGE_AFTER_COSTS",
+  "variant_strategy": "volatility_structure_pullback_hypothesis_v2",
+  "phase7_hypothesis_verdict": "RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_UNTOUCHED_HISTORY",
+  "selected_threshold": 3.975,
+  "phase5_holdout_status": "SEALED",
+  "phase5_checksums_valid": true,
+  "phase7_checksums_valid": true,
+  "parent_engine_unchanged_since_phase6": true,
+  "phase6_registry_unchanged": true,
+  "frozen_ml_integrity": true,
+  "pre_checks": {
+    "phase5_frozen_experiment_verified": true,
+    "phase5_holdout_sealed": true,
+    "phase7_frozen_experiment_verified": true,
+    "threshold_equals_3975": true,
+    "parent_engine_byte_identical_to_phase6": true,
+    "phase6_registry_unchanged": true,
+    "frozen_ml_artifacts_unchanged": true
+  },
+  "scope": "untouched_history_replication_of_the_single_preregistered_stop_distance_atr_hypothesis"
+}
