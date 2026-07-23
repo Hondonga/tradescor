@@ -75,11 +75,16 @@ def test_step_proofs_forbid_fvg_and_order_block_dependencies():
         assert set(registry[strategy_id]["forbidden_entities"])=={"fvg","order_block"}
 
 
-def test_proved_focused_behavior_is_available_to_auto():
+def test_proved_focused_behavior_is_reachable_but_still_not_auto_eligible():
+    # Phase 6: reachability (proven here) and historical validation are
+    # separate axes. volatility_structure_pullback's frozen Phase 5 verdict
+    # is REJECTED_NO_EDGE_AFTER_COSTS, so Auto must still block it even
+    # though the reachability proof below is satisfied.
     source={"setup":{"setup_type":"structure_pullback","state":"TRADE_READY","entry":100,"stop":99,"targets":[{"price":102}],"rr":2},"decision":{"trade_ready":True},"trade_chart":{"targets":[{"price":102}]}}
     gated=gate_auto_result(source,"VOLATILITY","auto")
     assert reachability_status("volatility_structure_pullback")=="REACHABLE"
-    assert gated["decision"]["trade_ready"] is True
+    assert gated["decision"]["trade_ready"] is False
+    assert gated["decision"]["status"]=="NO_VALIDATED_STRATEGY_AVAILABLE"
     manual={"setup":{"setup_type":"structure_pullback","state":"TRADE_READY"},"decision":{"trade_ready":True}}
     assert gate_auto_result(manual,"VOLATILITY","volatility_smc")["decision"]["trade_ready"] is True
 

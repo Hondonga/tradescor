@@ -34,6 +34,7 @@ def registerable_forex_paper_setup(product: dict) -> dict:
         and setup.get("stop") is not None
         and has_tp1
     )
+    block_reason = product.get("paper_signal_block_reason")
     reason = None
     if not eligible:
         if product.get("overlay_mode") != "LIVE":
@@ -44,11 +45,19 @@ def registerable_forex_paper_setup(product: dict) -> dict:
             reason = f"Data is not live-ready (readiness={readiness})."
         elif not decision.get("trade_ready"):
             reason = "Decision has not reached TRADE_READY."
-        else:
+        elif not (setup.get("setup_id") and setup.get("entry") is not None and setup.get("stop") is not None and has_tp1):
             reason = "No active setup with complete entry/stop/TP1 geometry."
+        elif block_reason:
+            # Phase 6: geometry and readiness are complete -- the sole
+            # remaining blocker is that this strategy has not been formally,
+            # historically validated. "Reachable does not mean validated".
+            reason = block_reason
+        else:
+            reason = "This strategy has not been historically validated for paper registration."
     return {
         "eligible": eligible,
         "reason": reason,
+        "block_reason": block_reason if not eligible else None,
         "historical_edge_proven": False,
         "profitability_claim_allowed": False,
         "live_execution_allowed": False,

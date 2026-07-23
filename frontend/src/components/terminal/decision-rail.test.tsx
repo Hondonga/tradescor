@@ -294,6 +294,52 @@ describe("DecisionRail status wording polish", () => {
     expect(screen.getByText("Looking for: Neutral")).toBeInTheDocument();
   });
 
+  it("Phase 6: shows RESEARCH PLAN, not TRADE READY, for a rejected strategy's complete engine TRADE_READY plan, and discloses STRATEGY STATUS/VALIDATION/REASON/REACHABILITY/TRADING ELIGIBILITY", () => {
+    renderRail(
+      baseDecision({
+        decision: { status: "READY TO SELL", direction: "sell", stage: "TRADE_READY", headline: "READY TO SELL", summary: "", next_action: "x", trade_ready: true },
+        trade_plan: { available: true, status: "READY TO SELL", entry: 51500, stop: 51650, targets: [{ name: "TP1", price: 51150, risk_reward: 2.3 }] },
+        strategy_evidence: {
+          reachability_status: "REACHABLE_BOTH_DIRECTIONS",
+          validation_status: "REJECTED_NO_EDGE_AFTER_COSTS",
+          validation_verdict: "REJECTED_NO_EDGE_AFTER_COSTS",
+          historical_edge_proven: false,
+          profitability_claim_allowed: false,
+          auto_eligible: false,
+          paper_signal_allowed: false,
+          paper_shadow_eligible: false,
+          live_execution_allowed: false,
+          research_only: true,
+          experiment_id: "phase5-r75-vsp-walkforward-v1",
+          evidence_summary: "",
+        },
+        product_actionability: {
+          actionable: false,
+          status: "RESEARCH_PLAN",
+          blocker: "REJECTED_NO_EDGE_AFTER_COSTS",
+          auto_allowed: false,
+          paper_allowed: false,
+          live_allowed: false,
+        },
+      } as Partial<NormalizedDecision>),
+    );
+    expect(screen.getByText("RESEARCH PLAN")).toBeInTheDocument();
+    expect(screen.queryByText("TRADE READY")).not.toBeInTheDocument();
+    // Appears twice: the header's "Research only" badge and the disclosure
+    // panel's "Strategy status" value both legitimately say this.
+    expect(screen.getAllByText("Research only").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText("Rejected after formal walk-forward validation")).toBeInTheDocument();
+    expect(screen.getByText("No stable post-cost edge was confirmed.")).toBeInTheDocument();
+    expect(screen.getByText("BUY and SELL setup construction verified.")).toBeInTheDocument();
+    expect(screen.getByText("Auto: Disabled")).toBeInTheDocument();
+    expect(screen.getByText("Paper signals: Disabled")).toBeInTheDocument();
+    expect(screen.getByText("Live execution: Disabled")).toBeInTheDocument();
+    expect(screen.getByText("ML filtering: Disabled")).toBeInTheDocument();
+    // Part 13: the engine's own output is still fully preserved and visible.
+    expect(screen.getByText("Research plan · not actionable")).toBeInTheDocument();
+    expect(screen.getByText(/51,?500|51500/)).toBeInTheDocument();
+  });
+
   it("uses the too-late entry-timing message and next action in WHAT IS MISSING / NEXT ACTION, and the chart card does not repeat it", () => {
     const decision = baseDecision({
       entry_timing: {

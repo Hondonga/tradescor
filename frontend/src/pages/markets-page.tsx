@@ -16,23 +16,46 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { formatPrice, titleCase } from "@/lib/utils";
 import {
-  canonicalStatus,
-  canonicalStatusTone,
   directionLabel,
   isLateEntryTiming,
+  productStatusLabel,
+  productStatusTone,
+  resolveProductStatus,
 } from "@/lib/status-labels";
 import type { MarketRow } from "@/types";
 const helper = createColumnHelper<MarketRow>();
+const SCANNER_COLUMN_COUNT = 24;
+// Phase 6: a strategy reaching engine TRADE_READY is no longer sufficient to
+// rank it as a top opportunity -- it must also be historically validated
+// (product_actionability.actionable). Rejected/unvalidated complete plans
+// land in their own "Research Plan" segment, never "Trade Ready".
 function segment(row: MarketRow) {
   const d = row.decision;
   if (row.symbol.analysis_supported === false) return "Unsupported Model";
   if (row.error || d?.readiness.state === "insufficient")
     return "Data Problems";
-  if (d?.decision.trade_ready) return "Trade Ready";
-  if (d?.decision.direction && d.decision.stage.includes("WAIT"))
-    return "Developing";
-  if (d?.decision.stage) return "Waiting";
+  if (!d) return "No Opportunity";
+  const status = resolveProductStatus(d);
+  if (status === "TRADE_READY") return "Trade Ready";
+  if (status === "RESEARCH_PLAN") return "Research Plan";
+  if (status === "RESEARCH_WATCH" || status === "WATCHLIST") return "Developing";
+  if (d.decision.stage) return "Waiting";
   return "No Opportunity";
+}
+const VALIDATION_VERDICT_TEXT: Record<string, string> = {
+  REJECTED_NO_EDGE_AFTER_COSTS: "Rejected — no post-cost edge",
+  NO_CONFIRMED_DIRECTIONAL_EDGE: "Rejected — no directional edge",
+  REJECTED_POOR_CALIBRATION: "Rejected — poor calibration",
+};
+function validationVerdictText(decision?: MarketRow["decision"]) {
+  const evidence = decision?.strategy_evidence;
+  if (!evidence) return "—";
+  if (evidence.historical_edge_proven) return "Validated";
+  if (evidence.validation_verdict) {
+    return VALIDATION_VERDICT_TEXT[evidence.validation_verdict] ?? `Rejected — ${evidence.validation_verdict.replace(/_/g, " ").toLowerCase()}`;
+  }
+  if (evidence.validation_status === "REACHABILITY_ONLY") return "Not yet validated";
+  return "Not tested";
 }
 export function MarketsPage() {
   const store = useTerminalStore(),
@@ -132,7 +155,7 @@ export function MarketsPage() {
       }),
       helper.accessor((x) => x.symbol.display_name, {
         id: "symbol",
-        header: "Symbol",
+        header: "Market",
         cell: (i) => (
           <div>
             <b>{i.getValue()}</b>
@@ -140,6 +163,19 @@ export function MarketsPage() {
           </div>
         ),
       }),
+      helper.accessor((x) => x.decision?.meta.timeframe, {
+        id: "timeframe",
+        header: "Timeframe",
+        cell: (i) => i.getValue() || "—",
+      }),
+      helper.accessor(
+        (x) => x.decision?.ownership.selected_strategy_id || x.decision?.ownership.selected_model_id,
+        {
+          id: "strategy",
+          header: "Strategy",
+          cell: (i) => titleCase(i.getValue()) || "—",
+        },
+      ),
       helper.accessor(
         (x) => x.symbol.family_display || titleCase(x.symbol.family),
         {
@@ -155,6 +191,14 @@ export function MarketsPage() {
           </span>
         ),
       }),
+      helper.accessor(
+        (x) => [x.decision?.market.external_structure, x.decision?.market.internal_structure].filter(Boolean).join(" / "),
+        {
+          id: "marketState",
+          header: "Market state",
+          cell: (i) => i.getValue() || "—",
+        },
+      ),
       helper.accessor((x) => x.decision?.market.external_structure, {
         id: "external",
         header: "External",
@@ -165,8 +209,18 @@ export function MarketsPage() {
       }),
       helper.accessor((x) => x.decision?.setup.setup_type, {
         id: "setup",
-        header: "Active SMC setup",
+        header: "Research setup",
         cell: (i) => titleCase(i.getValue()) || "—",
+      }),
+      helper.accessor((x) => x.decision?.decision.stage, {
+        id: "engineState",
+        header: "Engine state",
+        cell: (i) => titleCase(i.getValue()) || "—",
+      }),
+      helper.accessor((x) => x.decision?.strategy_evidence?.validation_verdict || x.decision?.strategy_evidence?.validation_status, {
+        id: "validationVerdict",
+        header: "Validation verdict",
+        cell: (i) => validationVerdictText(i.row.original.decision),
       }),
       helper.accessor((x) => x.decision?.decision.direction, {
         id: "direction",
@@ -174,15 +228,15 @@ export function MarketsPage() {
         cell: (i) => (i.row.original.decision ? directionLabel(i.getValue()) : "—"),
       }),
       helper.accessor((x) => x.decision?.decision.stage, {
-        id: "stage",
-        header: "Status",
+        id: "productStatus",
+        header: "Product status",
         cell: (i) => {
           const decision = i.row.original.decision;
           if (i.row.original.symbol.analysis_supported === false)
             return <StatusBadge tone="neutral">Unsupported model</StatusBadge>;
           if (!decision) return <StatusBadge tone="neutral">Unanalyzed</StatusBadge>;
-          const status = canonicalStatus(decision);
-          return <StatusBadge tone={canonicalStatusTone(status)}>{status}</StatusBadge>;
+          const status = resolveProductStatus(decision);
+          return <StatusBadge tone={productStatusTone(status)}>{productStatusLabel(status)}</StatusBadge>;
         },
       }),
       helper.accessor((x) => x.decision?.entry_timing?.status, {
@@ -192,6 +246,11 @@ export function MarketsPage() {
           const status = i.getValue();
           return status ? status.replace(/_/g, " ").toUpperCase() : "—";
         },
+      }),
+      helper.accessor((x) => x.decision?.decision.first_blocking_gate, {
+        id: "why",
+        header: "Why",
+        cell: (i) => titleCase(i.getValue()) || "—",
       }),
       helper.accessor(
         (x) => {
@@ -215,11 +274,6 @@ export function MarketsPage() {
         id: "confidence",
         header: "Confidence",
         cell: (i) => i.getValue() || "—",
-      }),
-      helper.accessor((x) => x.decision?.decision.first_blocking_gate, {
-        id: "why",
-        header: "Why",
-        cell: (i) => titleCase(i.getValue()) || "—",
       }),
       helper.accessor((x) => x.decision?.readiness.state, {
         id: "data",
@@ -321,6 +375,7 @@ export function MarketsPage() {
             <tbody>
               {[
                 "Trade Ready",
+                "Research Plan",
                 "Developing",
                 "Waiting",
                 "No Opportunity",
@@ -358,7 +413,7 @@ function FragmentRows({
   return (
     <>
       <tr className="segment-row">
-        <td colSpan={19}>
+        <td colSpan={SCANNER_COLUMN_COUNT}>
           {label}
           <span>{rows.length}</span>
         </td>

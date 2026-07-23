@@ -14,18 +14,27 @@ import { StatusBadge } from "@/components/ui/status-badge";
 import { formatPrice, titleCase } from "@/lib/utils";
 import {
   canonicalStatus,
-  canonicalStatusSubtitle,
   canonicalStatusTone,
   directionLabel,
+  productStatusLabel,
+  productStatusSubtitle,
+  productStatusTone,
+  resolveProductStatus,
 } from "@/lib/status-labels";
 import type { NormalizedDecision } from "@/types";
 
 export function DecisionHeader({ decision }: { decision: NormalizedDecision }) {
-  const status = canonicalStatus(decision);
+  // Product status (validation-aware, backend-authoritative) is what the
+  // user sees; canonicalStatus (raw engine lifecycle) is preserved under
+  // Details so the technical state is never hidden, only not conflated with
+  // "you may act on this" -- ENGINE TRADE_READY is not PRODUCT ACTIONABILITY.
+  const productStatus = resolveProductStatus(decision);
+  const engineStatus = canonicalStatus(decision);
+  const researchOnly = decision.strategy_evidence?.research_only ?? decision.setup.research_only;
   return (
     <motion.header layout className="border-b border-white/[.07] p-4">
       <div className="flex items-center justify-between gap-3">
-        <StatusBadge tone={canonicalStatusTone(status)}>{status}</StatusBadge>
+        <StatusBadge tone={productStatusTone(productStatus)}>{productStatusLabel(productStatus)}</StatusBadge>
         <span className="font-mono text-[10px] text-zinc-500">
           {decision.setup.setup_quality_score == null
             ? "Quality —"
@@ -36,20 +45,86 @@ export function DecisionHeader({ decision }: { decision: NormalizedDecision }) {
         Looking for: {directionLabel(decision.decision.direction)}
       </p>
       <h2 className="mt-1 text-base font-semibold">
-        {canonicalStatusSubtitle(status)}
+        {productStatusSubtitle(productStatus)}
       </h2>
       <p className="mt-1 text-xs text-zinc-500">
         {titleCase(decision.ownership.selected_model_id)}
+      </p>
+      <p className="mt-1 text-[10px] text-zinc-600">
+        Details: engine reached {engineStatus === "TRADE READY" ? "TRADE_READY" : titleCase(decision.decision.stage)}
       </p>
       {decision.ownership.model_corrected && (
         <p className="mt-2 rounded border border-blue-400/20 bg-blue-400/5 px-2 py-1.5 text-[10px] leading-4 text-blue-200">
           Model changed: {decision.ownership.model_correction_reason}
         </p>
       )}
-      {decision.setup.research_only && (
+      {researchOnly && (
         <StatusBadge tone="neutral">Research only</StatusBadge>
       )}
+      <StrategyValidationPanel decision={decision} />
     </motion.header>
+  );
+}
+
+const VALIDATION_REASON_TEXT: Record<string, string> = {
+  REJECTED_NO_EDGE_AFTER_COSTS: "No stable post-cost edge was confirmed.",
+  NO_CONFIRMED_DIRECTIONAL_EDGE: "The strategy design is coherent, but paired testing did not confirm reliable directional information.",
+  REJECTED_POOR_CALIBRATION: "The model's confidence calibration did not hold up under testing.",
+};
+
+const REACHABILITY_TEXT: Record<string, string> = {
+  REACHABLE_BOTH_DIRECTIONS: "BUY and SELL setup construction verified.",
+  REACHABLE_BUY_ONLY: "BUY setup construction verified. SELL is not yet reachable.",
+  REACHABLE_SELL_ONLY: "SELL setup construction verified. BUY is not yet reachable.",
+  NOT_REACHABLE: "Setup construction has not yet been verified.",
+};
+
+/**
+ * Phase 6 Part 7: the exact required Workspace text distinguishing
+ * STRATEGY STATUS / VALIDATION / REASON / REACHABILITY / TRADING ELIGIBILITY
+ * for any strategy that is not both historically validated and actionable.
+ * Never shown for an actionable (validated) strategy -- there is nothing to
+ * disclaim there.
+ */
+export function StrategyValidationPanel({ decision }: { decision: NormalizedDecision }) {
+  const evidence = decision.strategy_evidence;
+  const actionability = decision.product_actionability;
+  if (!evidence || !actionability || actionability.actionable) return null;
+  const validation = evidence.historical_edge_proven
+    ? "Historically validated"
+    : evidence.validation_verdict
+      ? "Rejected after formal walk-forward validation"
+      : "Formal historical validation not yet completed";
+  const reason = evidence.validation_verdict
+    ? VALIDATION_REASON_TEXT[evidence.validation_verdict] ?? evidence.evidence_summary
+    : "No historical validation has been completed for this strategy yet.";
+  const reachability = REACHABILITY_TEXT[evidence.reachability_status] ?? evidence.reachability_status;
+  return (
+    <section className="mt-3 space-y-2 rounded border border-white/[.07] bg-white/[.02] p-3 text-[11px] leading-5">
+      <div>
+        <p className="label">Strategy status</p>
+        <p className="text-zinc-300">{evidence.research_only ? "Research only" : "Production"}</p>
+      </div>
+      <div>
+        <p className="label">Validation</p>
+        <p className="text-zinc-300">{validation}</p>
+      </div>
+      <div>
+        <p className="label">Reason</p>
+        <p className="text-zinc-400">{reason}</p>
+      </div>
+      <div>
+        <p className="label">Reachability</p>
+        <p className="text-zinc-300">{reachability}</p>
+      </div>
+      <div>
+        <p className="label">Trading eligibility</p>
+        <p className="text-zinc-400">Auto: {actionability.auto_allowed ? "Enabled" : "Disabled"}</p>
+        <p className="text-zinc-400">Paper signals: {actionability.paper_allowed ? "Enabled" : "Disabled"}</p>
+        <p className="text-zinc-400">Live execution: {actionability.live_allowed ? "Enabled" : "Disabled"}</p>
+        <p className="text-zinc-400">ML filtering: Disabled</p>
+      </div>
+    </section>
   );
 }
 export function DevelopingSetup({
@@ -91,9 +166,16 @@ export function TradeReadyPlan({ decision }: { decision: NormalizedDecision }) {
     decision.trade_plan?.available !== true
   )
     return null;
+  // Engine TRADE_READY is preserved and fully displayed below regardless of
+  // validation status (Part 13: never delete analysis) -- only the label
+  // changes, so an unvalidated/rejected strategy is never presented as a
+  // trading recommendation. Absent product_actionability (a decision that
+  // predates Phase 6) preserves the original label rather than inventing a
+  // downgrade the backend never actually claimed.
+  const actionable = decision.product_actionability ? decision.product_actionability.actionable : true;
   return (
     <section className="space-y-3 border-b border-white/[.07] p-4">
-      <p className="label">Trade plan · paper only</p>
+      <p className="label">{actionable ? "Trade plan · paper only" : "Research plan · not actionable"}</p>
       <dl className="detail-grid financial">
         <dt>Setup ID</dt>
         <dd className="break-all text-[10px]">{active.setup_id}</dd>

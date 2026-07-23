@@ -90,6 +90,41 @@ export interface Overlay {
 export interface HistoricalCandle { time: string | number; open: number; high: number; low: number; close: number }
 export interface HistoricalSearchProgress { job_id: string; symbol: string; strategy: string; period_days: number; processed_candles: number; total_candles: number; trade_ready_found: number; state: "queued"|"running"|"completed"|"cancelled"|"error"; error?: string; result_available?: boolean }
 export interface HistoricalInspection { mode: "historical"; label: string; decision?: NormalizedDecision; candles: HistoricalCandle[]; report: Record<string, unknown> }
+/** Phase 6: backend-authoritative record of whether this strategy has ever
+ * been historically validated. Reachability (can the engine build a
+ * complete plan) and validation (has that plan been proven to hold a
+ * post-cost edge) are separate axes -- "reachable does not mean validated".
+ * The frontend must never infer these values itself. */
+export interface StrategyEvidence {
+  reachability_status: string;
+  validation_status: string;
+  validation_verdict: string;
+  historical_edge_proven: boolean;
+  profitability_claim_allowed: boolean;
+  auto_eligible: boolean;
+  paper_signal_allowed: boolean;
+  paper_shadow_eligible: boolean;
+  live_execution_allowed: boolean;
+  research_only: boolean;
+  experiment_id: string | null;
+  evidence_summary: string;
+}
+/** Phase 6: engine_readiness (technical lifecycle) can never override
+ * product_actionability (whether the product may treat this as tradeable).
+ * The frontend must use product_actionability -- not engine_readiness --
+ * for badges, buttons, queue inclusion, and recommendations. */
+export interface EngineReadiness {
+  lifecycle: string;
+  plan_complete: boolean;
+}
+export interface ProductActionability {
+  actionable: boolean;
+  status: "TRADE_READY" | "RESEARCH_PLAN" | "RESEARCH_WATCH" | "MARKET_CONTEXT" | string;
+  blocker: string | null;
+  auto_allowed: boolean;
+  paper_allowed: boolean;
+  live_allowed: boolean;
+}
 export interface NormalizedDecision {
   decision_id: string;
   overlay_mode: OverlayMode;
@@ -269,6 +304,14 @@ export interface NormalizedDecision {
   current_market?: Record<string, unknown>;
   active_setup?: ({ setup_id: string; lifecycle?: string; state?: string } & Record<string, unknown>) | null;
   previous_setup?: unknown;
+  // Phase 6 (analysis/global_overlay_contract.py::normalize_global_decision):
+  // backend-authoritative validation/actionability metadata. Optional only
+  // because older cached/replayed decisions predate this field.
+  strategy_evidence?: StrategyEvidence;
+  engine_readiness?: EngineReadiness;
+  product_actionability?: ProductActionability;
+  paper_registration_allowed?: boolean;
+  paper_signal_block_reason?: string | null;
 }
 export interface AnalyzePayload {
   decision?: NormalizedDecision;

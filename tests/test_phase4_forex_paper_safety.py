@@ -60,18 +60,23 @@ def _eval(product, mode="LIVE"):
     return normalize_global_decision(product, mode=mode)
 
 
-def test_trade_ready_buy_is_eligible_and_never_claims_profitability_or_live_execution():
+def test_trade_ready_buy_has_complete_geometry_but_is_blocked_pending_historical_validation():
+    # Phase 6: GBP/USD ICT is REACHABILITY_ONLY, not historically validated,
+    # so even a complete, technically-ready plan must not register a
+    # production paper signal. This never claims profitability or live
+    # execution either way -- both were already, and remain, False.
     result = registerable_forex_paper_setup(_eval(_trade_ready_product("buy")))
-    assert result["eligible"] is True
+    assert result["eligible"] is False
+    assert result["block_reason"] == "STRATEGY_RESEARCH_ONLY"
     assert result["historical_edge_proven"] is False
     assert result["profitability_claim_allowed"] is False
     assert result["live_execution_allowed"] is False
-    assert result["reason"] is None
 
 
-def test_trade_ready_sell_is_eligible():
+def test_trade_ready_sell_has_complete_geometry_but_is_blocked_pending_historical_validation():
     result = registerable_forex_paper_setup(_eval(_trade_ready_product("sell")))
-    assert result["eligible"] is True
+    assert result["eligible"] is False
+    assert result["block_reason"] == "STRATEGY_RESEARCH_ONLY"
 
 
 def test_market_context_is_blocked():

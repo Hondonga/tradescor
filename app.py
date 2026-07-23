@@ -58,7 +58,8 @@ from paper_testing.derived_paper_service import DerivedPaperService
 from replay.derived_replay_service import DerivedReplayService
 from replay.derived_replay_dataset import acquire_deriv_dataset
 from analysis.strategy_gate_diagnostics_store import StrategyGateDiagnosticsStore
-from analysis.strategy_reachability_gate import production_strategy_status
+from analysis.strategy_reachability_gate import production_strategy_status, NO_VALIDATED_STRATEGY_MESSAGE
+from analysis.strategy_quarantine_registry import strategy_validation_registry, is_auto_eligible
 from analysis.volatility_latest_setup_search import LatestVolatilitySetupSearch
 from ml.dataset_builder import MLDatasetService
 from ml.training import MLTrainingService
@@ -360,7 +361,18 @@ def api_strategy_reachability():
     path=Path(__file__).resolve().parent/"data"/"strategy_setup_proof"/"latest.json"
     if not path.exists():return jsonify({"error":"Strategy setup-proof report has not been generated."}),404
     try:
-        report=json.loads(path.read_text(encoding="utf-8"));report["production_status"]=production_strategy_status();return jsonify(report)
+        report=json.loads(path.read_text(encoding="utf-8"));report["production_status"]=production_strategy_status()
+        # Phase 6: this is the one registry-health diagnostics surface --
+        # reachability (technical) and validation_registry (historical edge,
+        # Auto/paper/live/ML eligibility) are reported side by side so no
+        # caller needs to re-derive eligibility from raw proof data.
+        # production_strategy_status() only knows raw fixture reachability,
+        # not historical validation -- its own auto_eligible is stale here
+        # and must never be trusted for anything Auto/paper/live-facing.
+        report["production_status"]["auto_eligible"]=is_auto_eligible("volatility_structure_pullback")
+        report["validation_registry"]=strategy_validation_registry()
+        report["no_validated_strategy_message"]=NO_VALIDATED_STRATEGY_MESSAGE
+        return jsonify(report)
     except ValueError:return jsonify({"error":"Strategy setup-proof report is invalid."}),500
 
 

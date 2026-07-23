@@ -32,16 +32,39 @@ def strategy_id_for_setup(family,setup_type):
     return None
 
 
+# Phase 6: no strategy for this market has passed the required historical
+# validation, so a reachable-but-unvalidated Auto candidate must be blocked
+# with its own distinct outcome rather than reported as "PLAN REJECTED"
+# (which means "not even technically reachable"). Deferred import avoids a
+# circular import -- strategy_quarantine_registry imports this module.
+NO_VALIDATED_STRATEGY_MESSAGE = "No strategy for this market has passed the required historical validation."
+
+
+def _validation_blocked(strategy_id):
+    from analysis.strategy_quarantine_registry import is_auto_eligible
+    return not is_auto_eligible(strategy_id)
+
+
 def gate_auto_result(result,family,requested_strategy):
     if str(requested_strategy or "auto").lower() not in {"auto","smc","smc_auto"}:return result
     setup=result.get("setup") or {};strategy_id=strategy_id_for_setup(family,setup.get("setup_type") or setup.get("type"))
-    if not strategy_id or reachability_status(strategy_id)=="REACHABLE":return result
-    reason=f"{strategy_id} is excluded from production Auto routing until chronological setup proof reaches REACHABLE."
-    setup.update(state="PLAN REJECTED",entry=None,stop=None,targets=[],rr=None,research_only=True,next_required_condition=reason,reachability_status=reachability_status(strategy_id))
-    decision=result.get("decision") or {};decision.update(status="PLAN REJECTED",trade_ready=False,next_action=reason,first_blocking_gate="strategy_reachability")
-    result.update(setup=setup,decision=decision,active_trade_plan=None,m15_setup_zone=None,m5_execution_zone=None)
-    chart=result.get("trade_chart") or {};chart.update(state="none",confirmed_entry=None,stop=None,targets=[]);result["trade_chart"]=chart
-    result["reachability_gate"]={"strategy_id":strategy_id,"status":reachability_status(strategy_id),"auto_eligible":False,"reason":reason}
+    if not strategy_id:return result
+    if reachability_status(strategy_id)!="REACHABLE":
+        reason=f"{strategy_id} is excluded from production Auto routing until chronological setup proof reaches REACHABLE."
+        setup.update(state="PLAN REJECTED",entry=None,stop=None,targets=[],rr=None,research_only=True,next_required_condition=reason,reachability_status=reachability_status(strategy_id))
+        decision=result.get("decision") or {};decision.update(status="PLAN REJECTED",trade_ready=False,next_action=reason,first_blocking_gate="strategy_reachability")
+        result.update(setup=setup,decision=decision,active_trade_plan=None,m15_setup_zone=None,m5_execution_zone=None)
+        chart=result.get("trade_chart") or {};chart.update(state="none",confirmed_entry=None,stop=None,targets=[]);result["trade_chart"]=chart
+        result["reachability_gate"]={"strategy_id":strategy_id,"status":reachability_status(strategy_id),"auto_eligible":False,"reason":reason}
+        return result
+    if _validation_blocked(strategy_id):
+        reason=NO_VALIDATED_STRATEGY_MESSAGE
+        setup.update(state="NO_VALIDATED_STRATEGY_AVAILABLE",entry=None,stop=None,targets=[],rr=None,research_only=True,next_required_condition=reason)
+        decision=result.get("decision") or {};decision.update(status="NO_VALIDATED_STRATEGY_AVAILABLE",trade_ready=False,next_action=reason,first_blocking_gate="historical_validation")
+        result.update(setup=setup,decision=decision,active_trade_plan=None,m15_setup_zone=None,m5_execution_zone=None)
+        chart=result.get("trade_chart") or {};chart.update(state="none",confirmed_entry=None,stop=None,targets=[]);result["trade_chart"]=chart
+        result["reachability_gate"]={"strategy_id":strategy_id,"status":reachability_status(strategy_id),"auto_eligible":False,"reason":reason,"blocking_gate":"historical_validation"}
+        return result
     return result
 
 
@@ -49,9 +72,17 @@ def gate_normalized_auto_result(result,family,requested_strategy):
     if str(requested_strategy or "auto").lower() not in {"auto","smc","smc_auto"}:return result
     decision=result.get("decision") or {};strategy_id=strategy_id_for_setup(family,(result.get("setup") or {}).get("setup_type"))
     if not strategy_id and str(family).upper() in {"BOOM","CRASH"}:strategy_id="boom_crash_spike_state"
-    if not strategy_id or reachability_status(strategy_id)=="REACHABLE":return result
-    reason=f"{strategy_id} is excluded from production Auto routing until chronological setup proof reaches REACHABLE."
-    decision.update(status="PLAN REJECTED",trade_ready=False,next_action=reason,first_blocking_gate="strategy_reachability")
-    result.update(decision=decision,active_trade_plan=None,m15_setup_zone=None,m5_execution_zone=None,reachability_gate={"strategy_id":strategy_id,"status":reachability_status(strategy_id),"auto_eligible":False,"reason":reason})
-    chart=result.get("trade_chart") or {};chart.update(state="none",confirmed_entry=None,stop=None,targets=[]);result["trade_chart"]=chart
+    if not strategy_id:return result
+    if reachability_status(strategy_id)!="REACHABLE":
+        reason=f"{strategy_id} is excluded from production Auto routing until chronological setup proof reaches REACHABLE."
+        decision.update(status="PLAN REJECTED",trade_ready=False,next_action=reason,first_blocking_gate="strategy_reachability")
+        result.update(decision=decision,active_trade_plan=None,m15_setup_zone=None,m5_execution_zone=None,reachability_gate={"strategy_id":strategy_id,"status":reachability_status(strategy_id),"auto_eligible":False,"reason":reason})
+        chart=result.get("trade_chart") or {};chart.update(state="none",confirmed_entry=None,stop=None,targets=[]);result["trade_chart"]=chart
+        return result
+    if _validation_blocked(strategy_id):
+        reason=NO_VALIDATED_STRATEGY_MESSAGE
+        decision.update(status="NO_VALIDATED_STRATEGY_AVAILABLE",trade_ready=False,next_action=reason,first_blocking_gate="historical_validation")
+        result.update(decision=decision,active_trade_plan=None,m15_setup_zone=None,m5_execution_zone=None,reachability_gate={"strategy_id":strategy_id,"status":reachability_status(strategy_id),"auto_eligible":False,"reason":reason,"blocking_gate":"historical_validation"})
+        chart=result.get("trade_chart") or {};chart.update(state="none",confirmed_entry=None,stop=None,targets=[]);result["trade_chart"]=chart
+        return result
     return result

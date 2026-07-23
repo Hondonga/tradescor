@@ -6,6 +6,12 @@ from analysis.instrument_precision import precision_registry
 from analysis.derived_setup_lifecycle import TERMINAL as _DERIVED_TERMINAL
 from analysis.forex_decision_normalizer import TERMINAL_STATES as _FOREX_TERMINAL
 from analysis.smc.smc_setup_engine import STATES as _SMC_STATES
+from analysis.strategy_quarantine_registry import (
+    validation_entry as _validation_entry,
+    strategy_evidence_contract as _strategy_evidence_contract,
+    product_actionability as _product_actionability,
+    paper_signal_block_reason as _paper_signal_block_reason,
+)
 
 # This module is the single boundary that decides what the frontend renders, so its
 # terminal-state set is a live union of every family-specific lifecycle vocabulary
@@ -50,7 +56,20 @@ def normalize_global_decision(product,*,instrument_metadata=None,mode="LIVE"):
     if value["overlay_mode"] in {"LIVE","PREVIOUS_SETUP"}:rows.extend(_historical_rows(value,previous,owner,precision))
     rows=_deduplicate(rows);rows=_cluster(rows,precision,(value.get("market") or {}).get("atr"));value["overlays"]=rows;value["decision"]=public;value["setup"]=active or _empty_setup(setup)
     if value["overlay_mode"]=="PREVIOUS_SETUP":value["overlays"]=[row for row in value["overlays"] if row["category"]=="historical"]
-    value["paper_registration_allowed"]=bool(value["overlay_mode"]=="LIVE" and ready and not contradiction and readiness=="ready")
+    # Phase 6: strategy-level historical validation is a second, independent
+    # axis from technical/geometric readiness. A strategy can be fully
+    # "ready" here (complete entry/stop/TP1 geometry, live data, no
+    # contradiction) and still be blocked from Auto/paper/live because it
+    # has never been proven to hold a post-cost edge -- "reachable does not
+    # mean validated". This block only ever narrows paper_registration_allowed
+    # and adds new informational fields; it never touches ready/active/overlays.
+    strategy_id=_strategy_id(value,owner);validation=_validation_entry(strategy_id)
+    value["strategy_evidence"]=_strategy_evidence_contract(strategy_id)
+    lifecycle=stage;plan_complete=bool(active and active.get("entry") is not None and active.get("stop") is not None and _tp1(active) is not None)
+    actionability=_product_actionability(strategy_id,lifecycle=lifecycle,plan_complete=plan_complete)
+    value["engine_readiness"]=actionability["engine_readiness"];value["product_actionability"]=actionability["product_actionability"]
+    value["paper_registration_allowed"]=bool(value["overlay_mode"]=="LIVE" and ready and not contradiction and readiness=="ready" and validation["paper_signal_allowed"])
+    value["paper_signal_block_reason"]=None if validation["paper_signal_allowed"] else _paper_signal_block_reason(strategy_id)
     value.setdefault("research_scenario",None)
     return value
 

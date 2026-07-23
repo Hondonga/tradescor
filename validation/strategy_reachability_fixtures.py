@@ -40,7 +40,11 @@ def production_paper_lifecycle(fixture,contract):
     handle,path=tempfile.mkstemp(prefix="tradescor-proof-",suffix=".db");os.close(handle)
     try:
         service=DerivedPaperService(store=DerivedPaperStore(path),config={"enabled":True,"ambiguity":{"policy":"stop_first"},"fill":{"default_slippage_points":0}},enabled=True)
-        record=service.record_analysis(provider_symbol=fixture.symbol,display_name=fixture.symbol,family=fixture.family["family"],subfamily=fixture.family["family"],requested_strategy="volatility_structure_pullback",analysis_candle_time=created,decision_contract=legacy,candles=_paper_candles(setup,created))
+        # This harness proves paper_engine_capability (can a complete plan be
+        # turned into a structurally valid paper setup) for the technical
+        # reachability proof -- it must never be read as proof of real
+        # strategy_paper_eligibility, so it is explicitly marked TEST_FIXTURE_ONLY.
+        record=service.record_analysis(provider_symbol=fixture.symbol,display_name=fixture.symbol,family=fixture.family["family"],subfamily=fixture.family["family"],requested_strategy="volatility_structure_pullback",analysis_candle_time=created,decision_contract=legacy,candles=_paper_candles(setup,created),test_fixture_only=True)
         outcomes=service.outcomes(limit=10);detail=service.store.setup_detail(record.get("paper_setup_id")) if record.get("paper_setup_id") else None;outcome=(detail or {}).get("observed_outcome") or (outcomes[0] if outcomes else {})
         outcome_name=outcome.get("outcome") if outcome else None;filled=outcome_name in {"TP1_HIT","TP2_HIT","STOPPED","INVALIDATED_AFTER_FILL"}
         return {"paper_registered":bool(record.get("setup_registered")),"entry_filled":filled,"outcome_resolved":bool(outcome and outcome_name not in {None,"OPEN"}),"paper_setup_id":record.get("paper_setup_id"),"outcome":outcome_name,"realized_r":outcome.get("realized_r") if outcome else None,"excursion":(detail or {}).get("excursion")}

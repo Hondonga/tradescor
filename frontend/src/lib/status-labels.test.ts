@@ -5,8 +5,9 @@ import {
   directionLabel,
   entryTimingCopy,
   isLateEntryTiming,
+  resolveProductStatus,
 } from "./status-labels";
-import type { NormalizedDecision } from "@/types";
+import type { NormalizedDecision, ProductActionability, StrategyEvidence } from "@/types";
 
 function decisionWith(overrides: {
   trade_ready?: boolean;
@@ -33,6 +34,49 @@ function decisionWith(overrides: {
           can_enter_now: false,
         }
       : undefined,
+  } as unknown as NormalizedDecision;
+}
+
+function evidenceWith(overrides: Partial<StrategyEvidence> = {}): StrategyEvidence {
+  return {
+    reachability_status: "REACHABLE_BOTH_DIRECTIONS",
+    validation_status: "REJECTED_NO_EDGE_AFTER_COSTS",
+    validation_verdict: "REJECTED_NO_EDGE_AFTER_COSTS",
+    historical_edge_proven: false,
+    profitability_claim_allowed: false,
+    auto_eligible: false,
+    paper_signal_allowed: false,
+    paper_shadow_eligible: false,
+    live_execution_allowed: false,
+    research_only: true,
+    experiment_id: "phase5-r75-vsp-walkforward-v1",
+    evidence_summary: "",
+    ...overrides,
+  };
+}
+
+function actionabilityWith(overrides: Partial<ProductActionability> = {}): ProductActionability {
+  return {
+    actionable: false,
+    status: "RESEARCH_PLAN",
+    blocker: "REJECTED_NO_EDGE_AFTER_COSTS",
+    auto_allowed: false,
+    paper_allowed: false,
+    live_allowed: false,
+    ...overrides,
+  };
+}
+
+function decisionWithEvidence(
+  base: Partial<{ trade_ready: boolean; status: string; stage: string }>,
+  evidence?: StrategyEvidence,
+  actionability?: ProductActionability,
+): NormalizedDecision {
+  const decision = decisionWith(base);
+  return {
+    ...decision,
+    strategy_evidence: evidence,
+    product_actionability: actionability,
   } as unknown as NormalizedDecision;
 }
 
@@ -122,6 +166,59 @@ describe("entryTimingCopy — exact required wording", () => {
     expect(entryTimingCopy(undefined)).toBeNull();
     expect(entryTimingCopy("")).toBeNull();
     expect(entryTimingCopy("unknown_status")).toBeNull();
+  });
+});
+
+describe("resolveProductStatus — Phase 6: engine readiness can never override validation eligibility", () => {
+  it("maps a rejected strategy's engine TRADE_READY plan to RESEARCH_PLAN, never TRADE_READY", () => {
+    const decision = decisionWithEvidence(
+      { trade_ready: true, status: "READY TO SELL", stage: "TRADE_READY" },
+      evidenceWith(),
+      actionabilityWith({ status: "RESEARCH_PLAN", actionable: false }),
+    );
+    expect(resolveProductStatus(decision)).toBe("RESEARCH_PLAN");
+  });
+
+  it("maps an unvalidated (not-yet-tested) strategy's engine TRADE_READY plan to RESEARCH_PLAN too", () => {
+    const decision = decisionWithEvidence(
+      { trade_ready: true, status: "READY TO BUY", stage: "TRADE_READY" },
+      evidenceWith({ validation_status: "REACHABILITY_ONLY", validation_verdict: "" }),
+      actionabilityWith({ status: "RESEARCH_PLAN", actionable: false }),
+    );
+    expect(resolveProductStatus(decision)).toBe("RESEARCH_PLAN");
+  });
+
+  it("only returns TRADE_READY when the backend reports the strategy as actionable", () => {
+    const decision = decisionWithEvidence(
+      { trade_ready: true, status: "READY TO BUY", stage: "TRADE_READY" },
+      evidenceWith({ historical_edge_proven: true, research_only: false }),
+      actionabilityWith({ status: "TRADE_READY", actionable: true, auto_allowed: true, paper_allowed: true }),
+    );
+    expect(resolveProductStatus(decision)).toBe("TRADE_READY");
+  });
+
+  it("maps a rejected strategy's developing setup to RESEARCH_WATCH, not WATCHLIST", () => {
+    const decision = decisionWithEvidence(
+      { trade_ready: false, status: "SELL SETUP DEVELOPING", stage: "WAITING_FOR_DISPLACEMENT" },
+      evidenceWith(),
+      actionabilityWith({ status: "RESEARCH_WATCH" }),
+    );
+    expect(resolveProductStatus(decision)).toBe("RESEARCH_WATCH");
+  });
+
+  it("maps the Auto NO_VALIDATED_STRATEGY_AVAILABLE outcome to NO_VALIDATED_STRATEGY", () => {
+    const decision = decisionWith({ status: "NO_VALIDATED_STRATEGY_AVAILABLE", stage: "NO_VALIDATED_STRATEGY_AVAILABLE" });
+    expect(resolveProductStatus(decision)).toBe("NO_VALIDATED_STRATEGY");
+  });
+
+  it("still maps AVOID markers to AVOID regardless of strategy_evidence", () => {
+    const decision = decisionWithEvidence({ status: "INVALIDATED", stage: "INVALIDATED" }, evidenceWith());
+    expect(resolveProductStatus(decision)).toBe("AVOID");
+  });
+
+  it("falls back to the pre-Phase-6 3-state behavior when strategy_evidence is entirely absent (legacy/cached decisions)", () => {
+    expect(resolveProductStatus(decisionWith({ trade_ready: true, status: "READY TO BUY" }))).toBe("TRADE_READY");
+    expect(resolveProductStatus(decisionWith({ status: "SELL SETUP DEVELOPING" }))).toBe("WATCHLIST");
   });
 });
 

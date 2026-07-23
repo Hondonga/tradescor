@@ -29,6 +29,8 @@ from strategies.ict_2022_v2 import analyze_ict_2022_v2
 from analysis.derived_family_classifier import classify_derived_family
 from analysis.synthetic_volatility import synthetic_volatility_profile
 from analysis.synthetic_spike_detector import detect_synthetic_spike
+from analysis.strategy_quarantine_registry import is_auto_eligible
+from analysis.strategy_reachability_gate import NO_VALIDATED_STRATEGY_MESSAGE
 
 
 STAGE_BY_STATE = {
@@ -73,9 +75,18 @@ def build_decision(
     research_router = route_auto(symbol=symbol, asset_class=asset_class, regime=regime, features=features, top_down=top_down, session=session or {}, execution_mode=execution_mode, registry=evidence_registry, amd=amd_context, ict_model=strict_ict, spread=spread, derived_family=derived_family, spike_state=spike_state)
     selected_candidate = research_router.get("selected_candidate")
     requested_key = str(requested_strategy or "auto").lower()
+    no_validated_strategy = False
     if requested_key != "auto":
         manual=[row for row in research_router["candidates"] if row["strategy_id"]==requested_key and row["eligible"]]; selected_candidate=max(manual,key=lambda row:(row.get("candidate_score",0),row.get("present_quality_score",0)),default=None)
-    routing = {"selected_strategy": selected_candidate["strategy_id"] if selected_candidate else "", "market_condition": regime["regime"], "reason": research_router["selection_reason"] if requested_key == "auto" else f"Manual {requested_key} candidate remains subject to eligibility and M5 risk gates.", "eligible_strategies": research_router["eligible_strategies"], "evidence_status": research_router["evidence_status"]}
+    else:
+        # Phase 6: Auto additionally requires historical_edge_proven=true.
+        # No strategy currently satisfies that, so Auto must never silently
+        # fall back to a merely market-eligible candidate; manual Research
+        # selection (the branch above) is untouched by this gate.
+        if not (selected_candidate and is_auto_eligible(selected_candidate.get("strategy_id"))):
+            selected_candidate = None
+            no_validated_strategy = True
+    routing = {"selected_strategy": selected_candidate["strategy_id"] if selected_candidate else "", "market_condition": regime["regime"], "reason": NO_VALIDATED_STRATEGY_MESSAGE if no_validated_strategy else (research_router["selection_reason"] if requested_key == "auto" else f"Manual {requested_key} candidate remains subject to eligibility and M5 risk gates."), "eligible_strategies": research_router["eligible_strategies"], "evidence_status": "NO_VALIDATED_STRATEGY_AVAILABLE" if no_validated_strategy else research_router["evidence_status"], "no_validated_strategy": no_validated_strategy}
     if selected_candidate:
         top_down = _top_down_for_candidate(top_down, selected_candidate)
     m5 = synchronized.get("M5", pd.DataFrame())

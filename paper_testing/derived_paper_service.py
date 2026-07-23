@@ -10,18 +10,28 @@ from paper_testing.derived_outcome_resolver import resolve_paper_outcome
 from paper_testing.derived_mfe_mae_tracker import track_mfe_mae
 from paper_testing.derived_evidence_classifier import classify_derived_evidence
 from paper_testing.derived_performance_aggregator import aggregate_derived_performance,chronological_drawdown
+from analysis.strategy_quarantine_registry import is_paper_signal_allowed,paper_signal_block_reason,validation_entry
 class DerivedPaperService:
     def __init__(self,store=None,config=None,enabled=None):
         cfg=config or _config();self.config=cfg;path=os.getenv("DERIVED_PAPER_DB",cfg.get("database_path","data/derived_paper_testing.db"));self.enabled=bool(cfg.get("enabled",True)) if enabled is None else enabled;self.store=store or DerivedPaperStore(path)
-    def record_analysis(self,*,provider_symbol,display_name,family,subfamily,requested_strategy,analysis_candle_time,decision_contract,candles=None,data_snapshot_id=""):
+    def record_analysis(self,*,provider_symbol,display_name,family,subfamily,requested_strategy,analysis_candle_time,decision_contract,candles=None,data_snapshot_id="",test_fixture_only=False):
         if not self.enabled:return {"enabled":False}
-        snapshot=build_derived_signal_snapshot(provider_symbol=provider_symbol,display_name=display_name,family=family,subfamily=subfamily,requested_strategy=requested_strategy,analysis_candle_time=analysis_candle_time,decision_contract=decision_contract,data_snapshot_id=data_snapshot_id);self._archive_replaced_pending(provider_symbol,snapshot.selected_strategy,analysis_candle_time);decision_id,inserted=self.store.insert_decision(snapshot)
+        snapshot=build_derived_signal_snapshot(provider_symbol=provider_symbol,display_name=display_name,family=family,subfamily=subfamily,requested_strategy=requested_strategy,analysis_candle_time=analysis_candle_time,decision_contract=decision_contract,data_snapshot_id=data_snapshot_id);self._archive_replaced_pending(provider_symbol,snapshot.selected_strategy,analysis_candle_time)
+        # Phase 6 Part 5/17: paper_engine_capability (can this decision be
+        # technically turned into a paper setup) is a different question from
+        # strategy_paper_eligibility (may it register through the production
+        # path). Fixture/harness callers pass test_fixture_only=True to prove
+        # the former without ever proving real eligibility; the live app
+        # (test_fixture_only=False, the default) is always subject to the gate.
+        strategy_id=snapshot.selected_strategy;validation=validation_entry(strategy_id);paper_allowed=bool(test_fixture_only or validation["paper_signal_allowed"]);block_reason=None if paper_allowed else paper_signal_block_reason(strategy_id)
+        snapshot.payload["phase6_record_safety"]={"strategy_id":strategy_id,"strategy_version":decision_contract.get("configuration_hash") or decision_contract.get("strategy_version"),"validation_status_at_registration":validation["validation_status"],"validation_verdict_at_registration":validation["validation_verdict"],"product_actionability_at_registration":{"auto_allowed":validation["auto_eligible"],"paper_allowed":validation["paper_signal_allowed"],"live_allowed":validation["live_execution_allowed"]},"test_fixture_only":bool(test_fixture_only),"experiment_id":validation["experiment_id"],"block_reason":block_reason}
+        decision_id,inserted=self.store.insert_decision(snapshot)
         if inserted:self.store.append_event("decision:"+decision_id,"decision_created",snapshot.created_at,payload={"decision_id":decision_id}) if False else None
         setup=build_paper_setup(snapshot,int(((decision_contract.get("active_trade_plan") or {}).get("setup_expiration_candles") or 12)))
         registered=False
-        if setup:registered=self.store.insert_setup(setup,snapshot.payload,snapshot.payload.get("research_mode",False));self.store.append_event(setup.paper_setup_id,"entry_available",snapshot.created_at,setup.entry,{"decision_id":decision_id}) if registered else None
+        if setup and paper_allowed:registered=self.store.insert_setup(setup,snapshot.payload,snapshot.payload.get("research_mode",False));self.store.append_event(setup.paper_setup_id,"entry_available",snapshot.created_at,setup.entry,{"decision_id":decision_id}) if registered else None
         reconciliation=self.reconcile(candles) if candles is not None else {}
-        return {"enabled":True,"decision_id":decision_id,"snapshot_inserted":inserted,"setup_registered":registered,"paper_setup_id":setup.paper_setup_id if setup else None,"reconciliation":reconciliation}
+        return {"enabled":True,"decision_id":decision_id,"snapshot_inserted":inserted,"setup_registered":registered,"paper_setup_id":setup.paper_setup_id if (setup and paper_allowed) else None,"paper_signal_allowed":paper_allowed,"paper_signal_block_reason":block_reason,"test_fixture_only":bool(test_fixture_only),"reconciliation":reconciliation}
     def _archive_replaced_pending(self,provider_symbol,current_strategy,at):
         for row in self.store.active_setups():
             if row.get("state")!="waiting_for_fill" or row.get("strategy")==current_strategy:continue

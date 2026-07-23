@@ -26,7 +26,13 @@ def test_focused_engine_produces_complete_bidirectional_ready_plans():
         assert result["ownership"]["requested_model"]=="smc_auto"
         assert result["ownership"]["selected_model"]=="volatility_structure_pullback"
         assert result["ownership"]["selection_reason"]=="Only proven production strategy enabled during focused validation."
-        assert result["production_status"]=={"strategy_id":"volatility_structure_pullback","production_supported":True,"fixture_buy_reachable":True,"fixture_sell_reachable":True,"historically_observed":False,"live_observed":False,"auto_eligible":True}
+        # Phase 6: technically reachable (both directions, complete geometry
+        # below) is not the same claim as historically validated/Auto
+        # eligible -- the frozen Phase 5 verdict makes that explicitly False.
+        status=result["production_status"]
+        assert status["strategy_id"]=="volatility_structure_pullback" and status["fixture_buy_reachable"] is True and status["fixture_sell_reachable"] is True
+        assert status["auto_eligible"] is False and status["historical_edge_proven"] is False
+        assert status["validation_verdict"]=="REJECTED_NO_EDGE_AFTER_COSTS"
         assert result["meta"]["source_timeframe"]=="provided" and result["trade_plan"]["available"]
         assert all({"overlay_id","owner_id","setup_id","type","created_at","actionable_at_decision_time"}<=set(row) for row in result["overlays"])
         assert all(row["owner_id"]=="volatility_structure_pullback" for row in result["overlays"])

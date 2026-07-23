@@ -12,9 +12,16 @@ export interface OpportunityQueueProps {
   analyzePending: boolean;
 }
 
-/** A research-only candidate can never be presented as an actionable
- * opportunity (Phase 2 quarantine rules, Phase 3 §18/§19). */
+/** A research-only or historically-unvalidated candidate can never be
+ * presented as an actionable opportunity (Phase 2 quarantine rules, Phase 3
+ * §18/§19, Phase 6 historical-validation gate). Prefers the backend-
+ * authoritative strategy_evidence; product_actionability.actionable is the
+ * single source of truth once attached, so "reachable but unvalidated"
+ * (e.g. Volatility Structure Pullback, GBP/USD ICT) is never mistaken for a
+ * real opportunity just because engine TRADE_READY was reached. */
 function isResearchOnly(row: MarketRow): boolean {
+  const evidence = row.decision?.strategy_evidence;
+  if (evidence) return evidence.research_only || !evidence.historical_edge_proven;
   return Boolean(row.decision?.setup?.research_only);
 }
 
@@ -67,10 +74,13 @@ function freshnessText(row: MarketRow): string {
 }
 
 /**
- * Opportunity queue (Phase 3 §19), extracted from workspace-page.tsx. Shows
- * only production-supported developing/plan-validation/trade-ready setups
- * by default; research-only candidates require the explicit "Show
- * Research" toggle and are always visually muted/labeled RESEARCH.
+ * Opportunity queue (Phase 3 §19; Phase 6 historical-validation gate).
+ * Shows only historically validated, paper/production-eligible setups by
+ * default -- as of Phase 6 no current strategy qualifies, so the default
+ * queue is NO VALIDATED OPPORTUNITIES. Research-only or unvalidated
+ * candidates (including complete, engine TRADE_READY plans) require the
+ * explicit "Show Research" toggle, are always visually muted/labeled
+ * RESEARCH, and never carry a paper-registration or Auto action.
  */
 export function OpportunityQueue({ rows, onSelect, dataReadiness, onAnalyzeNow, analyzePending }: OpportunityQueueProps) {
   const [showResearch, setShowResearch] = useState(false);
@@ -127,7 +137,16 @@ export function OpportunityQueue({ rows, onSelect, dataReadiness, onAnalyzeNow, 
         </div>
       ) : (
         <div className="queue-empty">
-          {rows.length ? "No production-supported opportunities right now." : "Star symbols in Markets to build the queue."}
+          {rows.length ? (
+            <>
+              <b>NO VALIDATED OPPORTUNITIES</b>
+              <br />
+              No strategy for this market has passed the required historical
+              validation.
+            </>
+          ) : (
+            "Star symbols in Markets to build the queue."
+          )}
         </div>
       )}
       <Button className="m-3" onClick={onAnalyzeNow} disabled={analyzePending}>

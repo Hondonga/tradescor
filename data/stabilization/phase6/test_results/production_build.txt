@@ -1,0 +1,18 @@
+
+> tradescor-terminal@1.0.0 build
+> tsc -b && vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 2304 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.78 kB │ gzip:   0.40 kB
+dist/assets/index-KcIqkeCR.css   37.69 kB │ gzip:   8.21 kB
+dist/assets/router-Cydpsmqd.js   91.27 kB │ gzip:  30.10 kB
+dist/assets/data-C8qbGAJs.js    103.67 kB │ gzip:  29.48 kB
+dist/assets/charts-CaQ7lzKo.js  162.76 kB │ gzip:  51.73 kB
+dist/assets/ui-BVOcgmqV.js      222.61 kB │ gzip:  74.05 kB
+dist/assets/index-Iipnhhty.js   353.52 kB │ gzip: 108.28 kB
+✓ built in 6.01s
+EXIT:0

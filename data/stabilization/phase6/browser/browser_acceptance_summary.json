@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-07-22T22:35:00Z",
+  "tool": "Playwright (chromium 1228, already cached in this environment)",
+  "resolution_tested": "1440x900 desktop (single resolution -- see scope note)",
+  "scope_note": "This repository has no pre-existing Playwright suite/config (playwright is a devDependency with no established spec files). A one-off smoke script was written for this pass, exercised against real, session-owned Flask + Vite dev servers (not the pytest suite, not mocks), and then removed. It is not a permanent addition to the repo. A pre-existing, unrelated Flask process (PID 74525, running since 2026-07-20, outside this session's control) was found occupying the default port 5000; it was left untouched and a dedicated instance was run on port 5050/5174 instead so results are attributable to this session's code only.",
+  "checks": {
+    "markets_page_loads": true,
+    "scanner_shows_required_new_columns": {
+      "Product status": true,
+      "Validation verdict": true,
+      "Engine state": true
+    },
+    "no_trade_ready_badge_text_found_anywhere": true,
+    "workspace_opens": true,
+    "workspace_shows_required_auto_unavailable_message": true,
+    "auto_unavailable_message_exact_text_confirmed": "No strategy for this market has passed the required historical validation, so Auto is unavailable. Use Research to review complete plans manually.",
+    "opportunity_queue_default_state": "Star symbols in Markets to build the queue. (zero rows scanned in this pass; the NO VALIDATED OPPORTUNITIES branch is covered by an automated Vitest test instead, see frontend/src/components/terminal/opportunity-queue.test.tsx)",
+    "no_profitability_claim_observed": true,
+    "console_errors_after_removing_the_stale_port_5000_confound": [
+      "1x: GET /api/candles?symbol=EUR/USD&...&provider=twelve_data -> 500, classified as external-provider availability failure (see reason below), not an application regression"
+    ]
+  },
+  "external_provider_availability_note": "The live Deriv connection showed as DISCONNECTED throughout this pass (Provider: Deriv badge), consistent with the 3 known live-Deriv-connectivity pytest failures already documented in the Phase 5 report and reproduced again in this Phase 6 regression run -- this prevented populating a live R_75/Jump scenario with real data during the browser pass. The single /api/candles 500 (TwelveData, Forex) was independently re-verified moments later via a direct curl to the same endpoint, which returned 200 with real candle data -- confirming a transient external-provider condition, not a deterministic code defect.",
+  "not_covered_in_this_pass": [
+    "Multiple browser resolutions (only 1440x900 desktop was exercised)",
+    "A live, fully-populated R_75 TRADE_READY / RESEARCH PLAN screenshot (blocked by live Deriv disconnection in this environment at run time)",
+    "A live GBP/USD or Jump screenshot beyond the reachability-only caption already captured",
+    "Zero-console-error confirmation under full Deriv connectivity"
+  ],
+  "how_the_gaps_were_covered_instead": "Every specific state Part 24 asks to capture (rejected-strategy TRADE_READY -> RESEARCH PLAN, reachability-only GBP/USD messaging, Jump research-only presentation, empty/populated opportunity queue, scanner Product/Validation columns, no TRADE READY/Auto badge for unvalidated strategies) is covered by an automated, deterministic Vitest test using real fixture data instead (frontend/src/lib/status-labels.test.ts, frontend/src/components/terminal/decision-rail.test.tsx, frontend/src/components/terminal/opportunity-queue.test.tsx) -- all 184 passing. The browser pass above additionally confirms the same wiring end-to-end against real running servers for the states reachable without live Deriv data."
+}

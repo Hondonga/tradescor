@@ -116,6 +116,54 @@ describe("OpportunityQueue", () => {
     expect(screen.getByText("RESEARCH")).toBeInTheDocument();
   });
 
+  it("Phase 6: hides a reachable, engine TRADE_READY, but historically-unvalidated strategy (e.g. rejected Volatility Structure Pullback) by default even though setup.research_only is not set", () => {
+    // The engine never sets setup.research_only=true for a technically
+    // complete plan (see analysis/volatility_structure_pullback_engine.py) --
+    // only strategy_evidence carries the "never proven" fact. This is the
+    // exact leak Phase 6 closes: reachable != validated.
+    render(
+      <OpportunityQueue
+        rows={[
+          row(
+            "R_75",
+            decisionFor({
+              decision: { status: "READY TO SELL", direction: "sell", stage: "TRADE_READY", headline: "", summary: "", next_action: "", trade_ready: true },
+              strategy_evidence: {
+                reachability_status: "REACHABLE_BOTH_DIRECTIONS",
+                validation_status: "REJECTED_NO_EDGE_AFTER_COSTS",
+                validation_verdict: "REJECTED_NO_EDGE_AFTER_COSTS",
+                historical_edge_proven: false,
+                profitability_claim_allowed: false,
+                auto_eligible: false,
+                paper_signal_allowed: false,
+                paper_shadow_eligible: false,
+                live_execution_allowed: false,
+                research_only: true,
+                experiment_id: "phase5-r75-vsp-walkforward-v1",
+                evidence_summary: "",
+              },
+            }),
+          ),
+        ]}
+        onSelect={() => {}}
+        dataReadiness="ready"
+        onAnalyzeNow={() => {}}
+        analyzePending={false}
+      />,
+    );
+    expect(screen.queryByText("R_75")).not.toBeInTheDocument();
+    expect(screen.getByText(/NO VALIDATED OPPORTUNITIES/)).toBeInTheDocument();
+    fireEvent.click(screen.getByText(/Show Research/));
+    expect(screen.getByText("R_75")).toBeInTheDocument();
+    expect(screen.getByText("RESEARCH")).toBeInTheDocument();
+  });
+
+  it("shows the default empty state (not the paused message) when zero rows exist at all", () => {
+    render(<OpportunityQueue rows={[]} onSelect={() => {}} dataReadiness="ready" onAnalyzeNow={() => {}} analyzePending={false} />);
+    expect(screen.queryByText(/NO VALIDATED OPPORTUNITIES/)).not.toBeInTheDocument();
+    expect(screen.getByText("Star symbols in Markets to build the queue.")).toBeInTheDocument();
+  });
+
   it("calls onSelect with the row when a card is clicked", () => {
     const onSelect = vi.fn();
     const r = row("R_75", decisionFor());

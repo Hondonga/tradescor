@@ -19,6 +19,7 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { ReplayProgress } from "@/components/terminal/status-components";
 import { useTerminalStore } from "@/store/terminal-store";
 import { titleCase } from "@/lib/utils";
+import type { NormalizedDecision } from "@/types";
 const tabs = [
   "Replay",
   "ML Dataset",
@@ -322,6 +323,42 @@ function EvidenceTab() {
     );
   return <pre>{JSON.stringify(query.data, null, 2)}</pre>;
 }
+/**
+ * Phase 6 Part 11: research presentation must not hide negative results or
+ * simplify a rejection into "needs more data" -- the frozen verdict for
+ * Volatility Structure Pullback is explicitly REJECTED_NO_EDGE_AFTER_COSTS.
+ * Three-part structure, sourced entirely from the backend-authoritative
+ * strategy_evidence object: what the engine CAN build, what formal
+ * validation FOUND, and what the product ALLOWS as a result.
+ */
+function StrategyValidationSection({ decision }: { decision: NormalizedDecision }) {
+  const evidence = decision.strategy_evidence;
+  if (!evidence) return null;
+  const reachable = evidence.reachability_status === "REACHABLE_BOTH_DIRECTIONS"
+    ? "The engine can produce complete BUY and SELL plans."
+    : evidence.reachability_status === "NOT_REACHABLE"
+      ? "Complete plan construction has not yet been verified."
+      : `Reachability: ${evidence.reachability_status.replace(/_/g, " ").toLowerCase()}.`;
+  const validationText = evidence.historical_edge_proven
+    ? "This strategy has demonstrated a stable, historically validated post-cost edge."
+    : evidence.validation_verdict
+      ? `The strategy failed to demonstrate a stable post-cost edge (${evidence.validation_verdict.replace(/_/g, " ").toLowerCase()}).`
+      : "Formal historical validation has not yet been completed for this strategy.";
+  const productDecisionText = evidence.historical_edge_proven && !evidence.research_only
+    ? "Eligible for Auto, paper signals, and further evaluation toward live execution."
+    : "Research only. Not eligible for Auto, paper signals, or live execution.";
+  return (
+    <section className="strategy-validation">
+      <h2>Technical capability</h2>
+      <p>{reachable}</p>
+      <h2>Historical validation</h2>
+      <p>{validationText}</p>
+      {evidence.experiment_id && <p className="text-zinc-500">Frozen experiment: {evidence.experiment_id}</p>}
+      <h2>Product decision</h2>
+      <p>{productDecisionText}</p>
+    </section>
+  );
+}
 function DiagnosticsTab() {
   const decision = useTerminalStore((s) => s.decision);
   if (!decision)
@@ -335,6 +372,7 @@ function DiagnosticsTab() {
     );
   return (
     <div className="diagnostic-grid">
+      <StrategyValidationSection decision={decision} />
       {[
         ["History readiness", decision.diagnostics.history_depth_audit],
         ["Target trace", decision.diagnostics.target_trace],
@@ -362,7 +400,7 @@ function PaperTab() {
       <EmptyState
         icon={NotebookTabs}
         title="No paper plans"
-        description="Only backend trade-ready plans appear here. Developing or contradictory setups are never registered."
+        description="Only backend-registered setups appear here -- developing, contradictory, or historically unvalidated setups are never registered through the production path. Test fixtures used to prove technical reachability are recorded separately and marked test-fixture-only."
         action="Open Workspace"
       />
     );
