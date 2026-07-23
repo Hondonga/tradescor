@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-07-23T03:25:00Z",
+  "symbol": "R_75",
+  "method": "Enumerated every window any prior phase or process in this repository is documented to have fetched, inspected, or stored for R_75, then computed what calendar time remains outside all of them plus the same 7-day purge/embargo margin Phase 5 itself applied around its own consumed window (data/stabilization/phase5/manifests/consumed_data_inventory.json -> labeling_rule_applied). Live Deriv availability was also checked directly (data/stabilization/phase7/diagnostics/phase6_external_verification.json) since even a theoretically untouched window cannot be evaluated without fetching its candles.",
+  "provider_history_retention": {
+    "note": "Deriv's public feed retains roughly 364-365 days of R_75 history from 'now' at fetch time (data/stabilization/phase5/manifests/data_coverage.json -> history_depth_probe). This bounds the theoretical maximum available window; it does not by itself mean any of that window is untouched.",
+    "theoretical_available_start_approx": "2025-07-24",
+    "theoretical_available_end": "2026-07-23 (today)"
+  },
+  "excluded_windows": [
+    {
+      "window": "2025-10-15T00:00:00Z to 2026-04-13T23:59:00Z",
+      "reason": "PHASE_5_RAW_PULL -- full Phase 5 development + purge + sealed-holdout window (data/stabilization/phase5/manifests/data_coverage.json raw_pull; data/stabilization/phase5/holdout/holdout_manifest.json). The sealed holdout portion (2026-03-12 to 2026-04-14) additionally must never be opened regardless of untouched-data considerations.",
+      "source": "data/stabilization/phase5/manifests/data_coverage.json, data/stabilization/phase5/holdout/holdout_manifest.json"
+    },
+    {
+      "window": "2026-04-14T00:00:00Z to 2026-04-20T23:59:00Z",
+      "reason": "PHASE_5_EMBARGO -- 7-day purge/embargo margin applied after the Phase 5 raw-pull end, per the exact labeling rule Phase 5 itself recorded and used ('Any Phase 5 data window overlapping [...], or within a 7-day purge/embargo margin of it, is treated as consumed').",
+      "source": "data/stabilization/phase5/manifests/consumed_data_inventory.json -> conclusion.labeling_rule_applied"
+    },
+    {
+      "window": "2026-04-21T05:45:00Z to 2026-07-20T05:44:00Z",
+      "reason": "ML_DATASET_CONSUMED -- ml-r75-f4c52d93c7a8dc3e95f1 (90 days, train/validation/test splits, final test split explicitly marked CONSUMED_FINAL_TEST) plus ml-r75-7158f2dfdb1e03ecdc1f (fully contained within it).",
+      "source": "data/stabilization/phase5/manifests/consumed_data_inventory.json -> consumed_windows"
+    },
+    {
+      "window": "2026-07-20T05:44:00Z to 2026-07-27T05:44:00Z",
+      "reason": "ML_DATASET_EMBARGO -- same 7-day embargo margin applied after the ML-consumed window's end. This margin has NOT YET ELAPSED as of this manifest's generation time (2026-07-23) -- there is currently negative clearance (embargo clears in ~4.1 more days).",
+      "source": "same embargo rule as above, applied symmetrically to the trailing edge"
+    }
+  ],
+  "genuinely_untouched_windows": [
+    {
+      "window": "2026-04-20T23:59:00Z to 2026-04-21T05:45:00Z",
+      "duration_hours": 5.77,
+      "status": "TECHNICALLY_UNTOUCHED_BUT_UNUSABLE",
+      "reason_unusable": "5.77 hours of M5 candles is far too short to produce a single complete H1/M15/M5 structure-pullback setup cycle (the parent engine requires >=20 H1, >=40 M15, >=60 M5 completed candles just to begin evaluating readiness -- data/stabilization/phase5 raw_pull sampling; at 5-minute bars this window contains at most ~69 M5 candles and a small fraction of one H1 bar's worth of H1/M15 history)."
+    }
+  ],
+  "candle_counts": {"genuinely_untouched_and_fetchable_now": 0, "reason": "The only technically-untouched window (5.77 hours) is unusable per above, and no other window remains after applying the ML embargo, which has not yet elapsed."},
+  "gaps": "N/A -- no data was fetched for this inventory (Deriv is currently unavailable; see provider_availability below)",
+  "duplicates": "N/A -- no data was fetched",
+  "ohlc_validity": "N/A -- no data was fetched",
+  "manual_review_status": {
+    "smc_matrix_cache_reviewed": {
+      "files": ["data/smc_matrix/v2-R_75-202606240000-202607010000.json", "data/smc_matrix/R_75-202607010000-202607020000.json"],
+      "window_covered": "2026-06-24T00:00:00Z to 2026-07-02T00:00:00Z",
+      "finding": "This window falls entirely INSIDE the ML_DATASET_CONSUMED window above (2026-04-21 to 2026-07-20) -- it is a re-download/cache of already-consumed calendar time, not additional untouched coverage. Excluded on consumption grounds, independent of any question about whether the cache itself was 'manually reviewed'.",
+      "additionally_disqualifying": "The R_75 acceptance report for the adjacent 2026-07-01/07-02 window (data/smc_matrix/latest_matrix-R_75.json) already recorded volatility_structure_pullback's behavior against it (0 trade_ready_setups) prior to this Phase 7 investigation -- a second, independent reason this specific sub-window could never have been treated as untouched even if it fell outside the ML window."
+    }
+  },
+  "provider_availability": {
+    "checked_at": "2026-07-23T03:00:00Z",
+    "provider": "deriv",
+    "result": "PROVIDER_UNAVAILABLE",
+    "detail": "See data/stabilization/phase7/diagnostics/phase6_external_verification.json. Even if a usable untouched window existed, it could not be fetched right now."
+  },
+  "checksum": null,
+  "data_access_log": [
+    {"action": "inspected data/stabilization/phase5/manifests/data_coverage.json (read-only)", "result": "identified raw-pull window"},
+    {"action": "inspected data/stabilization/phase5/manifests/consumed_data_inventory.json (read-only)", "result": "identified ML-consumed window and embargo rule"},
+    {"action": "inspected data/stabilization/phase5/holdout/holdout_manifest.json (read-only)", "result": "confirmed SEALED, not opened"},
+    {"action": "listed data/smc_matrix/*R_75* (read-only)", "result": "found an 8-day cached window, determined to fall inside the already-consumed ML window"},
+    {"action": "attempted providers.deriv_provider.DerivProvider().list_symbols()", "result": "DerivAPIError: Deriv returned no active symbols. (PROVIDER_UNAVAILABLE)"},
+    {"action": "no raw candle data was fetched, downloaded, or persisted by this inventory step", "result": "N/A"}
+  ],
+  "conclusion": "RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_UNTOUCHED_HISTORY. After excluding the Phase 5 development+holdout window, its 7-day embargo, the ML-dataset-consumed window, and that window's own 7-day embargo (which has not yet elapsed as of today), zero usable genuinely untouched R_75 history exists, and the live Deriv provider needed to fetch any new window is currently unavailable regardless. This finding is based entirely on calendar-coverage bookkeeping against already-frozen manifests -- no strategy outcome, setup count, or hypothesis-specific result was computed or viewed to reach it."
+}

@@ -1,0 +1,11 @@
+{
+  "candidate_id": "candidate_5_losing_streak_cooldown",
+  "failure_mechanism": "LONG_LOSING_SEQUENCE -- 47.8% of all setups occurred inside a chronological run of 5+ consecutive losses, jointly contributing -568.3R.",
+  "single_change": "Reject a new setup if the strategy's own immediately preceding N (e.g. 5) already-resolved setups were all losses (a cooldown/pacing rule based on the strategy's own recent, already-known trade history).",
+  "causal_rationale": "Long losing sequences could plausibly coincide with a regime the strategy is structurally mismatched to (e.g. a persistent counter-trend or choppy phase); pausing entries during an observed losing run is a coarse, mechanistic pacing rule rather than a prediction of the next setup's own quality.",
+  "decision_time_inputs": ["outcomes of the strategy's own N most recently RESOLVED setups (resolved strictly before the current setup's decision_time)"],
+  "expected_retention": 52.2,
+  "overfitting_risk": "HIGH, and structurally different from the other four candidates: this rule is built directly out of realized trade OUTCOMES (even though only already-resolved, strictly-past outcomes, never future ones), and streak length/cooldown duration are two additional parameters that would need to be fixed, adding parameter complexity beyond a single threshold.",
+  "falsification_condition": "N/A -- not selected; see why_not_selected.",
+  "why_not_selected": "Sits closest to the explicitly disallowed candidate pattern 'using outcome-derived information' -- even though every input is strictly past/already-resolved and therefore not a future-data violation, building eligibility directly from the strategy's own realized win/loss sequence is a materially different and riskier kind of rule than a pure pre-trade price/geometry gate, and it requires two parameters (streak length + cooldown length) rather than candidate 1's single threshold. Given a clean, single-threshold, price-geometry-only alternative (candidate 1) with stronger and more mechanistically direct evidence, this candidate is not selected."
+}

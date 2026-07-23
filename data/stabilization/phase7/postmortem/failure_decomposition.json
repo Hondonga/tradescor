@@ -1,0 +1,289 @@
+{
+  "generated_at": "2026-07-23T03:20:00Z",
+  "source": "data/stabilization/phase5/data/resolved_setups.csv (1,093 rows, read-only) + data/stabilization/phase5/reports/*.json (reused, not recomputed)",
+  "disclaimer": "DESCRIPTIVE -- CONSUMED DEVELOPMENT DATA -- NOT VALIDATION EVIDENCE",
+  "A_signal_quality": {
+    "disclaimer": "DESCRIPTIVE -- CONSUMED DEVELOPMENT DATA -- NOT VALIDATION EVIDENCE",
+    "same_direction_gross_expectancy_r": 0.07416955639705941,
+    "same_minus_opposite_ci": {
+      "mean": 0.22870145152016336,
+      "lower_95": -0.023318063626141142,
+      "upper_95": 0.47961815342690745,
+      "n_groups": 326
+    },
+    "same_minus_random_control": {
+      "percentile": 100.0,
+      "empirical_p_value_as_originally_reported": 0.0,
+      "methodology_note": "Phase 5 reported p=0.0 from 0/N exceedances out of an unrecorded permutation count. Phase 7 Part 7 replaces this with a finite-sample-corrected methodology (control_methodology_v2.json) for all FUTURE hypothesis evaluation; this field preserves the original Phase 5 figure unaltered for the post-mortem record and must not be read as a corrected value."
+    },
+    "buy_vs_sell": {
+      "buy_expectancy_ci": {
+        "mean": -0.024341332299220347,
+        "lower_95": -0.19797944439752208,
+        "upper_95": 0.16091213318600378,
+        "n_groups": 178
+      },
+      "sell_expectancy_ci": {
+        "mean": -0.02781910720299437,
+        "lower_95": -0.22369162265096723,
+        "upper_95": 0.18722481143843936,
+        "n_groups": 148
+      },
+      "buy_and_sell_are_both_negative_under_conservative_cost": true
+    },
+    "directional_consistency_by_fold": {
+      "1": {
+        "buy_mean_net_r": -0.18679569836228932,
+        "sell_mean_net_r": 0.5172802795024567,
+        "buy_sign": "negative",
+        "sell_sign": "positive",
+        "same_sign": false
+      },
+      "2": {
+        "buy_mean_net_r": -0.012749136572155258,
+        "sell_mean_net_r": -0.005977687014950984,
+        "buy_sign": "negative",
+        "sell_sign": "negative",
+        "same_sign": true
+      },
+      "3": {
+        "buy_mean_net_r": 0.14186125888570028,
+        "sell_mean_net_r": -0.3984395287755766,
+        "buy_sign": "positive",
+        "sell_sign": "negative",
+        "same_sign": false
+      },
+      "4": {
+        "buy_mean_net_r": 0.7078334787767434,
+        "sell_mean_net_r": -0.13018939054934556,
+        "buy_sign": "positive",
+        "sell_sign": "negative",
+        "same_sign": false
+      },
+      "5": {
+        "buy_mean_net_r": -0.2872450650656713,
+        "sell_mean_net_r": 0.2111425938983414,
+        "buy_sign": "negative",
+        "sell_sign": "positive",
+        "same_sign": false
+      },
+      "6": {
+        "buy_mean_net_r": -0.30140900519153,
+        "sell_mean_net_r": 0.07781643479393578,
+        "buy_sign": "negative",
+        "sell_sign": "positive",
+        "same_sign": false
+      },
+      "7": {
+        "buy_mean_net_r": 0.21583201428195145,
+        "sell_mean_net_r": -0.19837781368313617,
+        "buy_sign": "positive",
+        "sell_sign": "negative",
+        "same_sign": false
+      },
+      "8": {
+        "buy_mean_net_r": -0.36383682827769204,
+        "sell_mean_net_r": -0.1309440655532753,
+        "buy_sign": "negative",
+        "sell_sign": "negative",
+        "same_sign": true
+      }
+    },
+    "directional_consistency_by_fold_summary": "2/8 folds had BUY and SELL net expectancy on the same side of zero",
+    "directional_consistency_by_regime": "NOT AVAILABLE -- volatility/structural regime was not captured as a per-setup field in the frozen Phase 5 resolved-setup dataset (data/stabilization/phase5/data/resolved_setups.csv has no regime column). Reconstructing one would require re-running deterministic classification logic outside the read-only scope of this post-mortem, so this dimension is left undetermined rather than approximated.",
+    "required_wording": "The strategy showed directional information relative to the random control, but paired opposite-direction superiority was not statistically conclusive."
+  },
+  "B_cost_sensitivity": {
+    "disclaimer": "DESCRIPTIVE -- CONSUMED DEVELOPMENT DATA -- NOT VALIDATION EVIDENCE",
+    "gross_expectancy_r": 0.07416955639705941,
+    "base_cost_expectancy_r": 0.024169556397059425,
+    "conservative_cost_expectancy_r": -0.02583044360294065,
+    "cost_model": {
+      "zero": 0.0,
+      "base": 0.05,
+      "conservative": 0.1,
+      "basis": "Fraction of initial risk (R), applied as a round-trip deduction from realized R. Chosen because Deriv synthetic-index live spread/commission quotes are not available to this session as a verifiable, citable data source; a risk-fraction model is the most transparent honest substitute and is applied identically and preregistered before any outcome is computed."
+    },
+    "break_even_cost_in_r_approx": 0.0742,
+    "cost_as_percentage_of_expected_gross_edge": 134.8,
+    "percentage_of_trades_whose_gross_edge_is_smaller_than_cost": 66.0,
+    "result_under_preregistered_sensitivity_levels": {
+      "zero_cost": {
+        "mean_r": 0.07416955639705941,
+        "verdict_direction": "positive"
+      },
+      "base_cost_0.05R": {
+        "mean_r": 0.024169556397059425,
+        "verdict_direction": "positive"
+      },
+      "conservative_cost_0.10R": {
+        "mean_r": -0.02583044360294065,
+        "verdict_direction": "negative"
+      }
+    },
+    "finding": "The flat conservative cost (0.10R per trade) consumes 134.8% of the 0.0742R average gross edge -- the edge is thinner than the cost applied to erase it. 66.0% of individual trades had a gross edge smaller than the flat 0.10R cost. No cost assumption was lowered to produce this finding; costs were fixed before any outcome was computed (preregistration commitment)."
+  },
+  "C_execution_geometry": {
+    "disclaimer": "DESCRIPTIVE -- CONSUMED DEVELOPMENT DATA -- NOT VALIDATION EVIDENCE",
+    "stop_distance_in_atr": {
+      "mean": 3.002381854232589,
+      "median": 2.7356939930956745,
+      "p25": 2.0255818217984083,
+      "p75": 3.704907040943058,
+      "min": 0.23090696561522994,
+      "max": 10.460268357831547,
+      "n": 1093
+    },
+    "cost_as_fraction_of_stop_risk": {
+      "value": 0.1,
+      "note": "Cost model is a flat 0.10R deduction (conservative) applied identically to every trade -- not a distribution."
+    },
+    "tp1_distance_in_r_initial_rr": {
+      "mean": 2.487327636525643,
+      "median": 2.0267531623814667,
+      "p25": 1.692572856480839,
+      "p75": 2.7191918162686637,
+      "min": 1.5001406940677766,
+      "max": 10.178057275102388,
+      "n": 1093
+    },
+    "reward_to_risk_note": "identical to tp1_distance_in_r_initial_rr above (tp1 is the sole reward reference at entry)",
+    "realized_mfe_r": {
+      "mean": 1.1395221939172375,
+      "median": 1.0811466144821054,
+      "p25": 0.1843522370371016,
+      "p75": 1.913329511098549,
+      "min": -1.0190181296151215,
+      "max": 7.183008559687342,
+      "n": 1093
+    },
+    "realized_mae_r": "NOT USABLE -- every one of the 1,093 rows in the frozen dataset carries mae_r == -inf (a sentinel value, never overwritten with a real reading during the Phase 5 causal replay). This is a genuine limitation of the frozen artifact being diagnosed, disclosed here rather than silently omitted or fabricated; per Part 1, the frozen file itself must not be modified or backfilled.",
+    "time_to_fill_minutes": {
+      "value": 0.0,
+      "note": "decision_time in the frozen dataset is recorded at confirmed entry (the SMC engine only emits a resolved setup once price has already retraced into the entry zone) -- there is no separate 'waiting to fill' interval to measure in this dataset."
+    },
+    "time_to_resolution_minutes": {
+      "mean": 251.96395563770795,
+      "median": 100.0,
+      "p25": 35.0,
+      "p75": 250.0,
+      "min": 0.0,
+      "max": 2855.0,
+      "n": 1082
+    },
+    "stop_before_favorable_excursion_rate": {
+      "stopped_with_no_meaningful_favorable_excursion_pct": 32.3,
+      "stopped_after_some_favorable_excursion_then_reversed_pct": 67.7,
+      "n_stopped": 710
+    },
+    "favorable_excursion_that_failed_to_reach_tp1": {
+      "count": 518,
+      "percentage_of_all_setups": 47.4,
+      "mean_target_proximity_mfe_over_initial_rr": 0.37568597846902757
+    },
+    "target_proximity_mfe_over_initial_rr": {
+      "mean": 0.5146672156987184,
+      "median": 0.4815232567453208,
+      "p25": 0.0744532187810352,
+      "p75": 1.0192434345472645,
+      "min": -0.536458502667707,
+      "max": 1.6512693777071838,
+      "n": 1093
+    },
+    "chase_distance": "NOT AVAILABLE -- the engine's own chase_valid gate already excludes chased entries before a setup is ever emitted as TRADE_READY, so no chase-distance figure survives into the resolved-setup dataset for setups that were actually taken.",
+    "setup_zone_width": "NOT AVAILABLE -- entry-zone low/high dimensions were not persisted as a per-setup field in the frozen dataset (only entry/stop/tp1/tp2 point prices were kept).",
+    "entry_location_within_pullback_area": "NOT AVAILABLE -- same reason as setup_zone_width; the M15 pullback-area low/high was not persisted per-setup."
+  },
+  "D_stability": {
+    "disclaimer": "DESCRIPTIVE -- CONSUMED DEVELOPMENT DATA -- NOT VALIDATION EVIDENCE",
+    "by_fold": {
+      "1": 14.440737995463422,
+      "2": -1.2750115290077324,
+      "3": -14.380663152789232,
+      "4": 30.45211460852411,
+      "5": -18.51355952827942,
+      "6": -16.401111510898083,
+      "7": 14.873264164166144,
+      "8": -37.42844590519337
+    },
+    "by_month": {
+      "2025-11": 13.268931393341097,
+      "2025-12": 22.811543977499547,
+      "2026-01": -16.63749939309628,
+      "2026-02": -58.39880196773769,
+      "2026-03": 10.723151131979172
+    },
+    "buy_and_sell_expectancy": {
+      "buy": -15.213332687012757,
+      "sell": -13.019342171001401
+    },
+    "by_utc_hour_bucket": {
+      "0": -5.405693275078502,
+      "1": -47.637513596333555,
+      "2": 11.45935033521588,
+      "3": 13.351181678182023
+    },
+    "setup_duration_bucket_r": {
+      "shortest_25pct": {
+        "n": 283,
+        "gross_r_mean": -0.5680050560209803,
+        "conservative_cost_r_mean": -0.6680050560209804
+      },
+      "longest_25pct": {
+        "n": 270,
+        "gross_r_mean": 0.7066047452302964,
+        "conservative_cost_r_mean": 0.6066047452302963
+      },
+      "25_50pct": {
+        "n": 265,
+        "gross_r_mean": -0.12993901626334728,
+        "conservative_cost_r_mean": -0.22993901626334734
+      },
+      "50_75pct": {
+        "n": 264,
+        "gross_r_mean": 0.323724674596706,
+        "conservative_cost_r_mean": 0.22372467459670597
+      }
+    },
+    "zone_width_bucket": "NOT AVAILABLE -- see execution_geometry.setup_zone_width",
+    "reward_to_risk_bucket_r": {
+      "Q1_smallest_RR": {
+        "n": 274,
+        "gross_r_mean": 0.06243076107843921,
+        "conservative_cost_r_mean": -0.03756923892156085
+      },
+      "Q2": {
+        "n": 273,
+        "gross_r_mean": 0.14775052050401644,
+        "conservative_cost_r_mean": 0.047750520504016354
+      },
+      "Q3": {
+        "n": 273,
+        "gross_r_mean": 0.20613922476784363,
+        "conservative_cost_r_mean": 0.1061392247678436
+      },
+      "Q4_largest_RR": {
+        "n": 273,
+        "gross_r_mean": -0.11959928151181026,
+        "conservative_cost_r_mean": -0.2195992815118102
+      }
+    },
+    "structural_episode_clustering": {
+      "unique_structural_episodes": 326,
+      "episodes_producing_more_than_one_setup": 209,
+      "note": "A high count here would indicate the 1,093 setups are less independent than they appear (repeated setups drawn from the same underlying structural swing); used only to characterize independence, never to exclude setups."
+    },
+    "longest_losing_sequence_chronological": 28,
+    "drawdown_recovery": {
+      "maximum_drawdown_r": 114.08317174388051,
+      "maximum_drawdown_r_matches_evidence_114_1": true,
+      "recovered_within_dataset": false,
+      "setups_from_max_drawdown_to_recovery": null
+    },
+    "positive_fold_percentage": 0.375,
+    "fold_contribution_concentration": {
+      "top_fold_profit_share": 0.5095213852801374,
+      "top_month_profit_share": 0.48738838594323886
+    }
+  }
+}

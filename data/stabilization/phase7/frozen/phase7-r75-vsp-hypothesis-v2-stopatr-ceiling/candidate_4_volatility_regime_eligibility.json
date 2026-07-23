@@ -1,0 +1,11 @@
+{
+  "candidate_id": "candidate_4_volatility_regime_eligibility",
+  "failure_mechanism": "LOW_VOLATILITY_REGIME / HIGH_VOLATILITY_REGIME -- tested whether prevailing volatility at decision time (M5 ATR(14), a coarse regime proxy) differentiates outcome quality.",
+  "single_change": "Reject a setup if atr_at_entry falls in the lowest quintile (<= 106.142) -- i.e. avoid the quietest prevailing-volatility regime.",
+  "causal_rationale": "Thin, low-volatility conditions could plausibly produce noisier, less structurally significant swings, degrading signal quality for a structure-break-and-retracement strategy. HIGH_VOLATILITY_REGIME setups showed a small positive net contribution (+12.4R total) versus LOW_VOLATILITY_REGIME's small negative contribution (-9.9R total) in the failure-mode attribution.",
+  "decision_time_inputs": ["M5 ATR(14) at decision time"],
+  "expected_retention": 80.0,
+  "overfitting_risk": "HIGH -- none of the five atr_at_entry quintile buckets show a grouped 95% CI that excludes zero (data/stabilization/phase7/postmortem/diagnostic_buckets.json -> atr_at_entry_volatility_proxy_quintiles); the pattern is flat and statistically indistinguishable from noise across the whole range.",
+  "falsification_condition": "N/A -- not selected; see why_not_selected.",
+  "why_not_selected": "Weakest evidence of the five candidates: every quintile's confidence interval crosses zero, so there is no statistically notable regime effect to build a gate on, only a small, inconclusive aggregate skew already visible in the (equally inconclusive) failure-mode attribution."
+}

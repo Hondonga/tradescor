@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-07-23T04:00:00Z",
+  "part": "13 - REQUIRED SAMPLE AND FOLD RULES",
+  "preregistered_minimums": {
+    "total_resolved_setups": 250, "minimum_buy": 75, "minimum_sell": 75,
+    "minimum_folds": 6, "minimum_retention_pct_of_eligible_parent_setups": 50
+  },
+  "available_untouched_window": {
+    "start": "2026-04-20T23:59:00Z", "end": "2026-04-21T05:45:00Z", "duration_hours": 5.77
+  },
+  "engine_minimum_history_requirement": {
+    "source": "analysis/volatility_structure_pullback_engine.py::_readiness -- required={'H1':20,'M15':40,'M5':60} completed candles before the engine will even begin evaluating a decision point",
+    "implication": "A 5.77-hour window cannot supply 20 completed H1 candles (would need >=20 hours at minimum) even before considering M15/M5 sufficiency or producing a single scored decision point. Zero setups are achievable from this window under any circumstance."
+  },
+  "actual_achievable_sample": {"total_resolved_setups": 0, "buy": 0, "sell": 0, "folds": 0, "retention_pct": null},
+  "gate_result": "FAILED -- 0 achievable versus 250 required (total), 0 versus 75 (buy), 0 versus 75 (sell), 0 versus 6 (folds)",
+  "additional_blocker": "Live Deriv provider is currently unavailable regardless (data/stabilization/phase7/diagnostics/phase6_external_verification.json), so even the unusable 5.77-hour window's candles cannot be fetched right now.",
+  "verdict": "RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_UNTOUCHED_HISTORY",
+  "verdict_rationale": "The root cause is coverage insufficiency (a 5.77-hour genuinely untouched window against a requirement effectively measured in months, per Phase 5's own ~164-day scored development window), not merely a sample count that fell short after an otherwise-adequate window was actually evaluated. No hypothesis-specific outcome, setup, or statistic was computed to reach this verdict -- it follows deterministically from calendar-coverage arithmetic already completed in Part 11.",
+  "no_gate_loosened": "The preregistered minimums (data/stabilization/phase7/preregistration/hypothesis_experiment_spec.json) were not reduced, and the hypothesis was not broadened, after this shortfall was identified.",
+  "phase7_evaluation_status_parts_14_through_17": "NOT EXECUTED. Parts 14 (untouched-history evaluation), 15 (matched controls), 16 (gate evaluation), and 17 (verdict assignment beyond the one recorded here) require a candidate universe that does not exist. Running any part of the replay/control/gate pipeline against 0 achievable setups would not produce a meaningful result and was not attempted."
+}

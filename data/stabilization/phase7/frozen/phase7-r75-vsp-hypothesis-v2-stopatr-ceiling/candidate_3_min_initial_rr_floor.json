@@ -1,0 +1,11 @@
+{
+  "candidate_id": "candidate_3_min_initial_rr_floor",
+  "failure_mechanism": "COST_ERASED_SMALL_EDGE -- setups with initial_rr near the 1.5 minimum threshold leave the least room for the flat 0.10R cost and ordinary noise before net expectancy turns negative.",
+  "single_change": "Reject a setup if initial_rr < 1.638 (the empirical Q1/Q2 cutpoint), i.e. raise the effective minimum R:R floor from the engine's existing 1.5 to 1.638.",
+  "causal_rationale": "A setup priced at close to the bare minimum acceptable R:R has the smallest margin between the target and the point at which the flat per-trade cost (0.10R) would erase the entire edge. Raising the floor slightly could mechanically improve the cost-to-edge ratio for the retained population.",
+  "decision_time_inputs": ["stop (engine-selected)", "entry (engine-selected)", "tp1 (engine-selected)"],
+  "expected_retention": 80.0,
+  "overfitting_risk": "HIGH relative to the other candidates -- the lowest-RR quintile's own conservative-cost expectancy (-0.075R, CI [-0.239, 0.088]) is not clearly worse than several of the middle quintiles (Q2 was the single best-performing RR bucket at +0.111R), so this bucket boundary does not track a monotonic, mechanistically clean effect the way candidate 1's does.",
+  "falsification_condition": "N/A -- not selected; see why_not_selected.",
+  "why_not_selected": "The bucket evidence is not monotonic (Q1 worst-but-one, Q2 best, Q3 near zero, Q4 positive, Q5 worst) -- there is no clean, single-direction relationship between initial_rr and outcome to hang one narrow floor rule on, only a noisy, non-monotonic pattern. Selecting this would not satisfy 'strongest plausible market or execution mechanism' from the Part 9 selection hierarchy."
+}

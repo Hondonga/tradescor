@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-07-23T03:05:00Z",
+  "purpose": "Phase 6 carried verification debt (3 Deriv-dependent Python tests failing, partial browser acceptance) caused entirely by live Deriv provider unavailability, not application logic. This is tracked here as external verification debt, separate from and never mixed with any strategy verdict.",
+  "provider_check": {
+    "provider": "deriv",
+    "checked_at": "2026-07-23T03:00:00Z",
+    "method": "providers.deriv_provider.DerivProvider().list_symbols()",
+    "result": "PROVIDER_UNAVAILABLE",
+    "error": "DerivAPIError: Deriv returned no active symbols."
+  },
+  "deriv_dependent_python_tests": {
+    "status": "PROVIDER_UNAVAILABLE",
+    "tests": [
+      "tests/test_phase4_market_family_isolation.py::test_r75_resolves_only_to_deriv_and_volatility_family",
+      "tests/test_phase4_market_family_isolation.py::test_r75_never_offers_a_forex_strategy_model",
+      "tests/test_phase4_market_family_isolation.py::test_r75_market_schedule_is_24_7_not_forex_24_5"
+    ],
+    "rerun_result": "3 failed -- identical error (DerivAPIError: Deriv returned no active symbols.) to the Phase 5 and Phase 6 baselines",
+    "action_taken": "None -- application logic (providers/deriv_provider.py, providers/deriv_ws_client.py, and the test file itself) was not touched. This is recorded as still-outstanding external verification debt."
+  },
+  "r75_live_browser_smoke_acceptance": {
+    "status": "PROVIDER_UNAVAILABLE",
+    "note": "Not attempted this phase -- Deriv is unavailable, so a live R_75 browser pass would only reproduce the same DISCONNECTED state already documented in Phase 6's browser_acceptance_summary.json. Deferred until Deriv connectivity is restored."
+  },
+  "jump_live_browser_smoke_acceptance": {
+    "status": "PROVIDER_UNAVAILABLE",
+    "note": "Jump/JDBR runs on the same Deriv-sourced derived-index data as R_75 -- deferred for the same reason."
+  },
+  "gbpusd_r75_gbpusd_provider_switching_acceptance": {
+    "status": "PROVIDER_UNAVAILABLE",
+    "note": "Requires both TwelveData (GBP/USD) and Deriv (R_75) to be live simultaneously to exercise the switch; Deriv alone being unavailable blocks this end-to-end. Deferred."
+  },
+  "disposition": "PROVIDER_UNAVAILABLE for all four items. Per Phase 7 Part 2 instructions: application logic was not changed as a result, and this post-mortem proceeds using the frozen, already-consumed Phase 5 development data (which does not require a live Deriv connection) for diagnosis only. This external-verification item remains open and must not be conflated with or treated as evidence toward the Phase 5 strategy verdict, the Phase 6 registry classifications, or the Phase 7 hypothesis verdict -- all of which are determined entirely independently of live provider connectivity.",
+  "next_action": "Re-run the 3 Python tests and the 3 browser-acceptance items once Deriv's public active_symbols endpoint is confirmed reachable again. No code change is anticipated to be required."
+}

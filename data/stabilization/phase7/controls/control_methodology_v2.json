@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-07-23T03:45:00Z",
+  "version": "geometry_control_v2",
+  "purpose": "Corrects two Phase 5 control-methodology defects for all FUTURE hypothesis evaluation. Never applied retroactively to the frozen Phase 5 result -- data/stabilization/phase5/reports/grouped_uncertainty.json (same_minus_geometry_ci, random_control_empirical_p_value) remains historical record, unaltered.",
+  "implementation": "validation/strategy_feasibility/control_methodology_v2.py",
+  "tests": "tests/test_phase7_control_methodology_v2.py (10 passed)",
+  "correction_a_geometry_only_control": {
+    "phase5_defect": "Defined as identical absolute entry/stop/TP1 price levels with direction reassigned by an independent coin flip. Whenever the coin flip matched the setup's real direction (~50% of pairs), the geometry-only trade became byte-identical to the real trade, forcing same-minus-geometry diff to 0.0/0.0/0.0 for every surviving matched pair after the opposite-direction half was dropped as geometrically invalid.",
+    "v2_definition": "For every event: simulate the SAME-direction outcome and the mirrored OPPOSITE-direction outcome using build_symmetric_geometry (identical risk distance and identical reward distance in R, stop and target equidistant and mirrored around entry -- validation/strategy_feasibility/symmetric_geometry.py, already used for the same_minus_opposite arm). geometry_control_v2 is the per-event AVERAGE of the two realized outcomes. Averaging two independently simulated outcomes can only equal one of them alone in the degenerate case where every single paired outcome across the whole dataset happens to coincide -- ruled out for any real return distribution and proven false under an adversarial 50%-coincidence construction in tests.",
+    "properties_verified_by_test": [
+      "not identical to the same-direction arm (including under an adversarial 50%-coincidence construction mirroring the Phase 5 failure mode)",
+      "remains centered near zero when the synthetic universe has no genuine directional edge",
+      "beaten by the same-direction arm whenever a genuine edge exists, for both a bullish-edge synthetic universe and a bearish-edge synthetic universe",
+      "the underlying symmetric geometry is proven genuinely mirrored (equal risk magnitude, equal reward magnitude, opposite sign) for a synthetic bullish/bearish pair before any outcome is simulated"
+    ]
+  },
+  "correction_b_finite_sample_random_control_p_value": {
+    "phase5_defect": "Reported random_control_empirical_p_value = 0.0 from zero permutation exceedances out of an unrecorded permutation count. A literal 0.0 claims infinite confidence, which no finite permutation sample can support.",
+    "v2_formula": "p = (1 + number_of_permutations_at_least_as_extreme) / (N + 1)",
+    "worked_example": {
+      "permutations": 500,
+      "exceedances": 0,
+      "p_value": 0.001996,
+      "exact_fraction": "1/501"
+    },
+    "properties_verified_by_test": [
+      "strictly greater than zero for any finite permutation count, including zero exceedances",
+      "matches the required ~0.001996 for the specified 500-permutation / zero-exceedance example exactly",
+      "still strictly greater than zero even with many exceedances (sanity check on the formula, not just the zero-exceedance edge case)",
+      "raises rather than silently returning a degenerate value for an empty permutation set"
+    ]
+  },
+  "future_random_control_permutation_count": {
+    "requirement": "at least 1,000 deterministic random permutations when computationally feasible (Phase 7 Part 15)",
+    "implementation": "validation.strategy_feasibility.control_methodology_v2.deterministic_random_direction_permutations(n_events, n_permutations, seed) -- seeded once, fully reproducible, proven reproducible by test."
+  },
+  "scope": "This methodology correction governs any Phase 7+ hypothesis evaluation against genuinely untouched history. It does not retroactively reinterpret, reopen, or change the Phase 5 REJECTED_NO_EDGE_AFTER_COSTS verdict, which failed on the post-cost-expectancy gate before the geometry-only or random-control gates were even reached (see data/stabilization/phase5/reports/development_gate_results.json)."
+}

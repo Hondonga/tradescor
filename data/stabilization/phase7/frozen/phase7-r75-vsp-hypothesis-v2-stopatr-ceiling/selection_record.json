@@ -1,0 +1,17 @@
+{
+  "selected_candidate_id": "candidate_1_max_stop_distance_atr_ceiling",
+  "selection_time": "2026-07-23T03:50:00Z",
+  "selection_rule": "Selection hierarchy per Phase 7 Part 9, applied in order: (1) strongest plausible market/execution mechanism -- candidate 1 is the only one of five whose excluded bucket's grouped 95% CI fully excludes zero on the negative side; (2) observable causally at decision time -- stop, entry, and M5 ATR(14) are all known before entry, satisfied; (3) present across multiple folds -- the excluded (worst-performing) bucket covers all 8/8 folds with 0% positive folds, the most consistent cross-fold signal of any candidate; (4) applies to both BUY and SELL -- excluded bucket is 122 BUY / 97 SELL, both well represented; (5) does not depend on one month or one regime -- confirmed via the 8/8 fold spread; (6) retains a testable sample -- 80% retention (874/1093 in the consumed set); (7) smallest implementation change -- a single new threshold compared against a value the frozen engine already computes; (8) lowest parameter complexity -- one threshold, one comparison, versus candidate 5's two parameters (streak length + cooldown length). No untouched-history outcome was viewed before or during this selection -- selection was made using only the consumed Phase 5 development data documented in data/stabilization/phase7/postmortem/.",
+  "consumed_data_disclosure": true,
+  "mechanistic_reason": "An unusually wide stop relative to the prevailing M5 ATR(14) at decision time plausibly indicates either a lower-quality/less-precise structural pullback (the protected swing sits unusually far from the retracement entry) or an entry taken further into an already-extended move than the typical setup. This is consistent with the observed pattern in the consumed data: the widest-stop quintile (stop_distance_atr in (3.975, 10.460]) is the only one of five quintiles across all three tested variables whose grouped 95% confidence interval excludes zero (mean -0.327R, CI [-0.480, -0.146], 0% positive folds across all 8 folds), while the tightest-stop quintile is the single best-performing bucket (+0.175R).",
+  "expected_effect": "Excluding the worst-performing stop_distance_atr quintile (> 3.975) is expected to raise the retained population's conservative-cost expectancy above the parent's -0.026R, though the magnitude on genuinely untouched history is unknown and must not be assumed from the consumed-data figure above.",
+  "expected_retention": 80.0,
+  "single_change_only": true,
+  "production_engine_changed": false,
+  "alternatives_rejected": [
+    {"candidate_id": "candidate_2_max_initial_rr_ceiling", "reason": "Weaker evidence (CI does not exclude zero) and a plausible confound with candidate 1 (both derive from the same engine-selected stop distance)."},
+    {"candidate_id": "candidate_3_min_initial_rr_floor", "reason": "Non-monotonic, noisy bucket pattern with no clean single-direction mechanism."},
+    {"candidate_id": "candidate_4_volatility_regime_eligibility", "reason": "Every quintile's CI crosses zero -- no statistically notable regime effect in the consumed data."},
+    {"candidate_id": "candidate_5_losing_streak_cooldown", "reason": "Built from the strategy's own realized outcome sequence (closest of the five to the disallowed 'using outcome-derived information' pattern) and requires two parameters instead of one."}
+  ]
+}

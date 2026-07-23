@@ -1,0 +1,245 @@
+{
+  "generated_at": "2026-07-23T03:30:00Z",
+  "disclaimer": "DESCRIPTIVE -- CONSUMED DEVELOPMENT DATA -- NOT VALIDATION EVIDENCE",
+  "method": "Each of the 1,093 frozen resolved setups may carry zero or more descriptive category tags. Thresholds (stop_distance_atr <= Q1, initial_rr <= Q1, atr_at_entry <= Q1 / >= Q3, losing-streak length >= 5) are the full-dataset quartiles of already-frozen, decision-time-observable fields -- fixed once here, never swept or chosen to maximize any category's apparent effect. 'observable_at_decision_time' is false for categories that are inherently retrospective (e.g. TARGET_NOT_REACHED_DESPITE_POSITIVE_MFE requires knowing MFE, which only exists after entry) -- those categories explain what happened but must never be used directly as a pre-entry gate condition.",
+  "total_setups": 1093,
+  "setups_with_no_category_net_positive_unremarkable": 6,
+  "categories": {
+    "COST_ERASED_SMALL_EDGE": {
+      "count": 11,
+      "percentage_of_all_setups": 1.0,
+      "gross_r_contribution": 0.0,
+      "net_r_contribution": -1.1,
+      "fold_distribution": {
+        "1": 1,
+        "2": 4,
+        "3": 1,
+        "4": 2,
+        "5": 3
+      },
+      "buy_count": 4,
+      "sell_count": 7,
+      "observable_at_decision_time": false
+    },
+    "DIRECTIONAL_FAILURE": {
+      "count": 710,
+      "percentage_of_all_setups": 65.0,
+      "gross_r_contribution": -710.0,
+      "net_r_contribution": -780.9999999999998,
+      "fold_distribution": {
+        "1": 78,
+        "2": 87,
+        "3": 99,
+        "4": 80,
+        "5": 97,
+        "6": 72,
+        "7": 83,
+        "8": 114
+      },
+      "buy_count": 405,
+      "sell_count": 305,
+      "observable_at_decision_time": false
+    },
+    "HIGH_VOLATILITY_REGIME": {
+      "count": 274,
+      "percentage_of_all_setups": 25.1,
+      "gross_r_contribution": 39.79450169913696,
+      "net_r_contribution": 12.394501699136939,
+      "fold_distribution": {
+        "1": 75,
+        "2": 28,
+        "3": 79,
+        "4": 68,
+        "5": 24
+      },
+      "buy_count": 153,
+      "sell_count": 121,
+      "observable_at_decision_time": true
+    },
+    "LONG_LOSING_SEQUENCE": {
+      "count": 523,
+      "percentage_of_all_setups": 47.8,
+      "gross_r_contribution": -516.0,
+      "net_r_contribution": -568.3,
+      "fold_distribution": {
+        "1": 54,
+        "2": 60,
+        "3": 68,
+        "4": 61,
+        "5": 78,
+        "6": 60,
+        "7": 42,
+        "8": 100
+      },
+      "buy_count": 290,
+      "sell_count": 233,
+      "observable_at_decision_time": false
+    },
+    "LOW_VOLATILITY_REGIME": {
+      "count": 274,
+      "percentage_of_all_setups": 25.1,
+      "gross_r_contribution": 17.50823440302046,
+      "net_r_contribution": -9.891765596979566,
+      "fold_distribution": {
+        "2": 3,
+        "5": 3,
+        "6": 102,
+        "7": 130,
+        "8": 36
+      },
+      "buy_count": 174,
+      "sell_count": 100,
+      "observable_at_decision_time": true
+    },
+    "STOP_TOO_TIGHT_RELATIVE_TO_NOISE": {
+      "count": 170,
+      "percentage_of_all_setups": 15.6,
+      "gross_r_contribution": -170.0,
+      "net_r_contribution": -186.99999999999994,
+      "fold_distribution": {
+        "1": 12,
+        "2": 21,
+        "3": 24,
+        "4": 25,
+        "5": 21,
+        "6": 19,
+        "7": 21,
+        "8": 27
+      },
+      "buy_count": 100,
+      "sell_count": 70,
+      "observable_at_decision_time": true
+    },
+    "STOP_TOO_WIDE_RELATIVE_TO_TARGET": {
+      "count": 161,
+      "percentage_of_all_setups": 14.7,
+      "gross_r_contribution": -161.0,
+      "net_r_contribution": -177.09999999999997,
+      "fold_distribution": {
+        "1": 28,
+        "2": 21,
+        "3": 13,
+        "4": 16,
+        "5": 21,
+        "6": 18,
+        "7": 14,
+        "8": 30
+      },
+      "buy_count": 88,
+      "sell_count": 73,
+      "observable_at_decision_time": true
+    },
+    "STRUCTURAL_EPISODE_CLUSTERING": {
+      "count": 976,
+      "percentage_of_all_setups": 89.3,
+      "gross_r_contribution": 38.92467368766746,
+      "net_r_contribution": -58.67532631233256,
+      "fold_distribution": {
+        "1": 112,
+        "2": 122,
+        "3": 140,
+        "4": 119,
+        "5": 132,
+        "6": 93,
+        "7": 121,
+        "8": 137
+      },
+      "buy_count": 571,
+      "sell_count": 405,
+      "observable_at_decision_time": true
+    },
+    "TARGET_NOT_REACHED_DESPITE_POSITIVE_MFE": {
+      "count": 518,
+      "percentage_of_all_setups": 47.4,
+      "gross_r_contribution": -507.0,
+      "net_r_contribution": -558.8,
+      "fold_distribution": {
+        "1": 56,
+        "2": 68,
+        "3": 75,
+        "4": 52,
+        "5": 75,
+        "6": 50,
+        "7": 51,
+        "8": 91
+      },
+      "buy_count": 303,
+      "sell_count": 215,
+      "observable_at_decision_time": false
+    },
+    "UNSTABLE_DIRECTION": {
+      "count": 459,
+      "percentage_of_all_setups": 42.0,
+      "gross_r_contribution": 209.20120837383223,
+      "net_r_contribution": 163.30120837383225,
+      "fold_distribution": {
+        "1": 79,
+        "2": 43,
+        "3": 50,
+        "4": 82,
+        "5": 46,
+        "6": 34,
+        "7": 83,
+        "8": 42
+      },
+      "buy_count": 256,
+      "sell_count": 203,
+      "observable_at_decision_time": false
+    },
+    "STOP_BEFORE_CONFIRMATION": {
+      "count": 0,
+      "not_assignable_reason": "Every emitted setup already required a completed M5 structure-break confirmation before TRADE_READY by construction (analysis/volatility_structure_pullback_engine.py) -- this category cannot occur in this engine's output and is reported as zero by definition, not estimated."
+    },
+    "LATE_ENTRY": {
+      "count": 0,
+      "not_assignable_reason": "No entry-timing/chase-distance field was persisted per setup in the frozen dataset (decision_time already equals fill time for every row -- see Part 4 finding)."
+    },
+    "CHASED_ENTRY": {
+      "count": 0,
+      "not_assignable_reason": "The engine's own chase_valid gate excludes chased entries before a setup is ever emitted as TRADE_READY -- no chased setup exists in this dataset to count."
+    },
+    "EXCESSIVE_SETUP_AGE": {
+      "count": 0,
+      "not_assignable_reason": "Setup age was not persisted per setup in the frozen dataset."
+    },
+    "POOR_RANGE_LOCATION": {
+      "count": 0,
+      "not_assignable_reason": "M15 dealing-range position at entry was not persisted per setup in the frozen dataset (the engine's internal range_position gate result was not written to resolved_setups.csv)."
+    },
+    "EXCESSIVE_ZONE_WIDTH": {
+      "count": 0,
+      "not_assignable_reason": "M15 pullback-zone width was not persisted per setup in the frozen dataset."
+    },
+    "NO_CLEAR_MECHANISM": {
+      "count": 0,
+      "percentage_of_all_setups": 0.0,
+      "note": "By construction, every net-negative setup is already tagged DIRECTIONAL_FAILURE (negative gross_r -- the underlying directional bet itself lost) or COST_ERASED_SMALL_EDGE (positive-but-small gross_r that the flat 0.10R cost erased), so no loss in this dataset is left mechanism-free. This category exists for completeness against the suggested list and is reported as zero rather than omitted."
+    },
+    "FOLD_CONCENTRATION": {
+      "count": null,
+      "note": "Aggregate-level, not a per-setup category -- see data/stabilization/phase7/postmortem/failure_decomposition.json -> D_stability.fold_contribution_concentration (top_fold_profit_share, top_month_profit_share)."
+    }
+  },
+  "top_documented_failure_modes_by_negative_net_r_contribution": [
+    [
+      "DIRECTIONAL_FAILURE",
+      -780.9999999999998
+    ],
+    [
+      "LONG_LOSING_SEQUENCE",
+      -568.3
+    ],
+    [
+      "TARGET_NOT_REACHED_DESPITE_POSITIVE_MFE",
+      -558.8
+    ],
+    [
+      "STOP_TOO_TIGHT_RELATIVE_TO_NOISE",
+      -186.99999999999994
+    ],
+    [
+      "STOP_TOO_WIDE_RELATIVE_TO_TARGET",
+      -177.09999999999997
+    ]
+  ]
+}

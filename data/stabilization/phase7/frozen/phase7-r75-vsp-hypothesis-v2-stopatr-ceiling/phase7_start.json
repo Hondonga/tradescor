@@ -1,0 +1,12 @@
+{
+  "started_at": "2026-07-23T02:59:25Z",
+  "starting_phase6_commit": "2ab0c681dd0f98066144e02224497865d798a185",
+  "working_branch": "tradescor-phase7-strategy-failure-postmortem",
+  "working_tree_status": [],
+  "phase5_experiment_id": "phase5-r75-vsp-walkforward-v1",
+  "phase5_verdict": "REJECTED_NO_EDGE_AFTER_COSTS",
+  "phase5_holdout_status": "SEALED",
+  "phase5_checksums_valid": true,
+  "frozen_ml_integrity": true,
+  "scope": "postmortem_and_one_new_hypothesis"
+}

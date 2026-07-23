@@ -1,0 +1,265 @@
+{
+  "disclaimer": "DESCRIPTIVE -- CONSUMED DEVELOPMENT DATA -- NOT VALIDATION EVIDENCE",
+  "method": "Coarse quintile buckets (fixed 20% width cutpoints on the full 1,093-setup consumed distribution) on pre-entry-observable variables only. No threshold search was performed; every cutpoint is a plain quantile of the existing distribution, computed once.",
+  "stop_distance_in_atr_quintiles": [
+    {
+      "bucket": "Q1_lowest (0.231, 1.837]",
+      "setup_count": 219,
+      "buy_count": 132,
+      "sell_count": 87,
+      "fold_coverage": 8,
+      "gross_expectancy_r": 0.27495550974643224,
+      "conservative_cost_expectancy_r": 0.17495550974643223,
+      "grouped_confidence_interval_95": {
+        "lower_95": -0.043735392304829805,
+        "upper_95": 0.3854794960100377
+      },
+      "maximum_drawdown_r": 16.75411003484018,
+      "positive_fold_percentage": 75.0,
+      "retention_percentage_of_full_set": 20.0
+    },
+    {
+      "bucket": "Q2 (1.837, 2.463]",
+      "setup_count": 218,
+      "buy_count": 122,
+      "sell_count": 96,
+      "fold_coverage": 8,
+      "gross_expectancy_r": 0.07137705868243698,
+      "conservative_cost_expectancy_r": -0.028622941317563055,
+      "grouped_confidence_interval_95": {
+        "lower_95": -0.21789900045253058,
+        "upper_95": 0.18443482288606106
+      },
+      "maximum_drawdown_r": 40.249098228121355,
+      "positive_fold_percentage": 50.0,
+      "retention_percentage_of_full_set": 19.9
+    },
+    {
+      "bucket": "Q3 (2.463, 3.061]",
+      "setup_count": 219,
+      "buy_count": 125,
+      "sell_count": 94,
+      "fold_coverage": 8,
+      "gross_expectancy_r": 0.10125820232432106,
+      "conservative_cost_expectancy_r": 0.001258202324321045,
+      "grouped_confidence_interval_95": {
+        "lower_95": -0.2085264282980555,
+        "upper_95": 0.2197361346895646
+      },
+      "maximum_drawdown_r": 24.80478402018669,
+      "positive_fold_percentage": 37.5,
+      "retention_percentage_of_full_set": 20.0
+    },
+    {
+      "bucket": "Q4 (3.061, 3.975]",
+      "setup_count": 218,
+      "buy_count": 124,
+      "sell_count": 94,
+      "fold_coverage": 8,
+      "gross_expectancy_r": 0.15014358244033085,
+      "conservative_cost_expectancy_r": 0.05014358244033082,
+      "grouped_confidence_interval_95": {
+        "lower_95": -0.15363381899238082,
+        "upper_95": 0.2542857322976924
+      },
+      "maximum_drawdown_r": 20.828306058795448,
+      "positive_fold_percentage": 87.5,
+      "retention_percentage_of_full_set": 19.9
+    },
+    {
+      "bucket": "Q5_highest (3.975, 10.460]",
+      "setup_count": 219,
+      "buy_count": 122,
+      "sell_count": 97,
+      "fold_coverage": 8,
+      "gross_expectancy_r": -0.22655240897841292,
+      "conservative_cost_expectancy_r": -0.3265524089784129,
+      "grouped_confidence_interval_95": {
+        "lower_95": -0.47981553473399324,
+        "upper_95": -0.14616786371030677
+      },
+      "maximum_drawdown_r": 79.81543273587856,
+      "positive_fold_percentage": 0.0,
+      "retention_percentage_of_full_set": 20.0
+    }
+  ],
+  "initial_reward_to_risk_quintiles": [
+    {
+      "bucket": "Q1_lowest (1.500, 1.638]",
+      "setup_count": 219,
+      "buy_count": 130,
+      "sell_count": 89,
+      "fold_coverage": 8,
+      "gross_expectancy_r": 0.025088522060188696,
+      "conservative_cost_expectancy_r": -0.07491147793981136,
+      "grouped_confidence_interval_95": {
+        "lower_95": -0.2385487194379042,
+        "upper_95": 0.088282075967569
+      },
+      "maximum_drawdown_r": 23.443332100387885,
+      "positive_fold_percentage": 25.0,
+      "retention_percentage_of_full_set": 20.0
+    },
+    {
+      "bucket": "Q2 (1.638, 1.881]",
+      "setup_count": 218,
+      "buy_count": 123,
+      "sell_count": 95,
+      "fold_coverage": 8,
+      "gross_expectancy_r": 0.21145863538430812,
+      "conservative_cost_expectancy_r": 0.11145863538430807,
+      "grouped_confidence_interval_95": {
+        "lower_95": -0.06710725925777862,
+        "upper_95": 0.2902552842975509
+      },
+      "maximum_drawdown_r": 22.5613716158932,
+      "positive_fold_percentage": 75.0,
+      "retention_percentage_of_full_set": 19.9
+    },
+    {
+      "bucket": "Q3 (1.881, 2.233]",
+      "setup_count": 219,
+      "buy_count": 119,
+      "sell_count": 100,
+      "fold_coverage": 8,
+      "gross_expectancy_r": 0.1030668063027827,
+      "conservative_cost_expectancy_r": 0.0030668063027826853,
+      "grouped_confidence_interval_95": {
+        "lower_95": -0.18616757933592004,
+        "upper_95": 0.19870097088940294
+      },
+      "maximum_drawdown_r": 30.698801739868376,
+      "positive_fold_percentage": 62.5,
+      "retention_percentage_of_full_set": 20.0
+    },
+    {
+      "bucket": "Q4 (2.233, 3.004]",
+      "setup_count": 218,
+      "buy_count": 132,
+      "sell_count": 86,
+      "fold_coverage": 8,
+      "gross_expectancy_r": 0.16491847735476983,
+      "conservative_cost_expectancy_r": 0.0649184773547698,
+      "grouped_confidence_interval_95": {
+        "lower_95": -0.14883442556294937,
+        "upper_95": 0.2837518298308584
+      },
+      "maximum_drawdown_r": 30.927981947644852,
+      "positive_fold_percentage": 75.0,
+      "retention_percentage_of_full_set": 19.9
+    },
+    {
+      "bucket": "Q5_highest (3.004, 10.178]",
+      "setup_count": 219,
+      "buy_count": 121,
+      "sell_count": 98,
+      "fold_coverage": 8,
+      "gross_expectancy_r": -0.132643389710611,
+      "conservative_cost_expectancy_r": -0.23264338971061094,
+      "grouped_confidence_interval_95": {
+        "lower_95": -0.46302890027072663,
+        "upper_95": 0.01729869218923251
+      },
+      "maximum_drawdown_r": 73.63404385305657,
+      "positive_fold_percentage": 25.0,
+      "retention_percentage_of_full_set": 20.0
+    }
+  ],
+  "atr_at_entry_volatility_proxy_quintiles": [
+    {
+      "bucket": "Q1_lowest (73.273, 106.142]",
+      "setup_count": 219,
+      "buy_count": 152,
+      "sell_count": 67,
+      "fold_coverage": 3,
+      "gross_expectancy_r": 0.07504189606635657,
+      "conservative_cost_expectancy_r": -0.024958103933643477,
+      "grouped_confidence_interval_95": {
+        "lower_95": -0.21123092485183745,
+        "upper_95": 0.18069961651155433
+      },
+      "maximum_drawdown_r": 57.46629727235637,
+      "positive_fold_percentage": 66.66666666666666,
+      "retention_percentage_of_full_set": 20.0
+    },
+    {
+      "bucket": "Q2 (106.142, 128.353]",
+      "setup_count": 218,
+      "buy_count": 108,
+      "sell_count": 110,
+      "fold_coverage": 8,
+      "gross_expectancy_r": 0.0626021534710588,
+      "conservative_cost_expectancy_r": -0.03739784652894119,
+      "grouped_confidence_interval_95": {
+        "lower_95": -0.23753336279732742,
+        "upper_95": 0.17373523296544252
+      },
+      "maximum_drawdown_r": 68.17237144217505,
+      "positive_fold_percentage": 75.0,
+      "retention_percentage_of_full_set": 19.9
+    },
+    {
+      "bucket": "Q3 (128.353, 143.549]",
+      "setup_count": 219,
+      "buy_count": 113,
+      "sell_count": 106,
+      "fold_coverage": 7,
+      "gross_expectancy_r": 0.054913251538319156,
+      "conservative_cost_expectancy_r": -0.0450867484616809,
+      "grouped_confidence_interval_95": {
+        "lower_95": -0.2533772702599216,
+        "upper_95": 0.17516320527648324
+      },
+      "maximum_drawdown_r": 25.75553825719992,
+      "positive_fold_percentage": 42.857142857142854,
+      "retention_percentage_of_full_set": 20.0
+    },
+    {
+      "bucket": "Q4 (143.549, 157.458]",
+      "setup_count": 218,
+      "buy_count": 129,
+      "sell_count": 89,
+      "fold_coverage": 7,
+      "gross_expectancy_r": 0.027030774296562525,
+      "conservative_cost_expectancy_r": -0.07296922570343752,
+      "grouped_confidence_interval_95": {
+        "lower_95": -0.2548256358371522,
+        "upper_95": 0.1334792991306051
+      },
+      "maximum_drawdown_r": 36.11994750980425,
+      "positive_fold_percentage": 42.857142857142854,
+      "retention_percentage_of_full_set": 19.9
+    },
+    {
+      "bucket": "Q5_highest (157.458, 196.014]",
+      "setup_count": 219,
+      "buy_count": 123,
+      "sell_count": 96,
+      "fold_coverage": 5,
+      "gross_expectancy_r": 0.15099164184118952,
+      "conservative_cost_expectancy_r": 0.050991641841189435,
+      "grouped_confidence_interval_95": {
+        "lower_95": -0.15370287925957316,
+        "upper_95": 0.2718213245968277
+      },
+      "maximum_drawdown_r": 18.094352420228383,
+      "positive_fold_percentage": 60.0,
+      "retention_percentage_of_full_set": 20.0
+    }
+  ],
+  "cost_to_risk_ratio": "NOT BUCKETABLE -- constant 0.10R for every setup (flat conservative cost model); see failure_decomposition.json B_cost_sensitivity instead.",
+  "unavailable_pre_entry_variables": {
+    "setup_zone_width_in_atr": "NOT AVAILABLE -- not persisted per setup in the frozen dataset.",
+    "entry_position_inside_setup_zone": "NOT AVAILABLE -- entry-zone bounds not persisted per setup.",
+    "pullback_depth": "NOT AVAILABLE -- M15 pullback depth not persisted per setup.",
+    "chase_distance": "NOT AVAILABLE -- chase_valid already filters chased entries pre-emission; no chase distance survives to resolution.",
+    "h1_directional_leg_strength": "NOT AVAILABLE -- not persisted per setup.",
+    "m15_pullback_depth": "NOT AVAILABLE -- duplicate of pullback_depth above.",
+    "m5_displacement_strength": "NOT AVAILABLE -- not persisted per setup.",
+    "confirmation_candle_quality": "NOT AVAILABLE -- not persisted per setup.",
+    "setup_age": "NOT AVAILABLE -- not persisted per setup.",
+    "time_since_structural_break": "NOT AVAILABLE -- not persisted per setup.",
+    "distance_from_external_range_boundary": "NOT AVAILABLE -- not persisted per setup."
+  },
+  "note_on_target_distance_and_initial_rr": "target distance and initial R:R are the same quantity here (tp1 is the sole reward reference at entry) -- reported once as initial_reward_to_risk_quintiles."
+}

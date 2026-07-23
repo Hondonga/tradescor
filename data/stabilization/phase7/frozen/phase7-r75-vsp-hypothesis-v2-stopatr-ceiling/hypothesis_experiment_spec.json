@@ -1,0 +1,90 @@
+{
+  "generated_at": "2026-07-23T03:55:00Z",
+  "preregistration_notice": "This document freezes the complete evaluation plan for the selected Phase 7 hypothesis BEFORE any untouched-history outcome has been computed or viewed. Per the Part 11 coverage_manifest.json finding (completed immediately before this file, using only calendar-coverage bookkeeping against already-frozen manifests -- no hypothesis-specific or strategy-outcome data of any kind), zero genuinely untouched, currently-fetchable R_75 history exists. This plan is preregistered in full regardless, exactly as it would have been executed had sufficient untouched history existed, so that its own minimum-sample stopping rule (Part 13 below) is what formally concludes this study, rather than an ad-hoc abandonment. It will not be edited after this point; any future attempt to run it must be a new, separately versioned experiment_id.",
+  "experiment_id": "phase7-r75-vsp-hypothesis-v2-stopatr-ceiling",
+  "parent_strategy_id": "volatility_structure_pullback",
+  "parent_strategy_version": "volatility_structure_pullback_engine-v1",
+  "parent_verdict": "REJECTED_NO_EDGE_AFTER_COSTS",
+  "parent_experiment_id": "phase5-r75-vsp-walkforward-v1",
+  "research_variant_id": "volatility_structure_pullback_hypothesis_v2",
+  "research_variant_module": "strategies/research/volatility_structure_pullback_hypothesis_v2.py",
+  "exact_single_change": "Reject a setup the parent engine would otherwise mark TRADE_READY if stop_distance_atr > 3.975, where stop_distance_atr = abs(entry - stop) / mean(high - low) over the trailing 14 completed M5 candles up to and including the decision candle.",
+  "threshold_definition": {
+    "variable": "stop_distance_atr",
+    "threshold": 3.975,
+    "derivation": "Q4/Q5 quartile cutpoint of stop_distance_atr computed once over the full 1,093-setup Phase 5 consumed distribution (data/stabilization/phase7/postmortem/diagnostic_buckets.json). Fixed at preregistration time; never adjusted after this point regardless of any future outcome."
+  },
+  "rationale": "See data/stabilization/phase7/selected_hypothesis/selection_record.json -> mechanistic_reason.",
+  "primary_metric": "conservative-cost mean realized R (net_r_conservative_cost), grouped by structural_episode_id, on the retained (variant-eligible) population of the untouched-history candidate universe.",
+  "cost_model": {
+    "version": "phase5-conservative-cost-v1 (unchanged from Phase 5, per preregistration discipline -- costs are never lowered after seeing a result)",
+    "zero_cost_diagnostic": 0.0,
+    "base_cost": 0.05,
+    "conservative_cost": 0.1,
+    "verdict_uses": "conservative_cost"
+  },
+  "fill_policy": "Identical to Phase 5 -- setup.entry at the first completed M5 candle where decision.trade_ready == true (data/stabilization/phase5/preregistration/experiment_spec.json -> entry_policy), unchanged.",
+  "outcome_policy": {
+    "ambiguity_rule": "stop_first (conservative), identical to Phase 5.",
+    "maximum_resolution_horizon_m5_candles": 576,
+    "outcome_labels": ["NOT_FILLED", "TP1", "TP2", "STOP", "EXPIRED", "INVALIDATED", "TIME_LIMIT", "AMBIGUOUS_STOP_FIRST"]
+  },
+  "fold_schedule": {
+    "rule": "Chronological walk-forward folds over the genuinely untouched candidate window only, purge and embargo applied identically to the Phase 5 fold-construction method (data/stabilization/phase5/manifests/fold_manifest.json).",
+    "purge_days": 2,
+    "embargo_days": 7,
+    "minimum_folds": 6
+  },
+  "control_definitions": {
+    "paired_opposite_direction": "Same event, direction flipped, symmetric geometry -- unchanged construction from Phase 5.",
+    "geometry_control_v2": "data/stabilization/phase7/controls/control_methodology_v2.json -- corrected, non-degenerate construction.",
+    "random_direction": "At least 1,000 deterministic seeded permutations (validation.strategy_feasibility.control_methodology_v2.deterministic_random_direction_permutations), finite-sample p-value (same module).",
+    "parent_vs_variant": "Both the unfiltered parent strategy and the variant-filtered population are evaluated on the identical untouched-history candidate universe; the variant is always a subset of the parent's eligible setups."
+  },
+  "grouping_method": "structural_episode_id (matches Phase 5's grouping unit for the primary CI).",
+  "minimum_sample": {
+    "total_resolved_setups": 250,
+    "minimum_buy": 75,
+    "minimum_sell": 75,
+    "minimum_folds": 6,
+    "minimum_retention_pct_of_eligible_parent_setups": 50,
+    "stopping_rule": "If the genuinely untouched candidate universe cannot produce at least the minimums above for BOTH the parent-eligible population and the variant-retained population, stop with RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_SAMPLE (or RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_UNTOUCHED_HISTORY if the underlying calendar coverage itself is inadequate, as already determined in Part 11) without computing or reporting any hypothesis-specific outcome statistic."
+  },
+  "direction_requirements": "Both BUY and SELL must be represented in the retained population; a verdict is never issued from a single-direction sample.",
+  "stability_limits": {
+    "minimum_positive_fold_percentage": 60,
+    "no_single_fold_may_exceed": "50% of total profit",
+    "both_directions_must_remain_viable": true,
+    "recent_folds_must_not_strongly_reverse": true
+  },
+  "drawdown_limit": "Maximum drawdown on the retained population must not exceed the parent's own drawdown scaled proportionally to the retained sample size, and must be reported regardless of pass/fail.",
+  "acceptance_gates_in_order": [
+    "CAUSALITY (zero future-data violations, zero setup-ownership violations)",
+    "SAMPLE (minimum_sample block above)",
+    "POST_COST_PERFORMANCE (conservative-cost expectancy > 0, grouped lower-95 > 0, profit factor > 1.0)",
+    "IMPROVEMENT_OVER_PARENT (variant-minus-parent expectancy positive, grouped lower-95 of the difference > 0, drawdown not worse)",
+    "DIRECTIONAL_INFORMATION (same-minus-opposite grouped lower-95 > 0)",
+    "GEOMETRY_CONTROL (variant beats geometry_control_v2, grouped lower-95 > 0)",
+    "RANDOM_CONTROL (preregistered percentile + finite-sample p-value)",
+    "STABILITY (stability_limits block above)"
+  ],
+  "allowed_verdicts": [
+    "FAILED_CAUSALITY_AUDIT", "REJECTED_INSUFFICIENT_UNTOUCHED_HISTORY", "REJECTED_INSUFFICIENT_SAMPLE",
+    "REJECTED_NO_EDGE_AFTER_COSTS", "REJECTED_NO_IMPROVEMENT_OVER_PARENT", "REJECTED_NO_DIRECTIONAL_EDGE",
+    "REJECTED_GEOMETRY_ONLY_EFFECT", "REJECTED_RANDOM_CONTROL", "REJECTED_UNSTABLE_ACROSS_FOLDS",
+    "REJECTED_UNSTABLE_BY_DIRECTION", "REJECTED_EXCESSIVE_DRAWDOWN", "RESEARCH_EXTENSION_REQUIRED",
+    "ELIGIBLE_FOR_SECOND_INDEPENDENT_REPLICATION"
+  ],
+  "maximum_allowed_verdict": "ELIGIBLE_FOR_SECOND_INDEPENDENT_REPLICATION -- never PRODUCTION_READY, LIVE_READY, AUTO_ELIGIBLE, PAPER_ELIGIBLE, CONFIRMED_PROFITABLE, or GUARANTEED_EDGE under any outcome.",
+  "untouched_data_boundaries": {
+    "reference": "data/stabilization/phase7/untouched_data/coverage_manifest.json",
+    "genuinely_untouched_window_identified": "2026-04-20T23:59:00Z to 2026-04-21T05:45:00Z (5.77 hours) -- the only calendar time outside every excluded/embargoed window as of this preregistration's timestamp",
+    "known_inadequate": true,
+    "conclusion_carried_forward": "RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_UNTOUCHED_HISTORY, per Part 11, applies to this preregistered plan before any evaluation step (Parts 14-17) is attempted."
+  },
+  "second_holdout_policy": {
+    "applies_when": "A future Phase 7 extension accumulates enough newly-elapsed, non-embargoed calendar time (via natural passage of time and/or restored Deriv connectivity) to meet minimum_sample.",
+    "policy": "If a development-style evaluation on that newly available window passes every gate above, a further, separate, sealed holdout slice (never opened during development, opened at most once, following the exact discipline of data/stabilization/phase5/holdout/holdout_manifest.json) must be defined and preregistered before any development-window outcome is computed, mirroring Phase 5's own holdout discipline. This file does not itself define that holdout's dates, since insufficient calendar time exists yet to schedule one meaningfully."
+  },
+  "no_changes_after_outcomes_are_viewed": "This file is immutable from this point forward. Any correction, extension, or re-scoping is a new experiment_id, never an edit to this one."
+}

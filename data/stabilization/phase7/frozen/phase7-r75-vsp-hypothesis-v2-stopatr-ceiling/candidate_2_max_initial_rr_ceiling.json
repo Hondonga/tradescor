@@ -1,0 +1,11 @@
+{
+  "candidate_id": "candidate_2_max_initial_rr_ceiling",
+  "failure_mechanism": "A secondary, weaker echo of the same geometry-quality pattern behind candidate 1 -- see data/stabilization/phase7/postmortem/diagnostic_buckets.json -> initial_reward_to_risk_quintiles.",
+  "single_change": "Reject a setup if initial_rr (tp1 distance / stop distance, already computed by the frozen target engine before entry) > 3.004 (the empirical Q4/Q5 cutpoint).",
+  "causal_rationale": "The highest-RR quintile (largest target distance relative to risk) is the second-worst-performing bucket (-0.233R, CI [-0.463, 0.017]) after candidate 1's widest-stop quintile. A structural target selected far beyond a modest risk distance may be drawn from a less reliable, more distant structural reference, lowering the probability of completion before price reverses.",
+  "decision_time_inputs": ["stop (engine-selected)", "entry (engine-selected)", "tp1 (engine-selected)"],
+  "expected_retention": 80.0,
+  "overfitting_risk": "MODERATE. The CI for this bucket does not fully exclude zero (upper bound 0.017), so the evidence is weaker than candidate 1's. There is also a plausible confound: initial_rr and stop_distance_atr are not independent (both derive from the same selected stop), so this candidate may largely be re-detecting the same underlying effect as candidate 1 rather than an independent mechanism.",
+  "falsification_condition": "On genuinely untouched history, the retained population's conservative-cost grouped lower-95 CI does not exceed zero, or the effect fully disappears once considered alongside candidate 1 (supporting the confound concern above).",
+  "why_not_selected": "Weaker evidence than candidate 1 (CI does not exclude zero) and a plausible confound with candidate 1's mechanism (both derive from the same engine-selected stop distance) -- selecting this instead of, or in addition to, candidate 1 would not isolate an independent mechanism, and Part 9 forbids combining filters."
+}
