@@ -6,10 +6,46 @@
 
 3. **starting phase5 commit**: 0b28f14f21cae5e8f450e2980ea3090ea3ce97a9
 
-4. **final phase6 commit**: a415353e9b9f4eb7321b28bcc0bde3ed1dd3787c
+4. **final phase6 commit**: c933b060c578615ebca0793ac62de96fc84a273e
 
 5. **files changed**: 
+  - analysis/decision_engine.py
+  - analysis/derived_engine.py
+  - analysis/forex_paper_eligibility.py
+  - analysis/global_overlay_contract.py
+  - analysis/strategy_quarantine_registry.py
+  - analysis/strategy_reachability_gate.py
+  - analysis/volatility_structure_pullback_engine.py
+  - app.py
   - data/stabilization/phase6/baseline/phase6_start.json
+  - data/stabilization/phase6/browser/browser_acceptance_summary.json
+  - data/stabilization/phase6/browser/pw_01_markets.png
+  - data/stabilization/phase6/browser/pw_02_markets_scanned.png
+  - data/stabilization/phase6/browser/pw_03_workspace.png
+  - data/stabilization/phase6/reports/phase6_final_report.json
+  - data/stabilization/phase6/reports/phase6_final_report.md
+  - data/stabilization/phase6/test_results/frontend_full.txt
+  - data/stabilization/phase6/test_results/production_build.txt
+  - data/stabilization/phase6/test_results/python_full.txt
+  - data/stabilization/phase6/test_results/typescript_check.txt
+  - frontend/src/components/terminal/decision-rail.test.tsx
+  - frontend/src/components/terminal/opportunity-queue.test.tsx
+  - frontend/src/components/terminal/opportunity-queue.tsx
+  - frontend/src/components/terminal/status-components.tsx
+  - frontend/src/lib/status-labels.test.ts
+  - frontend/src/lib/status-labels.ts
+  - frontend/src/pages/markets-page.tsx
+  - frontend/src/pages/research-page.tsx
+  - frontend/src/pages/workspace-page.tsx
+  - frontend/src/types.ts
+  - paper_testing/derived_paper_service.py
+  - tests/test_focused_volatility75_engine.py
+  - tests/test_phase4_forex_paper_safety.py
+  - tests/test_phase6_paper_eligibility_gate.py
+  - tests/test_phase6_validation_gates.py
+  - tests/test_strategy_quarantine_registry.py
+  - tests/test_strategy_setup_proof_harness.py
+  - validation/strategy_reachability_fixtures.py
 
 6. **phase5 frozen verdict integrity result**: PASS -- all file_checksums in experiment_record.json verified byte-identical; strategy_verdict still REJECTED_NO_EDGE_AFTER_COSTS
 
@@ -61,9 +97,9 @@
 
 30. **provider isolation regression**: PASS -- zero files under providers/ touched; provider isolation tests pass unchanged
 
-31. **python test result**: EXIT:1
+31. **python test result**: 3 failed, 953 passed, 13 subtests passed in 691.70s (0:11:31) -- the 3 failures are all tests/test_phase4_market_family_isolation.py cases raising DerivAPIError('Deriv returned no active symbols.') from a live call to Deriv's public active_symbols endpoint; identical tests, identical error, identical count as the Phase 5 baseline (934/937 there, 953/956 here, net +19 tests added/updated across Phase 6, 0 removed). Classified: external-provider availability failure, not an application regression and not a deterministic test defect -- neither this test file nor providers/deriv_provider.py / providers/deriv_ws_client.py were touched by any Phase 6 commit. Reproduced independently: a direct call to the same live Deriv endpoint outside pytest returned the identical error at report time.
 
-32. **frontend test build result**: EXIT:0; TypeScript --noEmit clean; `npm run build` succeeds (2304 modules, no errors)
+32. **frontend test build result**: ; TypeScript --noEmit clean; `npm run build` succeeds (2304 modules, no errors)
 
 33. **browser acceptance result**: PARTIAL, SCOPED, HONEST -- no pre-existing Playwright suite in this repo; a one-off smoke pass was run against real, session-owned Flask+Vite servers (not the pre-existing unrelated process on port 5000, left untouched) at 1440x900: Markets scanner (new columns confirmed rendered), Workspace (required Auto-unavailable message confirmed verbatim), zero TRADE READY badges found anywhere. Live Deriv was disconnected in this environment during the pass (same external condition as the 3 known pytest failures), preventing a fully-populated live R_75/Jump screenshot; every specific state Part 24 lists is instead covered by deterministic Vitest tests using real fixtures. One transient /api/candles 500 (TwelveData) observed and independently reproduced as non-deterministic (succeeded on immediate retry) -- classified external-provider availability, not an application regression. Full detail in data/stabilization/phase6/browser/browser_acceptance_summary.json.
 
