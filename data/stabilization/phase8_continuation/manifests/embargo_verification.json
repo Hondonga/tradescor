@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-07-23T04:25:06Z",
+  "part": "1 - VERIFY THE EMBARGO HAS CLEARED",
+  "consumed_ml_window_end": "2026-07-20T05:44:00Z",
+  "embargo_length_days": 7,
+  "required_embargo_end_time_utc": "2026-07-27T05:44:00Z",
+  "current_time_utc": "2026-07-23T04:25:06.849443+00:00",
+  "check": "current_time_utc >= embargo_end_time_utc",
+  "cleared": false,
+  "remaining": "4 days, 1:18:53 (approximately 4.05 days)",
+  "action_taken": "None. Per Part 1 and the Part 18 stop rules ('Stop immediately if: the embargo has not cleared'), no outcome data was fetched, no replay was run, and no setup performance was inspected. Deriv connectivity (Part 2) was not tested since it is only relevant to acquiring new data, which is not yet permitted regardless of provider availability.",
+  "status": "PHASE 8 CONTINUATION STATUS: WAITING_FOR_EMBARGO",
+  "next_eligible_check_time_utc": "2026-07-27T05:44:00Z",
+  "note": "This is a temporary, correct state, not a failure. The Phase 8 frozen verdict (RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_UNTOUCHED_HISTORY) remains unchanged and was not recomputed or reopened."
+}

@@ -1,0 +1,29 @@
+{
+  "started_at": "2026-07-23T04:23:49Z",
+  "current_date_utc": "2026-07-23",
+  "current_time_utc": "04:23:49Z",
+  "phase8_branch": "tradescor-phase8-stop-distance-replication",
+  "phase8_starting_experiment": "phase8-r75-vsp-hypothesis-v2-untouched-replication-v1",
+  "phase8_frozen_commit_verified": "d6242418580c7e4a47bc78bfbf3f211b6849f759",
+  "phase8_frozen_commit_short_requested": "d624241",
+  "parent_strategy": "volatility_structure_pullback",
+  "variant_strategy": "volatility_structure_pullback_hypothesis_v2",
+  "single_change": "reject stop_distance_atr > 3.975",
+  "threshold": 3.975,
+  "current_hypothesis_verdict": "RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_UNTOUCHED_HISTORY",
+  "verdict_interpretation": "The hypothesis remains untested. This does not mean it passed or failed economically.",
+  "pre_checks": {
+    "1_commit_d624241_exists": true,
+    "2_phase8_frozen_experiment_exists": true,
+    "3_phase8_file_checksums_valid": true,
+    "4_phase7_file_checksums_valid": true,
+    "5_phase5_file_checksums_valid": true,
+    "6_phase5_holdout_sealed": true,
+    "7_production_parent_engine_unchanged": true,
+    "8_threshold_equals_3975": true,
+    "9_no_second_research_hypothesis_exists": true,
+    "10_phase6_registry_unchanged": true,
+    "11_ml_remains_inactive": true
+  },
+  "scope": "accumulate_and_verify_untouched_r75_history_then_complete_the_frozen_stop_distance_comparison"
+}

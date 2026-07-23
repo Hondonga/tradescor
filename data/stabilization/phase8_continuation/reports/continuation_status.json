@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-07-23T04:25:06Z",
+  "status": "PHASE 8 CONTINUATION STATUS: WAITING_FOR_EMBARGO",
+  "working_branch": "tradescor-phase8-stop-distance-replication",
+  "starting_phase8_commit": "d6242418580c7e4a47bc78bfbf3f211b6849f759",
+  "current_date_utc": "2026-07-23",
+  "current_time_utc": "04:25:06Z",
+  "embargo_clears_at_utc": "2026-07-27T05:44:00Z",
+  "remaining": "approximately 4.05 days",
+  "part_0_checkpoint": "COMPLETE -- all 11 pre-checks passed (commit resolved, Phase 5/7/8 checksums valid, Phase 5 holdout sealed, parent engine unchanged, threshold exactly 3.975, no second research hypothesis, Phase 6 registry unchanged, ML inactive). See data/stabilization/phase8_continuation/baseline/continuation_start.json.",
+  "part_1_embargo_verification": "COMPLETE -- embargo has NOT cleared. See data/stabilization/phase8_continuation/manifests/embargo_verification.json.",
+  "parts_2_through_16_status": "NOT STARTED -- per Part 1 and the Part 18 stop rules ('Stop immediately if: the embargo has not cleared'), Deriv connectivity was not tested, no data was acquired, no replay was run, no outcome or setup performance of any kind was inspected or computed.",
+  "hypothesis_verdict_unchanged": "RESEARCH_EXTENSION_REQUIRED_INSUFFICIENT_UNTOUCHED_HISTORY",
+  "phase5_holdout_opened": false,
+  "production_strategy_changed": false,
+  "threshold_changed": false,
+  "second_hypothesis_tested": false,
+  "outcome_data_fetched": false,
+  "next_action": "Re-run this continuation on or after 2026-07-27T05:44:00Z UTC, starting again from Part 1's embargo check."
+}
